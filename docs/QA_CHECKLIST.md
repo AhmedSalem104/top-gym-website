@@ -47,6 +47,8 @@ See [motion system](MOTION_SYSTEM.md) and [coverage matrix](MOTION_COVERAGE_MATR
 
 Settled full-page and section screenshots use reduced-motion emulation so viewport expansion during capture cannot start a new entrance mid-screenshot. Normal-motion recording/sequence captures and the dedicated motion tests retain animation. The local development server was restarted after Vite cached a missing import while the new stylesheet was being created; both live locale routes were subsequently smoke-tested again.
 
+Axe contrast scans also settle motion before measurement; all WCAG rules remain enabled. Normal-motion keyboard/menu tests run before that step, and viewport/reduced-motion/cleanup tests run separately. The first PR CI run retried an Arabic contrast scan taken during a reveal; the parallel push run passed directly. See the chronological CI record in `PROGRESS.md`.
+
 Desktop and mobile screenshots were inspected for hierarchy, heading wrapping, consistent dark/gold palette, Arabic shaping, CTA visibility, image crops and section spacing. Excessively tall about/location images found in the first pass were corrected. Five-width overflow checks passed. This is source-informed manual comparison, not a claimed pixel-identical rendering: source photos/content were deliberately corrected as detailed in `DESIGN_SYSTEM.md`.
 
 No physical iOS/Android device testing, Safari/WebKit screen-reader testing, or real call placement was performed. The source mobile screenshot is malformed at 37px wide. No claim of comprehensive WCAG conformance is made from automated checks alone.

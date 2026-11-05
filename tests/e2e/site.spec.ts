@@ -119,6 +119,11 @@ for (const locale of ['ar', 'en'] as const) {
     await toggle.click();
     await page.keyboard.press('Escape');
     await expect(toggle).toBeFocused();
+    // Contrast must be measured at rest, not halfway through an opacity entrance.
+    // Menu interaction above and motion.spec.ts exercise normal motion separately.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(page.locator('[data-motion-state="running"]')).toHaveCount(0);
+    await expect(page.locator('#mobile-nav')).toBeHidden();
     expect(
       (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
         .violations,
