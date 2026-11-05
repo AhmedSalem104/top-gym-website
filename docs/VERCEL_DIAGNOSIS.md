@@ -1,6 +1,16 @@
 # Vercel diagnosis — 2026-11-05
 
-## Observed evidence
+## Resolved after owner approval
+
+The owner explicitly approved merging and publishing PR #11. Both required quality runs passed before the PR was merged at `4a762f148701676d9589ac4f367178f4a55f451e` on 2026-11-05 at 21:01:28 UTC. Vercel completed [production deployment HkNF5KFVGH9fKPzU4tfTonpR789g](https://vercel.com/ahmedsalem104s-projects/top-gym-website/HkNF5KFVGH9fKPzU4tfTonpR789g).
+
+Anonymous HTTPS requests to `/`, `/ar/`, `/en/`, the original logo, and the pricing PDF now return HTTP 200 on [the public domain](https://top-gym-website.vercel.app/). HTML contains the actual TOP GYM site; the PDF is served as `application/pdf` with its original 453,139 bytes. The previous Vercel `NOT_FOUND` response is resolved. Main's [Quality checks](https://github.com/AhmedSalem104/top-gym-website/actions/runs/42108784323) also passed after merging.
+
+The complete live Chromium run passed 54 of 55 tests. One English navbar keyboard-outline assertion observed `none`; all three isolated repetitions of that same test then passed without application changes. The failure was in focus-style verification, not spotlight alignment or hosting. Its exact cause remains unconfirmed; do not describe the first run as an unconditional 55/55 pass. Mobile/tablet/desktop rendering, all prices, PDF download/hash, both languages, menu, gallery/certificates, QR and footer checks passed on the public host. Local and GitHub CI previously passed all 55 tests.
+
+Search indexing remains disabled and deployed canonical metadata is not yet configured. Original-document comparison, trainer role, promotional-image rights and hours confirmation remain tracked separately. The old dashboard-access limitation below did not prevent deployment through the authenticated GitHub integration and anonymous production verification.
+
+## Initial observed evidence — before the authorized merge
 
 - GitHub repository homepage points to `https://top-gym-website.vercel.app`.
 - Anonymous HTTP requests to `/`, `/ar/`, `/media/top-gym-logo.webp` and `/package.json` return HTTP 404 with Vercel `NOT_FOUND`. This is a hosting response, not the site's Astro 404 page.
@@ -14,7 +24,7 @@ The empty main deployment explains the public 404; the implementation branch has
 
 `vercel.json` now declares the actual Astro framework, `npm ci`, `npm run build`, `dist`, and trailing slashes. Node 24 is pinned by `package.json` engines. These per-deployment overrides remove ambiguity if the project was initially detected as "Other" while main was empty; the prior dashboard preset remains unverified. This static website does not require a Vercel adapter or serverless functions. [Vercel build configuration documentation](https://vercel.com/docs/builds/configure-a-build) describes the framework/build/output overrides.
 
-## Release steps requiring owner authorization
+## Original release procedure
 
 1. Review the feature PR and resolve the existing business release gates.
 2. Authorize merging the implementation into protected main and publishing production, as required by the owner's project instructions.
@@ -22,4 +32,4 @@ The empty main deployment explains the public 404; the implementation branch has
 4. Set `SITE_URL` to the owner-approved production HTTPS origin. Keep `PUBLIC_INDEXABLE=false` until public indexing is approved.
 5. After the approved production deployment, verify `/`, `/ar/`, `/en/`, assets, the original downloadable PDF, real map, metadata and external links on the public host.
 
-Pushing the authorized feature branch can create a protected Vercel preview. It does not merge main, promote a preview, change production-branch settings or authorize public production release. A local production build and a Ready check alone are not a verified production fix.
+Feature pushes create protected Vercel previews. The later explicit owner approval authorized the production merge described above. Successful anonymous HTTP and live browser checks, rather than a Ready label alone, verify the resolved public 404.

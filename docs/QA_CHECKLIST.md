@@ -62,9 +62,10 @@ No physical iOS/Android device testing, Safari/WebKit screen-reader testing, or 
 - [ ] Confirm current operating hours (historical listing approximately four years old).
 - [ ] Verify external destinations and WhatsApp invitation validity on an owner device.
 - [ ] Supply owner-approved written address. The supplied Google listing and live embed are verified in `map-verification.json`.
-- [ ] Supply production domain; validate canonical/hreflang/social metadata against the real origin.
+- [x] Owner supplied `https://top-gym-website.vercel.app`; public production routes/assets/PDF return HTTP 200 after the authorized merge.
+- [ ] Configure and validate canonical/hreflang/social metadata against that origin; indexing remains disabled.
 - [x] Establish an empty protected main baseline and draft PR while preserving feature history.
-- [ ] Review draft PR #11 and explicitly authorize implementation merge/deployment.
+- [x] Owner explicitly authorized implementation merge/deployment; PR #11 merged and Vercel production succeeded.
 - [ ] Enable indexing only after release approval and recheck robots/sitemap/SEO on the actual host.
 - [ ] Test real mobile devices and assistive technology as part of release acceptance.
 

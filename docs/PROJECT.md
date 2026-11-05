@@ -19,6 +19,6 @@ Original archives remain in the owner's Downloads folder, extracted copies in a 
 
 ## Acceptance and blockers
 
-The implementation can be reviewed with available assets. Final release acceptance requires original certificate comparison, trainer identity/role confirmation, Pinterest hero reuse-rights confirmation, current hours confirmation, written address/domain where available, and explicit merge/deploy authorization. Do not label this review build production-approved.
+The owner explicitly approved publishing the available implementation at `https://top-gym-website.vercel.app`; PR #11 is merged and the public website responds successfully. Original certificate comparison, trainer identity/role, Pinterest hero reuse rights, current hours, optional written address and production SEO/indexing configuration remain follow-ups. Publishing approval does not independently verify those business facts.
 
 See `CONTENT_INVENTORY.md`, `QA_CHECKLIST.md`, and `PROGRESS.md` for current evidence.

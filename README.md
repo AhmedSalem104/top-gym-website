@@ -2,7 +2,9 @@
 
 A premium Arabic/English gym landing page based on the supplied **Google Stitch Apex Gold** design and authentic TOP GYM equipment photographs. Visitors can explore the gym, compare two membership packages across six durations, view provisional opening hours, call the team, get directions, and join the WhatsApp group.
 
-**Status:** implemented review build; production launch awaits business-content confirmation. Five supplied certificate copies are now visible with registration numbers redacted; original-document comparison and current role confirmation remain outstanding. This implementation has not been promoted to production. The existing Vercel public URL serves an empty main baseline; see [diagnosis and release steps](docs/VERCEL_DIAGNOSIS.md). See [progress and verification evidence](docs/PROGRESS.md) and the [release checklist](docs/QA_CHECKLIST.md).
+**Live website:** [TOP GYM](https://top-gym-website.vercel.app/) · [Arabic](https://top-gym-website.vercel.app/ar/) · [English](https://top-gym-website.vercel.app/en/).
+
+The owner authorized merging and publishing PR #11 on November 5, 2026. Vercel now serves the website successfully; the empty-main 404 is resolved. Search indexing remains disabled while business-content and production SEO follow-ups are open. Five supplied certificate copies are visible with registration numbers redacted; original-document comparison and current role confirmation remain outstanding. See [deployment evidence](docs/VERCEL_DIAGNOSIS.md), [progress](docs/PROGRESS.md), and the [remaining checklist](docs/QA_CHECKLIST.md).
 
 ![Arabic desktop review screenshot](docs/evidence/ar-desktop-hero.webp)
 
@@ -55,7 +57,7 @@ tests/                   Unit and browser tests
 Install **Node.js 24 LTS**, npm, and Git. Use `node --version` to confirm Node 24 before installing. The initial Windows machine had Node 22.19; implementation validation used an isolated Node 24 runtime without changing the system installation.
 
 ```sh
-git clone --branch feat/top-gym-website https://github.com/AhmedSalem104/top-gym-website.git
+git clone https://github.com/AhmedSalem104/top-gym-website.git
 cd top-gym-website
 npm ci
 npm run dev

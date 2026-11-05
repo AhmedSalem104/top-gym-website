@@ -184,13 +184,17 @@ for (const locale of ['ar', 'en'] as const) {
 }
 test('language switching preserves section and persists explicit preference', async ({ page }) => {
   await page.goto('/ar/#memberships');
+  await expect(page).toHaveTitle(business.name);
   await page.locator('[data-language-switch]').first().click();
   await expect(page).toHaveURL('/en/#memberships');
+  await expect(page).toHaveTitle(business.name);
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await page.goto('/');
   await expect(page).toHaveURL('/en/');
+  await expect(page).toHaveTitle(business.name);
   await page.goto('/ar/');
   await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
+  await expect(page).toHaveTitle(business.name);
 });
 test('no-JavaScript content and safe prelaunch metadata', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
