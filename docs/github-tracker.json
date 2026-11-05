@@ -1,0 +1,75 @@
+{
+  "projectUrl": "https://github.com/users/AhmedSalem104/projects/2",
+  "phases": [
+    {
+      "phase": 0,
+      "title": "Phase 0 — Repository audit and asset inventory",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/1",
+      "number": 1,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/1"
+    },
+    {
+      "phase": 1,
+      "title": "Phase 1 — Project foundation and documentation",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/2",
+      "number": 2,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/2"
+    },
+    {
+      "phase": 2,
+      "title": "Phase 2 — Design system and responsive layouts",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/3",
+      "number": 3,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/3"
+    },
+    {
+      "phase": 3,
+      "title": "Phase 3 — Core landing page implementation",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/4",
+      "number": 4,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/4"
+    },
+    {
+      "phase": 4,
+      "title": "Phase 4 — Real content and photo integration",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/5",
+      "number": 5,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/5"
+    },
+    {
+      "phase": 5,
+      "title": "Phase 5 — Memberships and interactive functionality",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/6",
+      "number": 6,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/6"
+    },
+    {
+      "phase": 6,
+      "title": "Phase 6 — Bilingual support and accessibility",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/7",
+      "number": 7,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/7"
+    },
+    {
+      "phase": 7,
+      "title": "Phase 7 — SEO and performance",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/8",
+      "number": 8,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/8"
+    },
+    {
+      "phase": 8,
+      "title": "Phase 8 — Automated testing and visual review",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/9",
+      "number": 9,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/9"
+    },
+    {
+      "phase": 9,
+      "title": "Phase 9 — Release preparation and documentation",
+      "issue": "https://github.com/AhmedSalem104/top-gym-website/issues/10",
+      "number": 10,
+      "milestone": "https://github.com/AhmedSalem104/top-gym-website/milestone/10"
+    }
+  ]
+}

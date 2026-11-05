@@ -1,0 +1,24 @@
+{
+  "verifiedOn": "2026-11-05",
+  "files": [
+    {
+      "name": "Top_Gym_Enhanced_Photos_and_Certificates.zip",
+      "bytes": 12322803,
+      "sha256": "138968329d346c1ea89979dff5a26c4ef4048172368d143e30eaed0cae07b0d1",
+      "status": "Original preserved outside repository"
+    },
+    {
+      "name": "stitch_top_gym_landing_page.zip",
+      "bytes": 27379458,
+      "sha256": "874508e2b91d0a9bda44b1c13fbb1401a42cfa3e71811350fbfb0baedf070696",
+      "status": "Original preserved outside repository"
+    },
+    {
+      "name": "الاشتراكات والباقات - Top Gym.pdf",
+      "bytes": 453139,
+      "sha256": "52daf943dd18baeb9749c752bfdb7b992daccf81c834e4190514ade8843c629a",
+      "status": "All twelve prices visually verified. Owner-authorized byte-identical public PDF copy and rendered previews; original preserved outside repository.",
+      "publicCopy": "public/documents/top-gym-memberships-pricing-2026-11-05.pdf"
+    }
+  ]
+}

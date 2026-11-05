@@ -1,0 +1,162 @@
+---
+import { business, type Locale } from '../config/business';
+import { t } from '../i18n';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section id="location" class="section">
+  <div class="container">
+    <SectionHeading
+      eyebrow={copy.locationLabel}
+      title={copy.locationTitle}
+      description={copy.locationText}
+    />
+    <div class="location-map" data-motion="reveal" data-motion-step="2">
+      <iframe
+        src={`${business.location.embedBase}!3m1!1s${locale}!5m1!1s${locale}`}
+        title={copy.mapTitle}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        tabindex="-1"
+        aria-hidden="true"
+      ></iframe>
+      <a
+        class="location-map-link"
+        data-map-link
+        href={business.links.maps}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${copy.openMap} — TOP GYM`}
+      >
+        <span class="map-action-bar">
+          <span class="map-place">
+            <Icon name="pin" size={26} />
+            <strong>TOP GYM</strong>
+          </span>
+          <span class="map-action">
+            {copy.openMap}
+            <Icon name="arrow" />
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+<section id="contact" class="section surface">
+  <div class="container">
+    <SectionHeading
+      eyebrow={copy.contactLabel}
+      title={copy.contactTitle}
+      description={copy.contactText}
+    />
+    <div class="contact-grid" data-motion-group data-motion-step="2">
+      <div class="phone-list" data-motion-group>
+        {business.contacts.map((contact) => (
+          <a data-motion="reveal" class="phone-card" href={`tel:${contact.phone}`}>
+            <span class="contact-icon">
+              <Icon name="phone" size={24} />
+            </span>
+            <span>
+              <span class="eyebrow">
+                {copy.call} {contact.name[locale]}
+              </span>
+              <strong dir="ltr">{contact.display}</strong>
+            </span>
+            <Icon name="arrow" />
+          </a>
+        ))}
+      </div>
+      <div class="panel group-panel" data-motion-group>
+        <span class="eyebrow" data-motion="heading">
+          {copy.groupNote}
+        </span>
+        <h3 data-motion="heading" dir="ltr">
+          {business.whatsappGroupName}
+        </h3>
+        <p data-motion="reveal">{copy.groupText}</p>
+        <a
+          class="button button-gold"
+          href={business.links.whatsappGroup}
+          data-motion="reveal"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="chat" />
+          {copy.group}
+        </a>
+        <a
+          class="text-link"
+          href={business.links.facebook}
+          data-motion="reveal"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {copy.facebook}
+          <Icon name="arrow" />
+        </a>
+        <figure class="qr-card" data-motion="image">
+          <a
+            href={business.links.whatsappGroup}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={copy.group}
+            data-qr-link
+          >
+            <img src="/qr/whatsapp.png" alt={copy.qrAlt} width="216" height="216" loading="lazy" />
+          </a>
+          <figcaption>
+            <strong>{copy.qrTitle}</strong>
+            <p>{copy.qrText}</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section final-cta" aria-labelledby="footer-cta-title">
+  <div class="container">
+    <div class="footer-cta-panel" data-motion-group>
+      <div class="footer-cta-copy" data-motion-group>
+        <p class="eyebrow" data-motion="footer">
+          {copy.finalLabel}
+        </p>
+        <h2 id="footer-cta-title" data-motion="footer">
+          {copy.footerCtaTitle}
+        </h2>
+        <p data-motion="footer">{copy.finalText}</p>
+      </div>
+      <div class="footer-cta-actions" data-motion-group>
+        <a class="button button-gold" href="#memberships" data-motion="footer">
+          {copy.footerExplore}
+          <Icon name="arrow" />
+        </a>
+        <div class="footer-cta-secondary">
+          <a
+            class="button button-dark"
+            href={`tel:${business.contacts[0].phone}`}
+            data-motion="footer"
+          >
+            <Icon name="phone" />
+            {copy.footerCall}
+          </a>
+          <a
+            class="button button-dark"
+            href={business.links.maps}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-motion="footer"
+          >
+            <Icon name="pin" />
+            {copy.directions}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

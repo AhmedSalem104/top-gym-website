@@ -1,0 +1,57 @@
+---
+import { business, type Locale } from '../config/business';
+import { days, formatTime, t } from '../i18n';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section id="schedule" class="section surface">
+  <div class="container">
+    <SectionHeading eyebrow={copy.hoursLabel} title={copy.hoursTitle} />
+    <div class="hours-grid" data-motion-group>
+      <div class="panel hours-panel">
+        <div class="hours-header" data-motion="heading">
+          <span>
+            <Icon name="clock" />
+            {copy.cairo}
+          </span>
+          <span class="status" data-open-status hidden></span>
+        </div>
+        <dl class="hours-list" data-motion-group>
+          {business.hours.days.map((entry) => (
+            <div data-motion="reveal" data-day={entry.day}>
+              <dt>
+                {days[locale][entry.day]}
+                <span class="today-label" hidden>
+                  {copy.today}
+                </span>
+              </dt>
+              <dd>
+                <time>{formatTime(entry.opens, locale)}</time>
+                <span aria-hidden="true"> — </span>
+                <time>{formatTime(entry.closes, locale)}</time>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p class="hours-note" data-motion="fade">
+          {copy.hoursNote}
+        </p>
+      </div>
+      <aside class="panel hours-aside" data-motion="reveal">
+        <span class="eyebrow">{copy.contact}</span>
+        <h3>{copy.hoursAside}</h3>
+        <p>{copy.hoursAsideText}</p>
+        <a class="button button-gold" href="#contact">
+          <Icon name="phone" />
+          {copy.callUs}
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>

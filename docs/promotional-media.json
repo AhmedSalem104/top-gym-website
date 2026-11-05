@@ -1,0 +1,18 @@
+{
+  "selectedAt": "2026-11-05",
+  "requestedByOwner": "Replace the hero with a professional different photograph from Pinterest",
+  "pin": "https://www.pinterest.com/pin/fotos-na-academia-masculina--844636105109617078/",
+  "download": "https://i.pinimg.com/736x/6b/9c/b4/6b9cb4996970e16480ca7cccc9ca939a.jpg",
+  "sha256": "2e6197308f71c7c0d4446652423eb70a0d28b24638abccf12a6a4fcd0ec32e04",
+  "width": 736,
+  "height": 1308,
+  "review": "Single adult male athlete in black sportswear; no women observed. Promotional imagery, not the TOP GYM facility or a named TOP GYM trainer.",
+  "rights": "Pinterest source selected at owner request; photographer and reuse license have not been independently established. Confirm rights before public production launch.",
+  "derivatives": "Format/size optimization only; no AI generation or compositing. No upscaling.",
+  "destinations": [
+    "public/media/promotional-hero-480.avif",
+    "public/media/promotional-hero-480.webp",
+    "public/media/promotional-hero-736.avif",
+    "public/media/promotional-hero-736.webp"
+  ]
+}

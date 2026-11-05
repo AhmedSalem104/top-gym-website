@@ -1,0 +1,31 @@
+---
+import type { Locale } from '../config/business';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+---
+
+<div class="language-switch" dir="ltr" aria-label="Language / اللغة">
+  {(['en', 'ar'] as const).map((language) =>
+    language === locale ? (
+      <span
+        aria-current="true"
+        lang={language}
+        aria-label={language === 'en' ? 'English' : 'العربية'}
+      >
+        {language === 'en' ? 'EN' : 'AR'}
+      </span>
+    ) : (
+      <a
+        data-language-switch
+        href={`/${language}/`}
+        lang={language}
+        hreflang={language}
+        aria-label={language === 'en' ? 'English' : 'العربية'}
+      >
+        {language === 'en' ? 'EN' : 'AR'}
+      </a>
+    ),
+  )}
+</div>

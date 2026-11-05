@@ -1,0 +1,44 @@
+---
+import type { Locale } from '../config/business';
+import { gymPhotos } from '../content/media';
+import { t } from '../i18n';
+import Photo from '../components/Photo.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section id="gallery" class="section surface">
+  <div class="container">
+    <SectionHeading
+      eyebrow={copy.galleryLabel}
+      title={copy.galleryTitle}
+      description={copy.galleryText}
+    />
+    <div class="gallery-grid" data-motion-group data-motion-step="2">
+      {gymPhotos.map((photo) => (
+        <a
+          class="gallery-item"
+          data-motion="image"
+          href={`/media/${photo.id}-1440.webp`}
+          data-lightbox="gym"
+          data-caption={photo.title[locale]}
+          data-alt={photo.alt[locale]}
+          aria-label={`${copy.enlarge}: ${photo.title[locale]}`}
+        >
+          <Photo id={photo.id} locale={locale} sizes="(max-width: 767px) 100vw, 40vw" />
+          <span class="gallery-caption">
+            <strong>{photo.title[locale]}</strong>
+            <span class="zoom-icon">
+              <Icon name="plus" />
+            </span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

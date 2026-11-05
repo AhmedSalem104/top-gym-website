@@ -1,0 +1,133 @@
+---
+import { business, durationIds, type Locale } from '../config/business';
+import { durations, money, t } from '../i18n';
+import MembershipCard from '../components/MembershipCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section id="memberships" class="section">
+  <div class="container">
+    <SectionHeading
+      eyebrow={copy.membershipLabel}
+      title={copy.membershipTitle}
+      description={copy.membershipText}
+    />
+    <div class="duration-control" data-motion="reveal">
+      <span id="membership-duration-label">{copy.duration}</span>
+      <div class="duration-tabs" role="tablist" aria-labelledby="membership-duration-label">
+        {durationIds.map((id) => (
+          <button
+            type="button"
+            role="tab"
+            id={`duration-${id}`}
+            data-duration={id}
+            aria-controls="membership-prices"
+            aria-selected={id === 'month' ? 'true' : 'false'}
+            tabindex={id === 'month' ? 0 : -1}
+          >
+            {durations[id][locale]}
+          </button>
+        ))}
+      </div>
+    </div>
+    <div
+      id="membership-prices"
+      role="tabpanel"
+      aria-labelledby="duration-month"
+      tabindex="0"
+      class="membership-grid"
+      data-motion-group
+      data-motion-step="2"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      {business.memberships.map((membership, index) => (
+        <MembershipCard locale={locale} membership={membership} featured={index === 1} />
+      ))}
+    </div>
+    <p class="price-source">{copy.priceDate}</p>
+    <details class="price-table" data-motion="reveal">
+      <summary>{copy.compare}</summary>
+      <div class="table-wrap" tabindex="0" role="region" aria-label={copy.compare}>
+        <table>
+          <caption class="sr-only">{copy.compare}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{copy.duration}</th>
+              {business.memberships.map((plan) => (
+                <th scope="col">{plan.name[locale]}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {durationIds.map((id) => (
+              <tr>
+                <th scope="row">{durations[id][locale]}</th>
+                {business.memberships.map((plan) => (
+                  <td>{money(plan.prices[id], locale)}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <article class="pricing-document" aria-labelledby="pricing-document-title" data-motion-group>
+      <div class="pricing-document-copy" data-motion="reveal">
+        <span class="document-badge">
+          <Icon name="document" size={24} />
+          {copy.pricingDocumentFormat}
+        </span>
+        <h3 id="pricing-document-title">{copy.pricingDocument}</h3>
+        <p>{copy.pricingDocumentText}</p>
+        <p class="document-date">{copy.priceDate}</p>
+        <div class="actions">
+          <a
+            class="button button-gold"
+            data-pricing-download
+            href={business.pricingSource.url}
+            download={business.pricingSource.filename}
+          >
+            <Icon name="download" />
+            {copy.downloadPricingPdf}
+          </a>
+          <a
+            class="button button-dark"
+            data-pricing-view
+            href={business.pricingSource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="expand" />
+            {copy.viewPricingPdf}
+          </a>
+        </div>
+      </div>
+      <a
+        class="pricing-document-preview"
+        href={business.pricingSource.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={copy.viewPricingPdf}
+        data-motion="image"
+      >
+        <img
+          src={business.pricingSource.preview}
+          srcset={`${business.pricingSource.preview} 640w, ${business.pricingSource.previewLarge} 1200w`}
+          sizes="(max-width: 767px) 280px, 320px"
+          width={business.pricingSource.previewWidth}
+          height={business.pricingSource.previewHeight}
+          alt={copy.pricingDocumentPreview}
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    </article>
+  </div>
+</section>

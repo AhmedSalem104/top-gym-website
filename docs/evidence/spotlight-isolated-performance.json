@@ -1,0 +1,45 @@
+{
+  "method": "Headless Chromium local lab. Google embed response replaced by empty HTML only for attribution; not evidence of full-site map performance. Bounded scripted slow/fast/down/up scrolling. rAF cadence is not a GPU frame-time measurement or a real-device FPS guarantee. CPU/network emulation is relative to this host.",
+  "results": [
+    {
+      "locale": "ar",
+      "measuredAt": "2026-11-05T18:55:42.331Z",
+      "browser": "156.0.8078.4",
+      "viewport": "390x844 DPR1",
+      "cpuSlowdown": 6,
+      "network": "1.6 Mbps down / 750 Kbps up / 150 ms latency",
+      "samples": 542,
+      "durationMs": 11531.9,
+      "medianFrameIntervalMs": 16.7,
+      "p95FrameIntervalMs": 33.3,
+      "intervalsOver34Ms": 4,
+      "longTasksDuringScroll": [],
+      "cls": 0,
+      "lcpMs": 3176,
+      "unseen": [],
+      "runningAnimationsAfterSettling": 0,
+      "brokenImages": [],
+      "consoleErrors": []
+    },
+    {
+      "locale": "en",
+      "measuredAt": "2026-11-05T18:55:56.735Z",
+      "browser": "156.0.8078.4",
+      "viewport": "390x844 DPR1",
+      "cpuSlowdown": 6,
+      "network": "1.6 Mbps down / 750 Kbps up / 150 ms latency",
+      "samples": 568,
+      "durationMs": 11803.8,
+      "medianFrameIntervalMs": 16.7,
+      "p95FrameIntervalMs": 16.8,
+      "intervalsOver34Ms": 1,
+      "longTasksDuringScroll": [],
+      "cls": 0,
+      "lcpMs": 2004,
+      "unseen": [],
+      "runningAnimationsAfterSettling": 0,
+      "brokenImages": [],
+      "consoleErrors": []
+    }
+  ]
+}

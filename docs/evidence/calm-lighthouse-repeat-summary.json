@@ -1,0 +1,31 @@
+[
+  {
+    "locale": "ar",
+    "mode": "mobile",
+    "measuredAt": "2026-11-05T19:23:41.686Z",
+    "lighthouseVersion": "13.6.0",
+    "formFactor": "mobile",
+    "viewport": {
+      "mobile": true,
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75,
+      "disabled": false
+    },
+    "url": "http://127.0.0.1:4323/ar/",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "agentic-browsing": 100
+    },
+    "metrics": {
+      "fcp": "0.9 s",
+      "lcp": "2.2 s",
+      "cls": "0",
+      "tbt": "10 ms"
+    },
+    "notes": "Local Chromium lab measurement; review build intentionally noindex. Not field data or a production-domain test."
+  }
+]

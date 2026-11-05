@@ -1,0 +1,22 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+}
+const { eyebrow, title, description } = Astro.props;
+---
+
+<div class="section-heading" data-motion-group>
+  <div>
+    <p class="eyebrow" data-motion="heading">
+      {eyebrow}
+    </p>
+    <h2 data-motion="heading">{title}</h2>
+  </div>
+  {description && (
+    <p class="section-description" data-motion="reveal">
+      {description}
+    </p>
+  )}
+</div>

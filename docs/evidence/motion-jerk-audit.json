@@ -1,0 +1,3433 @@
+[
+  {
+    "locale": "ar",
+    "width": 390,
+    "visibleOpacityResets": [
+      {
+        "element": "P.hero-label",
+        "top": 141,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hero-description",
+        "top": 374.890625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 457.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.button button-dark",
+        "top": 457.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.text-link",
+        "top": 519.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "DIV.container hero-rail",
+        "top": 640.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 845.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 824,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 834,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.about-photo",
+        "top": 826.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.panel",
+        "top": 848.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.text-link",
+        "top": 779.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 814.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 847.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 793.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 758.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 830.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 824.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 754.5,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 787.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 648.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.credential-holder",
+        "top": 748.109375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 832.296875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 763.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 454.984375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 499.828125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 517.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.credential-privacy",
+        "top": 531.515625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 683.3125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 716.75,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 778.75,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 339.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 583.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 583.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 827.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 827.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 705.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 738.96875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 800.96875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.duration-control",
+        "top": 855.359375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.membership-card",
+        "top": 612.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.membership-card featured",
+        "top": 653.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DETAILS.price-table",
+        "top": 779.828125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.pricing-document-copy",
+        "top": 562.21875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.pricing-document-preview",
+        "top": 682.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 708.71875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 742.15625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.hours-header",
+        "top": 833.15625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 644.59375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 719.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 793.78125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.",
+        "top": 868.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DIV.",
+        "top": 728.96875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.is-today",
+        "top": 803.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 680.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hours-note",
+        "top": 758.890625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ASIDE.panel hours-aside",
+        "top": 825.328125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 858,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 729.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 833.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.location-map",
+        "top": 762.21875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 832.21875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 865.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 814.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.phone-card",
+        "top": 762.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.phone-card",
+        "top": 794.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "SPAN.eyebrow",
+        "top": 866.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H3.",
+        "top": 809.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.",
+        "top": 864.640625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 854.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.text-link",
+        "top": 834.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.qr-card",
+        "top": 832.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 871.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 854.09375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.",
+        "top": 851.09375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.actions",
+        "top": 852.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 843.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 856.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 856.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 567.640625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.container footer-bottom",
+        "top": 744.828125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "width": 768,
+    "visibleOpacityResets": [
+      {
+        "element": "P.hero-label",
+        "top": 161,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hero-description",
+        "top": 369.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 458.546875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.button button-dark",
+        "top": 458.546875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.text-link",
+        "top": 459.546875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "DIV.container hero-rail",
+        "top": 678.328125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 858,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 836.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 804.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.about-photo",
+        "top": 782.21875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.panel",
+        "top": 784.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.text-link",
+        "top": 850.578125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 874.21875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 853.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 823.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 773.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 773.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 773.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 873.296875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 851.734375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 827.734375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.credential-holder",
+        "top": 854.515625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 784.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 784.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 814.546875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 814.546875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 647.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.credential-privacy",
+        "top": 514.234375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 666.03125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 699.46875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 761.46875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 827.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 827.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 827.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 687.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 687.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 664.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 698.296875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 760.296875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.duration-control",
+        "top": 826.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.membership-card",
+        "top": 616.78125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.membership-card featured",
+        "top": 616.78125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DETAILS.price-table",
+        "top": 767.078125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.pricing-document-copy",
+        "top": 606.28125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.pricing-document-preview",
+        "top": 577.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 663.0625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 696.5,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.hours-header",
+        "top": 803.5,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 845.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 680.328125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 741.71875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 803.109375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.",
+        "top": 864.5,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DIV.is-today",
+        "top": 717.890625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 797.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.hours-note",
+        "top": 688.8125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ASIDE.panel hours-aside",
+        "top": 759.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 788.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 821.96875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 734.96875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.location-map",
+        "top": 801.359375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 868.359375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 802.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 864.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "A.phone-card",
+        "top": 837.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "SPAN.eyebrow",
+        "top": 862.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H3.",
+        "top": 806.625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.",
+        "top": 862.125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 855.90625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.text-link",
+        "top": 838.90625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.qr-card",
+        "top": 839.90625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.phone-card",
+        "top": 804.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 873.578125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 860.015625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.",
+        "top": 871.015625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.actions",
+        "top": 853.40625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 820.40625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 820.40625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 857.59375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 857.59375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.container footer-bottom",
+        "top": 814.78125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      }
+    ]
+  },
+  {
+    "locale": "ar",
+    "width": 1440,
+    "visibleOpacityResets": [
+      {
+        "element": "P.hero-label",
+        "top": 181,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hero-description",
+        "top": 478.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 567.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.button button-dark",
+        "top": 567.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.text-link",
+        "top": 568.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "DIV.container hero-rail",
+        "top": 733.59375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 848.28125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 866.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "H2.",
+        "top": 578.71875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.about-photo",
+        "top": 683.109375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.panel",
+        "top": 718.765625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.text-link",
+        "top": 855.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 673.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 707.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 745.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 811.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 811.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 811.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 861.125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 845.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 857.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.credential-holder",
+        "top": 810.953125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 582.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 582.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 582.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 827.984375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 827.984375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "P.credential-privacy",
+        "top": 628.828125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 854.21875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 547.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 559.265625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 652.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 652.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 652.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 565.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 565.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "H2.",
+        "top": -12.921875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 25.078125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.duration-control",
+        "top": 91.46875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.membership-card",
+        "top": 232.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.membership-card featured",
+        "top": 232.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DETAILS.price-table",
+        "top": 769.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.pricing-document-copy",
+        "top": 680.296875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.pricing-document-preview",
+        "top": 587.265625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 754.015625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 787.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.hours-header",
+        "top": 705.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 748.28125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 809.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 871.0625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ASIDE.panel hours-aside",
+        "top": 664.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 537.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 598.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.is-today",
+        "top": 660.234375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.",
+        "top": 739.765625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "P.hours-note",
+        "top": 821.15625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 755.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 788.625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 800.234375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.location-map",
+        "top": 746.015625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 804.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 838.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 785.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.phone-card",
+        "top": 851.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "SPAN.eyebrow",
+        "top": 807.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H3.",
+        "top": 840.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.",
+        "top": 815.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 865.765625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "A.phone-card",
+        "top": 831.59375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.text-link",
+        "top": 779.765625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.qr-card",
+        "top": 855.765625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 854.359375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 843.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.",
+        "top": 857.984375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.actions",
+        "top": 851.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 853.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 853.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 853.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.",
+        "top": 853.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DIV.container footer-bottom",
+        "top": 815.359375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "visibleOpacityResets": [
+      {
+        "element": "P.hero-label",
+        "top": 141,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hero-description",
+        "top": 376.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 486.015625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.button button-dark",
+        "top": 493.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.text-link",
+        "top": 563.203125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "DIV.container hero-rail",
+        "top": 683.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 801.890625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 833.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 854.484375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.about-photo",
+        "top": 768.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.panel",
+        "top": 835.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.text-link",
+        "top": 785.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 824.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 856.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 807.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 802.71875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 837.015625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 816.3125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 740.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 772.40625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 619.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.credential-holder",
+        "top": 719.109375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 803.296875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 735.984375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 413.75,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 490.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 512.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.credential-privacy",
+        "top": 532.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 707.15625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 738.953125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 799.21875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 338,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 582,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 582,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 826,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 826,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 684,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 715.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 816.328125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.duration-control",
+        "top": 440.109375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.membership-card",
+        "top": 641.203125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.membership-card featured",
+        "top": 705.09375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DETAILS.price-table",
+        "top": 852.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.pricing-document-copy",
+        "top": 621.8125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.pricing-document-preview",
+        "top": 718.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 722.90625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 754.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.hours-header",
+        "top": 843.96875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 645.40625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 720,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 794.59375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.",
+        "top": 869.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DIV.",
+        "top": 720.78125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.is-today",
+        "top": 795.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 664.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hours-note",
+        "top": 742.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ASIDE.panel hours-aside",
+        "top": 830.578125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 706.34375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 738.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 838.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.location-map",
+        "top": 760.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 809.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 841.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 823.78125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.phone-card",
+        "top": 792.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.phone-card",
+        "top": 821.75,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "SPAN.eyebrow",
+        "top": 793.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H3.",
+        "top": 825.734375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.",
+        "top": 785.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 802.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.text-link",
+        "top": 864.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "FIGURE.qr-card",
+        "top": 782.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 848.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 829.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.",
+        "top": 840.5,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.actions",
+        "top": 847.28125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 858.28125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 854.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 854.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 570.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.container footer-bottom",
+        "top": 745.484375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 768,
+    "visibleOpacityResets": [
+      {
+        "element": "P.hero-label",
+        "top": 161,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hero-description",
+        "top": 370.078125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 459.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.button button-dark",
+        "top": 459.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.text-link",
+        "top": 460.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "DIV.container hero-rail",
+        "top": 693.90625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 858,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 834.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 801.0625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.about-photo",
+        "top": 778.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.panel",
+        "top": 778.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.text-link",
+        "top": 871.546875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 836.546875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 868.34375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 807.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 760,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 760,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 760,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 857.59375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 858.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 831.65625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.credential-holder",
+        "top": 857.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 785.625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 785.625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 631.3125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 631.3125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 714.75,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.credential-privacy",
+        "top": 601.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 753.234375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 785.03125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 845.296875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 521.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 521.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 521.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 765.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 765.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 735.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 767.484375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 827.75,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.duration-control",
+        "top": 524.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.membership-card",
+        "top": 677.234375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.membership-card featured",
+        "top": 677.234375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DETAILS.price-table",
+        "top": 856.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.pricing-document-copy",
+        "top": 696.46875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.pricing-document-preview",
+        "top": 661.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 735.546875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 767.34375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.hours-header",
+        "top": 640.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 683.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 744.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 805.828125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.",
+        "top": 867.21875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DIV.",
+        "top": 716.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.is-today",
+        "top": 778,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 857.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.hours-note",
+        "top": 744.921875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ASIDE.panel hours-aside",
+        "top": 815.359375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 831.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 863.734375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 771,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.location-map",
+        "top": 696.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 790.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 822.1875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 786.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.phone-card",
+        "top": 762.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "SPAN.eyebrow",
+        "top": 787.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H3.",
+        "top": 819.640625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.",
+        "top": 869.4375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 806.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.text-link",
+        "top": 868.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "A.phone-card",
+        "top": 820.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.qr-card",
+        "top": 795.609375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 844.28125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 831.078125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.",
+        "top": 842.296875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.actions",
+        "top": 821.078125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 852.078125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 852.078125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 859.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 859.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.container footer-bottom",
+        "top": 814.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "visibleOpacityResets": [
+      {
+        "element": "P.hero-label",
+        "top": 181,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hero-description",
+        "top": 471.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 561.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.button button-dark",
+        "top": 561.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.text-link",
+        "top": 562.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "DIV.container hero-rail",
+        "top": 726.84375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 849.328125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 673.125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 719.109375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "FIGURE.about-photo",
+        "top": 838.28125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.panel",
+        "top": 636.5,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.text-link",
+        "top": 869.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 739.875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 771.671875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 781.46875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 762.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 762.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.facility-card",
+        "top": 762.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 852.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 867.34375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "H2.",
+        "top": 834.9375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.credential-holder",
+        "top": 799.515625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 796.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 796.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 796.703125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 375.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.credential-card",
+        "top": 375.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "P.credential-privacy",
+        "top": 643.40625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 868.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 193.59375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.section-description",
+        "top": 203.390625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 296.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 296.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 296.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 576.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "A.gallery-item",
+        "top": 576.171875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 320
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 663.765625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 695.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 705.359375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.duration-control",
+        "top": 798.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "ARTICLE.membership-card",
+        "top": 577.234375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "ARTICLE.membership-card featured",
+        "top": 577.234375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DETAILS.price-table",
+        "top": 794.625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.pricing-document-copy",
+        "top": 707.90625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.pricing-document-preview",
+        "top": 612.015625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 777.765625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 809.5625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.hours-header",
+        "top": 726.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 768.578125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 829.96875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "ASIDE.panel hours-aside",
+        "top": 685.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 684.359375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 745.75,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 807.140625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.is-today",
+        "top": 868.53125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DIV.",
+        "top": 759.0625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.hours-note",
+        "top": 840.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 773.484375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 805.28125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 815.078125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.location-map",
+        "top": 761.859375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 818.453125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 850.25,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.section-description",
+        "top": 860.046875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "A.phone-card",
+        "top": 775.828125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "SPAN.eyebrow",
+        "top": 816.828125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H3.",
+        "top": 848.625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.",
+        "top": 817.421875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.button button-gold",
+        "top": 867.8125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "A.text-link",
+        "top": 853.8125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "A.phone-card",
+        "top": 837.3125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "FIGURE.qr-card",
+        "top": 857.8125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "P.eyebrow",
+        "top": 811.40625,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "H2.",
+        "top": 843.203125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "P.",
+        "top": 847.796875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.actions",
+        "top": 838.578125,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 852.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      },
+      {
+        "element": "DIV.",
+        "top": 852.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 80
+      },
+      {
+        "element": "DIV.",
+        "top": 852.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 160
+      },
+      {
+        "element": "DIV.",
+        "top": 852.375,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 240
+      },
+      {
+        "element": "DIV.container footer-bottom",
+        "top": 814.6875,
+        "paintedOpacity": "1",
+        "startsAt": 0,
+        "delay": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+---
+import type { Locale } from '../config/business';
+import { t } from '../i18n';
+import Photo from '../components/Photo.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section id="about" class="section surface">
+  <div class="container">
+    <SectionHeading
+      eyebrow={copy.aboutLabel}
+      title={copy.aboutTitle}
+      description={copy.aboutText}
+    />
+    <div class="about-grid" data-motion-group data-motion-step="2">
+      <figure class="about-photo" data-motion="image">
+        <Photo id="leg-extension" locale={locale} />
+        <figcaption>
+          <span class="eyebrow">TOP GYM</span>
+          <strong>{copy.realGym}</strong>
+        </figcaption>
+      </figure>
+      <div class="about-story">
+        <div class="panel" data-motion="reveal">
+          <span class="eyebrow">{copy.about}</span>
+          <h3>{copy.aboutPanelTitle}</h3>
+          <p>{copy.aboutPanelText}</p>
+          <div class="note">
+            <Icon name="check" />
+            <p>{copy.aboutNote}</p>
+          </div>
+        </div>
+        <a class="text-link" href="#gallery" data-motion="reveal">
+          {copy.explore}
+          <Icon name="arrow" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

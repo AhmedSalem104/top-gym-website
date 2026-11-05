@@ -1,0 +1,116 @@
+---
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
+import '@fontsource/barlow-condensed/800.css';
+import '@fontsource/chivo/400.css';
+import '@fontsource/chivo/600.css';
+import '@fontsource-variable/cairo';
+import cairoArabic from '@fontsource-variable/cairo/files/cairo-arabic-wght-normal.woff2?url';
+import cairoLatin from '@fontsource-variable/cairo/files/cairo-latin-wght-normal.woff2?url';
+import barlowBold from '@fontsource/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2?url';
+import barlowHeading from '@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url';
+import chivoRegular from '@fontsource/chivo/files/chivo-latin-400-normal.woff2?url';
+import chivoSemibold from '@fontsource/chivo/files/chivo-latin-600-normal.woff2?url';
+import '../styles/global.css';
+import '../styles/motion.css';
+import { motionCssVariables } from '../config/motion';
+import { business, type Locale } from '../config/business';
+import { t } from '../i18n';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Lightbox from '../components/Lightbox.astro';
+interface Props {
+  locale: Locale;
+  root?: boolean;
+}
+const { locale, root = false } = Astro.props;
+const copy = t(locale);
+const origin = Astro.site;
+const canonical = origin ? new URL(`/${locale}/`, origin).href : undefined;
+const indexable = Boolean(origin) && import.meta.env.PUBLIC_INDEXABLE === 'true' && !root;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ExerciseGym',
+  name: business.name,
+  ...(origin
+    ? {
+        url: canonical,
+        image: new URL('/media/social-share.jpg', origin).href,
+        logo: new URL(business.logo, origin).href,
+      }
+    : {}),
+  telephone: business.contacts[0].phone,
+  currenciesAccepted: business.currency,
+  hasMap: business.links.maps,
+  sameAs: [business.links.facebook],
+  ...(business.location.address ? { address: business.location.address[locale] } : {}),
+  // Unconfirmed hours and identity are deliberately excluded from structured claims.
+};
+---
+
+<!doctype html>
+<html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} data-root={root ? 'true' : undefined}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{copy.title}</title>
+    <meta name="description" content={copy.description} />
+    <meta name="theme-color" content="#0B0D0F" />
+    <style is:inline set:html={motionCssVariables} />
+    <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
+    <link rel="icon" href="/media/favicon.png" type="image/png" />
+    <noscript>
+      <link rel="stylesheet" href="/no-js.css" />
+    </noscript>
+    {(locale === 'ar'
+      ? [cairoArabic, cairoLatin, barlowBold]
+      : [barlowBold, barlowHeading, chivoRegular, chivoSemibold]
+    ).map((font) => (
+      <link rel="preload" href={font} as="font" type="font/woff2" crossorigin="anonymous" />
+    ))}
+    {canonical && <link rel="canonical" href={canonical} />}
+    {origin && (
+      <>
+        <link rel="alternate" hreflang="ar" href={new URL('/ar/', origin)} />
+        <link rel="alternate" hreflang="en" href={new URL('/en/', origin)} />
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={new URL(`/${business.defaultLocale}/`, origin)}
+        />
+      </>
+    )}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={copy.title} />
+    <meta property="og:description" content={copy.description} />
+    <meta property="og:locale" content={locale === 'ar' ? 'ar_EG' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'ar' ? 'en_US' : 'ar_EG'} />
+    {origin && (
+      <>
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={new URL('/media/social-share.jpg', origin)} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={copy.brandAlt} />
+      </>
+    )}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={copy.title} />
+    <meta name="twitter:description" content={copy.description} />
+    {origin && <meta name="twitter:image" content={new URL('/media/social-share.jpg', origin)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\u003c')} />
+  </head>
+  <body id="top">
+    <span data-header-sentinel aria-hidden="true"></span>
+    <Header locale={locale} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <Lightbox locale={locale} />
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>

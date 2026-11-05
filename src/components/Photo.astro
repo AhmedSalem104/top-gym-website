@@ -1,0 +1,54 @@
+---
+import { gymPhotos } from '../content/media';
+import type { Locale } from '../config/business';
+interface Props {
+  id: string;
+  locale: Locale;
+  eager?: boolean;
+  class?: string;
+  sizes?: string;
+}
+const {
+  id,
+  locale,
+  eager = false,
+  class: className = '',
+  sizes = '(max-width: 767px) 100vw, 50vw',
+} = Astro.props;
+const photo = gymPhotos.find((item) => item.id === id)!;
+---
+
+<picture class={className}>
+  {eager && (
+    <>
+      <source
+        media="(min-width: 768px)"
+        type="image/avif"
+        srcset="/media/hero-wide-960.avif 960w, /media/hero-wide-1440.avif 1440w"
+        sizes="100vw"
+      />
+      <source
+        media="(min-width: 768px)"
+        type="image/webp"
+        srcset="/media/hero-wide-960.webp 960w, /media/hero-wide-1440.webp 1440w"
+        sizes="100vw"
+      />
+    </>
+  )}
+  <source
+    type="image/avif"
+    srcset={`/media/${id}-480.avif 480w, /media/${id}-960.avif 960w, /media/${id}-1440.avif 1440w`}
+    sizes={sizes}
+  />
+  <img
+    src={`/media/${id}-960.webp`}
+    srcset={`/media/${id}-480.webp 480w, /media/${id}-960.webp 960w, /media/${id}-1440.webp 1440w`}
+    sizes={sizes}
+    width="960"
+    height={id === 'cardio-room' ? 1707 : 1280}
+    alt={photo.alt[locale]}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding="async"
+  />
+</picture>

@@ -1,0 +1,84 @@
+---
+import { business, type Locale } from '../config/business';
+import { t } from '../i18n';
+import Icon from '../components/Icon.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <picture
+    class="hero-image hero-promotional"
+    data-motion="hero-image"
+    data-motion-group
+    data-motion-step="2"
+  >
+    <source
+      type="image/avif"
+      srcset="/media/promotional-hero-480.avif 480w, /media/promotional-hero-736.avif 736w"
+      sizes="(max-width: 767px) 100vw, 55vw"
+    />
+    <img
+      src="/media/promotional-hero-736.webp"
+      srcset="/media/promotional-hero-480.webp 480w, /media/promotional-hero-736.webp 736w"
+      sizes="(max-width: 767px) 100vw, 55vw"
+      width="736"
+      height="1308"
+      alt={copy.promotionalHeroAlt}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
+  <div class="hero-shade"></div>
+  <div class="container hero-content" data-motion-group>
+    <p class="hero-label" data-motion="heading">
+      <span></span>
+      {copy.heroLabel}
+    </p>
+    <h1 id="hero-title" data-motion="hero">
+      {copy.heroLine}
+      <br />
+      {copy.heroSecond} <em>{copy.heroGold}</em>
+    </h1>
+    <p class="hero-description" data-motion="reveal">
+      {copy.heroText}
+    </p>
+    <div class="actions">
+      <a class="button button-gold" href="#memberships" data-motion="reveal">
+        {copy.plans}
+        <Icon name="arrow" />
+      </a>
+      <a
+        class="button button-dark"
+        data-motion="reveal"
+        href={business.links.maps}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="pin" />
+        {copy.directions}
+      </a>
+      <a class="text-link" href="#facilities" data-motion="reveal">
+        {copy.explore}
+        <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+    <p class="hero-photo-note">{copy.promotionalHeroNote}</p>
+  </div>
+  <div class="container hero-rail" data-motion="reveal">
+    {business.facilities.map((facility) => (
+      <a href="#facilities">
+        <span class="eyebrow">TOP GYM</span>
+        <strong>{facility.title[locale]}</strong>
+      </a>
+    ))}
+    <a href="#gallery">
+      <span class="eyebrow">{copy.gallery}</span>
+      <strong>{copy.realGym}</strong>
+    </a>
+  </div>
+</section>

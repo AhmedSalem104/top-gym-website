@@ -1,0 +1,32 @@
+[
+  {
+    "locale": "ar",
+    "width": 390,
+    "visibleOpacityResets": []
+  },
+  {
+    "locale": "ar",
+    "width": 768,
+    "visibleOpacityResets": []
+  },
+  {
+    "locale": "ar",
+    "width": 1440,
+    "visibleOpacityResets": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "visibleOpacityResets": []
+  },
+  {
+    "locale": "en",
+    "width": 768,
+    "visibleOpacityResets": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "visibleOpacityResets": []
+  }
+]
