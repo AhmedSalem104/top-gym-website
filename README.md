@@ -137,7 +137,7 @@ Deploy `dist/` to a static host after completing [deployment preparation](docs/D
 
 ## Git workflow and project status
 
-Work on small feature branches, use conventional commits, run relevant checks and open a reviewable PR where a base branch exists. Do not reset others’ work, force-push, or commit archives, source certificates, private files, or credentials. This repository was empty at audit, so no established `main` base existed. See [project organization](docs/ROADMAP.md) for the actual tracker and PR status.
+Work on small feature branches, use conventional commits, run relevant checks and open a reviewable PR. Do not reset others’ work, force-push, or commit archives, source certificates, private files, or credentials. This repository was empty at audit; its empty protected `main` baseline now supports [draft PR #11](https://github.com/AhmedSalem104/top-gym-website/pull/11). Website code remains on `feat/top-gym-website` until an explicitly authorized merge. See [project organization](docs/ROADMAP.md) for the actual tracker and release status.
 
 ## Troubleshooting
 

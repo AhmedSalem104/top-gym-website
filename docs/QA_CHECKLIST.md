@@ -52,6 +52,7 @@ No physical iOS/Android device testing, Safari/WebKit screen-reader testing, or 
 - [ ] Verify external destinations and WhatsApp invitation validity on an owner device.
 - [ ] Supply written address and verify any future map embed before enabling it.
 - [ ] Supply production domain; validate canonical/hreflang/social metadata against the real origin.
-- [ ] Confirm main baseline/base-branch strategy, review PR and explicitly authorize merge/deployment.
+- [x] Establish an empty protected main baseline and draft PR while preserving feature history.
+- [ ] Review draft PR #11 and explicitly authorize implementation merge/deployment.
 - [ ] Enable indexing only after release approval and recheck robots/sitemap/SEO on the actual host.
 - [ ] Test real mobile devices and assistive technology as part of release acceptance.

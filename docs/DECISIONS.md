@@ -13,6 +13,6 @@
 | 2026-11-05 | Noindex until domain/release confirmation               | Avoid invented production URLs and premature indexing                                                              |
 | 2026-11-05 | Maps link without embed/address                         | Supplied short link exists, but exact embed/address could not be independently verified                            |
 | 2026-11-05 | Override minimatch to 11.0.1                            | Resolve reported globparts amplification advisory in lint tooling; validate lint/build/tests after override        |
-| 2026-11-05 | Keep feature work off main                              | Empty repo has no review base; do not create an unreviewed main implementation merely to manufacture a PR          |
+| 2026-11-05 | Empty protected main baseline and draft PR              | Enable the authorized review workflow while keeping all website code off main and preserving feature history       |
 
 Revisit decisions when new owner evidence arrives. Keep source-specific publishing constraints separate from implementation progress.

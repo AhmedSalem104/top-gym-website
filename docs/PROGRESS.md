@@ -43,13 +43,15 @@ The review website is implemented on `feat/top-gym-website`. It uses Astro 7.3.8
 
 The certificate section is implemented but hidden, with no public certificate files. Original comparison, identifiers/privacy and trainer role confirmation are required. Hours remain explicitly provisional. No verified written address/embed/domain has been supplied. Phone-link correctness does not prove call reachability. Social/Maps/group destinations need an owner/device check.
 
-A normal PR needs an approved base branch; the repository was empty. Do not manufacture a main implementation or merge without authorization. See `ROADMAP.md` for actionable owner inputs and open issue links.
+The review is available in [draft PR #11](https://github.com/AhmedSalem104/top-gym-website/pull/11). See `ROADMAP.md` for actionable owner inputs and open issue links. Implementation merging and production deployment still require explicit authorization.
 
 ## Verified GitHub handoff
 
 - Implementation commit: `0f3e0ca`; source/evidence documentation commit: `450b8855bb1fc75a906d106f963378ff333c6035`.
 - Both commits were pushed to `origin/feat/top-gym-website`; the working tree was clean after the push.
 - [GitHub Actions run 42043311915](https://github.com/AhmedSalem104/top-gym-website/actions/runs/42043311915) completed successfully on that exact documentation commit, including dependency installation, all static checks, unit tests, production build, isolated SEO validation, Chromium tests and uploaded QA artifacts.
-- The repository was initially empty. GitHub selected `feat/top-gym-website` as its default branch on the first push. No separate base branch exists, so a PR could not be opened; `PULL_REQUEST.md` contains the prepared review description.
-- Seven implementation phases are complete. Content verification (#5), production-domain SEO (#8), and release approval/base configuration (#10) remain open in the linked GitHub Project.
+- The repository was initially empty. An empty `main` baseline (`3bc80acb7e91890edfc0e147d70a9c6e4c6aed96`, no files) was created for the authorized PR workflow. It was connected into the feature branch by merge commit `c95506fb5aadf17236320091d6097a41107d1a71`; the feature tree was verified unchanged and every existing implementation commit was preserved. No website code was merged into main.
+- `main` is now the default branch. Its verified protection requires a PR, successful `quality` check, an up-to-date branch and resolved conversations; it includes administrators and forbids force pushes and deletion. Required approval count is zero so the sole owner is not locked out; the explicit owner authorization requirement still governs implementation merge.
+- [Draft PR #11](https://github.com/AhmedSalem104/top-gym-website/pull/11) contains the complete implementation against the empty main baseline. It remains a draft while business release gates are unresolved.
+- Seven implementation phases are complete. Content verification (#5), production-domain SEO (#8), and release approval (#10) remain open in the linked GitHub Project.
 - No production deployment or main merge was performed. This is a verified review build with the remaining business release gates stated above.

@@ -24,4 +24,4 @@ Keep the prior verified static artifact and commit SHA in the hosting release re
 
 ## First PR in an empty repository
 
-The remote initially had no commits or main branch. A feature branch can be pushed, but a normal PR requires a distinct base with common history. Do not merge feature work or silently publish it as main. The owner must authorize a minimal initial main baseline or choose an existing approved base before a PR can be opened. Preserve the implementation commits and use an ordinary branch/PR flow afterwards.
+The remote initially had no commits or main branch. To support the requested PR workflow, an empty main baseline was created and its history connected into the feature branch without changing the implementation tree or rewriting existing commits. [Draft PR #11](https://github.com/AhmedSalem104/top-gym-website/pull/11) now presents the full change. Main is protected by required PR and quality checks; it contains no website files. Do not merge implementation or deploy without explicit owner authorization.
