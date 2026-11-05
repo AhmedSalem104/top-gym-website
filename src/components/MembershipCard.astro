@@ -11,7 +11,7 @@ const { locale, membership, featured = false } = Astro.props;
 const copy = t(locale);
 ---
 
-<article class:list={['membership-card', { featured }]}>
+<article data-motion="reveal" class:list={['membership-card', { featured }]}>
   <span class="eyebrow">TOP GYM</span>
   <h3>{membership.name[locale]}</h3>
   <p>{membership.description[locale]}</p>

@@ -2,6 +2,7 @@
 import { business, publicCredentials, type Locale } from '../config/business';
 import { t } from '../i18n';
 import Icon from './Icon.astro';
+import LanguageSwitch from './LanguageSwitch.astro';
 interface Props {
   locale: Locale;
 }
@@ -23,9 +24,9 @@ const links = [
   {copy.skip}
 </a>
 <header class="site-header">
-  <div class="header-inner">
+  <div class="header-inner" data-motion="hero" data-motion-group>
     <a class="brand" href="#top" aria-label="TOP GYM">
-      <img src={business.logo} width="56" height="56" alt={copy.brandAlt} />
+      <img src={business.logo} width="44" height="44" alt={copy.brandAlt} />
       <span>TOP GYM</span>
     </a>
     <nav class="desktop-nav" aria-label={copy.navLabel}>
@@ -34,18 +35,19 @@ const links = [
       ))}
     </nav>
     <div class="header-actions">
-      <a
-        class="language-switch"
-        data-language-switch
-        href={locale === 'ar' ? '/en/' : '/ar/'}
-        lang={locale === 'ar' ? 'en' : 'ar'}
-        hreflang={locale === 'ar' ? 'en' : 'ar'}
-      >
-        {locale === 'ar' ? 'EN' : 'العربية'}
-      </a>
-      <a class="button button-gold header-call" href="#contact">
+      <LanguageSwitch locale={locale} />
+      <a class="button button-dark header-call" href="#contact">
         <Icon name="phone" />
         {copy.callUs}
+      </a>
+      <a
+        class="button button-gold header-group"
+        href={business.links.whatsappGroup}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="chat" />
+        {copy.group}
       </a>
       <button
         class="icon-button menu-toggle"
@@ -58,8 +60,27 @@ const links = [
     </div>
   </div>
   <nav id="mobile-nav" class="mobile-nav" aria-label={copy.navLabel} hidden>
+    <div class="mobile-language">
+      <span>Language / اللغة</span>
+      <LanguageSwitch locale={locale} />
+    </div>
     {links.map((id) => (
       <a href={`#${id}`}>{copy[id]}</a>
     ))}
+    <div class="mobile-nav-actions">
+      <a
+        class="button button-gold"
+        href={business.links.whatsappGroup}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="chat" />
+        {copy.group}
+      </a>
+      <a class="button button-dark" href="#contact">
+        <Icon name="phone" />
+        {copy.callUs}
+      </a>
+    </div>
   </nav>
 </header>

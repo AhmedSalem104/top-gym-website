@@ -6,6 +6,9 @@ const source = process.argv[2];
 if (!source) throw new Error('Usage: node scripts/prepare-media.mjs <extracted-source-root>');
 const root = resolve(source);
 const output = resolve('public/media');
+const previous = JSON.parse(
+  await readFile('docs/asset-manifest.json', 'utf8').catch(() => '{"assets":[]}'),
+);
 await mkdir(output, { recursive: true });
 const images = [
   ['01_chest_press.jpg', 'chest-press'],
@@ -89,6 +92,13 @@ async function walk(folder) {
 }
 await walk(join(root, 'media'));
 await walk(join(root, 'stitch'));
+// Preserve reviewed certificate derivatives when refreshing only gym photographs.
+for (const asset of inventory.filter((item) => item.source.includes('certificates/'))) {
+  const reviewed = previous.assets.find(
+    (item) => item.source === asset.source && item.sha256 === asset.sha256,
+  );
+  if (reviewed) Object.assign(asset, reviewed);
+}
 const hashes = new Map();
 for (const asset of inventory) {
   const group = hashes.get(asset.sha256) ?? [];
@@ -106,7 +116,7 @@ await writeFile(
         'stitch_top_gym_landing_page.zip',
       ],
       policy:
-        'Source archives and certificate photographs stay outside the repository. No original overwritten.',
+        'Original archives and unredacted certificates stay outside Git. Published certificate copies contain baked-in registration-number redactions. No original overwritten.',
       duplicates: [...hashes.values()].filter((group) => group.length > 1),
       assets: inventory,
     },

@@ -13,18 +13,18 @@ const copy = t(locale);
 <section id="schedule" class="section surface">
   <div class="container">
     <SectionHeading eyebrow={copy.hoursLabel} title={copy.hoursTitle} />
-    <div class="hours-grid">
+    <div class="hours-grid" data-motion-group>
       <div class="panel hours-panel">
-        <div class="hours-header">
+        <div class="hours-header" data-motion="heading">
           <span>
             <Icon name="clock" />
             {copy.cairo}
           </span>
           <span class="status" data-open-status hidden></span>
         </div>
-        <dl class="hours-list">
+        <dl class="hours-list" data-motion-group>
           {business.hours.days.map((entry) => (
-            <div data-day={entry.day}>
+            <div data-motion="reveal" data-day={entry.day}>
               <dt>
                 {days[locale][entry.day]}
                 <span class="today-label" hidden>
@@ -39,9 +39,11 @@ const copy = t(locale);
             </div>
           ))}
         </dl>
-        <p class="hours-note">{copy.hoursNote}</p>
+        <p class="hours-note" data-motion="fade">
+          {copy.hoursNote}
+        </p>
       </div>
-      <aside class="panel hours-aside">
+      <aside class="panel hours-aside" data-motion="reveal">
         <span class="eyebrow">{copy.contact}</span>
         <h3>{copy.hoursAside}</h3>
         <p>{copy.hoursAsideText}</p>

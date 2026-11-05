@@ -12,6 +12,8 @@ import barlowHeading from '@fontsource/barlow-condensed/files/barlow-condensed-l
 import chivoRegular from '@fontsource/chivo/files/chivo-latin-400-normal.woff2?url';
 import chivoSemibold from '@fontsource/chivo/files/chivo-latin-600-normal.woff2?url';
 import '../styles/global.css';
+import '../styles/motion.css';
+import { motionCssVariables } from '../config/motion';
 import { business, type Locale } from '../config/business';
 import { t } from '../i18n';
 import Header from '../components/Header.astro';
@@ -54,6 +56,7 @@ const schema = {
     <title>{copy.title}</title>
     <meta name="description" content={copy.description} />
     <meta name="theme-color" content="#0B0D0F" />
+    <style is:inline set:html={motionCssVariables} />
     <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
     <link rel="icon" href="/media/favicon.png" type="image/png" />
     <noscript>
@@ -99,6 +102,7 @@ const schema = {
     <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\u003c')} />
   </head>
   <body id="top">
+    <span data-header-sentinel aria-hidden="true"></span>
     <Header locale={locale} />
     <main id="main" tabindex="-1">
       <slot />

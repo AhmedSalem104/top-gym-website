@@ -30,24 +30,28 @@ Official one-page Arabic membership PDF dated **2026-11-05**, visually rendered 
 
 The PDF text layer reverses some Arabic numeric runs; visual inspection, not text extraction alone, was used. Prices in tests are an independent transcription of that rendered table. PDF authority applies to pricing, not to unsupported benefits.
 
-## Certificate review — private source only
+## Certificate review and publication
 
-Eight supplied enhanced photographs are inventoried. The README asserts conservative sharpening/contrast and unchanged documentary text; original photographs have not been supplied for independent comparison. Several images contain personal registration numbers. No image or identifier has been published or committed. Titles below describe legible supplied copy and are **not an accreditation verification**.
+Following the owner's request to show the missing section, five supplied enhanced certificate copies are displayed. Each was visually reviewed; registration numbers are hidden by opaque pixels before producing either the preview or the full-size lossless WebP. Sources remain unchanged outside Git. The displayed 8 February–6 April 2023 dates are labeled **training period**, not award dates. The documents identify Ahmed AbdElhamid Salem AbdElhamid Salem; the site does not infer his employment or equate him with contact Ahmed. Original comparison and accreditation verification have not been performed.
 
-| File                                   | Legible subject / organization                                          | Disposition                               |
-| -------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------- |
-| `01_titanium_tass_cards.jpg`           | Titanium Gym / World Gym training statement with TASS/PBLS cards        | Contains extra personal identifiers; hold |
-| `02_tass_nutrition.jpg`                | Sports Nutrition Specialist; Training Academy for Sports Science (TASS) | Hold for original/privacy review          |
-| `03_pbls_personal_trainer.jpg`         | Certified Personal Trainer (Gym Coach); PBLS Academy                    | Hold for original/privacy review          |
-| `04_tass_fitness_trainer.jpg`          | Certified Fitness Trainer; TASS                                         | Hold for original/privacy review          |
-| `05_pbls_nutrition.jpg`                | Specialist in Sports Nutrition; PBLS Academy                            | Hold for original/privacy review          |
-| `06_titanium_certificate.jpg`          | Titanium Gym Group in collaboration with World Gym training statement   | Hold for original/privacy review          |
-| `07_pbls_nutrition_variant.jpg`        | PBLS nutrition variant; not assumed an additional qualification         | Hold; reconcile variant with original     |
-| `08_pbls_personal_trainer_variant.jpg` | PBLS personal trainer variant; not assumed an additional qualification  | Hold; reconcile variant with original     |
+| File                                   | Published subject / organization                                  | Disposition                                                    |
+| -------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------- |
+| `01_titanium_tass_cards.jpg`           | Overlapping TASS/PBLS identification cards and training statement | Retained privately; extra personal data and duplicate subjects |
+| `02_tass_nutrition.jpg`                | Sports Nutrition Specialist / TASS                                | Redacted full copy and preview published                       |
+| `03_pbls_personal_trainer.jpg`         | Certified Personal Trainer (Gym Coach) / PBLS Academy             | Redacted full copy and preview published                       |
+| `04_tass_fitness_trainer.jpg`          | Certified Fitness Trainer / TASS                                  | Redacted full copy and preview published                       |
+| `05_pbls_nutrition.jpg`                | Specialist in Sports Nutrition / PBLS Academy                     | Redacted full copy and preview published                       |
+| `06_titanium_certificate.jpg`          | Training statement / Titanium Gym Group with World Gym            | Redacted full copy and preview published                       |
+| `07_pbls_nutrition_variant.jpg`        | Alternate PBLS nutrition copy                                     | Retained privately; not counted as an additional qualification |
+| `08_pbls_personal_trainer_variant.jpg` | Alternate PBLS personal trainer copy                              | Retained privately; not counted as an additional qualification |
 
-The visible training period is 8 February–6 April 2023; confirm each original before treating it as an award/issue date. The holder supplied by the owner is Ahmed AbdElhamid Salem AbdElhamid Salem. Do not conflate that holder with the contact Ahmed or infer a current employment role.
+`scripts/prepare-certificates.mjs` checks source SHA-256 hashes, applies documented registration-area redactions, strips metadata and creates separate web copies. No AI, documentary text replacement, seal/signature reconstruction or source overwrite is used. The manifest records every output and exact redaction rectangle. Both full copies and previews were visually reviewed after generation.
 
-To release: compare originals, verify exact titles/issuers/dates, confirm public use and role, prepare privacy-safe derivatives without changing documentary content, review the derivatives, add approved typed records to `business.trainer.credentials`, and verify both lightboxes. Existing `Credentials.astro` and shared dialog support this without layout duplication.
+## Promotional hero and QR
+
+The owner requested a professional replacement hero from Pinterest. The selected [male-athlete photograph](https://www.pinterest.com/pin/fotos-na-academia-masculina--844636105109617078/) is visibly labeled as promotional imagery, separate from actual TOP GYM equipment/gallery photography. `promotional-media.json` records the exact downloaded URL, hash, dimensions, derivatives and unresolved photographer/reuse-rights status. No facility or trainer identity is inferred from the image. Confirm reuse rights before production launch.
+
+The visible WhatsApp QR encodes the supplied group invitation directly. It is generated into the static build from central business configuration with a white quiet zone and dark modules. A normal join button remains available on the same device. QR decoding is tested against the exact configured URL; no third-party QR redirect/service is used.
 
 ## Design source decisions
 
@@ -55,7 +59,7 @@ All six HTML variants were inspected for headings, sections, behaviors and image
 
 ## Unresolved business content
 
-- Original gym/certificate files and confirmed public certificate treatment.
+- Original gym/certificate files for archival comparison; photographer/reuse rights for the requested Pinterest hero.
 - Trainer/contact identity and current TOP GYM role.
 - Current opening hours: owner supplied listing data approximately four years old.
 - Written address, verified embed coordinates/location, production domain.

@@ -4,7 +4,7 @@
     "Top_Gym_Enhanced_Photos_and_Certificates.zip",
     "stitch_top_gym_landing_page.zip"
   ],
-  "policy": "Source archives and certificate photographs stay outside the repository. No original overwritten.",
+  "policy": "Original archives and unredacted certificates stay outside Git. Published certificate copies contain baked-in registration-number redactions. No original overwritten.",
   "duplicates": [
     [
       "stitch/stitch_top_gym_landing_page/top_gym_elite_fitness_landing_page_1/code.html",
@@ -32,7 +32,7 @@
       "width": 1536,
       "height": 2048,
       "destinations": [],
-      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+      "decision": "Retained privately: overlapping identification cards duplicate published certificate subjects and contain extra personal data"
     },
     {
       "source": "media/certificates/02_tass_nutrition.jpg",
@@ -40,8 +40,18 @@
       "sha256": "3b5925bf04761d00f843f0731fbfcd00d69ef5f4d8e846927a7135e2d13a05c7",
       "width": 1114,
       "height": 1536,
-      "destinations": [],
-      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+      "destinations": [
+        "public/media/certificates/tass-nutrition.webp",
+        "public/media/certificates/tass-nutrition-preview.webp"
+      ],
+      "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
+      "redaction": {
+        "left": 17,
+        "top": 1394,
+        "width": 190,
+        "height": 34,
+        "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      }
     },
     {
       "source": "media/certificates/03_pbls_personal_trainer.jpg",
@@ -49,8 +59,18 @@
       "sha256": "181163f1c87893346fc0dcb40025692e9c754079f9227c5dfcf5b05ba2730a57",
       "width": 1536,
       "height": 1089,
-      "destinations": [],
-      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+      "destinations": [
+        "public/media/certificates/pbls-personal-trainer.webp",
+        "public/media/certificates/pbls-personal-trainer-preview.webp"
+      ],
+      "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
+      "redaction": {
+        "left": 24,
+        "top": 1015,
+        "width": 112,
+        "height": 43,
+        "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      }
     },
     {
       "source": "media/certificates/04_tass_fitness_trainer.jpg",
@@ -58,8 +78,18 @@
       "sha256": "4eb773e54bb4334cfb5710f0ea756e8d256c80f277cb3265eb05962758ec28d8",
       "width": 1135,
       "height": 1533,
-      "destinations": [],
-      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+      "destinations": [
+        "public/media/certificates/tass-fitness-trainer.webp",
+        "public/media/certificates/tass-fitness-trainer-preview.webp"
+      ],
+      "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
+      "redaction": {
+        "left": 24,
+        "top": 1370,
+        "width": 192,
+        "height": 35,
+        "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      }
     },
     {
       "source": "media/certificates/05_pbls_nutrition.jpg",
@@ -67,8 +97,18 @@
       "sha256": "57f45e7784d935ca023fa11e7feeb9726d3862c1d35fa7a149bdc499e803f657",
       "width": 1536,
       "height": 1077,
-      "destinations": [],
-      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+      "destinations": [
+        "public/media/certificates/pbls-nutrition.webp",
+        "public/media/certificates/pbls-nutrition-preview.webp"
+      ],
+      "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
+      "redaction": {
+        "left": 29,
+        "top": 1000,
+        "width": 126,
+        "height": 45,
+        "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      }
     },
     {
       "source": "media/certificates/06_titanium_certificate.jpg",
@@ -76,8 +116,18 @@
       "sha256": "8aa2de6dd04ce5e8e0ea5fcdd159da1fd668bb397aa32898d9bb850004837812",
       "width": 1099,
       "height": 1536,
-      "destinations": [],
-      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+      "destinations": [
+        "public/media/certificates/titanium-training.webp",
+        "public/media/certificates/titanium-training-preview.webp"
+      ],
+      "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
+      "redaction": {
+        "left": 130,
+        "top": 1394,
+        "width": 230,
+        "height": 43,
+        "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      }
     },
     {
       "source": "media/certificates/07_pbls_nutrition_variant.jpg",
@@ -86,7 +136,7 @@
       "width": 1536,
       "height": 1107,
       "destinations": [],
-      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+      "decision": "Retained privately: alternate version of a published PBLS subject; not counted as an additional qualification"
     },
     {
       "source": "media/certificates/08_pbls_personal_trainer_variant.jpg",
@@ -95,7 +145,7 @@
       "width": 1536,
       "height": 1101,
       "destinations": [],
-      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+      "decision": "Retained privately: alternate version of a published PBLS subject; not counted as an additional qualification"
     },
     {
       "source": "media/gym_photos/01_chest_press.jpg",

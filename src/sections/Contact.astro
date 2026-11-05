@@ -14,8 +14,8 @@ const copy = t(locale);
 <section id="location" class="section">
   <div class="container">
     <SectionHeading eyebrow={copy.locationLabel} title={copy.locationTitle} />
-    <div class="location-grid">
-      <div class="panel location-panel">
+    <div class="location-grid" data-motion-group data-motion-step="2">
+      <div class="panel location-panel" data-motion="reveal">
         <Icon name="pin" size={36} />
         <h3>{copy.locationCard}</h3>
         <p>{copy.locationText}</p>
@@ -31,7 +31,7 @@ const copy = t(locale);
         </a>
         <small>{copy.mapNote}</small>
       </div>
-      <figure class="location-photo">
+      <figure class="location-photo" data-motion="image">
         <Photo id="chest-press" locale={locale} />
         <figcaption>{copy.realGym}</figcaption>
       </figure>
@@ -45,10 +45,10 @@ const copy = t(locale);
       title={copy.contactTitle}
       description={copy.contactText}
     />
-    <div class="contact-grid">
-      <div class="phone-list">
+    <div class="contact-grid" data-motion-group data-motion-step="2">
+      <div class="phone-list" data-motion-group>
         {business.contacts.map((contact) => (
-          <a class="phone-card" href={`tel:${contact.phone}`}>
+          <a data-motion="reveal" class="phone-card" href={`tel:${contact.phone}`}>
             <span class="contact-icon">
               <Icon name="phone" size={24} />
             </span>
@@ -62,13 +62,18 @@ const copy = t(locale);
           </a>
         ))}
       </div>
-      <div class="panel group-panel">
-        <span class="eyebrow">{copy.groupNote}</span>
-        <h3 dir="ltr">{business.whatsappGroupName}</h3>
-        <p>{copy.groupText}</p>
+      <div class="panel group-panel" data-motion-group>
+        <span class="eyebrow" data-motion="heading">
+          {copy.groupNote}
+        </span>
+        <h3 data-motion="heading" dir="ltr">
+          {business.whatsappGroupName}
+        </h3>
+        <p data-motion="reveal">{copy.groupText}</p>
         <a
           class="button button-gold"
           href={business.links.whatsappGroup}
+          data-motion="reveal"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -78,26 +83,44 @@ const copy = t(locale);
         <a
           class="text-link"
           href={business.links.facebook}
+          data-motion="reveal"
           target="_blank"
           rel="noopener noreferrer"
         >
           {copy.facebook}
           <Icon name="arrow" />
         </a>
+        <figure class="qr-card" data-motion="image">
+          <a
+            href={business.links.whatsappGroup}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={copy.group}
+            data-qr-link
+          >
+            <img src="/qr/whatsapp.png" alt={copy.qrAlt} width="216" height="216" loading="lazy" />
+          </a>
+          <figcaption>
+            <strong>{copy.qrTitle}</strong>
+            <p>{copy.qrText}</p>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </div>
 </section>
-<section class="section final-cta">
+<section class="section final-cta" data-motion-group>
   <div class="container">
-    <p class="eyebrow">{copy.finalLabel}</p>
-    <h2>
+    <p class="eyebrow" data-motion="heading">
+      {copy.finalLabel}
+    </p>
+    <h2 data-motion="heading">
       {copy.finalLine}
       <br />
       <em>{copy.finalGold}</em>
     </h2>
-    <p>{copy.finalText}</p>
-    <div class="actions">
+    <p data-motion="reveal">{copy.finalText}</p>
+    <div class="actions" data-motion="reveal">
       <a class="button button-gold" href={`tel:${business.contacts[0].phone}`}>
         <Icon name="phone" />
         {copy.callAhmed}

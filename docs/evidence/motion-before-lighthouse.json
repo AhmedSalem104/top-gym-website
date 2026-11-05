@@ -1,0 +1,118 @@
+[
+  {
+    "locale": "ar",
+    "mode": "mobile",
+    "measuredAt": "2026-11-05T15:38:18.716Z",
+    "lighthouseVersion": "13.6.0",
+    "formFactor": "mobile",
+    "viewport": {
+      "mobile": true,
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75,
+      "disabled": false
+    },
+    "url": "http://127.0.0.1:4323/ar/",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "agentic-browsing": 100
+    },
+    "metrics": {
+      "fcp": "0.9 s",
+      "lcp": "2.2 s",
+      "cls": "0",
+      "tbt": "0 ms"
+    },
+    "notes": "Local Chromium lab measurement; review build intentionally noindex. Not field data or a production-domain test."
+  },
+  {
+    "locale": "ar",
+    "mode": "desktop",
+    "measuredAt": "2026-11-05T15:38:26.555Z",
+    "lighthouseVersion": "13.6.0",
+    "formFactor": "desktop",
+    "viewport": {
+      "mobile": false,
+      "width": 1350,
+      "height": 940,
+      "deviceScaleFactor": 1,
+      "disabled": false
+    },
+    "url": "http://127.0.0.1:4323/ar/",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "agentic-browsing": 100
+    },
+    "metrics": {
+      "fcp": "0.3 s",
+      "lcp": "0.5 s",
+      "cls": "0",
+      "tbt": "20 ms"
+    },
+    "notes": "Local Chromium lab measurement; review build intentionally noindex. Not field data or a production-domain test."
+  },
+  {
+    "locale": "en",
+    "mode": "mobile",
+    "measuredAt": "2026-11-05T15:38:34.696Z",
+    "lighthouseVersion": "13.6.0",
+    "formFactor": "mobile",
+    "viewport": {
+      "mobile": true,
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75,
+      "disabled": false
+    },
+    "url": "http://127.0.0.1:4323/en/",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "agentic-browsing": 100
+    },
+    "metrics": {
+      "fcp": "0.9 s",
+      "lcp": "2.0 s",
+      "cls": "0",
+      "tbt": "0 ms"
+    },
+    "notes": "Local Chromium lab measurement; review build intentionally noindex. Not field data or a production-domain test."
+  },
+  {
+    "locale": "en",
+    "mode": "desktop",
+    "measuredAt": "2026-11-05T15:38:42.116Z",
+    "lighthouseVersion": "13.6.0",
+    "formFactor": "desktop",
+    "viewport": {
+      "mobile": false,
+      "width": 1350,
+      "height": 940,
+      "deviceScaleFactor": 1,
+      "disabled": false
+    },
+    "url": "http://127.0.0.1:4323/en/",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "agentic-browsing": 100
+    },
+    "metrics": {
+      "fcp": "0.2 s",
+      "lcp": "0.5 s",
+      "cls": "0.004",
+      "tbt": "0 ms"
+    },
+    "notes": "Local Chromium lab measurement; review build intentionally noindex. Not field data or a production-domain test."
+  }
+]

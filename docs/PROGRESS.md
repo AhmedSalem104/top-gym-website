@@ -22,10 +22,10 @@ The review website is implemented on `feat/top-gym-website`. It uses Astro 7.3.8
 
 ## Validation record
 
-- Unit tests: **15 passed**.
-- Browser tests: **19 passed**, including ten viewport/language combinations and two axe scans with zero violations in the configured WCAG rules.
+- Unit tests: **18 passed**.
+- Browser tests: **32 passed**, including ten viewport/language combinations and two axe scans with zero violations in the configured WCAG rules.
 - Production build: passed, four HTML pages plus robots/sitemap.
-- `npm run test:all`: passed end-to-end locally (typecheck, lint, format, 15 unit tests, production build, isolated production-metadata checks, 19 browser tests). Typecheck: zero errors, warnings or hints.
+- `npm run test:all`: passed end-to-end locally (typecheck, lint, format, 18 unit tests, production build, isolated production-metadata checks, 32 browser tests). Typecheck: zero errors, warnings or hints.
 - Production metadata was validated against a reserved `.invalid` test origin in ignored `.local/seo-fixture/`; the actual `dist/` review output remains domain-free and noindex. Real-domain acceptance is still a release gate.
 - Remote CI status is recorded in the final Git handoff entry below.
 - `npm audit`: zero reported vulnerabilities after the scoped minimatch patch override; no forced upgrades.
@@ -41,7 +41,7 @@ The review website is implemented on `feat/top-gym-website`. It uses Astro 7.3.8
 
 ## Remaining gates
 
-The certificate section is implemented but hidden, with no public certificate files. Original comparison, identifiers/privacy and trainer role confirmation are required. Hours remain explicitly provisional. No verified written address/embed/domain has been supplied. Phone-link correctness does not prove call reachability. Social/Maps/group destinations need an owner/device check.
+Five reviewed enhanced certificates are now displayed at the owner’s request with registration-number redactions in every derivative. Original comparison and trainer role confirmation remain outstanding. The replacement Pinterest hero is promotional and labeled; reuse rights require confirmation before production launch. Hours remain explicitly provisional. No verified written address/embed/domain has been supplied. Phone-link correctness does not prove call reachability. Social/Maps/group destinations need an owner/device check.
 
 The review is available in [draft PR #11](https://github.com/AhmedSalem104/top-gym-website/pull/11). See `ROADMAP.md` for actionable owner inputs and open issue links. Implementation merging and production deployment still require explicit authorization.
 
@@ -55,3 +55,22 @@ The review is available in [draft PR #11](https://github.com/AhmedSalem104/top-g
 - [Draft PR #11](https://github.com/AhmedSalem104/top-gym-website/pull/11) contains the complete implementation against the empty main baseline. It remains a draft while business release gates are unresolved.
 - Seven implementation phases are complete. Content verification (#5), production-domain SEO (#8), and release approval (#10) remain open in the linked GitHub Project.
 - No production deployment or main merge was performed. This is a verified review build with the remaining business release gates stated above.
+
+## Owner-requested content follow-up — 2026-11-05
+
+- Enabled five distinct supplied certificate copies with bilingual titles, exact training periods and keyboard-accessible enlargement. Reviewed all five full-size derivatives after baking opaque registration-number redactions into the image pixels. Unredacted sources, overlapping identity cards and duplicate variants remain private.
+- Replaced the hero with the requested Pinterest male-athlete photograph, labeled promotional. Real facility/gallery photos remain separate. Source hash/URL and unconfirmed reuse-rights status are recorded in `promotional-media.json`.
+- Added a visible WhatsApp-group QR with a same-device join button. The PNG is generated locally from central business configuration at build time. Browser tests decode it and compare the exact invitation URL in both languages.
+- Browser coverage increased to 21 passing tests. A first assertion expected a relative dialog URL although the DOM correctly resolves it to an absolute URL; the assertion was corrected and both language cases then passed. Isolated production preview testing uses `PLAYWRIGHT_PORT` so the owner's development preview stays running.
+- Updated desktop/mobile hero, certificate and QR screenshots are in `docs/evidence/`. Section-only captures hide fixed navigation overlays to show the complete section; normal viewport captures retain navigation.
+- Original-document comparison, current trainer role, current hours, external destination validity, production domain and promotional image reuse rights remain release checks. No generated certificate, main merge or production deployment was performed.
+
+## Site-wide motion and source-navbar follow-up — 2026-11-05
+
+- Audited the actual Astro tree, native interactions, CSS and primary Gold Desktop 2 export. Added a central native motion system with one reveal/header observer, one dynamic-content observer, bounded 80 ms staggers, explicit variants, cleanup and progressive fallback. No animation dependencies or scroll loops were added.
+- Applied motion to every major section, heading hierarchy, image/card grid, hours rows, final CTA and footer. Kept LCP heading/image fully painted and contact/price updates immediate. Preserved original section order, targets, supplied business data and media during this motion change.
+- Corrected the separately requested navbar against the source: dark contact action, gold group CTA, segmented languages and single-column mobile disclosure. Preserved the real logo and omitted the unverified men-only business tagline.
+- Added interruptible menu/dialog transitions, focus-safe keyboard behavior, hover/press feedback and live reduced-motion cancellation. Full QA caught a stylesheet-order conflict in reduced-motion scrolling; the explicit reduced-motion override fixed it. A regression assertion also verifies the menu entrance survives initial focus placement.
+- Final local validation: 18 unit and 32 Chromium tests; typecheck/lint/format/build/isolated SEO checks. Six motion coverage cases traverse every marked element in Arabic/English at 390/768/1440; existing five-width and axe tests remain in the suite.
+- Architecture, reusable examples and coverage live in `MOTION_SYSTEM.md` and `MOTION_COVERAGE_MATRIX.md`. Recordings, before/after screenshots, frame sequences, 6× CPU scroll measurements and both Lighthouse runs are retained in `docs/evidence/`. See `QA_CHECKLIST.md` for numerical results and the unresolved Arabic startup timing variation.
+- Physical mobile devices/Safari/screen readers and original business release gates remain outside this local Chromium review. No main merge or production deployment was performed.

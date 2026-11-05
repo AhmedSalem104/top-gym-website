@@ -9,22 +9,22 @@ const copy = t(locale);
 ---
 
 <footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
+  <div class="container footer-grid" data-motion-group>
+    <div data-motion="reveal">
       <a class="brand" href="#top">
         <img src={business.logo} width="64" height="64" alt={copy.brandAlt} />
         <span>TOP GYM</span>
       </a>
       <p>{copy.footerText}</p>
     </div>
-    <div>
+    <div data-motion="reveal">
       <h2>{copy.navigation}</h2>
       <a href="#about">{copy.about}</a>
       <a href="#gallery">{copy.gallery}</a>
       <a href="#memberships">{copy.memberships}</a>
       <a href="#schedule">{copy.schedule}</a>
     </div>
-    <div>
+    <div data-motion="reveal">
       <h2>{copy.contact}</h2>
       {business.contacts.map((contact) => (
         <a href={`tel:${contact.phone}`}>
@@ -35,7 +35,7 @@ const copy = t(locale);
         {copy.directions}
       </a>
     </div>
-    <div>
+    <div data-motion="reveal">
       <h2>{copy.follow}</h2>
       <a href={business.links.facebook} target="_blank" rel="noopener noreferrer">
         {copy.facebook}
@@ -45,7 +45,7 @@ const copy = t(locale);
       </a>
     </div>
   </div>
-  <div class="container footer-bottom">
+  <div class="container footer-bottom" data-motion="fade">
     <p>
       © <span data-year>{new Date().getFullYear()}</span> {business.name}. {copy.rights}
     </p>

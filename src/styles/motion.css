@@ -1,0 +1,130 @@
+/* Timings/easing are emitted from config/motion.ts. SSR content is always visible. */
+html {
+  scrollbar-gutter: stable;
+}
+.group-panel > [data-motion='heading'] {
+  display: block;
+}
+[data-header-sentinel] {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 35%);
+  opacity: 0;
+  transition: opacity var(--motion-micro) var(--motion-ease);
+}
+.site-header.is-scrolled::after {
+  opacity: 1;
+}
+.button,
+.icon-button,
+.language-switch a,
+.mobile-contact a {
+  transition:
+    transform var(--motion-micro) var(--motion-ease),
+    color var(--motion-micro),
+    background-color var(--motion-micro),
+    border-color var(--motion-micro);
+}
+.membership-card,
+.credential-card,
+.facility-card,
+.phone-card {
+  transition:
+    transform var(--motion-micro) var(--motion-ease),
+    border-color var(--motion-micro);
+}
+.membership-card:focus-within,
+.credential-card:focus-within,
+.phone-card:focus-visible {
+  border-color: var(--color-gold);
+}
+.gallery-item img {
+  transition: transform var(--motion-image) var(--motion-ease);
+}
+.gallery-item:focus-visible img {
+  transform: scale(1.025);
+}
+.desktop-nav a {
+  position: relative;
+}
+.desktop-nav a::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 3px;
+  height: 2px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-micro) var(--motion-ease);
+}
+[dir='rtl'] .desktop-nav a::after {
+  transform-origin: right;
+}
+.desktop-nav a:is(:hover, :focus-visible)::after {
+  transform: scaleX(1);
+}
+.lightbox::backdrop {
+  transition: opacity var(--motion-micro) var(--motion-ease);
+}
+.lightbox.is-closing::backdrop {
+  opacity: 0;
+}
+@starting-style {
+  .lightbox[open]::backdrop {
+    opacity: 0;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .button:hover,
+  .icon-button:hover {
+    transform: translateY(-2px);
+  }
+  .membership-card:hover,
+  .credential-card:hover,
+  .facility-card:hover,
+  .phone-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-gold);
+  }
+  .gallery-item:hover img {
+    transform: scale(1.025);
+  }
+}
+.button:active,
+.icon-button:active,
+.mobile-contact a:active,
+.language-switch a:active {
+  transform: translateY(1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .button,
+  .icon-button,
+  .membership-card,
+  .credential-card,
+  .facility-card,
+  .phone-card,
+  .gallery-item img,
+  .mobile-contact a,
+  .language-switch a {
+    transform: none !important;
+  }
+}

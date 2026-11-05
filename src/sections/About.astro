@@ -18,8 +18,8 @@ const copy = t(locale);
       title={copy.aboutTitle}
       description={copy.aboutText}
     />
-    <div class="about-grid">
-      <figure class="about-photo">
+    <div class="about-grid" data-motion-group data-motion-step="2">
+      <figure class="about-photo" data-motion="image">
         <Photo id="leg-extension" locale={locale} />
         <figcaption>
           <span class="eyebrow">TOP GYM</span>
@@ -27,7 +27,7 @@ const copy = t(locale);
         </figcaption>
       </figure>
       <div class="about-story">
-        <div class="panel">
+        <div class="panel" data-motion="reveal">
           <span class="eyebrow">{copy.about}</span>
           <h3>{copy.aboutPanelTitle}</h3>
           <p>{copy.aboutPanelText}</p>
@@ -36,7 +36,7 @@ const copy = t(locale);
             <p>{copy.aboutNote}</p>
           </div>
         </div>
-        <a class="text-link" href="#gallery">
+        <a class="text-link" href="#gallery" data-motion="reveal">
           {copy.explore}
           <Icon name="arrow" />
         </a>

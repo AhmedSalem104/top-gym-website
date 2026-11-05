@@ -5,6 +5,7 @@ Build a static bilingual marketing site for the real TOP GYM. Preserve the suppl
 - Stack: Astro, TypeScript, Tailwind 4/CSS, small DOM scripts. Node 24, npm lockfile.
 - Business facts: `src/config/business.ts`; translations: `src/i18n/index.ts`; media descriptions: `src/content/media.ts`.
 - Shared components: `src/components`; page sections: `src/sections`; tokens/layout: `src/styles/global.css`.
+- Motion: `src/config/motion.ts`, `src/scripts/motion.ts`, `src/styles/motion.css`. Reuse `data-motion` primitives; no hidden SSR content, duplicate observers, scroll loops or animation dependencies. Read `docs/MOTION_SYSTEM.md` and update `docs/MOTION_COVERAGE_MATRIX.md` with verification when adding sections.
 - Validate: `npm ci`, `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm test`, `npm run build`, `npm run test:e2e`. Install Chromium with `npx playwright install chromium`.
 - Use gold #E59500 on the approved dark palette. Preserve Barlow Condensed/Chivo and use Cairo for Arabic. No lime UI, fabricated logo, invented facilities or promotional claims.
 - Check Arabic RTL and English LTR at 320, 390, 768, 1440, 1920px. Keep visible focus, 44px targets, semantic controls, reduced motion and keyboard-accessible dialogs.

@@ -10,6 +10,10 @@ Astro renders `/ar/` and `/en/` through one `Landing` component and section tree
 
 The bundled `site.ts` controls the menu, duration selector, localized price updates, language preference, current Cairo status, year, and shared lightbox. The dialog uses native modal behavior plus explicit focus cycling, Escape, arrow navigation and opener focus restoration. Gallery anchors are valid image links without JavaScript. All prices remain in a semantic details/table fallback. Contacts are ordinary links.
 
+## Motion
+
+Motion remains a small native enhancement, with one shared reveal observer and declarative component attributes. The same configuration supplies CSS micro-interactions and interruptible Web Animations. See `MOTION_SYSTEM.md` for tokens, lifecycle, dynamic registration and accessibility; `MOTION_COVERAGE_MATRIX.md` records coverage without duplicating this architecture document.
+
 ## Time model
 
 Opening/closing times are local minutes. Saturday through Thursday: 780–1440; Friday: 960–1320. Closing is exclusive. `Intl` determines the Cairo weekday/time for an absolute date, including Egyptian DST. No hardcoded UTC offset or visitor-local date is used. Status reflects provisional listed hours, not a verified live feed.
@@ -20,8 +24,12 @@ Opening/closing times are local minutes. Saturday through Thursday: 780–1440; 
 
 ## Assets and provenance
 
-Sharp creates AVIF/WebP derivatives of owner-supplied photos, preserving source files. Public output never includes original archives/PDFs or withheld certificate photos. The manifest records every extracted file and its publication decision. The logo derivative contains the complete supplied presentation image. Source metadata is stripped from published derivatives by normal Sharp output.
+Sharp creates AVIF/WebP derivatives of owner-supplied photos, preserving source files. Public output never includes original archives/PDFs or unredacted certificate sources. Five reviewed enhanced certificate copies have baked-in registration-number redactions; full-size copies use lossless WebP. The promotional hero is tracked separately from genuine gym photographs. The manifest records every extracted file and its publication decision. The logo derivative contains the complete supplied presentation image. Source metadata is stripped from published derivatives by normal Sharp output.
 
 ## Quality and deployment
 
 ESLint/TypeScript/Vitest/build run before browser checks. Playwright covers two locales, five widths, menu, prices, links, dialog, preferences, loaded images, errors and axe scans. CI uploads evidence and never deploys. A static host serves `dist/`; there are no secrets or application environment services. All production actions remain subject to owner authorization.
+
+## Static QR image
+
+`src/pages/qr/whatsapp.png.ts` generates a PNG during the Astro build from the central WhatsApp group URL. The QR library stays on the build side and adds no client JavaScript. Browser tests decode the generated PNG and compare its payload to the configured invitation.

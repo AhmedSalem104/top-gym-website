@@ -17,9 +17,9 @@ const copy = t(locale);
       title={copy.facilitiesTitle}
       description={copy.facilitiesText}
     />
-    <div class="facility-grid">
+    <div class="facility-grid" data-motion-group data-motion-step="2">
       {business.facilities.map((facility) => (
-        <article class="facility-card">
+        <article class="facility-card" data-motion="image">
           <Photo id={facility.image} locale={locale} sizes="(max-width: 767px) 100vw, 33vw" />
           <div class="card-content">
             <h3>{facility.title[locale]}</h3>

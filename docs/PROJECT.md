@@ -19,6 +19,6 @@ Original archives remain in the owner's Downloads folder, extracted copies in a 
 
 ## Acceptance and blockers
 
-The implementation can be reviewed with available assets. Final release acceptance requires original certificate comparison/privacy treatment, trainer identity/role confirmation, current hours confirmation, written address/domain where available, and explicit merge/deploy authorization. Do not label this review build production-approved.
+The implementation can be reviewed with available assets. Final release acceptance requires original certificate comparison, trainer identity/role confirmation, Pinterest hero reuse-rights confirmation, current hours confirmation, written address/domain where available, and explicit merge/deploy authorization. Do not label this review build production-approved.
 
 See `CONTENT_INVENTORY.md`, `QA_CHECKLIST.md`, and `PROGRESS.md` for current evidence.

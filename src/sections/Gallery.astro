@@ -19,10 +19,11 @@ const copy = t(locale);
       title={copy.galleryTitle}
       description={copy.galleryText}
     />
-    <div class="gallery-grid">
+    <div class="gallery-grid" data-motion-group data-motion-step="2">
       {gymPhotos.map((photo) => (
         <a
           class="gallery-item"
+          data-motion="image"
           href={`/media/${photo.id}-1440.webp`}
           data-lightbox="gym"
           data-caption={photo.title[locale]}

@@ -19,8 +19,11 @@ export type Credential = {
   id: string;
   title: Localized;
   issuer: string;
-  date: string;
+  period: { start: string; end: string };
   image: string;
+  preview: string;
+  width: number;
+  height: number;
   approved: boolean;
 };
 
@@ -132,8 +135,64 @@ export const business = {
   trainer: {
     name: 'Ahmed AbdElhamid Salem AbdElhamid Salem',
     roleConfirmed: false,
-    // Enhanced copies are held privately until original comparison / release approval.
-    credentials: [] as Credential[],
+    // Owner requested publication of supplied copies. Current employment/identity is not inferred.
+    credentials: [
+      {
+        id: 'pbls-personal-trainer',
+        title: { ar: 'مدرب شخصي — مدرب جيم', en: 'Certified Personal Trainer (Gym Coach)' },
+        issuer: 'PBLS Academy',
+        period: { start: '2023-02-08', end: '2023-04-06' },
+        image: '/media/certificates/pbls-personal-trainer.webp',
+        preview: '/media/certificates/pbls-personal-trainer-preview.webp',
+        width: 1536,
+        height: 1089,
+        approved: true,
+      },
+      {
+        id: 'tass-fitness-trainer',
+        title: { ar: 'مدرب لياقة بدنية', en: 'Certified Fitness Trainer' },
+        issuer: 'Training Academy for Sports Science (TASS)',
+        period: { start: '2023-02-08', end: '2023-04-06' },
+        image: '/media/certificates/tass-fitness-trainer.webp',
+        preview: '/media/certificates/tass-fitness-trainer-preview.webp',
+        width: 1135,
+        height: 1533,
+        approved: true,
+      },
+      {
+        id: 'tass-nutrition',
+        title: { ar: 'أخصائي تغذية رياضية', en: 'Sports Nutrition Specialist' },
+        issuer: 'Training Academy for Sports Science (TASS)',
+        period: { start: '2023-02-08', end: '2023-04-06' },
+        image: '/media/certificates/tass-nutrition.webp',
+        preview: '/media/certificates/tass-nutrition-preview.webp',
+        width: 1114,
+        height: 1536,
+        approved: true,
+      },
+      {
+        id: 'pbls-nutrition',
+        title: { ar: 'تخصص التغذية الرياضية', en: 'Specialist in Sports Nutrition' },
+        issuer: 'PBLS Academy',
+        period: { start: '2023-02-08', end: '2023-04-06' },
+        image: '/media/certificates/pbls-nutrition.webp',
+        preview: '/media/certificates/pbls-nutrition-preview.webp',
+        width: 1536,
+        height: 1077,
+        approved: true,
+      },
+      {
+        id: 'titanium-training',
+        title: { ar: 'شهادة تدريب عملي', en: 'Practical training certificate' },
+        issuer: 'Titanium Gym Group / World Gym',
+        period: { start: '2023-02-08', end: '2023-04-06' },
+        image: '/media/certificates/titanium-training.webp',
+        preview: '/media/certificates/titanium-training-preview.webp',
+        width: 1099,
+        height: 1536,
+        approved: true,
+      },
+    ] satisfies Credential[],
   },
 } as const;
 

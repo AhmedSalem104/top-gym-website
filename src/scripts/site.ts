@@ -1,6 +1,9 @@
 import { business, durationIds, type Duration, type Locale } from '../config/business';
 import { durations, money, t } from '../i18n';
 import { getCairoStatus } from '../utils/hours';
+import { initMotion, playMotion, cancelMotion } from './motion';
+
+initMotion();
 
 const locale: Locale = document.documentElement.lang === 'en' ? 'en' : 'ar';
 const copy = t(locale);
@@ -13,9 +16,8 @@ try {
 } catch {
   /* Storage can be unavailable; the localized links remain functional. */
 }
-document
-  .querySelector<HTMLAnchorElement>('[data-language-switch]')
-  ?.addEventListener('click', (event) => {
+document.querySelectorAll<HTMLAnchorElement>('[data-language-switch]').forEach((link) =>
+  link.addEventListener('click', (event) => {
     const target = event.currentTarget as HTMLAnchorElement;
     target.hash = location.hash;
     try {
@@ -23,29 +25,58 @@ document
     } catch {
       /* Navigation still works. */
     }
-  });
+  }),
+);
 
 const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
 const menu = document.querySelector<HTMLElement>('#mobile-nav');
-function closeMenu(restoreFocus = false) {
+let menuRevision = 0;
+async function closeMenu(restoreFocus = false) {
   if (!menu || !toggle) return;
-  menu.hidden = true;
+  if (toggle.getAttribute('aria-expanded') === 'false') return;
+  const revision = ++menuRevision;
   toggle.setAttribute('aria-expanded', 'false');
+  menu.inert = true;
   if (restoreFocus) toggle.focus();
+  await playMotion(menu, 'exit');
+  if (revision === menuRevision) menu.hidden = true;
 }
 toggle?.addEventListener('click', () => {
   if (!menu) return;
-  menu.hidden = !menu.hidden;
-  toggle.setAttribute('aria-expanded', String(!menu.hidden));
+  if (toggle.getAttribute('aria-expanded') === 'true') {
+    void closeMenu(true);
+    return;
+  }
+  menuRevision++;
+  cancelMotion(menu);
+  menu.hidden = false;
+  menu.inert = false;
+  toggle.setAttribute('aria-expanded', 'true');
+  menu.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
+  void playMotion(menu, 'enter');
 });
-menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => closeMenu()));
+menu?.querySelectorAll('a').forEach((a) =>
+  a.addEventListener('click', () => {
+    void closeMenu();
+    const href = a.getAttribute('href');
+    if (href?.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      target?.setAttribute('tabindex', '-1');
+      target?.focus({ preventScroll: true });
+    }
+  }),
+);
+document.addEventListener('focusin', (event) => {
+  if (event.target instanceof HTMLElement && !event.target.closest('.site-header'))
+    void closeMenu();
+});
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && menu && !menu.hidden) closeMenu(true);
 });
 document.addEventListener('click', (event) => {
   if (event.target instanceof HTMLElement && !event.target.closest('.site-header')) closeMenu();
 });
-window.matchMedia('(min-width: 1200px)').addEventListener('change', (event) => {
+window.matchMedia('(min-width: 1360px)').addEventListener('change', (event) => {
   if (event.matches) closeMenu();
 });
 
@@ -56,7 +87,10 @@ document
     if (!durationIds.includes(value)) return;
     business.memberships.forEach((plan) => {
       const price = document.querySelector(`[data-price="${plan.id}"]`);
-      if (price) price.textContent = money(plan.prices[value], locale);
+      if (price instanceof HTMLElement) {
+        price.textContent = money(plan.prices[value], locale);
+        void playMotion(price, 'feedback');
+      }
     });
     document.querySelectorAll('[data-duration-label]').forEach((node) => {
       node.textContent = durations[value][locale];
@@ -115,9 +149,29 @@ document.querySelectorAll<HTMLAnchorElement>('[data-lightbox]').forEach((anchor)
     showImage(activeImages.indexOf(anchor));
     document.body.classList.add('dialog-open');
     dialog.showModal();
+    void playMotion(dialog, 'enter');
   });
 });
-dialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
+let closingDialog = false;
+async function closeLightbox() {
+  if (!dialog?.open || closingDialog) return;
+  closingDialog = true;
+  dialog.classList.add('is-closing');
+  await playMotion(dialog, 'exit');
+  dialog.close();
+  dialog.classList.remove('is-closing');
+  closingDialog = false;
+}
+dialog
+  ?.querySelector('[data-lightbox-close]')
+  ?.addEventListener('click', () => void closeLightbox());
+dialog?.addEventListener('cancel', (event) => {
+  event.preventDefault();
+  void closeLightbox();
+});
+photo?.addEventListener('load', () => {
+  if (dialog?.open) void playMotion(photo, 'feedback');
+});
 dialog
   ?.querySelector('[data-lightbox-prev]')
   ?.addEventListener('click', () => showImage(currentIndex - 1));
@@ -133,7 +187,7 @@ dialog?.addEventListener('click', (event) => {
     event.clientY < bounds.top ||
     event.clientY > bounds.bottom
   )
-    dialog.close();
+    void closeLightbox();
 });
 dialog?.addEventListener('keydown', (event) => {
   if (event.key === 'Tab') {

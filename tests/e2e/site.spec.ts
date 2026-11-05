@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { business, durationIds } from '../../src/config/business';
 import { money } from '../../src/i18n';
+import sharp from 'sharp';
+import jsQR from 'jsqr';
 
 for (const locale of ['ar', 'en'] as const) {
   for (const width of [320, 390, 768, 1440, 1920]) {
@@ -29,6 +31,7 @@ for (const locale of ['ar', 'en'] as const) {
       for (const id of [
         'about',
         'facilities',
+        'credentials',
         'gallery',
         'memberships',
         'schedule',
@@ -47,7 +50,12 @@ for (const locale of ['ar', 'en'] as const) {
           ),
       ).toEqual([]);
       await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+      // Settle even newly observed items when full-page capture changes the viewport.
+      // Normal-motion timing/coverage is exercised separately in motion.spec.ts.
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await expect(page.locator('[data-motion-state="running"]')).toHaveCount(0);
       await page.screenshot({
+        animations: 'disabled',
         path: testInfo.outputPath(`${locale}-${width}.png`),
         fullPage: true,
       });
@@ -116,10 +124,54 @@ for (const locale of ['ar', 'en'] as const) {
         .violations,
     ).toEqual([]);
   });
+
+  test(`${locale} certificates and visible WhatsApp QR`, async ({ page, request }) => {
+    await page.goto(`/${locale}/`);
+    await expect(page.locator('#credentials .credential-card')).toHaveCount(5);
+    const opener = page.locator('[data-lightbox="certificates"]').first();
+    await opener.click();
+    await expect(page.locator('#lightbox')).toBeVisible();
+    await expect(page.locator('#lightbox-image')).toHaveAttribute(
+      'src',
+      /\/media\/certificates\/pbls-personal-trainer\.webp$/,
+    );
+    await expect(page.locator('#lightbox-image')).toHaveJSProperty('complete', true);
+    await expect(page.locator('#lightbox-caption')).toContainText(
+      '2023'.replace(/\d/g, (digit) => (locale === 'ar' ? '٠١٢٣٤٥٦٧٨٩'[Number(digit)] : digit)),
+    );
+    await page.keyboard.press(locale === 'ar' ? 'ArrowLeft' : 'ArrowRight');
+    await expect(page.locator('#lightbox-image')).toHaveAttribute(
+      'src',
+      /\/media\/certificates\/tass-fitness-trainer\.webp$/,
+    );
+    await page.keyboard.press('Escape');
+    await expect(opener).toBeFocused();
+    await page.locator('.qr-card').scrollIntoViewIfNeeded();
+    await expect(page.locator('.qr-card')).toBeVisible();
+    await expect(page.locator('[data-qr-link]')).toHaveAttribute(
+      'href',
+      business.links.whatsappGroup,
+    );
+    const qrResponse = await request.get('/qr/whatsapp.png');
+    expect(qrResponse.ok()).toBe(true);
+    const { data, info } = await sharp(await qrResponse.body())
+      .resize(216, 216)
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    expect(jsQR(new Uint8ClampedArray(data), info.width, info.height)?.data).toBe(
+      business.links.whatsappGroup,
+    );
+    await expect(page.locator('.hero-promotional img')).toHaveAttribute(
+      'src',
+      '/media/promotional-hero-736.webp',
+    );
+    await expect(page.locator('.hero-photo-note')).toBeVisible();
+  });
 }
 test('language switching preserves section and persists explicit preference', async ({ page }) => {
   await page.goto('/ar/#memberships');
-  await page.locator('[data-language-switch]').click();
+  await page.locator('[data-language-switch]').first().click();
   await expect(page).toHaveURL('/en/#memberships');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await page.goto('/');
@@ -136,7 +188,12 @@ test('no-JavaScript content and safe prelaunch metadata', async ({ browser }) =>
   await expect(page.locator('tbody tr')).toHaveCount(6);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
-  await expect(page.locator('#credentials')).toHaveCount(0);
+  await expect(page.locator('#credentials .credential-card')).toHaveCount(5);
+  await expect(page.locator('[data-lightbox="certificates"]').first()).toHaveAttribute(
+    'href',
+    /\/media\/certificates\/.+\.webp$/,
+  );
+  await expect(page.locator('.qr-card img')).toHaveAttribute('src', '/qr/whatsapp.png');
   await context.close();
 });
 test('reduced motion and current-day indicator', async ({ page }) => {

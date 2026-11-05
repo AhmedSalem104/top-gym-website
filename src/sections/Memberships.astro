@@ -17,7 +17,7 @@ const copy = t(locale);
       title={copy.membershipTitle}
       description={copy.membershipText}
     />
-    <div class="duration-control">
+    <div class="duration-control" data-motion="reveal">
       <label for="membership-duration">{copy.duration}</label>
       <select id="membership-duration">
         {durationIds.map((id) => (
@@ -27,13 +27,19 @@ const copy = t(locale);
         ))}
       </select>
     </div>
-    <div class="membership-grid" aria-live="polite" aria-atomic="true">
+    <div
+      class="membership-grid"
+      data-motion-group
+      data-motion-step="2"
+      aria-live="polite"
+      aria-atomic="true"
+    >
       {business.memberships.map((membership, index) => (
         <MembershipCard locale={locale} membership={membership} featured={index === 1} />
       ))}
     </div>
     <p class="price-source">{copy.priceDate}</p>
-    <details class="price-table">
+    <details class="price-table" data-motion="reveal">
       <summary>{copy.compare}</summary>
       <div class="table-wrap" tabindex="0" role="region" aria-label={copy.compare}>
         <table>

@@ -2,7 +2,7 @@
 
 A premium Arabic/English gym landing page based on the supplied **Google Stitch Apex Gold** design and authentic TOP GYM equipment photographs. Visitors can explore the gym, compare two membership packages across six durations, view provisional opening hours, call the team, get directions, and join the WhatsApp group.
 
-**Status:** implemented review build; production launch awaits business-content confirmation. Trainer certificate publishing is deliberately withheld pending original-document and privacy review. No production deployment has been performed. See [progress and verification evidence](docs/PROGRESS.md) and the [release checklist](docs/QA_CHECKLIST.md).
+**Status:** implemented review build; production launch awaits business-content confirmation. Five supplied certificate copies are now visible with registration numbers redacted; original-document comparison and current role confirmation remain outstanding. No production deployment has been performed. See [progress and verification evidence](docs/PROGRESS.md) and the [release checklist](docs/QA_CHECKLIST.md).
 
 ![Arabic desktop review screenshot](docs/evidence/ar-desktop-hero.webp)
 
@@ -11,8 +11,11 @@ A premium Arabic/English gym landing page based on the supplied **Google Stitch 
 ## Features
 
 - Shared Arabic RTL and English LTR pages, localized copy, EGP prices and times, persistent explicit language choice.
-- Original supplied logo; five genuine gym photographs in responsive AVIF/WebP sizes; local fonts.
+- Original supplied logo; five genuine gym photographs; a separately labeled Pinterest promotional hero; local fonts.
+- Five certificate previews with keyboard-accessible enlargement and privacy-safe copies.
+- A visible, scannable WhatsApp-group QR code generated locally during the static build.
 - Sticky navigation, mobile menu, gallery dialog with keyboard controls and restored focus.
+- Reusable native motion across every section, bounded reading-order staggers, accessible menu/dialog transitions and live reduced-motion support. See [motion architecture](docs/MOTION_SYSTEM.md) and the [coverage matrix](docs/MOTION_COVERAGE_MATRIX.md).
 - PDF-verified pricing, duration selector, and a full comparison table; contact-based membership enquiries.
 - Africa/Cairo current-day and open/closed calculation with midnight and DST boundary tests.
 - Separate Ahmed/Karim phone links, the supplied Maps/Facebook URLs, and clearly labeled WhatsApp **group** access.
@@ -34,6 +37,7 @@ scripts/                 Reproducible media and performance tools
 src/
   components/            Shared header, footer, photo, pricing card and dialog
   config/business.ts     Authoritative typed business configuration
+  config/motion.ts       Shared native motion tokens, variants and trigger settings
   content/media.ts       Photo captions and accessible alternatives
   i18n/index.ts          Arabic/English UI copy and formatting
   layouts/               Document shell and localized SEO
@@ -104,7 +108,7 @@ Build before browser tests. Tests automatically start preview if port 4321 is fr
 
 ## Photos, logo and certificate handling
 
-Original ZIPs and PDF are retained outside the repository. Public media consists only of optimized derivatives of the supplied logo and five photographs. No AI-generated facility or certificate imagery from Stitch is used.
+Original ZIPs and PDF are retained outside the repository. Public media includes optimized derivatives of the supplied logo and five gym photographs, five redacted certificate copies, and the owner-requested Pinterest promotional hero. No AI-generated facility or certificate imagery from Stitch is used.
 
 To regenerate derivatives from an extracted folder with `media/` and `stitch/` subdirectories:
 
@@ -114,7 +118,11 @@ node scripts/prepare-media.mjs /absolute/path/to/extracted-sources
 
 The script writes to `public/media/` and updates `docs/asset-manifest.json` with source hashes, dimensions, duplicates, dispositions, and destinations. It never modifies source files. Review every resulting image, including mirror reflections/posters. Only male human imagery is permitted. Add corresponding descriptive alternatives in `src/content/media.ts`.
 
-The logo is the supplied 3D presentation photograph, preserved with its background and proportions. A genuine transparent logo remains desirable; do not trace or fabricate one. Certificate images and registration numbers are not included in this repository. Original comparison and privacy approval are outstanding.
+The logo is the supplied 3D presentation photograph, preserved with its background and proportions. A genuine transparent logo remains desirable; do not trace or fabricate one. Only privacy-safe certificate derivatives are included; opaque redactions are baked into previews and full-size files. Unredacted sources remain private. Original comparison and trainer-role confirmation are outstanding.
+
+Regenerate certificate copies with `node scripts/prepare-certificates.mjs <extracted-source-root>`. The reviewed source hashes and redaction regions are recorded in the asset manifest. The Pinterest hero can be regenerated with `node scripts/prepare-promotional-hero.mjs <downloaded-image>`; source/rights status is in `docs/promotional-media.json`. No certificate content is generated or reconstructed.
+
+The WhatsApp QR is generated at `/qr/whatsapp.png` from `business.links.whatsappGroup`; changing that central URL and rebuilding updates both the QR and buttons. It does not use an external QR service. Use `PLAYWRIGHT_PORT` to test an existing production preview on another local port while the development server remains available.
 
 ## Accessibility and performance
 
@@ -147,11 +155,11 @@ Work on small feature branches, use conventional commits, run relevant checks an
 - **Stale preview:** rebuild after changes when using `npm run preview`. Use `dev` for live reload.
 - **Port conflict:** close the process using 4321 or change both preview and Playwright configuration consistently.
 - **Missing canonical/sitemap entries:** configure the real `SITE_URL` and the intended indexing policy, then rebuild.
-- **Hidden certificates:** this is the content-integrity gate; inspect `docs/CONTENT_INVENTORY.md`.
+- **Certificate changes:** update approved records and the redaction manifest; never replace published copies with unredacted originals.
 - **Dependency audit:** `minimatch` is explicitly pinned to patched 11.0.1 through overrides; validate lint and tests after changing it. Do not use forced audit upgrades blindly.
 
 ## Documentation and credits
 
 Start with [project brief](docs/PROJECT.md), [architecture](docs/ARCHITECTURE.md), [design system](docs/DESIGN_SYSTEM.md), [decisions](docs/DECISIONS.md), [roadmap](docs/ROADMAP.md), and [progress](docs/PROGRESS.md).
 
-TOP GYM owns/provides the brand and business content. Visual direction: supplied Google Stitch Apex Gold export. Equipment photographs and enhanced copies: supplied by the owner; archive README describes conservative enhancement. Typeface licensing is retained in the installed Fontsource packages. Source assets are not licensed here for unrelated reuse. No stock athletes, invented reviews, or generated certificate images are published.
+TOP GYM owns/provides the brand and business content. Visual direction: supplied Google Stitch Apex Gold export. Equipment photographs and enhanced copies: supplied by the owner; archive README describes conservative enhancement. Typeface licensing is retained in the installed Fontsource packages. Source assets are not licensed here for unrelated reuse. The promotional male-athlete hero was selected from Pinterest at the owner’s request; it is labeled separately from actual TOP GYM photography. Photographer/reuse rights need confirmation before production launch. No invented reviews or generated certificate images are published.
