@@ -2,6 +2,8 @@
 
 [GitHub Project: TOP GYM — Website delivery](https://github.com/users/AhmedSalem104/projects/2) is an actual private owner project with ten linked issues and ten milestones. The tracker inventory is in `github-tracker.json`.
 
+Phases 0, 1, 2, 3, 5, 6 and 8 are complete with local and GitHub Actions evidence. Phases 4, 7 and 9 remain in progress for the owner inputs below.
+
 | Phase                       | Issue                                                             | Implementation state / remaining work                                                                        |
 | --------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | 0 — Audit/inventory         | [#1](https://github.com/AhmedSalem104/top-gym-website/issues/1)   | Repository and all supplied assets audited; missing originals explicitly inventoried                         |
@@ -12,7 +14,7 @@
 | 5 — Interactions/prices     | [#6](https://github.com/AhmedSalem104/top-gym-website/issues/6)   | Six durations, contact links, menu/dialog and Cairo status tested                                            |
 | 6 — Languages/accessibility | [#7](https://github.com/AhmedSalem104/top-gym-website/issues/7)   | Both locales, RTL/LTR, keyboard behavior and axe checks implemented                                          |
 | 7 — SEO/performance         | [#8](https://github.com/AhmedSalem104/top-gym-website/issues/8)   | SEO infrastructure and lab measurements implemented; confirmed production domain/indexing remains open       |
-| 8 — QA/visual               | [#9](https://github.com/AhmedSalem104/top-gym-website/issues/9)   | Local automated/visual evidence collected; see progress for remote CI result                                 |
+| 8 — QA/visual               | [#9](https://github.com/AhmedSalem104/top-gym-website/issues/9)   | Local automated/visual evidence collected; remote GitHub Actions passed                                      |
 | 9 — Release preparation     | [#10](https://github.com/AhmedSalem104/top-gym-website/issues/10) | Feature branch handoff; approved base/PR, business gates and deployment authorization remain open            |
 
 ## Next owner inputs
