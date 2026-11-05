@@ -1,0 +1,59 @@
+---
+import { business, type Locale } from '../config/business';
+import { t } from '../i18n';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <Photo id="cable-machine" locale={locale} eager class="hero-image" sizes="100vw" />
+  <div class="hero-shade"></div>
+  <div class="container hero-content">
+    <p class="hero-label">
+      <span></span>
+      {copy.heroLabel}
+    </p>
+    <h1 id="hero-title">
+      {copy.heroLine}
+      <br />
+      {copy.heroSecond} <em>{copy.heroGold}</em>
+    </h1>
+    <p class="hero-description">{copy.heroText}</p>
+    <div class="actions">
+      <a class="button button-gold" href="#memberships">
+        {copy.plans}
+        <Icon name="arrow" />
+      </a>
+      <a
+        class="button button-dark"
+        href={business.links.maps}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="pin" />
+        {copy.directions}
+      </a>
+      <a class="text-link" href="#facilities">
+        {copy.explore}
+        <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </div>
+  <div class="container hero-rail">
+    {business.facilities.map((facility) => (
+      <a href="#facilities">
+        <span class="eyebrow">TOP GYM</span>
+        <strong>{facility.title[locale]}</strong>
+      </a>
+    ))}
+    <a href="#gallery">
+      <span class="eyebrow">{copy.gallery}</span>
+      <strong>{copy.realGym}</strong>
+    </a>
+  </div>
+</section>

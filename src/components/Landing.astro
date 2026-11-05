@@ -1,0 +1,28 @@
+---
+import type { Locale } from '../config/business';
+import Base from '../layouts/Base.astro';
+import Hero from '../sections/Hero.astro';
+import About from '../sections/About.astro';
+import Facilities from '../sections/Facilities.astro';
+import Gallery from '../sections/Gallery.astro';
+import Memberships from '../sections/Memberships.astro';
+import Credentials from '../sections/Credentials.astro';
+import Hours from '../sections/Hours.astro';
+import Contact from '../sections/Contact.astro';
+interface Props {
+  locale: Locale;
+  root?: boolean;
+}
+const { locale, root = false } = Astro.props;
+---
+
+<Base locale={locale} root={root}>
+  <Hero locale={locale} />
+  <About locale={locale} />
+  <Facilities locale={locale} />
+  <Credentials locale={locale} />
+  <Gallery locale={locale} />
+  <Memberships locale={locale} />
+  <Hours locale={locale} />
+  <Contact locale={locale} />
+</Base>

@@ -1,0 +1,10 @@
+---
+import Landing from '../../components/Landing.astro';
+import type { Locale } from '../../config/business';
+export function getStaticPaths() {
+  return [{ params: { locale: 'ar' } }, { params: { locale: 'en' } }];
+}
+const locale = Astro.params.locale as Locale;
+---
+
+<Landing locale={locale} />

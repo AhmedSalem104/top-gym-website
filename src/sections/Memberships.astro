@@ -1,0 +1,63 @@
+---
+import { business, durationIds, type Locale } from '../config/business';
+import { durations, money, t } from '../i18n';
+import MembershipCard from '../components/MembershipCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section id="memberships" class="section">
+  <div class="container">
+    <SectionHeading
+      eyebrow={copy.membershipLabel}
+      title={copy.membershipTitle}
+      description={copy.membershipText}
+    />
+    <div class="duration-control">
+      <label for="membership-duration">{copy.duration}</label>
+      <select id="membership-duration">
+        {durationIds.map((id) => (
+          <option value={id} selected={id === 'month'}>
+            {durations[id][locale]}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div class="membership-grid" aria-live="polite" aria-atomic="true">
+      {business.memberships.map((membership, index) => (
+        <MembershipCard locale={locale} membership={membership} featured={index === 1} />
+      ))}
+    </div>
+    <p class="price-source">{copy.priceDate}</p>
+    <details class="price-table">
+      <summary>{copy.compare}</summary>
+      <div class="table-wrap" tabindex="0" role="region" aria-label={copy.compare}>
+        <table>
+          <caption class="sr-only">{copy.compare}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{copy.duration}</th>
+              {business.memberships.map((plan) => (
+                <th scope="col">{plan.name[locale]}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {durationIds.map((id) => (
+              <tr>
+                <th scope="row">{durations[id][locale]}</th>
+                {business.memberships.map((plan) => (
+                  <td>{money(plan.prices[id], locale)}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>

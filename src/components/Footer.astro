@@ -1,0 +1,65 @@
+---
+import { business, type Locale } from '../config/business';
+import { t } from '../i18n';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="#top">
+        <img src={business.logo} width="64" height="64" alt={copy.brandAlt} />
+        <span>TOP GYM</span>
+      </a>
+      <p>{copy.footerText}</p>
+    </div>
+    <div>
+      <h2>{copy.navigation}</h2>
+      <a href="#about">{copy.about}</a>
+      <a href="#gallery">{copy.gallery}</a>
+      <a href="#memberships">{copy.memberships}</a>
+      <a href="#schedule">{copy.schedule}</a>
+    </div>
+    <div>
+      <h2>{copy.contact}</h2>
+      {business.contacts.map((contact) => (
+        <a href={`tel:${contact.phone}`}>
+          {contact.name[locale]} <bdi>{contact.display}</bdi>
+        </a>
+      ))}
+      <a href={business.links.maps} target="_blank" rel="noopener noreferrer">
+        {copy.directions}
+      </a>
+    </div>
+    <div>
+      <h2>{copy.follow}</h2>
+      <a href={business.links.facebook} target="_blank" rel="noopener noreferrer">
+        {copy.facebook}
+      </a>
+      <a href={business.links.whatsappGroup} target="_blank" rel="noopener noreferrer">
+        {copy.group}
+      </a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>
+      © <span data-year>{new Date().getFullYear()}</span> {business.name}. {copy.rights}
+    </p>
+    <a href="#top">{copy.backTop} ↑</a>
+  </div>
+</footer>
+<div class="mobile-contact">
+  <a href="#contact">{copy.callUs}</a>
+  <a
+    class="button-gold"
+    href={business.links.whatsappGroup}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {copy.group}
+  </a>
+</div>

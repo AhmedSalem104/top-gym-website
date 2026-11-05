@@ -1,0 +1,32 @@
+---
+import { business, type Locale } from '../config/business';
+import { t } from '../i18n';
+import Photo from '../components/Photo.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+
+<section id="facilities" class="section">
+  <div class="container">
+    <SectionHeading
+      eyebrow={copy.facilitiesLabel}
+      title={copy.facilitiesTitle}
+      description={copy.facilitiesText}
+    />
+    <div class="facility-grid">
+      {business.facilities.map((facility) => (
+        <article class="facility-card">
+          <Photo id={facility.image} locale={locale} sizes="(max-width: 767px) 100vw, 33vw" />
+          <div class="card-content">
+            <h3>{facility.title[locale]}</h3>
+            <p>{facility.text[locale]}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

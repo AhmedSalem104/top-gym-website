@@ -1,0 +1,12 @@
+name: Implementation task
+description: A traceable item from the project roadmap
+body:
+  - type: textarea
+    attributes:
+      label: Scope and acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Validation evidence
+      description: Commands, results, screenshots, source provenance, and remaining blockers.

@@ -1,0 +1,65 @@
+---
+import { business, publicCredentials, type Locale } from '../config/business';
+import { t } from '../i18n';
+import Icon from './Icon.astro';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = t(locale);
+const links = [
+  'about',
+  'facilities',
+  ...(publicCredentials.length ? ['credentials'] : []),
+  'gallery',
+  'memberships',
+  'schedule',
+  'location',
+  'contact',
+] as (keyof typeof copy)[];
+---
+
+<a class="skip-link" href="#main">
+  {copy.skip}
+</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#top" aria-label="TOP GYM">
+      <img src={business.logo} width="56" height="56" alt={copy.brandAlt} />
+      <span>TOP GYM</span>
+    </a>
+    <nav class="desktop-nav" aria-label={copy.navLabel}>
+      {links.map((id) => (
+        <a href={`#${id}`}>{copy[id]}</a>
+      ))}
+    </nav>
+    <div class="header-actions">
+      <a
+        class="language-switch"
+        data-language-switch
+        href={locale === 'ar' ? '/en/' : '/ar/'}
+        lang={locale === 'ar' ? 'en' : 'ar'}
+        hreflang={locale === 'ar' ? 'en' : 'ar'}
+      >
+        {locale === 'ar' ? 'EN' : 'العربية'}
+      </a>
+      <a class="button button-gold header-call" href="#contact">
+        <Icon name="phone" />
+        {copy.callUs}
+      </a>
+      <button
+        class="icon-button menu-toggle"
+        aria-label={copy.menu}
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label={copy.navLabel} hidden>
+    {links.map((id) => (
+      <a href={`#${id}`}>{copy[id]}</a>
+    ))}
+  </nav>
+</header>

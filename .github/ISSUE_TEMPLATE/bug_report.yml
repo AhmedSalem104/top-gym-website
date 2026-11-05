@@ -1,0 +1,13 @@
+name: Bug report
+description: Report a functional, visual or content issue
+body:
+  - type: textarea
+    attributes:
+      label: Expected and actual behavior
+      description: Include language, viewport, steps, and screenshots when available.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Verification and source
+      description: For business data corrections, identify the approved authoritative source. Do not attach private certificate identifiers.
