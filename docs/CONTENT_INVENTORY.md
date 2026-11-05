@@ -62,6 +62,6 @@ All six HTML variants were inspected for headings, sections, behaviors and image
 - Original gym/certificate files for archival comparison; photographer/reuse rights for the requested Pinterest hero.
 - Trainer/contact identity and current TOP GYM role.
 - Current opening hours: owner supplied listing data approximately four years old.
-- Owner-approved written address and production domain. The supplied Maps listing and embed are now verified; see `map-verification.json`. No numeric business coordinates were inferred.
+- Owner-approved written address. The production domain is now supplied: `https://top-gym-website.vercel.app`. The supplied Maps listing and embed are verified; see `map-verification.json`. No numeric business coordinates were inferred.
 - Transparent official logo, if one exists; current supplied original is sufficient for the review build.
 - External link destination verification: initial web checks on 2026-11-05 could not resolve Maps/WhatsApp; Facebook was throttled. The later direct redirect and live embed check verified the supplied Maps place (`map-verification.json`). Exact supplied URLs are preserved and browser link integrity is tested. An owner/device check remains necessary; no group was joined.

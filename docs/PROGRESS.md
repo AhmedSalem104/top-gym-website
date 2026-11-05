@@ -2,7 +2,15 @@
 
 ## Current state
 
-The review website is implemented on `feat/top-gym-website`. It uses Astro 7.3.8, TypeScript 6.0.3, Tailwind 4.3.4, local Fontsource typography, and small browser scripts. Node 24.22.2 was used for application validation. No production deployment or main merge has occurred.
+The website is live at https://top-gym-website.vercel.app following the owner's explicit approval and PR #11 merge into main. It uses Astro 7.3.8, TypeScript 6.0.3, Tailwind 4.3.4, local Fontsource typography, and small browser scripts. Node 24.22.2 was used for application validation. Earlier entries below retain their historical review-stage state; the latest production record is in `VERCEL_DIAGNOSIS.md`.
+
+## Latest release and browser-title follow-up
+
+- Explicit owner authorization received; PR #11 merged at `4a762f148701676d9589ac4f367178f4a55f451e`. Vercel production and main Quality checks succeeded. The public home page, both locales, logo and official PDF return HTTP 200; the empty-main 404 is resolved.
+- Public Chromium validation: 54/55 passed on the first complete run, followed by three passing isolated repetitions of the English navbar focus assertion that failed. No application change was made between those runs. See `VERCEL_DIAGNOSIS.md` for the exact limitation.
+- Owner requested the same browser-tab title in every language. Both the shared page layout and custom 404 now use central `business.name` (`TOP GYM`); localized descriptions and social-sharing titles remain intact. The existing language-switching test checks the title before/after switching and after root-route preference navigation.
+- Owner requested the contact-name prefix: display `C. Ahmed` / `C. Karim` in English and `كابتن أحمد` / `كابتن كريم` in Arabic through central business configuration. Phone numbers and documentary certificate-holder names remain unchanged.
+- Production indexing/canonical configuration and the outstanding business-content confirmations remain follow-ups; release approval does not verify those facts.
 
 ## Completed with evidence
 

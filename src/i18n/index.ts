@@ -13,8 +13,7 @@ export const days = {
 };
 const en = {
   title: 'TOP GYM | Strength, cardio & memberships',
-  description:
-    'Explore the real TOP GYM, compare gym and cardio memberships, view opening hours, and call Ahmed or Karim to plan your visit.',
+  description: `Explore the real TOP GYM, compare gym and cardio memberships, view opening hours, and call ${business.contacts[0].name.en} or ${business.contacts[1].name.en} to plan your visit.`,
   skip: 'Skip to content',
   navLabel: 'Main navigation',
   menu: 'Menu',
@@ -29,7 +28,7 @@ const en = {
   contact: 'Contact',
   call: 'Call',
   callUs: 'Call us',
-  callAhmed: 'Call Ahmed',
+  callAhmed: `Call ${business.contacts[0].name.en}`,
   directions: 'Get directions',
   group: 'Join WhatsApp Group',
   facebook: 'Facebook',
@@ -91,7 +90,7 @@ const en = {
   midnight: '12 midnight (next day)',
   hoursNote: 'Please call to confirm opening hours before your visit.',
   hoursAside: 'Make your next session happen.',
-  hoursAsideText: 'Talk to Ahmed or Karim about memberships and your visit.',
+  hoursAsideText: `Talk to ${business.contacts[0].name.en} or ${business.contacts[1].name.en} about memberships and your visit.`,
   open: 'Open now · listed hours',
   closed: 'Closed now · listed hours',
   locationLabel: 'FIND US',
@@ -130,8 +129,7 @@ const en = {
 };
 const ar: typeof en = {
   title: 'توب جيم | تمارين القوة والكارديو والاشتراكات',
-  description:
-    'تعرّف على توب جيم بالصور، وقارن اشتراكات الجيم والكارديو، واطّلع على المواعيد واتصل بأحمد أو كريم لترتيب زيارتك.',
+  description: `تعرّف على توب جيم بالصور، وقارن اشتراكات الجيم والكارديو، واطّلع على المواعيد واتصل بـ${business.contacts[0].name.ar} أو ${business.contacts[1].name.ar} لترتيب زيارتك.`,
   skip: 'انتقل إلى المحتوى',
   navLabel: 'القائمة الرئيسية',
   menu: 'القائمة',
@@ -146,7 +144,7 @@ const ar: typeof en = {
   contact: 'تواصل معنا',
   call: 'اتصل بـ',
   callUs: 'اتصل بنا',
-  callAhmed: 'اتصل بأحمد',
+  callAhmed: `اتصل بـ${business.contacts[0].name.ar}`,
   directions: 'اعرف الطريق',
   group: 'انضم لجروب الواتساب',
   facebook: 'فيسبوك',
@@ -206,7 +204,7 @@ const ar: typeof en = {
   midnight: '١٢ منتصف الليل (بداية اليوم التالي)',
   hoursNote: 'يُرجى الاتصال لتأكيد المواعيد قبل زيارتك.',
   hoursAside: 'خطّط لتمرينك القادم.',
-  hoursAsideText: 'تواصل مع أحمد أو كريم للاستفسار عن الاشتراكات وزيارة الجيم.',
+  hoursAsideText: `تواصل مع ${business.contacts[0].name.ar} أو ${business.contacts[1].name.ar} للاستفسار عن الاشتراكات وزيارة الجيم.`,
   open: 'مفتوح الآن حسب المواعيد المدرجة',
   closed: 'مغلق الآن حسب المواعيد المدرجة',
   locationLabel: 'مكاننا',
