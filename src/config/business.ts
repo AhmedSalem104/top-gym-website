@@ -37,13 +37,13 @@ export const business = {
   contacts: [
     {
       id: 'ahmed',
-      name: { ar: 'أحمد', en: 'Ahmed' },
+      name: { ar: 'كابتن أحمد', en: 'C. Ahmed' },
       display: '01015819700',
       phone: '+201015819700',
     },
     {
       id: 'karim',
-      name: { ar: 'كريم', en: 'Karim' },
+      name: { ar: 'كابتن كريم', en: 'C. Karim' },
       display: '01005376843',
       phone: '+201005376843',
     },
