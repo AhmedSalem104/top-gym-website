@@ -1,47 +1,142 @@
 ---
-import { business, type Locale } from '../config/business';
-import { t } from '../i18n';
+import { business, publicCredentials, type Locale } from '../config/business';
+import { days, formatTime, t } from '../i18n';
+import Icon from './Icon.astro';
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 const copy = t(locale);
+const links = [
+  'about',
+  'facilities',
+  'gallery',
+  'memberships',
+  ...(publicCredentials.length ? ['credentials'] : []),
+  'schedule',
+  'location',
+] as (keyof typeof copy)[];
+// Group consecutive rows with identical hours; business configuration remains authoritative.
+const hours: { first: number; last: number; opens: number; closes: number }[] = [];
+for (const entry of business.hours.days) {
+  const previous = hours.at(-1);
+  if (
+    previous &&
+    previous.opens === entry.opens &&
+    previous.closes === entry.closes &&
+    (previous.last + 1) % 7 === entry.day
+  )
+    previous.last = entry.day;
+  else hours.push({ first: entry.day, last: entry.day, opens: entry.opens, closes: entry.closes });
+}
 ---
 
 <footer class="site-footer">
   <div class="container footer-grid" data-motion-group>
-    <div data-motion="reveal">
-      <a class="brand" href="#top">
-        <img src={business.logo} width="64" height="64" alt={copy.brandAlt} />
-        <span>TOP GYM</span>
+    <div class="footer-brand" data-motion-group>
+      <a class="footer-brand-link" href="#top" data-motion="footer" aria-label="TOP GYM">
+        <img src={business.logo} width="88" height="88" alt={copy.brandAlt} loading="lazy" />
+        <span>
+          <strong>TOP GYM</strong>
+          <span class="footer-brand-rule" aria-hidden="true"></span>
+        </span>
       </a>
-      <p>{copy.footerText}</p>
+      <p data-motion="footer">{copy.footerText}</p>
+      <a class="footer-link footer-brand-action" href="#gallery" data-motion="footer">
+        {copy.realGym}
+        <Icon name="arrow" size={18} />
+      </a>
     </div>
-    <div data-motion="reveal">
-      <h2>{copy.navigation}</h2>
-      <a href="#about">{copy.about}</a>
-      <a href="#gallery">{copy.gallery}</a>
-      <a href="#memberships">{copy.memberships}</a>
-      <a href="#schedule">{copy.schedule}</a>
-    </div>
-    <div data-motion="reveal">
-      <h2>{copy.contact}</h2>
-      {business.contacts.map((contact) => (
-        <a href={`tel:${contact.phone}`}>
-          {contact.name[locale]} <bdi>{contact.display}</bdi>
+    <nav class="footer-navigation" aria-labelledby="footer-navigation-title" data-motion-group>
+      <h2 id="footer-navigation-title" data-motion="footer">
+        {copy.navigation}
+      </h2>
+      <ul>
+        {links.map((id) => (
+          <li data-motion="footer">
+            <a class="footer-link" href={`#${id}`}>
+              {copy[id]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="footer-contact" data-motion-group>
+      <h2 data-motion="footer">{copy.contact}</h2>
+      <div class="footer-phones">
+        {business.contacts.map((contact) => (
+          <a class="footer-phone" href={`tel:${contact.phone}`} data-motion="footer">
+            <span class="footer-icon">
+              <Icon name="phone" size={18} />
+            </span>
+            <span>
+              <span>{contact.name[locale]}</span>
+              <bdi>{contact.phone}</bdi>
+            </span>
+          </a>
+        ))}
+      </div>
+      <div class="footer-socials" data-motion-group>
+        <a
+          class="footer-social"
+          href={business.links.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-motion="footer"
+        >
+          <span class="footer-icon">
+            <Icon name="facebook" size={18} />
+          </span>
+          {copy.facebook}
         </a>
-      ))}
-      <a href={business.links.maps} target="_blank" rel="noopener noreferrer">
-        {copy.directions}
-      </a>
+        <a
+          class="footer-social"
+          href={business.links.whatsappGroup}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-motion="footer"
+        >
+          <span class="footer-icon">
+            <Icon name="chat" size={18} />
+          </span>
+          {copy.group}
+        </a>
+      </div>
     </div>
-    <div data-motion="reveal">
-      <h2>{copy.follow}</h2>
-      <a href={business.links.facebook} target="_blank" rel="noopener noreferrer">
-        {copy.facebook}
-      </a>
-      <a href={business.links.whatsappGroup} target="_blank" rel="noopener noreferrer">
-        {copy.group}
+    <div class="footer-hours" data-motion-group>
+      <h2 data-motion="footer">{copy.footerHoursLocation}</h2>
+      <p class="footer-timezone" data-motion="footer">
+        <Icon name="clock" size={16} />
+        {copy.cairo}
+      </p>
+      <dl>
+        {hours.map((entry) => (
+          <div data-motion="footer" data-footer-hours={`${entry.opens}-${entry.closes}`}>
+            <dt>
+              {days[locale][entry.first]}
+              {entry.first !== entry.last && <> – {days[locale][entry.last]}</>}
+            </dt>
+            <dd>
+              <time>{formatTime(entry.opens, locale)}</time>
+              <span aria-hidden="true"> — </span>
+              <time>{formatTime(entry.closes, locale)}</time>
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p class="footer-hours-note" data-motion="footer">
+        {copy.hoursNote}
+      </p>
+      <a
+        class="footer-directions footer-link"
+        href={business.links.maps}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-motion="footer"
+      >
+        <Icon name="pin" size={18} />
+        {copy.directions}
+        <Icon name="arrow" size={18} />
       </a>
     </div>
   </div>
@@ -49,7 +144,10 @@ const copy = t(locale);
     <p>
       © <span data-year>{new Date().getFullYear()}</span> {business.name}. {copy.rights}
     </p>
-    <a href="#top">{copy.backTop} ↑</a>
+    <a class="footer-back-top" href="#top" data-back-top>
+      {copy.backTop}
+      <span aria-hidden="true">↑</span>
+    </a>
   </div>
 </footer>
 <div class="mobile-contact">

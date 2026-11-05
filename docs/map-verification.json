@@ -1,0 +1,11 @@
+{
+  "verifiedOn": "2026-11-05",
+  "suppliedUrl": "https://maps.app.goo.gl/X6jyrHU7x6e5j8vv6?g_st=ic",
+  "googleFeatureId": "0x1457ff1dce0b5c17:0x8b2be1654a9627c4",
+  "googleCid": "10028356820429842372",
+  "listingName": "Top Gym",
+  "verification": "Resolved the supplied short link to the Google Maps listing, converted the listing's hexadecimal CID to decimal, then visually inspected its live Google embed. The map displays the Top Gym pin on Misr El Nour Road by roundabout 43. No map-center coordinates were inferred as business coordinates.",
+  "embed": "https://www.google.com/maps/embed?origin=mfe&pb=!1m4!3m2!1m1!4s10028356820429842372!6i16!3m1!1sar!5m1!1sar",
+  "behavior": "Lazy-loaded map preview with a full-area accessible link opening the owner's unchanged short URL. The iframe is excluded from pointer/keyboard interaction because the owner requested clicking anywhere to open Maps. Attribution remains visible; full pan/zoom and directions are available on Google Maps.",
+  "limits": "Verified online map identity, not an on-site survey or phone-hours verification. Map tiles depend on Google's availability and the visitor's network. The external link remains usable if embedding fails. No Google API key or invented postal address is added."
+}

@@ -3,6 +3,7 @@ import { business, durationIds, type Locale } from '../config/business';
 import { durations, money, t } from '../i18n';
 import MembershipCard from '../components/MembershipCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
 interface Props {
   locale: Locale;
 }
@@ -18,16 +19,28 @@ const copy = t(locale);
       description={copy.membershipText}
     />
     <div class="duration-control" data-motion="reveal">
-      <label for="membership-duration">{copy.duration}</label>
-      <select id="membership-duration">
+      <span id="membership-duration-label">{copy.duration}</span>
+      <div class="duration-tabs" role="tablist" aria-labelledby="membership-duration-label">
         {durationIds.map((id) => (
-          <option value={id} selected={id === 'month'}>
+          <button
+            type="button"
+            role="tab"
+            id={`duration-${id}`}
+            data-duration={id}
+            aria-controls="membership-prices"
+            aria-selected={id === 'month' ? 'true' : 'false'}
+            tabindex={id === 'month' ? 0 : -1}
+          >
             {durations[id][locale]}
-          </option>
+          </button>
         ))}
-      </select>
+      </div>
     </div>
     <div
+      id="membership-prices"
+      role="tabpanel"
+      aria-labelledby="duration-month"
+      tabindex="0"
       class="membership-grid"
       data-motion-group
       data-motion-step="2"
@@ -65,5 +78,56 @@ const copy = t(locale);
         </table>
       </div>
     </details>
+    <article class="pricing-document" aria-labelledby="pricing-document-title" data-motion-group>
+      <div class="pricing-document-copy" data-motion="reveal">
+        <span class="document-badge">
+          <Icon name="document" size={24} />
+          {copy.pricingDocumentFormat}
+        </span>
+        <h3 id="pricing-document-title">{copy.pricingDocument}</h3>
+        <p>{copy.pricingDocumentText}</p>
+        <p class="document-date">{copy.priceDate}</p>
+        <div class="actions">
+          <a
+            class="button button-gold"
+            data-pricing-download
+            href={business.pricingSource.url}
+            download={business.pricingSource.filename}
+          >
+            <Icon name="download" />
+            {copy.downloadPricingPdf}
+          </a>
+          <a
+            class="button button-dark"
+            data-pricing-view
+            href={business.pricingSource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="expand" />
+            {copy.viewPricingPdf}
+          </a>
+        </div>
+      </div>
+      <a
+        class="pricing-document-preview"
+        href={business.pricingSource.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={copy.viewPricingPdf}
+        data-motion="image"
+      >
+        <img
+          src={business.pricingSource.preview}
+          srcset={`${business.pricingSource.preview} 640w, ${business.pricingSource.previewLarge} 1200w`}
+          sizes="(max-width: 767px) 280px, 320px"
+          width={business.pricingSource.previewWidth}
+          height={business.pricingSource.previewHeight}
+          alt={copy.pricingDocumentPreview}
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    </article>
   </div>
 </section>

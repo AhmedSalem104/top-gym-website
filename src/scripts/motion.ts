@@ -19,11 +19,17 @@ export function cancelMotion(element: HTMLElement) {
 
 /** Native, interruptible transitions. No inline end styles or retained animation layers. */
 export async function playMotion(element: HTMLElement, variant: MotionTransition, delay = 0) {
+  const frames = motionFrames(variant);
+  // Reversing an in-flight disclosure starts at its painted frame, not a fixed endpoint.
+  if (active.has(element)) {
+    const current = getComputedStyle(element);
+    frames[0] = { opacity: current.opacity, transform: current.transform };
+  }
   cancelMotion(element);
   if (preference?.matches || !element.animate) return;
   let animation: Animation | undefined;
   try {
-    animation = element.animate(motionFrames(variant), {
+    animation = element.animate(frames, {
       duration: motionDuration(variant),
       delay,
       easing: variant === 'exit' ? motion.exitEasing : motion.easing,
@@ -86,6 +92,8 @@ export function initMotion() {
         if (
           preference?.matches ||
           entry.boundingClientRect.bottom <= 0 ||
+          // Late initialization, fast scrolling and anchor jumps must not hide painted content.
+          entry.boundingClientRect.top < window.innerHeight ||
           element.contains(document.activeElement)
         ) {
           complete(element);
@@ -116,7 +124,9 @@ export function initMotion() {
     if (root instanceof HTMLElement && root.matches('[data-motion]')) elements.unshift(root);
     for (const element of elements) {
       if (seen.has(element) || pending.has(element)) continue;
-      if (!observer || preference?.matches) complete(element);
+      // Initial hero motion is CSS-owned from first paint, using the same tokens.
+      if (!observer || preference?.matches || element.closest('.hero, .header-inner'))
+        complete(element);
       else {
         element.dataset.motionState = 'pending'; // Diagnostic only; no hidden CSS state.
         pending.add(element);
@@ -151,7 +161,8 @@ export function initMotion() {
       if (!(event.target instanceof HTMLElement)) return;
       for (const element of pending) if (element.contains(event.target)) complete(element);
       for (const element of active.keys())
-        if (element.contains(event.target)) cancelMotion(element);
+        if (element.hasAttribute('data-motion') && element.contains(event.target))
+          cancelMotion(element);
     },
     { signal: signal.signal },
   );

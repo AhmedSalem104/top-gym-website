@@ -2,6 +2,41 @@
 html {
   scrollbar-gutter: stable;
 }
+/* First-paint entrance: never re-hide hero copy after JS/font initialization. */
+.hero [data-motion],
+.header-inner[data-motion] {
+  animation: hero-entrance var(--motion-hero) var(--motion-ease) backwards;
+}
+.hero-description {
+  animation-delay: var(--motion-step) !important;
+}
+.hero .actions [data-motion] {
+  animation-delay: calc(var(--motion-step) * 2) !important;
+}
+.hero .actions [data-motion]:not(:first-child),
+.hero .hero-rail,
+.hero .hero-image {
+  animation-delay: calc(var(--motion-step) * 3) !important;
+}
+.hero .hero-image {
+  animation-name: hero-image-entrance;
+}
+@keyframes hero-entrance {
+  from {
+    transform: translateY(var(--motion-distance));
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes hero-image-entrance {
+  from {
+    transform: scale(1.008);
+  }
+  to {
+    transform: none;
+  }
+}
 .group-panel > [data-motion='heading'] {
   display: block;
 }
@@ -27,9 +62,11 @@ html {
 .button,
 .icon-button,
 .language-switch a,
+.duration-tabs button,
+.pricing-document-preview,
 .mobile-contact a {
   transition:
-    transform var(--motion-micro) var(--motion-ease),
+    translate var(--motion-micro) var(--motion-ease),
     color var(--motion-micro),
     background-color var(--motion-micro),
     border-color var(--motion-micro);
@@ -39,7 +76,7 @@ html {
 .facility-card,
 .phone-card {
   transition:
-    transform var(--motion-micro) var(--motion-ease),
+    translate var(--motion-micro) var(--motion-ease),
     border-color var(--motion-micro);
 }
 .membership-card:focus-within,
@@ -53,10 +90,11 @@ html {
 .gallery-item:focus-visible img {
   transform: scale(1.025);
 }
-.desktop-nav a {
+[data-section-link] {
   position: relative;
+  transition: color var(--motion-micro);
 }
-.desktop-nav a::after {
+.mobile-nav [data-section-link]::after {
   content: '';
   position: absolute;
   inset-inline: 0;
@@ -67,14 +105,127 @@ html {
   transform-origin: left;
   transition: transform var(--motion-micro) var(--motion-ease);
 }
-[dir='rtl'] .desktop-nav a::after {
+[dir='rtl'] .mobile-nav [data-section-link]::after {
   transform-origin: right;
 }
-.desktop-nav a:is(:hover, :focus-visible)::after {
+.mobile-nav [data-section-link]:is(:hover, :focus-visible, [aria-current='location'])::after {
+  transform: scaleX(1);
+}
+[data-section-link][aria-current='location'] {
+  color: var(--color-gold);
+}
+.nav-spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 48px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(var(--spotlight-x, 0px));
+}
+.nav-spotlight[data-ready='true'] {
+  transition:
+    transform var(--motion-navigation) var(--motion-ease),
+    opacity var(--motion-navigation) var(--motion-ease);
+}
+.nav-spotlight[data-visible='true'] {
+  opacity: 1;
+}
+.nav-spotlight::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 26px;
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-gold);
+  box-shadow: 0 0 8px rgb(229 149 0 / 45%);
+}
+.nav-spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 3px 0 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(229 149 0 / 18%),
+    rgb(229 149 0 / 5%) 65%,
+    transparent
+  );
+  clip-path: polygon(32% 0, 68% 0, 100% 100%, 0 100%);
+}
+.desktop-nav [data-section-link] {
+  z-index: 1;
+}
+.desktop-nav [data-section-link]::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: calc(50% - 10px);
+  width: 20px;
+  height: 1px;
+  background: var(--color-gold);
+  box-shadow: 0 0 5px rgb(229 149 0 / 25%);
+  opacity: 0;
+  transform: scaleX(0.7);
+  transition:
+    opacity var(--motion-navigation),
+    transform var(--motion-navigation) var(--motion-ease);
+}
+.desktop-nav [data-section-link]:not([aria-current]):is(:hover, :focus-visible)::before {
+  opacity: 0.55;
   transform: scaleX(1);
 }
 .lightbox::backdrop {
   transition: opacity var(--motion-micro) var(--motion-ease);
+}
+.footer-link,
+.footer-phone,
+.footer-social,
+.footer-back-top {
+  transition: color var(--motion-micro) var(--motion-ease);
+}
+.footer-link::after {
+  transition: transform var(--motion-micro) var(--motion-ease);
+}
+.footer-icon,
+.footer-back-top span {
+  transition:
+    background-color var(--motion-micro),
+    border-color var(--motion-micro),
+    color var(--motion-micro);
+}
+.footer-link [data-icon='arrow'],
+.footer-back-top span {
+  transition:
+    translate var(--motion-micro) var(--motion-ease),
+    border-color var(--motion-micro),
+    background-color var(--motion-micro);
+}
+:is(.footer-link, .footer-phone, .footer-social, .footer-back-top):is(:hover, :focus-visible) {
+  color: var(--color-gold);
+}
+.footer-link:is(:hover, :focus-visible)::after {
+  transform: scaleX(1);
+}
+:is(.footer-phone, .footer-social):is(:hover, :focus-visible) .footer-icon,
+.footer-back-top:is(:hover, :focus-visible) span {
+  border-color: var(--color-gold);
+  background-color: rgb(229 149 0 / 7%);
+  color: var(--color-gold);
+}
+.footer-link:is(:hover, :focus-visible) [data-icon='arrow'] {
+  translate: 2px 0;
+}
+[dir='rtl'] .footer-link:is(:hover, :focus-visible) [data-icon='arrow'] {
+  translate: -2px 0;
+}
+.footer-back-top:is(:hover, :focus-visible) span {
+  translate: 0 -2px;
+}
+.footer-back-top:active span {
+  translate: 0 0;
 }
 .lightbox.is-closing::backdrop {
   opacity: 0;
@@ -87,13 +238,13 @@ html {
 @media (hover: hover) and (pointer: fine) {
   .button:hover,
   .icon-button:hover {
-    transform: translateY(-2px);
+    translate: 0 -1px;
   }
   .membership-card:hover,
   .credential-card:hover,
   .facility-card:hover,
   .phone-card:hover {
-    transform: translateY(-3px);
+    translate: 0 -1px;
     border-color: var(--color-gold);
   }
   .gallery-item:hover img {
@@ -104,7 +255,7 @@ html {
 .icon-button:active,
 .mobile-contact a:active,
 .language-switch a:active {
-  transform: translateY(1px);
+  translate: 0 1px;
 }
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -115,6 +266,7 @@ html {
   *::after {
     animation: none !important;
     transition: none !important;
+    translate: none !important;
   }
   .button,
   .icon-button,
@@ -126,5 +278,6 @@ html {
   .mobile-contact a,
   .language-switch a {
     transform: none !important;
+    translate: none !important;
   }
 }

@@ -46,9 +46,13 @@ Desktop navigation becomes a disclosure menu below 1360px so the longer truthful
 - Two real packages and six exact durations replace three fictional pricing tiers.
 - Real contact cards replace the fake booking form and placeholder direct WhatsApp chat.
 - The source's men-only business assertion, CSCS/ISSA assertions and generated certificates are removed because the supplied evidence does not support them.
-- A real Maps link and gym image replace the unverified map/placeholder address.
+- The requested live Google map uses the verified listing, with the entire preview linking to the supplied Maps URL. No address is invented.
 - Five supplied enhanced certificates now appear in responsive framed cards with full-document previews, dated training periods and accessible enlargement. Registration numbers are redacted in the actual files.
 - The WhatsApp contact panel includes an explicit high-contrast QR code and a normal join action.
 - Body size and focus/touch targets are enlarged where necessary for readability/accessibility.
 
 Screenshots and visual-review findings belong in `docs/evidence/` and `QA_CHECKLIST.md`.
+
+## Requested footer refinement
+
+The existing final CTA is now a bordered charcoal panel with one gold edge, the requested bilingual journey headline and membership/call/directions actions. The footer uses four desktop columns, two tablet columns and one mobile column with a two-column quick-link list. The actual logo preserves its proportions. Restrained gold details, 200ms interactions and shared 12px reveals connect it to the site. Hours derive from business configuration with the confirmation note intact.

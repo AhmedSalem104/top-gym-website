@@ -1,13 +1,13 @@
 # Source inventory and publishing decisions
 
-The machine-readable [asset manifest](asset-manifest.json) inventories 32 extracted files with SHA-256 hashes, bytes, image dimensions, duplicates, destination paths and decisions. Archives and original PDF are not public repository content.
+The machine-readable [asset manifest](asset-manifest.json) inventories the 32 extracted files and the approved pricing PDF with SHA-256 hashes, bytes, image dimensions, duplicates, destination paths and decisions. Archives stay outside Git. At the owner’s explicit request, a byte-identical public copy of the official pricing PDF and two rendered previews are now included; the local original is untouched.
 
 ## Integrated assets
 
 | Source                            | Destination / usage                                                                       |
 | --------------------------------- | ----------------------------------------------------------------------------------------- |
 | `brand/top_gym_logo_original.jpg` | `top-gym-logo.webp`, favicon, social-share JPEG; original proportions/background retained |
-| `gym_photos/01_chest_press.jpg`   | `chest-press-*`; facilities, gallery, location                                            |
+| `gym_photos/01_chest_press.jpg`   | `chest-press-*`; facilities and gallery                                                   |
 | `gym_photos/02_cardio_room.jpg`   | `cardio-room-*`; facilities and gallery                                                   |
 | `gym_photos/03_cable_machine.jpg` | `cable-machine-*`; hero, facilities, gallery                                              |
 | `gym_photos/04_leg_machine.jpg`   | `leg-machine-*`; gallery                                                                  |
@@ -62,6 +62,6 @@ All six HTML variants were inspected for headings, sections, behaviors and image
 - Original gym/certificate files for archival comparison; photographer/reuse rights for the requested Pinterest hero.
 - Trainer/contact identity and current TOP GYM role.
 - Current opening hours: owner supplied listing data approximately four years old.
-- Written address, verified embed coordinates/location, production domain.
+- Owner-approved written address and production domain. The supplied Maps listing and embed are now verified; see `map-verification.json`. No numeric business coordinates were inferred.
 - Transparent official logo, if one exists; current supplied original is sufficient for the review build.
-- External link destination verification: web checks on 2026-11-05 could not resolve Maps/WhatsApp; Facebook was throttled. Exact supplied URLs are preserved and browser link integrity is tested. An owner/device check remains necessary; no group was joined.
+- External link destination verification: initial web checks on 2026-11-05 could not resolve Maps/WhatsApp; Facebook was throttled. The later direct redirect and live embed check verified the supplied Maps place (`map-verification.json`). Exact supplied URLs are preserved and browser link integrity is tested. An owner/device check remains necessary; no group was joined.

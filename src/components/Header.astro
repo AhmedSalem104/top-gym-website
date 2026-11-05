@@ -30,8 +30,11 @@ const links = [
       <span>TOP GYM</span>
     </a>
     <nav class="desktop-nav" aria-label={copy.navLabel}>
+      <span class="nav-spotlight" aria-hidden="true"></span>
       {links.map((id) => (
-        <a href={`#${id}`}>{copy[id]}</a>
+        <a data-section-link href={`#${id}`}>
+          {copy[id]}
+        </a>
       ))}
     </nav>
     <div class="header-actions">
@@ -65,7 +68,9 @@ const links = [
       <LanguageSwitch locale={locale} />
     </div>
     {links.map((id) => (
-      <a href={`#${id}`}>{copy[id]}</a>
+      <a data-section-link href={`#${id}`}>
+        {copy[id]}
+      </a>
     ))}
     <div class="mobile-nav-actions">
       <a

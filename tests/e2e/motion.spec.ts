@@ -63,25 +63,42 @@ for (const locale of ['ar', 'en']) {
   }
 }
 
-test('one observer, bounded stagger in RTL reading order, dynamic content and cleanup', async ({
+test('one motion observer, bounded stagger in RTL reading order, dynamic content and cleanup', async ({
   page,
 }) => {
-  await page.addInitScript(() => {
-    const NativeObserver = window.IntersectionObserver;
-    Object.assign(window, { motionObservers: 0 });
-    window.IntersectionObserver = class extends NativeObserver {
-      constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
-        super(callback, options);
-        Object.assign(window, {
-          motionObservers: (window as unknown as { motionObservers: number }).motionObservers + 1,
-        });
-      }
-    };
-  });
+  await page.addInitScript(
+    ({ rootMargin }) => {
+      const NativeObserver = window.IntersectionObserver;
+      Object.assign(window, { motionObservers: 0 });
+      window.IntersectionObserver = class extends NativeObserver {
+        constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
+          super(callback, options);
+          if (options?.rootMargin === rootMargin)
+            Object.assign(window, {
+              motionObservers:
+                (window as unknown as { motionObservers: number }).motionObservers + 1,
+            });
+        }
+      };
+    },
+    { rootMargin: motion.observer.rootMargin },
+  );
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/ar/');
   const grid = page.locator('.facility-grid');
-  await grid.evaluate((el) => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  await grid.evaluate((el) =>
+    window.scrollTo({
+      top: scrollY + el.getBoundingClientRect().top - innerHeight - 40,
+      behavior: 'instant',
+    }),
+  );
+  await page.waitForTimeout(100);
+  await grid.evaluate((el) =>
+    window.scrollTo({
+      top: scrollY + el.getBoundingClientRect().top - innerHeight - 12,
+      behavior: 'instant',
+    }),
+  );
   await expect(grid.locator('[data-motion-state="running"]').first()).toBeAttached();
   const delays = await grid.locator('[data-motion]').evaluateAll((items) =>
     items.map((el) => ({
@@ -228,8 +245,8 @@ test('hero LCP content stays painted during entrance and prices respond without 
   expect(await page.locator('.hero-image').evaluate((el) => getComputedStyle(el).opacity)).toBe(
     '1',
   );
-  await page.locator('#membership-duration').selectOption('year');
+  await page.locator('[data-duration="year"]').click();
   await expect(page.locator('[data-price="gym"]')).toContainText('4,200');
-  await page.locator('#membership-duration').selectOption('month');
+  await page.locator('[data-duration="month"]').click();
   await expect(page.locator('[data-price="gym"]')).toContainText('350');
 });

@@ -8,7 +8,7 @@ Astro renders `/ar/` and `/en/` through one `Landing` component and section tree
 
 ## Progressive interactions
 
-The bundled `site.ts` controls the menu, duration selector, localized price updates, language preference, current Cairo status, year, and shared lightbox. The dialog uses native modal behavior plus explicit focus cycling, Escape, arrow navigation and opener focus restoration. Gallery anchors are valid image links without JavaScript. All prices remain in a semantic details/table fallback. Contacts are ordinary links.
+The bundled `site.ts` controls the menu, duration tabs, localized price updates, language preference, current Cairo status, year, and shared lightbox. The dialog uses native modal behavior plus explicit focus cycling, Escape, arrow navigation and opener focus restoration. Gallery anchors are valid image links without JavaScript. All prices remain in a semantic details/table fallback. Contacts are ordinary links.
 
 ## Motion
 
@@ -24,7 +24,7 @@ Opening/closing times are local minutes. Saturday through Thursday: 780–1440; 
 
 ## Assets and provenance
 
-Sharp creates AVIF/WebP derivatives of owner-supplied photos, preserving source files. Public output never includes original archives/PDFs or unredacted certificate sources. Five reviewed enhanced certificate copies have baked-in registration-number redactions; full-size copies use lossless WebP. The promotional hero is tracked separately from genuine gym photographs. The manifest records every extracted file and its publication decision. The logo derivative contains the complete supplied presentation image. Source metadata is stripped from published derivatives by normal Sharp output.
+Sharp creates AVIF/WebP derivatives of owner-supplied photos, preserving source files. Public output excludes original archives, unapproved PDFs and unredacted certificate sources. The owner-approved pricing PDF is copied byte-for-byte, with a lazy-loaded one-page image preview instead of a heavyweight embedded PDF viewer; native view/download links work without JavaScript. Five reviewed enhanced certificate copies have baked-in registration-number redactions; full-size copies use lossless WebP. The promotional hero is tracked separately from genuine gym photographs. The manifest records every extracted file and its publication decision. The logo derivative contains the complete supplied presentation image. Source metadata is stripped from published derivatives by normal Sharp output.
 
 ## Quality and deployment
 
@@ -33,3 +33,11 @@ ESLint/TypeScript/Vitest/build run before browser checks. Playwright covers two 
 ## Static QR image
 
 `src/pages/qr/whatsapp.png.ts` generates a PNG during the Astro build from the central WhatsApp group URL. The QR library stays on the build side and adds no client JavaScript. Browser tests decode the generated PNG and compare its payload to the configured invitation.
+
+## Active navigation and pricing documents
+
+`navigation.ts` maintains desktop/mobile `aria-current="location"` together. One dedicated IntersectionObserver watches a band below the sticky header; debounced resize refreshes pixel margins. Deep links, clicks, hash changes and bfcache restoration are handled with pagehide teardown. There is no scroll listener or hash rewriting during scrolling. This observer has a continuous lifecycle distinct from the once-only motion observer. Click/hash feedback remains available if observation fails.
+
+Six duration tabs share one pricing panel with roving tabindex, RTL-aware left/right arrows and Home/End. Selecting a tab immediately updates both prices and the panel label before applying the existing feedback animation. The complete price table remains usable without JavaScript. The official PDF is Arabic in both locale views, labeled as such; preview rendering uses PyMuPDF and Pillow, with no runtime PDF dependency.
+
+The desktop spotlight reuses section state and one decorative marker; no additional observer is introduced for the light. See `MOTION_SYSTEM.md` for hysteresis, anchor handling and timing. The location section now uses the verified Google Maps embed from central configuration. Its entire surface is a native accessible link, as requested, so pointer/keyboard interaction opens the original Maps URL rather than trapping scroll in the iframe. Google attribution remains visible. The map loads lazily; no Google script or SDK is imported into the application bundle.

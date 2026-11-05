@@ -2,7 +2,7 @@
 
 A premium Arabic/English gym landing page based on the supplied **Google Stitch Apex Gold** design and authentic TOP GYM equipment photographs. Visitors can explore the gym, compare two membership packages across six durations, view provisional opening hours, call the team, get directions, and join the WhatsApp group.
 
-**Status:** implemented review build; production launch awaits business-content confirmation. Five supplied certificate copies are now visible with registration numbers redacted; original-document comparison and current role confirmation remain outstanding. No production deployment has been performed. See [progress and verification evidence](docs/PROGRESS.md) and the [release checklist](docs/QA_CHECKLIST.md).
+**Status:** implemented review build; production launch awaits business-content confirmation. Five supplied certificate copies are now visible with registration numbers redacted; original-document comparison and current role confirmation remain outstanding. This implementation has not been promoted to production. The existing Vercel public URL serves an empty main baseline; see [diagnosis and release steps](docs/VERCEL_DIAGNOSIS.md). See [progress and verification evidence](docs/PROGRESS.md) and the [release checklist](docs/QA_CHECKLIST.md).
 
 ![Arabic desktop review screenshot](docs/evidence/ar-desktop-hero.webp)
 
@@ -14,9 +14,10 @@ A premium Arabic/English gym landing page based on the supplied **Google Stitch 
 - Original supplied logo; five genuine gym photographs; a separately labeled Pinterest promotional hero; local fonts.
 - Five certificate previews with keyboard-accessible enlargement and privacy-safe copies.
 - A visible, scannable WhatsApp-group QR code generated locally during the static build.
-- Sticky navigation, mobile menu, gallery dialog with keyboard controls and restored focus.
+- Sticky navigation with one gliding gold spotlight, mobile menu, gallery dialog with keyboard controls and restored focus.
+- Premium pre-footer CTA and responsive four-group footer with configured hours, real contact/social links, directions and native Back to Top.
 - Reusable native motion across every section, bounded reading-order staggers, accessible menu/dialog transitions and live reduced-motion support. See [motion architecture](docs/MOTION_SYSTEM.md) and the [coverage matrix](docs/MOTION_COVERAGE_MATRIX.md).
-- PDF-verified pricing, duration selector, and a full comparison table; contact-based membership enquiries.
+- PDF-verified pricing, six keyboard-accessible duration tabs, and a full comparison table; contact-based membership enquiries.
 - Africa/Cairo current-day and open/closed calculation with midnight and DST boundary tests.
 - Separate Ahmed/Karim phone links, the supplied Maps/Facebook URLs, and clearly labeled WhatsApp **group** access.
 - Conditional canonical/hreflang/social metadata, an ExerciseGym schema, sitemap, and robots policy.
@@ -108,7 +109,7 @@ Build before browser tests. Tests automatically start preview if port 4321 is fr
 
 ## Photos, logo and certificate handling
 
-Original ZIPs and PDF are retained outside the repository. Public media includes optimized derivatives of the supplied logo and five gym photographs, five redacted certificate copies, and the owner-requested Pinterest promotional hero. No AI-generated facility or certificate imagery from Stitch is used.
+Original source files remain preserved outside the repository. At the owner’s explicit request, `public/documents/top-gym-memberships-pricing-2026-11-05.pdf` is a byte-identical copy of the official pricing document, with rendered WebP previews and view/download links. Its URL, hash and file size live in `business.pricingSource`; the gitignore exception permits only this approved PDF. When replacing the price list, visually verify all values, update the configuration, previews, manifest and independent price fixture, then rerun the download/hash tests. Public media includes optimized derivatives of the supplied logo and five gym photographs, five redacted certificate copies, and the owner-requested Pinterest promotional hero. No AI-generated facility or certificate imagery from Stitch is used.
 
 To regenerate derivatives from an extracted folder with `media/` and `stitch/` subdirectories:
 
@@ -163,3 +164,7 @@ Work on small feature branches, use conventional commits, run relevant checks an
 Start with [project brief](docs/PROJECT.md), [architecture](docs/ARCHITECTURE.md), [design system](docs/DESIGN_SYSTEM.md), [decisions](docs/DECISIONS.md), [roadmap](docs/ROADMAP.md), and [progress](docs/PROGRESS.md).
 
 TOP GYM owns/provides the brand and business content. Visual direction: supplied Google Stitch Apex Gold export. Equipment photographs and enhanced copies: supplied by the owner; archive README describes conservative enhancement. Typeface licensing is retained in the installed Fontsource packages. Source assets are not licensed here for unrelated reuse. The promotional male-athlete hero was selected from Pinterest at the owner’s request; it is labeled separately from actual TOP GYM photography. Photographer/reuse rights need confirmation before production launch. No invented reviews or generated certificate images are published.
+
+The current header adds a single subtle gold spotlight above the active desktop link and a clean mobile active underline; section tracking follows clicks and scrolling. The location section embeds the exact owner-supplied Google Maps place and opens that same original URL when any part of the map card is selected. See `docs/map-verification.json` for provenance and behavior.
+
+Current footer review: [Arabic desktop](docs/evidence/footer-after-ar-1440.webp) · [Arabic mobile](docs/evidence/footer-after-ar-390.webp) · [English tablet](docs/evidence/footer-after-en-768.webp) · [pre-footer CTA](docs/evidence/footer-cta-after-en-1440.webp).

@@ -66,7 +66,15 @@ for (const locale of ['ar', 'en'] as const) {
   test(`${locale} price selector and complete comparison table`, async ({ page }) => {
     await page.goto(`/${locale}/`);
     for (const duration of durationIds) {
-      await page.locator('#membership-duration').selectOption(duration);
+      await page.locator(`[data-duration="${duration}"]`).click();
+      await expect(page.getByRole('tab', { selected: true })).toHaveAttribute(
+        'data-duration',
+        duration,
+      );
+      await expect(page.getByRole('tabpanel')).toHaveAttribute(
+        'aria-labelledby',
+        `duration-${duration}`,
+      );
       for (const plan of business.memberships)
         await expect(page.locator(`[data-price="${plan.id}"]`)).toHaveText(
           money(plan.prices[duration], locale),
@@ -199,6 +207,14 @@ test('no-JavaScript content and safe prelaunch metadata', async ({ browser }) =>
     /\/media\/certificates\/.+\.webp$/,
   );
   await expect(page.locator('.qr-card img')).toHaveAttribute('src', '/qr/whatsapp.png');
+  await expect(page.locator('[data-pricing-download]')).toHaveAttribute(
+    'download',
+    business.pricingSource.filename,
+  );
+  await expect(page.locator('[data-pricing-view]')).toHaveAttribute(
+    'href',
+    business.pricingSource.url,
+  );
   await context.close();
 });
 test('reduced motion and current-day indicator', async ({ page }) => {

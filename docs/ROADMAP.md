@@ -22,9 +22,11 @@ Phases 0, 1, 2, 3, 5, 6 and 8 are complete with local and GitHub Actions evidenc
 1. Provide original certificate/gym photograph paths (enhanced images are available).
 2. Confirm trainer holder/current role and whether he is contact Ahmed. Review the published copies with baked-in registration-number redactions; confirm the original-document comparison and hero reuse rights before launch.
 3. Confirm current hours; supply a written address and production domain when known.
-4. Check Facebook, Maps and the WhatsApp invitation on an owner's device; tool fetches were inconclusive.
+4. Check Facebook, Maps and the WhatsApp invitation on an owner's device; the real Maps pin/embed is now verified; Facebook/group availability still needs an owner-device check.
 5. Review [draft PR #11](https://github.com/AhmedSalem104/top-gym-website/pull/11). Implementation merge and production deployment require separate explicit authorization after the business gates are resolved.
 
 ## Release gate
 
 Do not close the real-content/release work as complete while certificates and business confirmation remain unresolved. Opening a PR or passing checks is not production acceptance. The empty default `main` branch is protected by required PR/check/conversation rules, including administrators, with force pushes and deletion disabled. Website code remains only on the feature branch.
+
+Latest implementation follow-up: membership tabs/PDF, active spotlight, verified map, calm motion and premium footer are complete with 18 unit / 55 browser tests. Vercel release remains open; see `VERCEL_DIAGNOSIS.md` for the empty-main 404 and protected preview.

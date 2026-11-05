@@ -26,6 +26,7 @@ describe('Motion safety budget', () => {
       'enter',
       'exit',
       'feedback',
+      'footer',
     ];
     for (const variant of variants) {
       expect(

@@ -54,7 +54,15 @@ export const business = {
     whatsappGroup: 'https://chat.whatsapp.com/HYYB9EXYHv46YBFSLq5zSu?mode=gi_t',
   },
   whatsappGroupName: "Top Gym Master's",
-  location: { address: null as Localized | null, coordinates: null },
+  location: {
+    address: null as Localized | null,
+    coordinates: null,
+    // Resolved from the owner's Maps link and visually verified in the live embed.
+    googleFeatureId: '0x1457ff1dce0b5c17:0x8b2be1654a9627c4',
+    embedBase:
+      'https://www.google.com/maps/embed?origin=mfe&pb=!1m4!3m2!1m1!4s10028356820429842372!6i16',
+    embedVerifiedOn: '2026-11-05',
+  },
   hours: {
     verified: false,
     // Monday=1 ... Sunday=0. 1440 is the following midnight, exclusive.
@@ -68,6 +76,14 @@ export const business = {
     date: '2026-11-05',
     verified: true,
     document: 'Official TOP GYM Membership and Pricing PDF',
+    url: '/documents/top-gym-memberships-pricing-2026-11-05.pdf',
+    filename: 'top-gym-memberships-pricing-2026-11-05.pdf',
+    bytes: 453139,
+    sha256: '52daf943dd18baeb9749c752bfdb7b992daccf81c834e4190514ade8843c629a',
+    preview: '/media/pricing-document-640.webp',
+    previewLarge: '/media/pricing-document-1200.webp',
+    previewWidth: 640,
+    previewHeight: 906,
   },
   memberships: [
     {

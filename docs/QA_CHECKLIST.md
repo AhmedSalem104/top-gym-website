@@ -16,7 +16,7 @@
 - [x] Mobile axe scans for WCAG 2 A/AA and 2.1 AA: zero reported violations.
 - [x] Reduced-motion behavior verified; main content and prices available without JavaScript.
 - [x] No booking form, fake purchase flow or success simulation.
-- [x] Static production build and 18 unit / 32 browser tests pass.
+- [x] Static production build and 18 unit / 45 browser tests pass.
 - [x] Default noindex policy verified; no fake domain, address, ratings or coordinates.
 - [x] Dependency audit reports zero vulnerabilities after patching lint-tool dependency.
 
@@ -26,7 +26,7 @@ Lighthouse 13.6.0 through local Playwright Chromium, mobile emulation at 412×82
 
 Font preloads target the actual visible Arabic/English families. The promotional hero uses responsive 480/736px derivatives without upscaling the source, while gallery photographs remain uncropped in the lightbox. Certificate thumbnails load lazily; full-size lossless copies load only when opened. Optimized AVIF variants reduce photo transfer size. See the recorded summary for final numeric results.
 
-Final local measurements on 2026-11-05:
+Earlier motion-build measurements on 2026-11-05 (before the membership/PDF/map/spotlight follow-up):
 
 | Locale / mode   | Performance | Accessibility | Best practices | SEO | LCP    | CLS | TBT     |
 | --------------- | ----------: | ------------: | -------------: | --: | ------ | --- | ------- |
@@ -61,9 +61,50 @@ No physical iOS/Android device testing, Safari/WebKit screen-reader testing, or 
 - [ ] Confirm photographer/reuse rights for the owner-requested Pinterest promotional hero before launch.
 - [ ] Confirm current operating hours (historical listing approximately four years old).
 - [ ] Verify external destinations and WhatsApp invitation validity on an owner device.
-- [ ] Supply written address and verify any future map embed before enabling it.
+- [ ] Supply owner-approved written address. The supplied Google listing and live embed are verified in `map-verification.json`.
 - [ ] Supply production domain; validate canonical/hreflang/social metadata against the real origin.
 - [x] Establish an empty protected main baseline and draft PR while preserving feature history.
 - [ ] Review draft PR #11 and explicitly authorize implementation merge/deployment.
 - [ ] Enable indexing only after release approval and recheck robots/sitemap/SEO on the actual host.
 - [ ] Test real mobile devices and assistive technology as part of release acceptance.
+
+## Latest follow-up verification and performance
+
+All 45 browser tests and 18 unit tests passed with the full validation pipeline. New focused suites are `membership-navigation.spec.ts` and `navigation-spotlight.spec.ts`. They check all nav targets, exact light alignment, stable near-boundary selection, keyboard/modality, desktop/mobile/RTL, original PDF bytes/download filename and whole-map pointer/keyboard links. External destination navigation is isolated in the map-link test; separate live map screenshots and `map-verification.json` establish the actual Google pin.
+
+Current Lighthouse: Arabic mobile 99, English mobile 90 on first run and 97 on repeat, both desktops 100. CLS is 0 throughout. Mobile LCP is 2.2 s Arabic / 2.1 s English; mobile TBT is 20 ms Arabic and 310 / 150 ms English. The repeat did not change source code. English startup variability remains unresolved; the first run attributes its longest task to the application script and contains no Google Maps request. Both results are retained in `evidence/followup-lighthouse-summary.json` and `evidence/followup-lighthouse-repeat.json`.
+
+The complete live-map scroll run at 390×844, 6× CPU and 1.6 Mbps/150 ms network records CLS 0, no errors/broken images, median rAF 16.7 ms, and p95 33.4 ms Arabic / 33.3 ms English. It also records 12 Arabic / 10 English long tasks (largest 538 / 371 ms) while the embedded map loads, and 24 / 15 frame intervals above 34 ms. These are a material third-party cost, not omitted evidence. The map is lazy-loaded and keeps its dimensions reserved; its full-area link works independently of rendering.
+
+A controlled attribution run with only Google's iframe response replaced by empty HTML records no long scroll tasks, CLS 0 and median rAF 16.7 ms in both languages; p95 is 33.3 / 16.8 ms. This comparison supports attribution of the scroll slowdown to the embed, but does not represent the complete live-map experience or certify real-device performance. Results are in `evidence/navigation-pricing-map-performance.json` and `evidence/spotlight-isolated-performance.json`. Physical low-end mobile/Safari testing remains necessary.
+
+The application JavaScript is 27,552 bytes raw / 10,091 gzip (`evidence/followup-browser-bundle.json`), with no animation dependency. Google's iframe resources are separate and not included in that bundle figure. Previous motion-only measurements above remain historical evidence.
+
+Visual review: [Arabic spotlight](evidence/spotlight-ar.webp), [English spotlight](evidence/spotlight-en.webp), [Arabic membership tabs/PDF](evidence/memberships-ar-390.webp), [English memberships](evidence/memberships-en-1440.webp), [Arabic map](evidence/map-ar-390.webp), [English map](evidence/map-en-1440.webp).
+
+## Calm motion, premium footer and Vercel investigation — 2026-11-05
+
+- Implemented the requested pre-footer journey CTA, membership/call/directions buttons and four logical footer groups. The original logo, seven section links, international phone numbers, clearly labeled WhatsApp group, Facebook, configured hours/location and native Back to Top are preserved and functional. Layout is four columns at desktop, two on tablet and one on mobile with compact quick links.
+- Fixed visible opacity resets, first-position spotlight travel, competing hover/reveal transforms and discontinuous menu reversals. Hero motion starts in CSS from first paint while remaining opaque; edge-triggered reveals skip already-painted content. Timings are 540–580ms entrances, 80ms stagger capped at 240ms, 200ms micro feedback and 340ms spotlight. No dependency was added.
+- Full `npm run test:all` passed: TypeScript (52 files, zero errors/warnings/hints), ESLint, Prettier, 18 unit tests, production build, isolated production-metadata fixture and **55 Chromium browser tests, with no retries**. The new tests include actual near-edge activation, fast-anchor/no-flash fallback, initial spotlight alignment, menu interruption continuity and six footer layout/link/keyboard/axe checks. Existing prices, PDF hash/download, certificates, QR, map, no-JS and reduced-motion tests remain passing. Production dependency audit: zero reported vulnerabilities.
+- Before/after motion audit: 80–81 starts from zero opacity on already-visible elements before; **zero afterward in all six Arabic/English × 390/768/1440 scenarios**. This checks a concrete source of flashing, not all possible frame drops. All applicable sections are covered in `MOTION_COVERAGE_MATRIX.md`.
+- Footer and CTA before/after screenshots captured for both languages at 390/768/1440 and manually reviewed. Desktop motion recordings are retained for both languages. No layout overflow was detected across the broader 320–1920px browser suite. Captures exclude sticky chrome; the unfocused skip link was verified at top −100px in a real viewport before excluding its full-element screenshot artifact.
+- Vercel public `/` and `/ar/` return 404. GitHub reports a successful deployment of the **empty main baseline**; website code is still on the feature branch. Feature previews are Ready but require Vercel authentication. Added explicit Astro/build/output settings in `vercel.json`. No main merge, production promotion or authentication/protection change was performed. Dashboard inspection was unavailable; details and exact release steps are in `VERCEL_DIAGNOSIS.md`.
+
+Review: [Arabic footer desktop](evidence/footer-after-ar-1440.webp), [Arabic footer mobile](evidence/footer-after-ar-390.webp), [English footer tablet](evidence/footer-after-en-768.webp), [English CTA](evidence/footer-cta-after-en-1440.webp), [Arabic before recording](evidence/calm-before-ar-1440.webm), [Arabic after recording](evidence/calm-after-ar-1440.webm).
+
+## Final calm-motion lab measurements
+
+| Locale / mode                                  | Performance |  LCP |   TBT | CLS |
+| ---------------------------------------------- | ----------: | ---: | ----: | --: |
+| Arabic mobile, first run                       |          86 | 2.2s | 400ms |   0 |
+| Arabic mobile, isolated repeat, unchanged code |          99 | 2.2s |  10ms |   0 |
+| English mobile                                 |          99 | 2.0s |   0ms |   0 |
+| Arabic desktop                                 |         100 | 0.5s |  40ms |   0 |
+| English desktop                                |         100 | 0.5s |   0ms |   0 |
+
+Accessibility and best-practices scores are 100 in all runs. Review SEO remains 66 because indexing is intentionally disabled. The first Arabic run attributes long tasks to the application script; the isolated repeat improves without a source change. This variance is retained rather than reporting only the best score. Other local QA/browser work was not fully isolated during the first measurement window; causation is not established. Results: `evidence/calm-lighthouse-summary.json` and `evidence/calm-lighthouse-repeat-summary.json`. These are local Chromium lab results, not field metrics.
+
+The complete live-map 6× CPU / 1.6Mbps / 150ms scroll run at 390×844 reports median rAF intervals 16.7ms and p95 33.4ms for both languages, CLS 0, no pending/running motion after settling, no broken images and no console errors. It still records 11 Arabic / 9 English long scroll tasks, largest 381 / 349ms, and 18 / 25 frame intervals above 34ms. Google's embedded map remains a material cost on emulated slow hardware. No claim of consistent real-device 60fps or elimination of all performance variance is made. `evidence/calm-motion-performance.json` retains the raw observations; the earlier controlled map-isolation comparison remains available as historical attribution evidence.
+
+Physical mobile/Safari/screen-reader acceptance, original certificate comparison, trainer role, hero reuse rights, provisional hours and production release approval remain open. Vercel dashboard/build logs and protected preview rendering could not be inspected without a usable authenticated session.

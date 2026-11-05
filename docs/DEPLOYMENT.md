@@ -1,6 +1,6 @@
 # Deployment preparation
 
-No deployment is authorized or performed by this implementation. GitHub Actions validates but does not publish.
+No production deployment is authorized or performed by this implementation. GitHub Actions validates but does not publish. The existing Vercel integration creates protected previews on feature pushes; its empty main deployment returns 404. See [Vercel diagnosis](VERCEL_DIAGNOSIS.md).
 
 1. Complete the content and privacy gates in `QA_CHECKLIST.md`.
 2. Obtain owner confirmation of the real HTTPS production origin and hosting destination.
@@ -25,3 +25,7 @@ Keep the prior verified static artifact and commit SHA in the hosting release re
 ## First PR in an empty repository
 
 The remote initially had no commits or main branch. To support the requested PR workflow, an empty main baseline was created and its history connected into the feature branch without changing the implementation tree or rewriting existing commits. [Draft PR #11](https://github.com/AhmedSalem104/top-gym-website/pull/11) now presents the full change. Main is protected by required PR and quality checks; it contains no website files. Do not merge implementation or deploy without explicit owner authorization.
+
+The official pricing PDF must be served as `application/pdf` at its configured `/documents/` path. If enforcing CSP, allow `frame-src https://www.google.com` for the verified lazy Maps embed and test the provider redirect on the host. No Google API key is required. Network/content blocking can prevent tiles; the full-area link still opens the unchanged supplied Maps URL.
+
+`vercel.json` explicitly declares Astro, `npm ci`, `npm run build`, `dist` and trailing slashes. Node 24 is required by package engines. This prepares feature previews and does not authorize merging or promoting production.

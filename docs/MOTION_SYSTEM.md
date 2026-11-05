@@ -2,7 +2,7 @@
 
 ## Architecture
 
-The site remains static Astro with shared Arabic/English components. Motion uses native Web Animations for interruptible entrances/dialogs and CSS transitions for hover/focus/press states. There are no animation packages, hydration islands, scroll handlers or perpetual animation loops.
+The site remains static Astro with shared Arabic/English components. Native Web Animations own viewport entrances/dialogs; CSS owns first-paint hero motion and hover/focus/press states. All share the same configuration tokens. There are no animation packages, hydration islands, scroll handlers or perpetual animation loops.
 
 - `src/config/motion.ts`: timings, easing, distances, variants, viewport trigger and stagger budget. `Base.astro` emits the same tokens as CSS variables.
 - `src/scripts/motion.ts`: one IntersectionObserver shared by all reveals and the header shadow sentinel; one child-list MutationObserver for new/remounted content; delegated keyboard-focus handling; cancellation and lifecycle cleanup.
@@ -17,22 +17,22 @@ Native [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/I
 
 | Primitive        |     Duration | Movement                       | Usage                                   |
 | ---------------- | -----------: | ------------------------------ | --------------------------------------- |
-| `heading`        |       480 ms | opacity + 12 px vertical       | labels and headings                     |
-| `reveal`         |       560 ms | opacity + 20 px vertical       | copy, panels, lists and cards           |
-| `image`          |       680 ms | opacity + 16 px vertical       | facility, gallery and certificate cards |
+| `heading`        |       540 ms | opacity + 12 px vertical       | labels and headings                     |
+| `reveal`         |       560 ms | opacity + 16 px vertical       | copy, panels, lists and cards           |
+| `image`          |       580 ms | opacity + 12 px vertical       | facility, gallery and certificate cards |
 | `fade`           |       560 ms | opacity only                   | supporting notes/footer                 |
-| `hero`           |       600 ms | 12 px vertical, fully opaque   | navigation and LCP heading              |
-| `hero-image`     |       680 ms | 1.018 to 1 scale, fully opaque | existing hero photograph                |
+| `hero`           |       560 ms | 12 px vertical, fully opaque   | navigation and LCP heading              |
+| `hero-image`     |       580 ms | 1.008 to 1 scale, fully opaque | existing hero photograph                |
 | `enter` / `exit` | 260 / 160 ms | opacity + 12 / −8 px           | disclosure menu and native dialog       |
-| `feedback`       |       180 ms | opacity 0.65 + 4 px            | immediately updated price/image         |
+| `feedback`       |       200 ms | fully opaque + 2 px            | immediately updated price/image         |
 
-Ease-out: `cubic-bezier(0.22, 1, 0.36, 1)`; exit: `cubic-bezier(0.4, 0, 1, 1)`. Stagger is 80 ms, capped at 320 ms. Only nearby elements entering in the same observer delivery share a stagger; later rows start a fresh short sequence. Content groups use a two-step lead after section headings. No bounce, blur, shaking or scroll-linked parallax.
+Ease-out: `cubic-bezier(0.22, 1, 0.36, 1)`; exit: `cubic-bezier(0.4, 0, 1, 1)`. Stagger is 80 ms, capped at 240 ms. Only nearby elements entering in the same observer delivery share a stagger; later rows start a fresh short sequence. Content groups use a two-step lead after section headings. No bounce, blur, shaking or scroll-linked parallax.
 
 ## Viewport and entrance behavior
 
-The observer uses an 8% threshold with a `0px 0px -24px 0px` root margin. Elements are observed individually, so a tall section does not reveal its offscreen cards at once. Completion unobserves the element. A diagnostic `data-motion-state` is `pending`, `running` or `complete`; **none of these states hides content in CSS**.
+The observer uses threshold 0 with a `0px 0px 24px 0px` root margin. It prepares entrances just before first visibility at the viewport edge. An opacity entrance starts only while the element's top is still outside the visible viewport. Already-visible content from late initialization, fast scrolling, anchors or dynamic insertion settles immediately without being hidden. This deliberately prioritizes continuity over forcing a fade onto painted content. Elements are observed individually, unobserved once and never reset on return scrolling. The diagnostic states `pending`, `running` and `complete` never hide content in CSS.
 
-The initial hero groups sequence navigation, eyebrow/heading, supporting text and CTAs. The heading and image remain opaque throughout; there is no image-load gate, loading screen or delayed LCP paint. The image settles gently while text enters. Internal anchors and restored scroll positions use the same actual-viewport behavior.
+Hero/header motion is CSS-owned from first paint and excluded from observer animation. Eyebrow/heading start together, copy follows after 80ms, CTAs at 160/240ms, and supporting visuals at 240ms. All remain opaque, including the LCP heading and image; no load gate or blank state is introduced. CSS individual `translate` provides 1px hover feedback independently of entrance `transform`, preventing competing property ownership.
 
 The DOM order defines each stagger. The existing grids mirror naturally in RTL, so Arabic reads from right to left and English from left to right without sorting geometry or reversing DOM/accessibility order. Navigation underline origin follows direction; other motion is vertical.
 
@@ -49,7 +49,7 @@ Use the existing `SectionHeading`, which supplies label → heading → descript
 </div>
 ```
 
-Use `image` for image-led cards, `fade` for subtle supporting content. Avoid nesting an animated card inside an animated parent. `data-motion-step` optionally adds stagger steps and remains subject to the global cap. Use `hero` only when LCP content must remain fully painted. Do not add hidden styles or inline animation timings.
+Use `image` for image-led cards, `footer` for subtle footer groups, and `fade` for notes. Avoid nested animated parents/children. `data-motion-step` optionally adds bounded stagger steps. Hero CSS ownership is limited to the header/hero. Do not add hidden styles or arbitrary inline timings.
 
 New nodes with `data-motion` register automatically. For attributes added to an existing node, dispatch `document.dispatchEvent(new Event('motion:refresh'))`. Repeated refresh events do not duplicate observers or replay seen items. Changed values should update the DOM first and call `playMotion(element, 'feedback')`; prices never wait for an animation.
 
@@ -78,3 +78,25 @@ node scripts/measure-motion.mjs http://127.0.0.1:4323
 ```
 
 `evidence/motion-before-lighthouse.json` preserves the pre-motion local lab result. `evidence/lighthouse-summary.json` is the final build's lab result. `evidence/motion-performance.json` records 6× CPU slowdown, throttled network, slow/fast/down/up scrolling, layout shifts, long tasks and frame intervals. Its bounded requestAnimationFrame loop is test instrumentation only, never shipped. rAF cadence is not a GPU frame-time measurement or a real-device FPS guarantee. See `MOTION_COVERAGE_MATRIX.md` and `QA_CHECKLIST.md` for the actual verification record and limitations.
+
+## Navigation and membership follow-up
+
+Active section tracking uses its own single continuous observer in `navigation.ts`, independently of the once-only reveal observer. It shares gold state styling with the mobile underline and adds no scroll loop or animation library. The official PDF copy and preview adopt `reveal` / `image`; duration tabs use centralized micro-transition tokens and immediate price feedback. The motion observer-count test distinguishes its root margin from the navigation observer.
+
+## Active navigation spotlight
+
+A single decorative `nav-spotlight` inside the existing desktop nav moves via `transform: translateX`; its CSS pseudo-elements draw a 28 × 2 px gold light and a static low-opacity gradient beam. No animated blur, width, layout or continuous frame loop is used. Inactive hover/focus gets a dimmer 20 px top line. Below the existing 1360 px desktop breakpoint, the shared mobile nav uses its gold active underline. Focus rings remain independent.
+
+`motion.duration.navigation` sets a 340ms transition. The first placement and geometry corrections occur with transitions disabled; two finite animation-frame callbacks enable subsequent glides after geometry is established. Font readiness/loading completion and one nav ResizeObserver update alignment using physical offsets for RTL/LTR. A 110ms stability window, 150ms window resize debounce and 1800ms interrupted-anchor fallback prevent switching during native anchor travel. Arrival, deliberate wheel/touch/keyboard interruption or the bounded fallback releases the clicked target. Timers, callbacks and observers are disposed on pagehide and restored for bfcache. Reduced motion removes transitions without removing the indicator.
+
+## Calm-motion audit and footer refinement
+
+The before audit recorded 80–81 opacity-zero starts on already visible elements per scenario. The old 8% threshold/inset waited until content was visible before hiding it, with up to 320ms delay; above-fold copy also reset after script initialization. CSS hover transforms competed with entrance transforms, menu reversals restarted from fixed endpoints, and the spotlight could animate its initial position from x=0. These causes are corrected by the ownership/edge-trigger rules above. Interrupted native transitions sample their painted opacity/transform before cancellation; the replacement continues from that frame. The read occurs only on an interrupted user interaction, never per scroll frame. Feedback stays opaque and only moves 2px.
+
+The footer uses the shared `footer` variant (12px/560ms), 80ms stagger and 240ms cap. Brand, headings, links, configured hours and bottom bar enter once. Its semantic navigation, native phone/social/directions links and `#top` control work without JavaScript. Back to Top follows global smooth scrolling and becomes instant for reduced motion. Hour groups are derived from consecutive rows in business configuration; midnight and the confirmation note are preserved.
+
+`evidence/motion-jerk-audit.json` and `evidence/motion-calm-audit.json` preserve before/after results: zero visible opacity resets after the fix in all six locale/viewport scenarios. `footer-calm.spec.ts` tests the footer, real edge activation, fast-anchor fallback, initial spotlight placement and menu reversal continuity. Before/after screenshots and recordings use `footer-before-*`, `footer-after-*`, `footer-cta-before-*`, `footer-cta-after-*`, `calm-before-*` and `calm-after-*`. Full-section screenshots exclude sticky chrome; a negative-position skip-link screenshot artifact was excluded after confirming it stays outside the actual viewport when unfocused.
+
+Current lab measurements are retained separately in `evidence/calm-motion-performance.json`, `evidence/calm-lighthouse-summary.json` and `evidence/calm-lighthouse-repeat-summary.json`. Earlier evidence remains historical. See `QA_CHECKLIST.md` for actual numbers, local-run variability and the remaining live Google-map cost.
+
+The initial hero image uses the 560ms CSS hero duration; the exported native `hero-image` variant retains the 580ms image duration for callers outside that CSS-owned initial sequence.

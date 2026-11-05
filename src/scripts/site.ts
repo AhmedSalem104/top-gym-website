@@ -1,9 +1,11 @@
 import { business, durationIds, type Duration, type Locale } from '../config/business';
 import { durations, money, t } from '../i18n';
 import { getCairoStatus } from '../utils/hours';
-import { initMotion, playMotion, cancelMotion } from './motion';
+import { initMotion, playMotion } from './motion';
+import { initNavigation } from './navigation';
 
 initMotion();
+initNavigation();
 
 const locale: Locale = document.documentElement.lang === 'en' ? 'en' : 'ar';
 const copy = t(locale);
@@ -48,7 +50,6 @@ toggle?.addEventListener('click', () => {
     return;
   }
   menuRevision++;
-  cancelMotion(menu);
   menu.hidden = false;
   menu.inert = false;
   toggle.setAttribute('aria-expanded', 'true');
@@ -80,22 +81,43 @@ window.matchMedia('(min-width: 1360px)').addEventListener('change', (event) => {
   if (event.matches) closeMenu();
 });
 
-document
-  .querySelector<HTMLSelectElement>('#membership-duration')
-  ?.addEventListener('change', (event) => {
-    const value = (event.target as HTMLSelectElement).value as Duration;
-    if (!durationIds.includes(value)) return;
-    business.memberships.forEach((plan) => {
-      const price = document.querySelector(`[data-price="${plan.id}"]`);
-      if (price instanceof HTMLElement) {
-        price.textContent = money(plan.prices[value], locale);
-        void playMotion(price, 'feedback');
-      }
-    });
-    document.querySelectorAll('[data-duration-label]').forEach((node) => {
-      node.textContent = durations[value][locale];
-    });
+const durationTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-duration]'));
+function selectDuration(tab: HTMLButtonElement) {
+  const value = tab.dataset.duration as Duration;
+  if (!durationIds.includes(value)) return;
+  durationTabs.forEach((item) => {
+    const selected = item === tab;
+    item.setAttribute('aria-selected', String(selected));
+    item.tabIndex = selected ? 0 : -1;
   });
+  document.querySelector('#membership-prices')?.setAttribute('aria-labelledby', tab.id);
+  business.memberships.forEach((plan) => {
+    const price = document.querySelector(`[data-price="${plan.id}"]`);
+    if (price instanceof HTMLElement) {
+      price.textContent = money(plan.prices[value], locale);
+      void playMotion(price, 'feedback');
+    }
+  });
+  document.querySelectorAll('[data-duration-label]').forEach((node) => {
+    node.textContent = durations[value][locale];
+  });
+}
+durationTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectDuration(tab));
+  tab.addEventListener('keydown', (event) => {
+    let next: number;
+    const forward = locale === 'ar' ? 'ArrowLeft' : 'ArrowRight';
+    const backward = locale === 'ar' ? 'ArrowRight' : 'ArrowLeft';
+    if (event.key === forward) next = (index + 1) % durationTabs.length;
+    else if (event.key === backward) next = (index - 1 + durationTabs.length) % durationTabs.length;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = durationTabs.length - 1;
+    else return;
+    event.preventDefault();
+    selectDuration(durationTabs[next]);
+    durationTabs[next].focus();
+  });
+});
 
 function updateHours() {
   const state = getCairoStatus();

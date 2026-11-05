@@ -374,6 +374,18 @@
       "height": 12362,
       "destinations": [],
       "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "الاشتراكات والباقات - Top Gym.pdf",
+      "bytes": 453139,
+      "sha256": "52daf943dd18baeb9749c752bfdb7b992daccf81c834e4190514ade8843c629a",
+      "destinations": [
+        "public/documents/top-gym-memberships-pricing-2026-11-05.pdf",
+        "public/media/pricing-document-640.webp",
+        "public/media/pricing-document-1200.webp"
+      ],
+      "decision": "Owner explicitly requested public display and download. PDF copied byte-for-byte; one-page preview rendered without content edits. Local original remains untouched.",
+      "previewMethod": "PyMuPDF rasterization and Pillow WebP at quality 88; 640 and 1200 pixels wide"
     }
   ]
 }
