@@ -102,7 +102,6 @@ const schema = {
     <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\u003c')} />
   </head>
   <body id="top">
-    <span data-header-sentinel aria-hidden="true"></span>
     <Header locale={locale} />
     <main id="main" tabindex="-1">
       <slot />

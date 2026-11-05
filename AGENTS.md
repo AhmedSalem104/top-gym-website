@@ -20,3 +20,5 @@ Read `docs/PROJECT.md`, `docs/DECISIONS.md`, `docs/PROGRESS.md`, and `docs/QA_CH
 Navigation state lives in `src/scripts/navigation.ts`; share desktop/mobile `aria-current="location"`. Membership tabs require RTL arrow keys, Home/End, immediate prices and the no-JavaScript comparison table. See `docs/ARCHITECTURE.md`.
 
 Footer groups and the pre-footer CTA reuse shared `footer` motion. Never restart an opacity entrance on content already painted in the viewport; preserve the offscreen-edge trigger and fast-anchor fallback. Keep first-paint hero CSS separate from observer ownership. See `docs/MOTION_SYSTEM.md` for the diagnosed discontinuities and `docs/DEPLOYMENT.md` for the Vercel/main-branch investigation.
+
+Current Hero composition, media provenance and post-Hero header inversion: `docs/HERO_REDESIGN.md`. Keep Home mapped to the Hero in ScrollSpy; never observe the full body as a section.

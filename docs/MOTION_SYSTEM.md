@@ -5,7 +5,7 @@
 The site remains static Astro with shared Arabic/English components. Native Web Animations own viewport entrances/dialogs; CSS owns first-paint hero motion and hover/focus/press states. All share the same configuration tokens. There are no animation packages, hydration islands, scroll handlers or perpetual animation loops.
 
 - `src/config/motion.ts`: timings, easing, distances, variants, viewport trigger and stagger budget. `Base.astro` emits the same tokens as CSS variables.
-- `src/scripts/motion.ts`: one IntersectionObserver shared by all reveals and the header shadow sentinel; one child-list MutationObserver for new/remounted content; delegated keyboard-focus handling; cancellation and lifecycle cleanup.
+- `src/scripts/motion.ts`: one IntersectionObserver shared by all reveals and the Hero boundary; one child-list MutationObserver for new/remounted content; delegated keyboard-focus handling; cancellation and lifecycle cleanup. After the Hero leaves the viewport above, the header becomes #FFAD26 with black links and focus rings. Its height remains unchanged.
 - `src/styles/motion.css`: button/card/image/navigation micro-interactions and reduced-motion rules.
 - `src/scripts/site.ts`: existing menu, price and lightbox interactions call the shared motion primitives.
 
@@ -32,7 +32,7 @@ Ease-out: `cubic-bezier(0.22, 1, 0.36, 1)`; exit: `cubic-bezier(0.4, 0, 1, 1)`. 
 
 The observer uses threshold 0 with a `0px 0px 24px 0px` root margin. It prepares entrances just before first visibility at the viewport edge. An opacity entrance starts only while the element's top is still outside the visible viewport. Already-visible content from late initialization, fast scrolling, anchors or dynamic insertion settles immediately without being hidden. This deliberately prioritizes continuity over forcing a fade onto painted content. Elements are observed individually, unobserved once and never reset on return scrolling. The diagnostic states `pending`, `running` and `complete` never hide content in CSS.
 
-Hero/header motion is CSS-owned from first paint and excluded from observer animation. Eyebrow/heading start together, copy follows after 80ms, CTAs at 160/240ms, and supporting visuals at 240ms. All remain opaque, including the LCP heading and image; no load gate or blank state is introduced. CSS individual `translate` provides 1px hover feedback independently of entrance `transform`, preventing competing property ownership.
+Hero/header motion is CSS-owned from first paint and excluded from observer animation. Eyebrow starts immediately, heading follows at 80ms, copy at 160ms, CTAs and supporting visuals at 240ms. All remain opaque, including the LCP heading and image; no load gate or blank state is introduced. CSS individual `translate` provides 1px hover feedback independently of entrance `transform`, preventing competing property ownership.
 
 The DOM order defines each stagger. The existing grids mirror naturally in RTL, so Arabic reads from right to left and English from left to right without sorting geometry or reversing DOM/accessibility order. Navigation underline origin follows direction; other motion is vertical.
 

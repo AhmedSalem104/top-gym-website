@@ -9,7 +9,8 @@ describe('Official PDF price transcription, 2026-11-05', () => {
       [180, 350, 700, 1050, 2100, 4200],
       [200, 400, 800, 1200, 2400, 4800],
     ]);
-    expect(durations.twoMonths).toEqual({ ar: 'شهران / ٦٠ يومًا', en: '2 months / 60 days' });
+    expect(durations.twoMonths).toEqual({ ar: 'شهرين', en: '2 months' });
+    expect(durations.halfMonth).toEqual({ ar: 'نص شهر', en: 'Half month' });
   });
   it('uses supplied phone and external contact destinations', () => {
     expect(business.contacts.map((contact) => contact.phone)).toEqual([

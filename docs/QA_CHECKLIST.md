@@ -1,5 +1,27 @@
 # QA and release checklist
 
+## Hero / Home / inverted navigation — 5 November 2026
+
+- Full local Node 24 `npm run test:all` passed: typecheck (54 files, zero diagnostics), lint, formatting, 18 unit tests, production build, isolated SEO fixture and **75 Chromium browser tests** (2.2 minutes, no retries).
+- Both languages: Hero checked at 320/375/390/768/1366/1440/1920px. No horizontal overflow, headline/image overlap or clipped heading; primary CTA stays within the initial 900px viewport. Membership, Maps and gallery actions passed.
+- Header checked at 390/768/1440px, including touch emulation at 390px. Height stayed 77px mobile / 81px tablet and desktop. Boundary crossing, fast jumps, Home, every navigation link, keyboard focus, language switching and reduced motion passed. Axe scan of the visible gold header/menu: zero violations.
+- Fixed findings: Home's anchor lock released while a sliver of Hero remained visible; a one-pixel boundary could miss fast jumps; language accessible names omitted visible AR/EN abbreviations. Browser harness now clicks sticky controls in-place and prevents programmatic focus-scroll competing with the anchor under test.
+- Forty actual screenshots: `hero-authentic-{before,after}-{ar,en}-{320,375,390,768,1366,1440,1920}.webp` and `hero-navigation-{ar,en}-{390,768,1440}-{top,gold}.webp` in `evidence/`. Section captures hide fixed chrome; navigation captures retain it. Representative desktop, tablet and small-mobile results were visually inspected.
+- Price fixture, PDF download/hash, contacts, dialogs, no-JavaScript content, observer failure and motion cleanup passed. Business configuration and official PDF bytes have no diff.
+
+### Actual throttled local measurement
+
+Production preview, Chromium 156, 390×844 DPR1 with touch, 6× CPU slowdown, 1.6Mbps download / 750Kbps upload / 150ms latency. One cold-context run per language; bounded slow/fast/down/up scrolling. Raw evidence: [hero-motion-performance.json](evidence/hero-motion-performance.json).
+
+| Locale  |    LCP | CLS | Median / p95 rAF interval | Scroll long tasks |
+| ------- | -----: | --: | ------------------------: | ----------------: |
+| Arabic  | 4172ms |   0 |             16.7 / 49.9ms |                16 |
+| English | 2320ms |   0 |             16.7 / 33.4ms |                12 |
+
+Both runs: zero console errors, broken images, unrevealed items or animations left running after settling. Arabic throttled LCP exceeds the 2.5s goal; full-page scrolling still includes long tasks, whose attribution was not profiled in this scoped update. These are local lab samples, not real-user Core Web Vitals, GPU frame timings or a 60fps guarantee. No new Lighthouse score is claimed.
+
+The separately approved title/contact production release was verified: root, Arabic, English, 404 document, logo and PDF returned 200; TOP GYM tab title and captain-prefixed names passed at 390/1440px in both languages, including language/hash preference behavior. The new Hero/header branch has not been merged or deployed to production.
+
 ## Verified in the local implementation
 
 - [x] Gold design reviewed against the source desktop screenshot; source differences documented.

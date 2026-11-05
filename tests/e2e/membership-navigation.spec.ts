@@ -14,9 +14,15 @@ for (const locale of ['ar', 'en'] as const) {
     await expect(page.locator('.language-switch [lang="ar"]').first()).toHaveText('AR');
     await expect(page.locator('.language-switch [lang="ar"]').first()).toHaveAttribute(
       'aria-label',
-      'العربية',
+      'AR — العربية',
     );
     await expect(page.getByRole('tab')).toHaveCount(6);
+    await expect(page.locator('[data-duration="halfMonth"]')).toHaveText(
+      locale === 'ar' ? 'نص شهر' : 'Half month',
+    );
+    await expect(page.locator('[data-duration="twoMonths"]')).toHaveText(
+      locale === 'ar' ? 'شهرين' : '2 months',
+    );
     await page.locator('[data-duration="month"]').focus();
     await page.keyboard.press(locale === 'ar' ? 'ArrowLeft' : 'ArrowRight');
     await expect(page.locator('[data-duration="twoMonths"]')).toBeFocused();
@@ -95,6 +101,7 @@ for (const locale of ['ar', 'en'] as const) {
       }
       const visibleActive = nav.locator('[aria-current="location"]');
       await expect(visibleActive).toBeVisible();
+      // About's anchor leaves the hero's last 100px visible; the header stays dark here.
       expect(await visibleActive.evaluate((el) => getComputedStyle(el).color)).toBe(
         'rgb(229, 149, 0)',
       );
@@ -112,7 +119,8 @@ for (const locale of ['ar', 'en'] as const) {
       }
       if (width < 1360) await page.keyboard.press('Escape');
       await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-      await expect(active).toHaveCount(0);
+      await expect(active).toHaveCount(2);
+      await expect(active.first()).toHaveAttribute('href', '#top');
       await page.evaluate(() => {
         location.hash = 'location';
       });

@@ -7,11 +7,14 @@ html {
 .header-inner[data-motion] {
   animation: hero-entrance var(--motion-hero) var(--motion-ease) backwards;
 }
-.hero-description {
+#hero-title {
   animation-delay: var(--motion-step) !important;
 }
-.hero .actions [data-motion] {
+.hero-description {
   animation-delay: calc(var(--motion-step) * 2) !important;
+}
+.hero .actions [data-motion] {
+  animation-delay: calc(var(--motion-step) * 3) !important;
 }
 .hero .actions [data-motion]:not(:first-child),
 .hero .hero-rail,
@@ -40,13 +43,6 @@ html {
 .group-panel > [data-motion='heading'] {
   display: block;
 }
-[data-header-sentinel] {
-  position: absolute;
-  top: 0;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-}
 .site-header::after {
   content: '';
   position: absolute;
@@ -58,6 +54,59 @@ html {
 }
 .site-header.is-scrolled::after {
   opacity: 1;
+}
+/* The existing reveal observer tracks the hero's viewport exit. No scroll loop. */
+.site-header {
+  transition:
+    background-color var(--motion-micro) var(--motion-ease),
+    color var(--motion-micro),
+    border-color var(--motion-micro);
+}
+.site-header.is-scrolled {
+  background: var(--color-hover);
+  color: #000;
+  border-color: rgb(0 0 0 / 20%);
+}
+.site-header.is-scrolled :focus-visible {
+  outline-color: #000;
+}
+.site-header.is-scrolled :is(.brand, .desktop-nav a, .mobile-nav > a) {
+  color: #000;
+}
+.site-header.is-scrolled :is(.desktop-nav a, .mobile-nav > a):hover {
+  color: #24272b;
+}
+.site-header.is-scrolled :is(.mobile-nav, .language-switch, .icon-button, .button-dark) {
+  background: var(--color-hover);
+  color: #000;
+  border-color: rgb(0 0 0 / 35%);
+}
+.site-header.is-scrolled :is(.language-switch > * + *, .mobile-nav > a, .mobile-language) {
+  border-color: rgb(0 0 0 / 25%);
+}
+.site-header.is-scrolled :is(.mobile-language, .header-call svg) {
+  color: #000;
+}
+.site-header.is-scrolled :is(.language-switch [aria-current], .button-gold) {
+  background: var(--color-canvas);
+  color: var(--color-hover);
+}
+.site-header.is-scrolled :is(.language-switch a, .icon-button, .button-dark):hover {
+  background: rgb(0 0 0 / 9%);
+  color: #000;
+}
+.site-header.is-scrolled .button-gold:hover {
+  background: var(--color-card);
+}
+.site-header.is-scrolled :is(.nav-spotlight, .desktop-nav [data-section-link])::before {
+  background: #000;
+  box-shadow: none;
+}
+.site-header.is-scrolled .nav-spotlight::after {
+  background: linear-gradient(to bottom, rgb(0 0 0 / 14%), rgb(0 0 0 / 3%) 65%, transparent);
+}
+.site-header.is-scrolled .mobile-nav [data-section-link]::after {
+  background: #000;
 }
 .button,
 .icon-button,

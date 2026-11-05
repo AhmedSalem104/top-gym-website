@@ -65,12 +65,12 @@ export function initMotion() {
   try {
     observer = new IntersectionObserver((entries) => {
       for (const entry of entries)
-        if (entry.target.hasAttribute('data-header-sentinel')) {
+        if (entry.target.hasAttribute('data-header-boundary')) {
           document
             .querySelector('.site-header')
             ?.classList.toggle(
               'is-scrolled',
-              !entry.isIntersecting && entry.boundingClientRect.top < 0,
+              !entry.isIntersecting && entry.boundingClientRect.bottom <= 0,
             );
         }
       const visible = entries.filter(
@@ -135,8 +135,9 @@ export function initMotion() {
     }
   };
   register(document);
-  const sentinel = document.querySelector('[data-header-sentinel]');
-  if (sentinel) observer?.observe(sentinel);
+  // Observe the whole hero: a 1px sentinel can skip the viewport on fast anchor jumps.
+  const headerBoundary = document.querySelector('[data-header-boundary]');
+  if (headerBoundary) observer?.observe(headerBoundary);
   const mutations = new MutationObserver((records) => {
     for (const record of records) {
       for (const node of record.addedNodes) if (node instanceof HTMLElement) register(node);
