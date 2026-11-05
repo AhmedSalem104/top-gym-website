@@ -1,0 +1,329 @@
+{
+  "generated": "2026-11-05",
+  "sourceArchives": [
+    "Top_Gym_Enhanced_Photos_and_Certificates.zip",
+    "stitch_top_gym_landing_page.zip"
+  ],
+  "policy": "Source archives and certificate photographs stay outside the repository. No original overwritten.",
+  "duplicates": [
+    [
+      "stitch/stitch_top_gym_landing_page/top_gym_elite_fitness_landing_page_1/code.html",
+      "stitch/stitch_top_gym_landing_page/top_gym_elite_performance_landing/code.html"
+    ]
+  ],
+  "assets": [
+    {
+      "source": "media/brand/top_gym_logo_original.jpg",
+      "bytes": 305980,
+      "sha256": "512e51c3b90a2956068cf3dc22af53219c0c01b5e8ba5b0eebc5b1351786f73b",
+      "width": 1254,
+      "height": 1254,
+      "destinations": [
+        "public/media/top-gym-logo.webp",
+        "public/media/favicon.png",
+        "public/media/social-share.jpg"
+      ],
+      "decision": "Published optimized derivative; original preserved outside repository"
+    },
+    {
+      "source": "media/certificates/01_titanium_tass_cards.jpg",
+      "bytes": 695082,
+      "sha256": "805adb7e4b4a2c478bcfc410ec45511ea4292f0cfcae59faa67f89d3c0d2c68d",
+      "width": 1536,
+      "height": 2048,
+      "destinations": [],
+      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+    },
+    {
+      "source": "media/certificates/02_tass_nutrition.jpg",
+      "bytes": 894422,
+      "sha256": "3b5925bf04761d00f843f0731fbfcd00d69ef5f4d8e846927a7135e2d13a05c7",
+      "width": 1114,
+      "height": 1536,
+      "destinations": [],
+      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+    },
+    {
+      "source": "media/certificates/03_pbls_personal_trainer.jpg",
+      "bytes": 827392,
+      "sha256": "181163f1c87893346fc0dcb40025692e9c754079f9227c5dfcf5b05ba2730a57",
+      "width": 1536,
+      "height": 1089,
+      "destinations": [],
+      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+    },
+    {
+      "source": "media/certificates/04_tass_fitness_trainer.jpg",
+      "bytes": 972660,
+      "sha256": "4eb773e54bb4334cfb5710f0ea756e8d256c80f277cb3265eb05962758ec28d8",
+      "width": 1135,
+      "height": 1533,
+      "destinations": [],
+      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+    },
+    {
+      "source": "media/certificates/05_pbls_nutrition.jpg",
+      "bytes": 810226,
+      "sha256": "57f45e7784d935ca023fa11e7feeb9726d3862c1d35fa7a149bdc499e803f657",
+      "width": 1536,
+      "height": 1077,
+      "destinations": [],
+      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+    },
+    {
+      "source": "media/certificates/06_titanium_certificate.jpg",
+      "bytes": 950124,
+      "sha256": "8aa2de6dd04ce5e8e0ea5fcdd159da1fd668bb397aa32898d9bb850004837812",
+      "width": 1099,
+      "height": 1536,
+      "destinations": [],
+      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+    },
+    {
+      "source": "media/certificates/07_pbls_nutrition_variant.jpg",
+      "bytes": 765504,
+      "sha256": "2546dd4b0cab04ed69ad7d33a41ea9ae5e61350f97b1f4d573bacc001f592d62",
+      "width": 1536,
+      "height": 1107,
+      "destinations": [],
+      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+    },
+    {
+      "source": "media/certificates/08_pbls_personal_trainer_variant.jpg",
+      "bytes": 744638,
+      "sha256": "0bfb4a4707d6ab864ac99af20f63c9d22742c2df0fcef305fa139c5f927d4ff9",
+      "width": 1536,
+      "height": 1101,
+      "destinations": [],
+      "decision": "Withheld: original comparison, privacy review and trainer role confirmation pending"
+    },
+    {
+      "source": "media/gym_photos/01_chest_press.jpg",
+      "bytes": 1123068,
+      "sha256": "e5c77c33c3239d9451c1d17cb9b5a293d8531c6ed005b991f0c6d47ecf38ebcb",
+      "width": 1536,
+      "height": 2048,
+      "destinations": [
+        "public/media/chest-press-480.webp",
+        "public/media/chest-press-480.avif",
+        "public/media/chest-press-960.webp",
+        "public/media/chest-press-960.avif",
+        "public/media/chest-press-1440.webp",
+        "public/media/chest-press-1440.avif"
+      ],
+      "decision": "Published optimized derivative; original preserved outside repository"
+    },
+    {
+      "source": "media/gym_photos/02_cardio_room.jpg",
+      "bytes": 534344,
+      "sha256": "c10abfdac909e786ed598659421fb45e2bf87d57178b9e57431569edb50b812b",
+      "width": 1152,
+      "height": 2048,
+      "destinations": [
+        "public/media/cardio-room-480.webp",
+        "public/media/cardio-room-480.avif",
+        "public/media/cardio-room-960.webp",
+        "public/media/cardio-room-960.avif",
+        "public/media/cardio-room-1440.webp",
+        "public/media/cardio-room-1440.avif"
+      ],
+      "decision": "Published optimized derivative; original preserved outside repository"
+    },
+    {
+      "source": "media/gym_photos/03_cable_machine.jpg",
+      "bytes": 1183457,
+      "sha256": "256f6ca9d07b290e72d5f6dd7191472575b72351dde2d669ede778243e686a6d",
+      "width": 1536,
+      "height": 2048,
+      "destinations": [
+        "public/media/cable-machine-480.webp",
+        "public/media/cable-machine-480.avif",
+        "public/media/cable-machine-960.webp",
+        "public/media/cable-machine-960.avif",
+        "public/media/cable-machine-1440.webp",
+        "public/media/cable-machine-1440.avif",
+        "public/media/hero-wide-960.avif",
+        "public/media/hero-wide-960.webp",
+        "public/media/hero-wide-1440.avif",
+        "public/media/hero-wide-1440.webp"
+      ],
+      "decision": "Published optimized derivative; original preserved outside repository"
+    },
+    {
+      "source": "media/gym_photos/04_leg_machine.jpg",
+      "bytes": 1249608,
+      "sha256": "924cc1d26a962f24523899261efceff5cc525504eb94e433509f52d281fdc941",
+      "width": 1536,
+      "height": 2048,
+      "destinations": [
+        "public/media/leg-machine-480.webp",
+        "public/media/leg-machine-480.avif",
+        "public/media/leg-machine-960.webp",
+        "public/media/leg-machine-960.avif",
+        "public/media/leg-machine-1440.webp",
+        "public/media/leg-machine-1440.avif"
+      ],
+      "decision": "Published optimized derivative; original preserved outside repository"
+    },
+    {
+      "source": "media/gym_photos/05_leg_extension.jpg",
+      "bytes": 1374957,
+      "sha256": "e37748bbd52ec1aa35523fbc41c482f52b1cb803b249acccfc409a243755e288",
+      "width": 1536,
+      "height": 2048,
+      "destinations": [
+        "public/media/leg-extension-480.webp",
+        "public/media/leg-extension-480.avif",
+        "public/media/leg-extension-960.webp",
+        "public/media/leg-extension-960.avif",
+        "public/media/leg-extension-1440.webp",
+        "public/media/leg-extension-1440.avif"
+      ],
+      "decision": "Published optimized derivative; original preserved outside repository"
+    },
+    {
+      "source": "media/README.txt",
+      "bytes": 731,
+      "sha256": "c6a7b8a66bc802e7d7d2a3651b0c8b7736ab4093878de683a59184e719aca7f2",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/apex_gold_kinetic/DESIGN.md",
+      "bytes": 9875,
+      "sha256": "62d06a4a09292f0608bc42720d00f3af9d37dc738fa34df254274c36fdb73cd8",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/apex_kinetic/DESIGN.md",
+      "bytes": 9942,
+      "sha256": "0a759e4b66b969d2da8ce21cab8953acc44352fd89bf23574ce27c4781e9174b",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/cinematic_professional_photography_of_a_premium_dark_bodybuilding_gym_interior/screen.png",
+      "bytes": 1704253,
+      "sha256": "aa12e5cd6c588c09e681cf7687ffbc757639c6e62ad4686a8e42d9ff6d204c6f",
+      "width": 1376,
+      "height": 768,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/close_up_professional_photo_of_heavy_duty_commercial_pin_loaded_resistance_gym/screen.png",
+      "bytes": 1611096,
+      "sha256": "d08c2a43c0ff73840b60de89b53482c1397408e8ebd8f9921d85e1bf7f6e29d4",
+      "width": 1200,
+      "height": 896,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/professional_accredited_strength_and_conditioning_specialist_certificate/screen.png",
+      "bytes": 1326423,
+      "sha256": "0c36fe493f2ea8a50aad32239809ee20e540f55ad2f4b031a06fcbf84e21bff0",
+      "width": 1200,
+      "height": 896,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/professional_framed_fitness_trainer_certification_diploma_document_on_dark/screen.png",
+      "bytes": 1431381,
+      "sha256": "86bf927800e9ee3b08754403498a69e1830d84f0283bcc6f413d1f0ab9852fe4",
+      "width": 1200,
+      "height": 896,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_elite_fitness_landing_page_1/code.html",
+      "bytes": 77395,
+      "sha256": "0b19bdbb428db30ef936deea8f13c08a4e877579549cc46a3463bbfd76267517",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_elite_fitness_landing_page_1/screen.png",
+      "bytes": 6499797,
+      "sha256": "e1f6dd977cd86b513587b47ecf572dd1d05936cdf22c7078a8bcf4890c5e7618",
+      "width": 1600,
+      "height": 10995,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_elite_fitness_landing_page_2/code.html",
+      "bytes": 76296,
+      "sha256": "8a465ec21737216e1fb9253100addeceecaebb2dab663ea85c377249466ac94c",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_elite_fitness_landing_page_2/screen.png",
+      "bytes": 277089,
+      "sha256": "492cea8198605727eaede246d3b56b468b77c19c65db509c203ee5ec7d8032d3",
+      "width": 270,
+      "height": 1600,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_elite_performance_landing/code.html",
+      "bytes": 77395,
+      "sha256": "0b19bdbb428db30ef936deea8f13c08a4e877579549cc46a3463bbfd76267517",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_mobile_experience_apex_gold/code.html",
+      "bytes": 81015,
+      "sha256": "bd72816a8ea66b5587622a9af3fbdfa205017b2e3f44ade561716786de93e195",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_mobile_experience_apex_gold/screen.png",
+      "bytes": 76251,
+      "sha256": "b58f53ac2a89153efdccf8c43b4226cf7d32697a5d2ec6774c08bd8f25e04b0f",
+      "width": 37,
+      "height": 1600,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_refined_desktop_landing_page_apex_gold_1/code.html",
+      "bytes": 80101,
+      "sha256": "26482b7f0ee86476626538f45603c775d04ab1d2715801773ede5dd17c0a0c97",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_refined_desktop_landing_page_apex_gold_1/screen.png",
+      "bytes": 6463708,
+      "sha256": "a7175dc750afb535d893cb62556dc46867dd81ef512e97587a7a306a690f567c",
+      "width": 1600,
+      "height": 10900,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_refined_desktop_landing_page_apex_gold_2/code.html",
+      "bytes": 90998,
+      "sha256": "b83b0d7606c508acbe40b4773cd77af4e3eb76f0f34bc84c54af9852e2859d61",
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    },
+    {
+      "source": "stitch/stitch_top_gym_landing_page/top_gym_refined_desktop_landing_page_apex_gold_2/screen.png",
+      "bytes": 8444907,
+      "sha256": "20a0af4e9457d5b4600a6841f977a83d4b9388e962e036eac04803c0eac4056c",
+      "width": 1600,
+      "height": 12362,
+      "destinations": [],
+      "decision": "Reference only; never published as authentic gym or certificate media"
+    }
+  ]
+}
