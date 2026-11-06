@@ -1,5 +1,11 @@
 # Implementation progress — 2026-11-05
 
+## Faster Hero image — 2026-11-06
+
+At the owner's request, shortened the existing image cycle from 24 to 18 seconds (approximately 33% faster along the same path). The only application change is the centralized image-duration token. Lighting, amplitude, easing, text, image assets and reduced-motion/offscreen lifecycle remain unchanged. Updated the existing timing safety range to 16–24 seconds.
+
+Validation: production build, typecheck (74 files, zero diagnostics), lint, formatting and all 54 unit tests pass. All 34 existing cinematic Hero / Hero navigation browser cases pass without retries. Six additional Arabic/English runtime checks at 390/768/1440px confirm 18-second image animation, 20-second lighting, actual transform progress, reduced motion, the feedback Navbar link and no page errors. No new animation dependency or JavaScript work was introduced. Protected CI and post-deployment verification are recorded in the release PR.
+
 ## Feedback production activation — 2026-11-06
 
 Resolved the reported unavailable message by completing private Vercel configuration, not by suppressing errors. The owner supplied the Gmail address and accepted Upstash terms. The free Redis resource is connected with automatic upgrades disabled; integration-provided KV REST values were mapped to the server's UPSTASH variables. Sender and recipient use the owner-supplied inbox. No credentials or email address were added to source control or client code.

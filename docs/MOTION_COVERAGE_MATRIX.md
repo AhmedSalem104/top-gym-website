@@ -7,7 +7,7 @@
 | Feedback introduction | Existing heading/reveal sequence and bounded group stagger         | Added to all six locale/viewport coverage and no-replay traversals                                   |
 | Feedback form         | One viewport reveal; native focus and CSS star/topic states        | Eight locale/viewport submission and axe cases, keyboard/touch, unavailable/retry/uncertain outcomes |
 | Feedback acceptance   | Existing short feedback variant after actual accepted API result   | Mocked acceptance wait and focus/live-region checks; reduced-motion path                             |
-| Hero camera/light     | 24s / 20s, increased responsive amplitude, no visible pause button | Fourteen cinematic cases: two-cycle poses, real progress, stable content, coverage and lifecycle     |
+| Hero camera/light     | 18s / 20s, increased responsive amplitude, no visible pause button | Fourteen cinematic cases: two-cycle poses, real progress, stable content, coverage and lifecycle     |
 
 No extra observer, animation dependency or continuous JavaScript loop was added. Email notifications contain no animation. Current numeric results and limitations are in QA_CHECKLIST.md; older entries below are historical snapshots.
 

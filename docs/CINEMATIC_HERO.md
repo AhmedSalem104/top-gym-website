@@ -2,7 +2,7 @@
 
 ## Current owner follow-up: stronger motion and no pause button
 
-The owner explicitly requested more visible movement, removal of the pause button, completion of private feedback, and publication. The background now follows a 24-second cycle; lighting follows a 20-second cycle with 5.5% opacity (3.5% mobile). Desktop scales are 1.03 / 1.06 / 1.09 with total 1.2% / 0.8% horizontal/vertical travel; tablet 1.025 / 1.045 / 1.065 and 0.8% / 0.5%; mobile 1.015 / 1.03 / 1.045 and 0.5% / 0.3%.
+The owner explicitly requested more visible movement, removal of the pause button, completion of private feedback, and publication. The later speed adjustment shortens the background cycle from 24 to 18 seconds: the same path runs approximately 33% faster. Lighting remains a separate 20-second cycle with 5.5% opacity (3.5% mobile). Desktop scales are 1.03 / 1.06 / 1.09 with total 1.2% / 0.8% horizontal/vertical travel; tablet 1.025 / 1.045 / 1.065 and 0.8% / 0.5%; mobile 1.015 / 1.03 / 1.045 and 0.5% / 0.3%.
 
 The visible control and its manual-pause state/listener/styles were removed. Existing viewport, document visibility, bfcache and OS reduced-motion handling remain. No image, text, CTA, shared easing, observer or JavaScript render loop was added. Text and controls remain stationary after entrance. The image remains high-priority and fully visible from first paint.
 

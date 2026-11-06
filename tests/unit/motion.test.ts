@@ -9,8 +9,8 @@ import {
 
 describe('Motion safety budget', () => {
   it('keeps the cinematic cycle slow and camera overscan larger than its travel', () => {
-    expect(motion.cinematic.image).toBeGreaterThanOrEqual(24_000);
-    expect(motion.cinematic.image).toBeLessThanOrEqual(32_000);
+    expect(motion.cinematic.image).toBeGreaterThanOrEqual(16_000);
+    expect(motion.cinematic.image).toBeLessThanOrEqual(24_000);
     expect(motion.cinematic.light).toBeGreaterThanOrEqual(16_000);
     expect(motion.cinematic.light).toBeLessThanOrEqual(24_000);
     for (const camera of [
