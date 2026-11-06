@@ -13,7 +13,7 @@ The owner authorized merging and publishing PR #11 on November 5, 2026. Vercel n
 ## Features
 
 - Shared Arabic RTL and English LTR pages, localized copy, EGP prices and times, persistent explicit language choice.
-- Original supplied logo; five genuine gym photographs; a separately labeled spacious-gym promotional hero by Risen Wang; local fonts.
+- Original supplied logo; five genuine gym photographs; a spacious-gym promotional hero by Risen Wang with recorded provenance; local fonts.
 - Five certificate previews with keyboard-accessible enlargement and privacy-safe copies.
 - A visible, scannable WhatsApp-group QR code generated locally during the static build.
 - Sticky navigation with one gliding gold spotlight, mobile menu, gallery dialog with keyboard controls and restored focus.
@@ -97,6 +97,8 @@ Build before browser tests. Tests automatically start preview if port 4321 is fr
 
 ## Business content maintenance
 
+**Hero:** the owner-supplied nine-year claim and bilingual service statements live in `business.hero`; the headline and closing invitation use `src/i18n/index.ts`. Keep supplied claims separate from documentary certificate qualifications. See [Hero composition](docs/HERO_REDESIGN.md) and [certificate presentation](docs/CREDENTIALS_PRESENTATION.md) for the current layout and before/after screenshots.
+
 **Contacts and external links:** edit only `business.contacts` or `business.links`. Store international phone values for `tel:` links, local display values, and Arabic/English names. Preserve the WhatsApp group distinction. Do not add `wa.me` numbers, email addresses or new social accounts without approval.
 
 **Memberships:** edit `business.memberships[].prices` after checking a new official price source. Keep explicit values for each duration; do not infer discounts from monthly multiplication. Update `pricingSource`, the independently transcribed fixture in `tests/unit/business.test.ts`, and the verification note. The two-month duration is explicitly 60 days. All displayed cards and the comparison table use the same configuration.
@@ -165,7 +167,7 @@ Work on small feature branches, use conventional commits, run relevant checks an
 
 Start with [project brief](docs/PROJECT.md), [architecture](docs/ARCHITECTURE.md), [design system](docs/DESIGN_SYSTEM.md), [decisions](docs/DECISIONS.md), [roadmap](docs/ROADMAP.md), and [progress](docs/PROGRESS.md).
 
-TOP GYM owns/provides the brand and business content. Visual direction: supplied Google Stitch Apex Gold export. Equipment photographs and enhanced copies: supplied by the owner; archive README describes conservative enhancement. Typeface licensing is retained in the installed Fontsource packages. Source assets are not licensed here for unrelated reuse. The promotional wide-gym Hero uses [Risen Wang’s photograph](https://unsplash.com/photos/gym-equipment-inside-room-20jX9b35r_M) under the [Unsplash License](https://unsplash.com/license), separately labeled from actual TOP GYM photography. The old Pinterest portrait is no longer referenced by the Hero. No invented reviews or generated certificate images are published.
+TOP GYM owns/provides the brand and business content. Visual direction: supplied Google Stitch Apex Gold export. Equipment photographs and enhanced copies: supplied by the owner; archive README describes conservative enhancement. Typeface licensing is retained in the installed Fontsource packages. Source assets are not licensed here for unrelated reuse. The promotional wide-gym Hero uses [Risen Wang’s photograph](https://unsplash.com/photos/gym-equipment-inside-room-20jX9b35r_M) under the [Unsplash License](https://unsplash.com/license), with promotional provenance retained separately from actual TOP GYM photography. The old Pinterest portrait is no longer referenced by the Hero. No invented reviews or generated certificate images are published.
 
 The current header adds a single subtle gold spotlight above the active desktop link and a clean mobile active underline; section tracking follows clicks and scrolling. The location section embeds the exact owner-supplied Google Maps place and opens that same original URL when any part of the map card is selected. See `docs/map-verification.json` for provenance and behavior.
 

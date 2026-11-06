@@ -20,8 +20,8 @@
   color: var(--color-gold);
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  margin-bottom: 24px;
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
 }
 .hero-label::before {
   content: '';
@@ -29,18 +29,22 @@
   height: 2px;
   background: currentColor;
 }
+.hero-label bdi {
+  font-family: 'Chivo', sans-serif;
+  font-weight: 700;
+}
 [dir='rtl'] .hero-label {
-  letter-spacing: 0;
-  font-size: 14px;
+  letter-spacing: 0.12em;
+  font-size: 12px;
 }
 .hero h1 {
-  font-size: clamp(43px, 5.2vw, 78px);
-  line-height: 1.03;
+  font-size: clamp(38px, 4.1vw, 62px);
+  line-height: 1.08;
   letter-spacing: -0.018em;
 }
 html[dir='rtl'] .hero h1 {
-  font-size: clamp(39px, 4.9vw, 70px);
-  line-height: 1.36;
+  font-size: clamp(38px, 4.2vw, 60px);
+  line-height: 1.3;
   letter-spacing: 0;
 }
 .hero h1 span,
@@ -49,10 +53,34 @@ html[dir='rtl'] .hero h1 {
   white-space: nowrap;
 }
 .hero-description {
-  max-width: 37ch;
+  max-width: 48ch;
   margin-block: 24px 28px;
-  font-size: clamp(15px, 1.25vw, 18px);
+  font-size: 16px;
   line-height: 1.8;
+}
+.hero-services {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.hero-services li,
+.hero-invitation {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+}
+.hero-service-icon {
+  font-size: 18px;
+  line-height: 1.6;
+}
+.hero-invitation {
+  border-top: 1px solid var(--color-line);
+  margin-top: 20px;
+  padding-top: 16px;
+  font-size: 14px;
 }
 .hero .actions {
   gap: 12px;
@@ -102,12 +130,6 @@ html[dir='rtl'] .hero h1 {
   pointer-events: none;
   background: linear-gradient(0deg, rgb(11 13 15 / 30%), transparent 30%);
 }
-.hero-photo-note {
-  font-size: 11px;
-  line-height: 1.7;
-  margin-top: 16px;
-  max-width: 60ch;
-}
 .hero-rail {
   display: flex;
   flex-wrap: wrap;
@@ -135,10 +157,13 @@ html[dir='rtl'] .hero h1 {
     gap: 24px;
   }
   .hero h1 {
-    font-size: clamp(38px, 5vw, 51px);
+    font-size: clamp(32px, 4.3vw, 43px);
   }
   html[dir='rtl'] .hero h1 {
-    font-size: clamp(38px, 5vw, 49px);
+    font-size: clamp(36px, 4.7vw, 47px);
+  }
+  .hero-description {
+    font-size: 14px;
   }
   .hero .button {
     padding-inline: 12px;
@@ -155,22 +180,29 @@ html[dir='rtl'] .hero h1 {
   }
   .hero-label {
     margin-bottom: 16px;
-    font-size: 10px;
+    font-size: 12px;
   }
   [dir='rtl'] .hero-label {
     font-size: 12px;
   }
   .hero h1 {
-    font-size: clamp(43px, 11.5vw, 72px);
+    font-size: clamp(32px, 9vw, 54px);
   }
   html[dir='rtl'] .hero h1 {
-    font-size: clamp(42px, 11vw, 68px);
+    font-size: clamp(40px, 10.5vw, 60px);
     line-height: 1.3;
   }
   .hero-description {
-    font-size: 14px;
-    margin-block: 16px 20px;
+    font-size: 15px;
+    margin-block: 20px 24px;
     max-width: 48ch;
+  }
+  .hero-services {
+    gap: 12px;
+  }
+  .hero-services li,
+  .hero-invitation {
+    gap: 8px;
   }
   .hero .actions {
     gap: 8px;
@@ -182,10 +214,6 @@ html[dir='rtl'] .hero h1 {
   }
   .hero .text-link {
     min-height: 44px;
-  }
-  .hero-photo-note {
-    font-size: 10px;
-    margin-top: 12px;
   }
   .hero-rail {
     gap: 8px 18px;

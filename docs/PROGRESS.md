@@ -1,5 +1,14 @@
 # Implementation progress — 2026-11-05
 
+## Hero copy and certificate presentation — 2026-11-06
+
+- Removed the requested visible promotional-photo caption and About paragraph in both languages. Accurate photo alternative text and source/license provenance remain.
+- Replaced the Hero wording with the owner's TOP GYM / nine years of experience and trust, four service statements and closing invitation. Arabic wording is preserved with an English translation; central `business.hero` holds the supplied facts. The existing photograph, three actions, first-paint motion, navbar and pricing remain intact.
+- Integrated the credentials introduction with the five document cards in a three/two/one-column gallery. Clear titles, complete uncropped previews, training dates and enlargement controls preserve every original published document, redaction, issuer and the supplied holder name.
+- Full local `npm run test:all` passed after the final Hero update: typecheck (55 files, zero diagnostics), lint, formatting, 18 unit tests, production build, isolated SEO fixture and **81 Chromium tests with no retries**. Six new certificate scenarios cover every document, keyboard opening/Escape/focus return, loaded images and accessibility in Arabic/English at 390/768/1440px. The 14 existing Hero layout/action scenarios also check the new services across 320–1920px.
+- Captured 24 actual before/after screenshots for Hero copy and credentials at 390/768/1440px in both locales. Representative mobile/tablet/desktop results were visually inspected. No new Lighthouse or frame-rate measurement is claimed; earlier performance evidence remains historical.
+- The owner explicitly requested finishing and publishing these changes. The feature branch is `feat/credentials-presentation`; production delivery will follow successful required GitHub checks. Final merge/deployment/live-check evidence will be recorded in the PR release note.
+
 ## Hero and navigation follow-ups
 
 Completed the asymmetric Hero with a new licensed spacious-gym photograph by Risen Wang, two-line bilingual headline, membership/Maps/gallery actions and responsive AVIF/WebP media. Shared motion remains visible at first paint. Added Home / الرئيسية and shortened half-month/two-month labels without changing prices or the official PDF. After the entire Hero leaves the viewport, the existing sticky header changes to #FFAD26 with black links and adapted active/focus indicators; returning restores the original palette.
@@ -8,7 +17,7 @@ Actual browser testing corrected fast-jump boundary detection, premature Home se
 
 Complete local test:all passed: 18 unit / 75 Chromium tests plus build, typecheck, lint, formatting and SEO fixture. Forty before/after/viewport screenshots and throttled motion measurements are in evidence. CLS was zero in both lab runs; Arabic throttled LCP was 4.172s and full-page scrolling still included long tasks. See QA_CHECKLIST.md for exact results/limitations and HERO_REDESIGN.md for composition/provenance.
 
-The preceding title/contact PR #12 is merged and verified on production. New work is on feat/authentic-gym-hero for review only; the Hero brief withholds production authorization. Current hours and certificate-source/holder-role confirmation remain unresolved as previously recorded.
+The preceding title/contact PR #12 is merged and verified on production. The owner subsequently authorized publication on 6 November: PR #13 merged at ddd9bc871d83440d8bb15902a16f2531acac2a1b, Vercel production became Ready, and 13 live Chromium checks passed. Current hours and certificate-source/holder-role confirmation remain unresolved as previously recorded.
 
 ## Current state
 

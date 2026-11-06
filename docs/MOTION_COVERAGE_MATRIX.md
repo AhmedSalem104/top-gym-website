@@ -32,3 +32,9 @@ Evidence and measurements are linked in `MOTION_SYSTEM.md`, `PROGRESS.md` and `Q
 ## Hero and inverted header follow-up
 
 `hero-navigation.spec.ts` adds 14 Hero composition/CTA scenarios (Arabic/English × 320/375/390/768/1366/1440/1920) and six header boundary/Home/keyboard/contrast/reduced-motion scenarios (both languages × 390/768/1440). Existing motion, no-JavaScript, observer-failure, menu, language and spotlight tests remain applicable. First-paint sequence is eyebrow → heading → description → CTAs/photograph, using shared timings. The Hero boundary uses the existing observer and changes colors without changing geometry. See `HERO_REDESIGN.md` for screenshots and the latest QA entry for measured results.
+
+## Credentials presentation — 6 November 2026
+
+The revised Hero services and invitation reuse the existing `hero-description` entrance as one readable group. No new stagger, observer or animation dependency is introduced; the headline/image remain opaque at first paint. The existing 14 Hero viewport/CTA tests also check the four configured service statements.
+
+The introduction now occupies the first gallery cell; the existing heading/reveal/image/fade primitives still animate content once in DOM reading order. Cards retain the shared native lightbox and keyboard focus return. No observer or animation library was added. The focused certificate suite checks every published document and keyboard enlargement in both locales at 390/768/1440px. The full motion suite remains the regression check for entry, no replay, reduced motion and cleanup. See the latest QA entry for results.
