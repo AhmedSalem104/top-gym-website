@@ -519,6 +519,26 @@
         "public/media/promotional-gym-1600.webp"
       ],
       "decision": "Owner-requested external promotional hero. Reviewed Unsplash License; separate from real TOP GYM photography. Owner removed the visible caption on 2026-11-06; promotional alternative text and provenance remain. See hero-media.json."
+    },
+    {
+      "source": "Luxury Gym with Golden Top Gym Emblem.png",
+      "sha256": "9c2e10b706f96a854bdcec9cf6fc65ed6793bdc7b6b0e8e94c58d0c8f7579b9a",
+      "bytes": 2052653,
+      "width": 1672,
+      "height": 940,
+      "destinations": [
+        "public/media/top-gym-hero-wide-768.avif",
+        "public/media/top-gym-hero-wide-768.webp",
+        "public/media/top-gym-hero-wide-1200.avif",
+        "public/media/top-gym-hero-wide-1200.webp",
+        "public/media/top-gym-hero-wide-1672.avif",
+        "public/media/top-gym-hero-wide-1672.webp",
+        "public/media/top-gym-hero-mobile-360.avif",
+        "public/media/top-gym-hero-mobile-360.webp",
+        "public/media/top-gym-hero-mobile-704.avif",
+        "public/media/top-gym-hero-mobile-704.webp"
+      ],
+      "decision": "Owner-authorized promotional Hero background. Original preserved privately; mobile crop and output hashes recorded in hero-fullbleed-media.json. No claim that the visual depicts actual TOP GYM premises."
     }
   ]
 }

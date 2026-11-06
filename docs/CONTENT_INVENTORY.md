@@ -1,5 +1,11 @@
 # Source inventory and publishing decisions
 
+## Full-width Hero source — 2026-11-06
+
+The owner supplied `Luxury Gym with Golden Top Gym Emblem.png` specifically as the new Hero background. The 1672×940 PNG remains unchanged outside Git; ten resized/cropped AVIF/WebP derivatives are served as `top-gym-hero-{wide,mobile}-*`. See `hero-fullbleed-media.json` for the reviewed source hash, crop, sizes and every output hash. This is an authorized promotional visual, not independently verified photography of the actual premises. No people were observed. The existing original brand logo, genuine gallery photographs and all certificates are unchanged.
+
+The full-width brief replaces the long Hero service list with the owner's shorter personal-training/membership invitation in both languages. The supplied nine-year headline remains; central business configuration is preserved. Historical statements below describe previous presentations, not additional verification.
+
 ## Owner's text update — 2026-11-06
 
 The owner supplied replacement Hero copy stating nine years of experience/trust, personal training and follow-up, comprehensive fitness assessment, injury rehabilitation/physiotherapy supervised by specialists, and military preparation/tests. These statements are published as supplied, with English translations, from `business.hero`. They were not independently verified or inferred from certificate images. No founding date, military affiliation, medical license, practitioner identity or guaranteed result is asserted. The original certificate-holder name remains Ahmed AbdElhamid Salem AbdElhamid Salem. The visible promotional-photo caption and specified About paragraph were removed at the owner's request; image alternative text and media provenance remain accurate.
@@ -13,7 +19,7 @@ The machine-readable [asset manifest](asset-manifest.json) inventories the 32 ex
 | `brand/top_gym_logo_original.jpg` | `top-gym-logo.webp`, favicon, social-share JPEG; original proportions/background retained |
 | `gym_photos/01_chest_press.jpg`   | `chest-press-*`; facilities and gallery                                                   |
 | `gym_photos/02_cardio_room.jpg`   | `cardio-room-*`; facilities and gallery                                                   |
-| `gym_photos/03_cable_machine.jpg` | `cable-machine-*`; hero, facilities, gallery                                              |
+| `gym_photos/03_cable_machine.jpg` | `cable-machine-*`; facilities, gallery; historical Hero derivatives retained              |
 | `gym_photos/04_leg_machine.jpg`   | `leg-machine-*`; gallery                                                                  |
 | `gym_photos/05_leg_extension.jpg` | `leg-extension-*`; about and gallery                                                      |
 

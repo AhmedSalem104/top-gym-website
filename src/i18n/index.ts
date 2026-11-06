@@ -38,8 +38,9 @@ const en = {
   heroMemberships: 'Explore Memberships',
   heroGallery: 'Explore the Gym',
   promotionalHeroAlt:
-    'Promotional photograph of a spacious gym with strength equipment, cardio machines and tall windows',
-  heroText: 'Start your journey with us. Your goal becomes our plan.',
+    'Promotional gym visual with black equipment, gold columns and a TOP GYM emblem',
+  heroText:
+    'Personal training and follow-up to help you reach your goal. Choose your membership and start your journey at TOP GYM.',
   explore: 'Explore the gym',
   plans: 'View memberships',
   realGym: 'Inside the real TOP GYM',
@@ -154,8 +155,8 @@ const ar: typeof en = {
   heroGold: 'خبرة وثقة',
   heroMemberships: 'شوف الاشتراكات',
   heroGallery: 'شاهد صور الجيم',
-  promotionalHeroAlt: 'صورة دعائية لصالة واسعة بها أجهزة حديد وكارديو ونوافذ مرتفعة',
-  heroText: 'ابدأ رحلتك معانا وخلي هدفك خطتنا',
+  promotionalHeroAlt: 'صورة دعائية لصالة تدريب بأجهزة سوداء وأعمدة ذهبية وشعار TOP GYM',
+  heroText: 'تدريب ومتابعة شخصية للوصول لهدفك، واختَر الاشتراك المناسب وابدأ رحلتك مع توب جيم.',
   explore: 'اكتشف الجيم',
   plans: 'شاهد الاشتراكات',
   realGym: 'صور حقيقية من داخل توب جيم',

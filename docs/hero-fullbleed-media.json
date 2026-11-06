@@ -1,0 +1,91 @@
+{
+  "selectedAt": "2026-11-06",
+  "source": "Luxury Gym with Golden Top Gym Emblem.png",
+  "authorization": "Owner explicitly supplied this local image as the Hero background during the full-width redesign.",
+  "master": {
+    "sha256": "9c2e10b706f96a854bdcec9cf6fc65ed6793bdc7b6b0e8e94c58d0c8f7579b9a",
+    "bytes": 2052653,
+    "width": 1672,
+    "height": 940
+  },
+  "review": "Owner-supplied promotional gym visual with an embedded gold TOP GYM emblem. No people observed. Not independently verified as a photograph of TOP GYM premises; do not describe it as authentic facility photography. The separate original brand logo remains unchanged.",
+  "processing": "Resize/AVIF/WebP encoding and the documented mobile crop only. No generative edits, retouching, recoloring, equipment changes, logo reconstruction or source overwrite. Master remains in the owner Downloads directory outside Git.",
+  "mobileCrop": {
+    "left": 350,
+    "top": 0,
+    "width": 704,
+    "height": 940
+  },
+  "destinations": [
+    {
+      "path": "public/media/top-gym-hero-wide-768.avif",
+      "width": 768,
+      "height": 432,
+      "bytes": 37139,
+      "sha256": "9e3351e9a69d4622e8ce7981f42dafdb52aa689d3fcfd331684bb1b214aac10d"
+    },
+    {
+      "path": "public/media/top-gym-hero-wide-768.webp",
+      "width": 768,
+      "height": 432,
+      "bytes": 65052,
+      "sha256": "60fcf79acfd727eb485691b53594ed280eb9b42c4673969403f76511dd10b818"
+    },
+    {
+      "path": "public/media/top-gym-hero-wide-1200.avif",
+      "width": 1200,
+      "height": 675,
+      "bytes": 68601,
+      "sha256": "0d81ea96ce7ee5a58c8d0053942e2404fb1058d3c86bd396a03a30445838cdd5"
+    },
+    {
+      "path": "public/media/top-gym-hero-wide-1200.webp",
+      "width": 1200,
+      "height": 675,
+      "bytes": 117512,
+      "sha256": "f2c76002fb9fc5e4fe8f33d6027d632a9d26e688a0ecf76156467eaa9d4a6062"
+    },
+    {
+      "path": "public/media/top-gym-hero-wide-1672.avif",
+      "width": 1672,
+      "height": 940,
+      "bytes": 103580,
+      "sha256": "201f9a0396a2a85eb0ff7837066cfa39707704fff79b376367b83776208e7225"
+    },
+    {
+      "path": "public/media/top-gym-hero-wide-1672.webp",
+      "width": 1672,
+      "height": 940,
+      "bytes": 177576,
+      "sha256": "a45316e8325c2b4ad3698c8a5b26cba6c6835a0cceb422db622f56c9f454530e"
+    },
+    {
+      "path": "public/media/top-gym-hero-mobile-360.avif",
+      "width": 360,
+      "height": 481,
+      "bytes": 18250,
+      "sha256": "14ca970031fdcdd06d3aea82c41e51faccfeff32bf6938f5026c601dc26cb565"
+    },
+    {
+      "path": "public/media/top-gym-hero-mobile-360.webp",
+      "width": 360,
+      "height": 481,
+      "bytes": 31012,
+      "sha256": "54fd7558e3070cd10f7d66d5d50d70058a50d736c81230d01a47750c913c7793"
+    },
+    {
+      "path": "public/media/top-gym-hero-mobile-704.avif",
+      "width": 704,
+      "height": 940,
+      "bytes": 44291,
+      "sha256": "52bccf16a5c5109e0de2ab141de12e174d5eac5e12448f69e7e593897b057821"
+    },
+    {
+      "path": "public/media/top-gym-hero-mobile-704.webp",
+      "width": 704,
+      "height": 940,
+      "bytes": 72740,
+      "sha256": "ad7d446fa1388aa365b142ecb58e62867bf8e5f9772d8a07b97d8db101c9cd41"
+    }
+  ]
+}
