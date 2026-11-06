@@ -7,6 +7,8 @@
 - Six unmocked production browser cases pass: Arabic/English at 390/768/1440px, enabled submission, expected direction, no horizontal overflow, no page errors and preserved reduced motion.
 - One labeled test sent through the real Arabic mobile form returned HTTP 200 accepted and a focused localized success state. Same-key replay returned stored acceptance. A read-only exact Message-ID search found exactly one copy in Gmail INBOX; unrelated messages were not fetched or marked read.
 - This resolves the earlier configuration and real-delivery gates below. Gmail visual rendering, physical-device checks and unrelated business-source follow-ups remain separate. Evidence: [activation record](evidence/feedback-activation.json), [Arabic mobile](evidence/feedback-live-ar-390.png), [English desktop](evidence/feedback-live-en-1440.png).
+- Subsequent desktop feedback-link request: 12 local Arabic/English checks at 320/390/768/1360/1440/1920px passed keyboard anchor navigation, shared active state and overflow/overlap checks. Desktop navigation retains its 80px header and existing spotlight; mobile behavior is preserved.
+- The 27 existing feedback, membership/navigation and spotlight browser cases all pass without retries, including every desktop anchor and reduced motion. Typecheck (74 files, zero diagnostics), lint, formatting and build pass. [Arabic Navbar](evidence/feedback-navbar-ar.png), [English Navbar](evidence/feedback-navbar-en.png), [twelve-width/locale checks](evidence/feedback-navbar-verification.json).
 
 ## Feedback and stronger Hero — 6 November 2026
 

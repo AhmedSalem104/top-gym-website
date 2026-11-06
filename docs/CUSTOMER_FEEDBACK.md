@@ -20,7 +20,7 @@ Mobile:  title → stars → topics → message → optional contact → privacy
 Email:   dark branded header → gold rating → light message card → optional details
 ```
 
-Placement: after Contact and before the final CTA. Footer and mobile navigation link to the section; the already dense desktop navbar stays unchanged. All other sections and business facts remain intact.
+Placement: after Contact and before the final CTA. Desktop/mobile navigation and the footer link to the section. The desktop link uses the existing localized feedback label, active-section tracking and shared spotlight; no separate observer or animation is added. All other sections and business facts remain intact.
 
 Architecture: Astro pages remain static. One native Vercel Node function at `api/feedback.ts` handles `/api/feedback`; no second application or UI framework. Nodemailer sends through Gmail with a fixed authenticated sender. A shared Redis REST store supplies atomic rate limits and idempotency across function instances. It retains only keyed hashes, counters and delivery state with expiration, never feedback text, names, email addresses or raw IPs. Missing configuration/storage fails closed.
 
