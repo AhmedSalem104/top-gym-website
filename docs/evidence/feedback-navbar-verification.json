@@ -1,0 +1,102 @@
+{
+  "origin": "http://127.0.0.1:4330",
+  "checkedAt": "2026-11-06T18:18:51.733Z",
+  "results": [
+    {
+      "locale": "ar",
+      "width": 320,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "ar",
+      "width": 390,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "ar",
+      "width": 768,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "ar",
+      "width": 1360,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "ar",
+      "width": 1440,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "ar",
+      "width": 1920,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "width": 1360,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "width": 1920,
+      "feedbackLink": true,
+      "keyboardAnchor": true,
+      "activeState": true,
+      "noOverflow": true
+    }
+  ]
+}

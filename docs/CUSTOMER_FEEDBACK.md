@@ -1,5 +1,13 @@
 # Customer feedback
 
+## Production activation — 6 November 2026
+
+The production form is enabled. The owner supplied the sender/recipient address and accepted the free Upstash integration terms. Gmail credentials, the hash secret and the mapped Redis REST values are private production environment variables. Automatic Redis plan upgrades remain disabled. Redeploying main picked up the completed configuration; no application-code or public business-data change was needed.
+
+Live verification passed: Gmail TLS/authentication; Redis atomic limits, claims and completion; public readiness available:true; six Arabic/English browser cases at 390/768/1440px; one clearly labeled test submitted through the real Arabic form; HTTP 200 accepted and the localized success state. Repeating the same idempotency key returned the stored acceptance. A read-only IMAP search for that exact test Message-ID found exactly one message in the configured Gmail INBOX. No unrelated mail was fetched and no message was marked read.
+
+This confirms delivery of that test, not a guarantee of future inbox placement. Actual Gmail visual rendering remains unreviewed. See [activation evidence](evidence/feedback-activation.json), [live Arabic mobile form](evidence/feedback-live-ar-390.png) and [live English desktop form](evidence/feedback-live-en-1440.png). Section captures hide fixed page chrome; production interactions used the normal page.
+
 ## Design and delivery decision
 
 Purpose: let a visitor privately tell management how a visit felt in under a minute. Direction: a refined black-and-gold conversation, with a large five-star rating as the signature, compact selectable topic chips and a generous writing area. Keep the current Cairo / Barlow Condensed / Chivo typography. Tokens: gold #E59500, canvas #0B0D0F, surface #17191C, ink #F8F9FA, muted #A6ABB2, border #34383D; spacing 8/16/24/32/48px. Reuse existing motion; semantic native controls remain visible without animations.
@@ -12,7 +20,7 @@ Mobile:  title → stars → topics → message → optional contact → privacy
 Email:   dark branded header → gold rating → light message card → optional details
 ```
 
-Placement: after Contact and before the final CTA. Footer and mobile navigation link to the section; the already dense desktop navbar stays unchanged. All other sections and business facts remain intact.
+Placement: after Contact and before the final CTA. Desktop/mobile navigation and the footer link to the section. The desktop link uses the existing localized feedback label, active-section tracking and shared spotlight; no separate observer or animation is added. All other sections and business facts remain intact.
 
 Architecture: Astro pages remain static. One native Vercel Node function at `api/feedback.ts` handles `/api/feedback`; no second application or UI framework. Nodemailer sends through Gmail with a fixed authenticated sender. A shared Redis REST store supplies atomic rate limits and idempotency across function instances. It retains only keyed hashes, counters and delivery state with expiration, never feedback text, names, email addresses or raw IPs. Missing configuration/storage fails closed.
 
@@ -100,7 +108,7 @@ The first Vercel preview exposed ERR_MODULE_NOT_FOUND for emitted TypeScript imp
 
 If unavailable, check private variables, exact origin and store access. For SMTP failures check the sender/app-password pairing, account policy and TLS port without logging credentials. SMTP acceptance does not prove inbox placement: inspect Inbox/Spam and confirm the subject in Gmail. Never automatically retry uncertain deliveries.
 
-See PROGRESS.md for current configuration/release status. Actual Gmail delivery and Gmail light/dark rendering remain unverified until an authorized inbox can be tested. Chromium sample previews are visual evidence only:
+See the activation record above and PROGRESS.md for current configuration/release status. One real Gmail inbox delivery is verified; actual Gmail light/dark rendering remains unreviewed. Chromium sample previews are visual evidence only:
 
 - [Arabic desktop form](evidence/feedback-after-ar-1440.webp), [Arabic mobile](evidence/feedback-after-ar-390.webp).
 - [English desktop form](evidence/feedback-after-en-1440.webp), [English mobile](evidence/feedback-after-en-390.webp).

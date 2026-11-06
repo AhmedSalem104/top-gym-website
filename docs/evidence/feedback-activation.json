@@ -1,0 +1,85 @@
+{
+  "checkedAt": "2026-11-06T18:12:39.970Z",
+  "origin": "https://top-gym-website.vercel.app",
+  "deployment": "dpl_HqKYRt6gRcjfRpxPF6RJpwsWpw1s",
+  "sourceCommit": "e64dc05edc7032a0b26e2c8392be2c38a4d1fd0f",
+  "services": {
+    "checkedAt": "2026-11-06T18:08:11.587Z",
+    "configured": true,
+    "redisAtomicIntegration": "passed",
+    "smtpAuthentication": "passed"
+  },
+  "readiness": {
+    "available": true
+  },
+  "browserChecks": [
+    {
+      "locale": "ar",
+      "width": 390,
+      "available": true,
+      "submitEnabled": true,
+      "overflow": false,
+      "pageErrors": [],
+      "reducedMotion": true
+    },
+    {
+      "locale": "ar",
+      "width": 768,
+      "available": true,
+      "submitEnabled": true,
+      "overflow": false,
+      "pageErrors": [],
+      "reducedMotion": true
+    },
+    {
+      "locale": "ar",
+      "width": 1440,
+      "available": true,
+      "submitEnabled": true,
+      "overflow": false,
+      "pageErrors": [],
+      "reducedMotion": true
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "available": true,
+      "submitEnabled": true,
+      "overflow": false,
+      "pageErrors": [],
+      "reducedMotion": true
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "available": true,
+      "submitEnabled": true,
+      "overflow": false,
+      "pageErrors": [],
+      "reducedMotion": true
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "available": true,
+      "submitEnabled": true,
+      "overflow": false,
+      "pageErrors": [],
+      "reducedMotion": true
+    }
+  ],
+  "realSubmission": {
+    "count": 1,
+    "clearlyLabeledTest": true,
+    "status": 200,
+    "uiSuccess": true,
+    "sameKeyReplayStatus": 200
+  },
+  "inbox": {
+    "checkedAt": "2026-11-06T18:10:12.055Z",
+    "method": "Read-only IMAP EXAMINE INBOX and exact test Message-ID search; no messages fetched or marked read.",
+    "inboxMessageCount": 1,
+    "confirmed": true
+  },
+  "limitation": "Gmail visual rendering was not inspected. Inbox receipt was verified by read-only exact test Message-ID search, without reading unrelated messages."
+}
