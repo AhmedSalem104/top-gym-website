@@ -23,4 +23,4 @@ Footer groups and the pre-footer CTA reuse shared `footer` motion. Never restart
 
 Current Hero composition, media provenance and post-Hero header inversion: `docs/HERO_REDESIGN.md`. Keep Home mapped to the Hero in ScrollSpy; never observe the full body as a section.
 
-Credentials layout and owner-requested copy removals: `docs/CREDENTIALS_PRESENTATION.md`. Keep document files, redactions, issuer names and training dates intact.
+Credentials layout, responsive derivatives and certificate-only zoom: `docs/CREDENTIALS_PRESENTATION.md`. Keep document files, redactions, issuer names and training dates intact. Card hover uses independent `translate`; do not compete with shared reveal transforms. The requested new visual-reference image is still pending; this revision must not be merged or deployed without fresh authorization.

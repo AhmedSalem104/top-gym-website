@@ -100,3 +100,11 @@ The footer uses the shared `footer` variant (12px/560ms), 80ms stagger and 240ms
 Current lab measurements are retained separately in `evidence/calm-motion-performance.json`, `evidence/calm-lighthouse-summary.json` and `evidence/calm-lighthouse-repeat-summary.json`. Earlier evidence remains historical. See `QA_CHECKLIST.md` for actual numbers, local-run variability and the remaining live Google-map cost.
 
 The initial hero image uses the 560ms CSS hero duration; the exported native `hero-image` variant retains the 580ms image duration for callers outside that CSS-owned initial sequence.
+
+## Premium certificate showcase
+
+The centered label/heading/description/name reuse `heading` and `reveal`; certificate articles reuse `image` (12px/580ms) with the existing 80ms stagger and 240ms cap. The privacy note retains `fade`. No new observer, loop or animation dependency is introduced. Existing visible-content, once-only, dynamic-content and reduced-motion safeguards still apply.
+
+`credentials.css` owns certificate micro-interactions, replacing only their old generic 1px card-hover rules. Duration is `--motion-micro + --motion-step` (280ms) with shared easing. A 4px CSS `translate` is independent of the observer's `transform`, preventing hover/reveal ownership conflicts. The image scales to 1.025 within protected contain-fit padding; a static shadow layer fades through opacity, without animated blur/shadow geometry. Border color transitions to brand gold. The reserved action row fades/slides 4px; the expand icon moves 2px. Keyboard focus gets equivalent feedback, and touch/reduced-motion users see the action without hover.
+
+The existing native lightbox retains shared open/close/image feedback. Certificate-only zoom changes between fit and natural-size inspection immediately, without an animated layout transition. A focusable native scroll region supports keyboard/touch panning; fit/next/previous/close reset zoom. Normal gym photographs do not expose the zoom control. See `CREDENTIALS_PRESENTATION.md` for provenance and `MOTION_COVERAGE_MATRIX.md` for verification.

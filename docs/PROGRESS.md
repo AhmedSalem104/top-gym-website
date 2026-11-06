@@ -1,5 +1,15 @@
 # Implementation progress — 2026-11-05
 
+## Premium certificate showcase — 2026-11-06
+
+Implemented the requested scoped redesign on `feat/premium-certificates`: centered bilingual introduction and documented name, larger document-first cards, three-plus-two centered desktop grid, two-column tablet and intrinsic-ratio single-column mobile. Original titles, issuers, training periods and privacy redactions remain intact. Ten resize-only responsive derivatives supplement the unchanged full-size and 680px files.
+
+Cards use the existing motion architecture with smooth 280ms lift, gold border/static-glow fade, protected 1.025 image emphasis, and keyboard/touch-visible actions. The existing native lightbox adds certificate-only natural-size zoom, native pan, fit and safe focus return; normal photo-gallery behavior remains covered. No animation dependency or observer was added.
+
+Full local validation passed: 56-file typecheck with zero diagnostics, lint, formatting, 18 unit tests, production build, SEO fixture and 89 Chromium tests without retries. Twenty before/after captures cover Arabic/English at 320/390/768/1440/1920px. Details, source limitations, motion coverage and actual measurements are in `CREDENTIALS_PRESENTATION.md`, `MOTION_COVERAGE_MATRIX.md` and the latest `QA_CHECKLIST.md` entry.
+
+The new reference image was not supplied or found; its file path was requested and comparison remains pending. This work follows the explicit written brief. The current request explicitly prohibits main merge and production deployment without new authorization; only a review branch/PR is prepared.
+
 ## Hero brand legibility — 2026-11-06
 
 Increased the existing TOP GYM label from 12px to 20–26px and the decorative flexed-arm emoji to 24–28px, retaining gold, Chivo, the original reading order and shared motion. Removed the old mobile/RTL size overrides. Typecheck (55 files, zero diagnostics), lint, formatting and production build passed; all 20 existing Hero/navigation browser checks passed without retries across both locales and 320–1920px. Four actual screenshots are retained as `evidence/hero-brand-after-{ar,en}-{390,1440}.webp`; Arabic mobile/desktop were visually compared with the prior `hero-copy-after-*` captures. No new performance measurement is claimed.

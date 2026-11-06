@@ -146,6 +146,32 @@ const dialog = document.querySelector<HTMLDialogElement>('#lightbox');
 const photo = document.querySelector<HTMLImageElement>('#lightbox-image');
 const caption = document.querySelector<HTMLElement>('#lightbox-caption');
 const count = document.querySelector<HTMLElement>('#lightbox-count');
+const documentStage = document.querySelector<HTMLElement>('#lightbox-stage');
+const zoomButton = document.querySelector<HTMLButtonElement>('[data-lightbox-zoom]');
+let certificateZoomed = false;
+function setCertificateZoom(zoomed: boolean) {
+  if (!dialog || !photo || !documentStage || !zoomButton) return;
+  certificateZoomed = zoomed && dialog.dataset.gallery === 'certificates';
+  dialog.dataset.zoomed = String(certificateZoomed);
+  zoomButton.setAttribute('aria-pressed', String(certificateZoomed));
+  const label = zoomButton.querySelector('span');
+  if (label)
+    label.textContent = certificateZoomed ? copy.certificateZoomOut : copy.certificateZoomIn;
+  if (certificateZoomed) {
+    photo.style.setProperty('--document-width', `${photo.naturalWidth}px`);
+    documentStage.tabIndex = 0;
+    documentStage.setAttribute('role', 'region');
+    documentStage.setAttribute('aria-label', copy.certificatePan);
+  } else {
+    photo.style.removeProperty('--document-width');
+    documentStage.removeAttribute('tabindex');
+    documentStage.removeAttribute('role');
+    documentStage.removeAttribute('aria-label');
+    documentStage.scrollTop = 0;
+    documentStage.scrollLeft = 0;
+  }
+}
+zoomButton?.addEventListener('click', () => setCertificateZoom(!certificateZoomed));
 let activeImages: HTMLAnchorElement[] = [];
 let currentIndex = 0;
 let opener: HTMLAnchorElement | null = null;
@@ -153,6 +179,12 @@ function showImage(index: number) {
   if (!photo || !caption || !count || !activeImages.length) return;
   currentIndex = (index + activeImages.length) % activeImages.length;
   const item = activeImages[currentIndex];
+  if (dialog) dialog.dataset.gallery = item.dataset.lightbox;
+  setCertificateZoom(false);
+  if (zoomButton) {
+    zoomButton.hidden = item.dataset.lightbox !== 'certificates';
+    zoomButton.disabled = true;
+  }
   photo.src = item.href;
   photo.alt = item.dataset.alt ?? '';
   caption.textContent = item.dataset.caption ?? '';
@@ -192,6 +224,7 @@ dialog?.addEventListener('cancel', (event) => {
   void closeLightbox();
 });
 photo?.addEventListener('load', () => {
+  if (zoomButton) zoomButton.disabled = false;
   if (dialog?.open) void playMotion(photo, 'feedback');
 });
 dialog
@@ -214,8 +247,8 @@ dialog?.addEventListener('click', (event) => {
 dialog?.addEventListener('keydown', (event) => {
   if (event.key === 'Tab') {
     const controls = Array.from(
-      dialog.querySelectorAll<HTMLButtonElement>('button:not([disabled])'),
-    );
+      dialog.querySelectorAll<HTMLElement>('button:not([disabled]), [tabindex="0"]'),
+    ).filter((control) => control.getClientRects().length > 0);
     const first = controls[0];
     const last = controls[controls.length - 1];
     if (event.shiftKey && document.activeElement === first) {
@@ -227,12 +260,15 @@ dialog?.addEventListener('keydown', (event) => {
     }
   }
   if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+    // Arrow keys pan the native scroll region while inspecting a zoomed document.
+    if (certificateZoomed && document.activeElement === documentStage) return;
     event.preventDefault();
     const advance = locale === 'ar' ? event.key === 'ArrowLeft' : event.key === 'ArrowRight';
     showImage(currentIndex + (advance ? 1 : -1));
   }
 });
 dialog?.addEventListener('close', () => {
+  setCertificateZoom(false);
   document.body.classList.remove('dialog-open');
   opener?.focus({ preventScroll: true });
 });
