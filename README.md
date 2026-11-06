@@ -6,14 +6,14 @@ A premium Arabic/English gym landing page based on the supplied **Google Stitch 
 
 The owner authorized merging and publishing PR #11 on November 5, 2026. Vercel now serves the website successfully; the empty-main 404 is resolved. Search indexing remains disabled while business-content and production SEO follow-ups are open. Five supplied certificate copies are visible with registration numbers redacted; original-document comparison and current role confirmation remain outstanding. See [deployment evidence](docs/VERCEL_DIAGNOSIS.md), [progress](docs/PROGRESS.md), and the [remaining checklist](docs/QA_CHECKLIST.md).
 
-![Arabic desktop review screenshot](docs/evidence/ar-desktop-hero.webp)
+![Arabic desktop review screenshot](docs/evidence/hero-authentic-after-ar-1440.webp)
 
 [English desktop](docs/evidence/en-1440.webp) · [Arabic mobile](docs/evidence/ar-390.webp) · [English mobile](docs/evidence/en-390.webp) · [Delivery board](https://github.com/users/AhmedSalem104/projects/2)
 
 ## Features
 
 - Shared Arabic RTL and English LTR pages, localized copy, EGP prices and times, persistent explicit language choice.
-- Original supplied logo; five genuine gym photographs; a separately labeled Pinterest promotional hero; local fonts.
+- Original supplied logo; five genuine gym photographs; a separately labeled spacious-gym promotional hero by Risen Wang; local fonts.
 - Five certificate previews with keyboard-accessible enlargement and privacy-safe copies.
 - A visible, scannable WhatsApp-group QR code generated locally during the static build.
 - Sticky navigation with one gliding gold spotlight, mobile menu, gallery dialog with keyboard controls and restored focus.
@@ -111,7 +111,7 @@ Build before browser tests. Tests automatically start preview if port 4321 is fr
 
 ## Photos, logo and certificate handling
 
-Original source files remain preserved outside the repository. At the owner’s explicit request, `public/documents/top-gym-memberships-pricing-2026-11-05.pdf` is a byte-identical copy of the official pricing document, with rendered WebP previews and view/download links. Its URL, hash and file size live in `business.pricingSource`; the gitignore exception permits only this approved PDF. When replacing the price list, visually verify all values, update the configuration, previews, manifest and independent price fixture, then rerun the download/hash tests. Public media includes optimized derivatives of the supplied logo and five gym photographs, five redacted certificate copies, and the owner-requested Pinterest promotional hero. No AI-generated facility or certificate imagery from Stitch is used.
+Original source files remain preserved outside the repository. At the owner’s explicit request, `public/documents/top-gym-memberships-pricing-2026-11-05.pdf` is a byte-identical copy of the official pricing document, with rendered WebP previews and view/download links. Its URL, hash and file size live in `business.pricingSource`; the gitignore exception permits only this approved PDF. When replacing the price list, visually verify all values, update the configuration, previews, manifest and independent price fixture, then rerun the download/hash tests. Public media includes optimized derivatives of the supplied logo and five gym photographs, five redacted certificate copies, and the owner-requested Risen Wang / Unsplash promotional hero. No AI-generated facility or certificate imagery from Stitch is used.
 
 To regenerate derivatives from an extracted folder with `media/` and `stitch/` subdirectories:
 
@@ -123,7 +123,7 @@ The script writes to `public/media/` and updates `docs/asset-manifest.json` with
 
 The logo is the supplied 3D presentation photograph, preserved with its background and proportions. A genuine transparent logo remains desirable; do not trace or fabricate one. Only privacy-safe certificate derivatives are included; opaque redactions are baked into previews and full-size files. Unredacted sources remain private. Original comparison and trainer-role confirmation are outstanding.
 
-Regenerate certificate copies with `node scripts/prepare-certificates.mjs <extracted-source-root>`. The reviewed source hashes and redaction regions are recorded in the asset manifest. The Pinterest hero can be regenerated with `node scripts/prepare-promotional-hero.mjs <downloaded-image>`; source/rights status is in `docs/promotional-media.json`. No certificate content is generated or reconstructed.
+Regenerate certificate copies with `node scripts/prepare-certificates.mjs <extracted-source-root>`. The reviewed source hashes and redaction regions are recorded in the asset manifest. The current Hero can be regenerated with `node scripts/prepare-wide-hero.mjs <reviewed-master>`; its verified source hash, photographer and license are in `docs/hero-media.json`. See [Hero redesign](docs/HERO_REDESIGN.md) for before/after captures, responsive composition and navigation changes. No certificate content is generated or reconstructed.
 
 The WhatsApp QR is generated at `/qr/whatsapp.png` from `business.links.whatsappGroup`; changing that central URL and rebuilding updates both the QR and buttons. It does not use an external QR service. Use `PLAYWRIGHT_PORT` to test an existing production preview on another local port while the development server remains available.
 
@@ -165,7 +165,7 @@ Work on small feature branches, use conventional commits, run relevant checks an
 
 Start with [project brief](docs/PROJECT.md), [architecture](docs/ARCHITECTURE.md), [design system](docs/DESIGN_SYSTEM.md), [decisions](docs/DECISIONS.md), [roadmap](docs/ROADMAP.md), and [progress](docs/PROGRESS.md).
 
-TOP GYM owns/provides the brand and business content. Visual direction: supplied Google Stitch Apex Gold export. Equipment photographs and enhanced copies: supplied by the owner; archive README describes conservative enhancement. Typeface licensing is retained in the installed Fontsource packages. Source assets are not licensed here for unrelated reuse. The promotional male-athlete hero was selected from Pinterest at the owner’s request; it is labeled separately from actual TOP GYM photography. Photographer/reuse rights need confirmation before production launch. No invented reviews or generated certificate images are published.
+TOP GYM owns/provides the brand and business content. Visual direction: supplied Google Stitch Apex Gold export. Equipment photographs and enhanced copies: supplied by the owner; archive README describes conservative enhancement. Typeface licensing is retained in the installed Fontsource packages. Source assets are not licensed here for unrelated reuse. The promotional wide-gym Hero uses [Risen Wang’s photograph](https://unsplash.com/photos/gym-equipment-inside-room-20jX9b35r_M) under the [Unsplash License](https://unsplash.com/license), separately labeled from actual TOP GYM photography. The old Pinterest portrait is no longer referenced by the Hero. No invented reviews or generated certificate images are published.
 
 The current header adds a single subtle gold spotlight above the active desktop link and a clean mobile active underline; section tracking follows clicks and scrolling. The location section embeds the exact owner-supplied Google Maps place and opens that same original URL when any part of the map card is selected. See `docs/map-verification.json` for provenance and behavior.
 

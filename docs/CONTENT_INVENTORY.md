@@ -65,3 +65,7 @@ All six HTML variants were inspected for headings, sections, behaviors and image
 - Owner-approved written address. The production domain is now supplied: `https://top-gym-website.vercel.app`. The supplied Maps listing and embed are verified; see `map-verification.json`. No numeric business coordinates were inferred.
 - Transparent official logo, if one exists; current supplied original is sufficient for the review build.
 - External link destination verification: initial web checks on 2026-11-05 could not resolve Maps/WhatsApp; Facebook was throttled. The later direct redirect and live embed check verified the supplied Maps place (`map-verification.json`). Exact supplied URLs are preserved and browser link integrity is tested. An owner/device check remains necessary; no group was joined.
+
+## Current Hero source — 5 November 2026
+
+The latest owner request replaces the previous Pinterest athlete with Risen Wang’s spacious-gym photograph from Unsplash. Reviewed 4000×2997 master and eight optimized derivatives are recorded in `hero-media.json` and the asset manifest. No people observed; published caption identifies promotional imagery. It is not represented as TOP GYM’s premises. The previous Pinterest provenance is historical; its portrait is no longer referenced in the Hero. No membership values or source PDF bytes changed: only the requested duration labels changed.

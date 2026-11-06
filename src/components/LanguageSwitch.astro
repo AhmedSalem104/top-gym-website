@@ -12,7 +12,7 @@ const { locale } = Astro.props;
       <span
         aria-current="true"
         lang={language}
-        aria-label={language === 'en' ? 'English' : 'العربية'}
+        aria-label={language === 'en' ? 'EN — English' : 'AR — العربية'}
       >
         {language === 'en' ? 'EN' : 'AR'}
       </span>
@@ -22,7 +22,7 @@ const { locale } = Astro.props;
         href={`/${language}/`}
         lang={language}
         hreflang={language}
-        aria-label={language === 'en' ? 'English' : 'العربية'}
+        aria-label={language === 'en' ? 'EN — English' : 'AR — العربية'}
       >
         {language === 'en' ? 'EN' : 'AR'}
       </a>

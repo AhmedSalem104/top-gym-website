@@ -1,0 +1,68 @@
+{
+  "selectedAt": "2026-11-05",
+  "requestedByOwner": "Use a new high-quality photograph of a spacious real gym from an external source.",
+  "author": "Risen Wang",
+  "source": "https://unsplash.com/photos/gym-equipment-inside-room-20jX9b35r_M",
+  "download": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?fm=jpg&q=95&w=4000",
+  "license": "https://unsplash.com/license",
+  "licenseReviewedAt": "2026-11-05",
+  "licenseSummary": "Unsplash License permits free commercial use; no endorsement is implied.",
+  "master": {
+    "sha256": "009364cec6bd757dd8912c32e51349c9cbc7c5a794f0d9836422aee6c0500f7d",
+    "bytes": 1774810,
+    "width": 4000,
+    "height": 2997
+  },
+  "review": "Real gym photograph; no people observed, including windows/reflections. Promotional imagery, not the TOP GYM premises. The monochrome appearance is present in the downloaded source.",
+  "processing": "Resize and AVIF/WebP encoding only. No crop, recoloring, generative editing or equipment changes. Master is preserved privately.",
+  "destinations": [
+    {
+      "path": "public/media/promotional-gym-480.avif",
+      "width": 480,
+      "height": 360,
+      "bytes": 18773
+    },
+    {
+      "path": "public/media/promotional-gym-480.webp",
+      "width": 480,
+      "height": 360,
+      "bytes": 32912
+    },
+    {
+      "path": "public/media/promotional-gym-800.avif",
+      "width": 800,
+      "height": 599,
+      "bytes": 37517
+    },
+    {
+      "path": "public/media/promotional-gym-800.webp",
+      "width": 800,
+      "height": 599,
+      "bytes": 68356
+    },
+    {
+      "path": "public/media/promotional-gym-1200.avif",
+      "width": 1200,
+      "height": 899,
+      "bytes": 70032
+    },
+    {
+      "path": "public/media/promotional-gym-1200.webp",
+      "width": 1200,
+      "height": 899,
+      "bytes": 126968
+    },
+    {
+      "path": "public/media/promotional-gym-1600.avif",
+      "width": 1600,
+      "height": 1199,
+      "bytes": 110601
+    },
+    {
+      "path": "public/media/promotional-gym-1600.webp",
+      "width": 1600,
+      "height": 1199,
+      "bytes": 204210
+    }
+  ]
+}

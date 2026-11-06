@@ -177,7 +177,7 @@ for (const locale of ['ar', 'en'] as const) {
     );
     await expect(page.locator('.hero-promotional img')).toHaveAttribute(
       'src',
-      '/media/promotional-hero-736.webp',
+      '/media/promotional-gym-1200.webp',
     );
     await expect(page.locator('.hero-photo-note')).toBeVisible();
   });

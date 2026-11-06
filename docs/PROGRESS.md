@@ -1,5 +1,15 @@
 # Implementation progress — 2026-11-05
 
+## Hero and navigation follow-ups
+
+Completed the asymmetric Hero with a new licensed spacious-gym photograph by Risen Wang, two-line bilingual headline, membership/Maps/gallery actions and responsive AVIF/WebP media. Shared motion remains visible at first paint. Added Home / الرئيسية and shortened half-month/two-month labels without changing prices or the official PDF. After the entire Hero leaves the viewport, the existing sticky header changes to #FFAD26 with black links and adapted active/focus indicators; returning restores the original palette.
+
+Actual browser testing corrected fast-jump boundary detection, premature Home selection release and the language switch label/name mismatch. The shared observer watches the whole Hero; no new observer, scroll listener, animation package or hydration was added. Other page sections are unchanged.
+
+Complete local test:all passed: 18 unit / 75 Chromium tests plus build, typecheck, lint, formatting and SEO fixture. Forty before/after/viewport screenshots and throttled motion measurements are in evidence. CLS was zero in both lab runs; Arabic throttled LCP was 4.172s and full-page scrolling still included long tasks. See QA_CHECKLIST.md for exact results/limitations and HERO_REDESIGN.md for composition/provenance.
+
+The preceding title/contact PR #12 is merged and verified on production. New work is on feat/authentic-gym-hero for review only; the Hero brief withholds production authorization. Current hours and certificate-source/holder-role confirmation remain unresolved as previously recorded.
+
 ## Current state
 
 The website is live at https://top-gym-website.vercel.app following the owner's explicit approval and PR #11 merge into main. It uses Astro 7.3.8, TypeScript 6.0.3, Tailwind 4.3.4, local Fontsource typography, and small browser scripts. Node 24.22.2 was used for application validation. Earlier entries below retain their historical review-stage state; the latest production record is in `VERCEL_DIAGNOSIS.md`.

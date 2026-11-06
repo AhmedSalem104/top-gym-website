@@ -7,6 +7,7 @@ export function initNavigation() {
   dispose?.();
   const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-section-link]'));
   const sections = Array.from(document.querySelectorAll<HTMLElement>('main > section'));
+  const sectionId = (section: HTMLElement) => (section.matches('.hero') ? 'top' : section.id);
   const nav = document.querySelector<HTMLElement>('.desktop-nav');
   const spotlight = nav?.querySelector<HTMLElement>('.nav-spotlight');
   const visible = new Set<HTMLElement>();
@@ -56,13 +57,20 @@ export function initNavigation() {
   const updateFromViewport = () => {
     clearTimeout(settleTimer);
     if (pendingAnchor) {
-      if (Array.from(visible).some((section) => section.id === pendingAnchor)) {
+      // Home's hero can already intersect above About before an upward anchor scroll starts.
+      // Keep its selection locked until the document reaches the actual top.
+      const arrived =
+        pendingAnchor === 'top'
+          ? window.scrollY <= 2
+          : Array.from(visible).some((section) => sectionId(section) === pendingAnchor);
+      if (arrived) {
         pendingAnchor = undefined;
         clearTimeout(anchorTimer);
       } else return;
     }
     const current = sections.filter((section) => visible.has(section)).at(-1);
-    if (current) settleTimer = setTimeout(() => select(current.id), motion.navigation.settle);
+    if (current)
+      settleTimer = setTimeout(() => select(sectionId(current)), motion.navigation.settle);
   };
   const releaseAnchor = () => {
     if (!pendingAnchor) return;
@@ -74,11 +82,11 @@ export function initNavigation() {
     clearTimeout(settleTimer);
     clearTimeout(anchorTimer);
     select(id);
-    pendingAnchor = sections.some((section) => section.id === id) ? id : undefined;
+    pendingAnchor = sections.some((section) => sectionId(section) === id) ? id : undefined;
     // Native smooth scrolling can cross other sections before reaching the clicked anchor.
     if (pendingAnchor) anchorTimer = setTimeout(releaseAnchor, motion.navigation.anchorTimeout);
   };
-  followAnchor(location.hash.slice(1));
+  followAnchor(location.hash.slice(1) || 'top');
   for (const link of links)
     link.addEventListener(
       'click',
@@ -94,7 +102,7 @@ export function initNavigation() {
       },
       { signal: signal.signal },
     );
-  window.addEventListener('hashchange', () => followAnchor(location.hash.slice(1)), {
+  window.addEventListener('hashchange', () => followAnchor(location.hash.slice(1) || 'top'), {
     signal: signal.signal,
   });
   for (const type of ['wheel', 'touchmove'])

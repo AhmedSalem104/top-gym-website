@@ -386,6 +386,24 @@
       ],
       "decision": "Owner explicitly requested public display and download. PDF copied byte-for-byte; one-page preview rendered without content edits. Local original remains untouched.",
       "previewMethod": "PyMuPDF rasterization and Pillow WebP at quality 88; 640 and 1200 pixels wide"
+    },
+    {
+      "source": "https://unsplash.com/photos/gym-equipment-inside-room-20jX9b35r_M",
+      "sha256": "009364cec6bd757dd8912c32e51349c9cbc7c5a794f0d9836422aee6c0500f7d",
+      "bytes": 1774810,
+      "width": 4000,
+      "height": 2997,
+      "destinations": [
+        "public/media/promotional-gym-480.avif",
+        "public/media/promotional-gym-480.webp",
+        "public/media/promotional-gym-800.avif",
+        "public/media/promotional-gym-800.webp",
+        "public/media/promotional-gym-1200.avif",
+        "public/media/promotional-gym-1200.webp",
+        "public/media/promotional-gym-1600.avif",
+        "public/media/promotional-gym-1600.webp"
+      ],
+      "decision": "Owner-requested external promotional hero. Reviewed Unsplash License; visibly distinguished from real TOP GYM photography. See hero-media.json."
     }
   ]
 }

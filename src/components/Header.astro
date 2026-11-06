@@ -9,6 +9,7 @@ interface Props {
 const { locale } = Astro.props;
 const copy = t(locale);
 const links = [
+  'top',
   'about',
   'facilities',
   ...(publicCredentials.length ? ['credentials'] : []),
