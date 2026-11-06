@@ -81,11 +81,14 @@ for (const locale of ['ar', 'en']) {
         () => (window as unknown as { navActiveHistory: string[] }).navActiveHistory.length,
       ),
     ).toBeLessThanOrEqual(1);
-    await active.focus();
+    // Focus stays on the same link even if native focus scrolling updates ScrollSpy.
+    // A live aria-current locator can resolve to a different element during Tab navigation.
+    const focusedLink = nav.locator(`[href="${await active.getAttribute('href')}"]`);
+    await focusedLink.focus();
     await page.keyboard.press('Tab');
     await page.keyboard.press('Shift+Tab');
-    await expect(active).toBeFocused();
-    expect(await active.evaluate((el) => getComputedStyle(el).outlineStyle)).not.toBe('none');
+    await expect(focusedLink).toBeFocused();
+    expect(await focusedLink.evaluate((el) => getComputedStyle(el).outlineStyle)).not.toBe('none');
     expect(await spotlight.evaluate((el) => getComputedStyle(el).transitionDuration)).toContain(
       `${motion.duration.navigation / 1000}s`,
     );

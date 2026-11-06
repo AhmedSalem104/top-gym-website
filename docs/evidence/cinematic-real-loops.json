@@ -1,0 +1,18 @@
+{
+  "method": "Actual 63-second Chromium desktop observation across two 30-second CSS loops, sampling image coverage, opacity and translation. QA-only rAF; no such loop ships to visitors.",
+  "durationMs": 63016.299999952316,
+  "samples": 3719,
+  "uncovered": 0,
+  "transparent": 0,
+  "maxTranslationStepPx": 0.056400000000000006,
+  "iterations": [
+    {
+      "at": 31244.599999904633,
+      "transform": "matrix(1.025, 0, 0, 1.025, -4.63121, -1.845)"
+    },
+    {
+      "at": 61236.59999990463,
+      "transform": "matrix(1.025, 0, 0, 1.025, -4.63122, -1.845)"
+    }
+  ]
+}

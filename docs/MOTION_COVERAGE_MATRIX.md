@@ -1,5 +1,9 @@
 # Motion coverage matrix
 
+## Cinematic Hero — 6 November 2026
+
+The existing image is immediately visible inside a dedicated CSS camera wrapper; text/CTAs retain their one-time sequence. A 30s camera path and 22s light cycle share the existing Hero observer and pause for offscreen/hidden/user/reduced-motion states. Twelve locale/viewport cases cover 320/375/390/768/1440/1920, frozen-frame keyboard pause/resume, stable content, two-loop endpoints and full image coverage; two additional cases exercise visibility events, observer failure, resize and retained pause through the bfcache lifecycle. All 14 new cases and all 20 existing Hero/navigation cases passed in the final **103/103 Chromium** run without retries; **19 unit tests** and build/type/lint/format/SEO checks also passed. See `CINEMATIC_HERO.md` and the latest QA entry for actual real-time observation, screenshots, recording and performance limitations. The older static-Hero entries below are historical.
+
 ## Full-width Hero — 6 November 2026
 
 The owner-supplied background and overlaid content reuse the existing first-paint sequence, CTA feedback and reduced-motion behavior. No motion code or tokens changed. All 20 focused Hero/navigation cases passed locally without retries: two languages, seven composition widths (320–1920px), and three header-boundary widths. They verify full-bleed image geometry, readable two-part headings, first-screen primary CTA, source selection, exact action targets, zero Hero animations in reduced motion, axe scans and unchanged Home/header behavior. The full-suite and throttled-lab outcome are recorded in the latest `QA_CHECKLIST.md` entry; evidence files use `hero-fullbleed-*`.

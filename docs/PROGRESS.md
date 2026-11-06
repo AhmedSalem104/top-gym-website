@@ -1,5 +1,11 @@
 # Implementation progress — 2026-11-05
 
+## Cinematic living Hero — 2026-11-06
+
+Implemented the latest scoped Hero motion brief on `feat/cinematic-hero`, isolated from the in-progress customer-feedback worktree. The approved image/embedded emblem and text remain intact. A dedicated camera wrapper owns a 30-second CSS path; a separate low-opacity gold layer owns a 22-second cycle. Desktop/tablet/mobile amplitudes are centralized. The existing observer and lifecycle handle offscreen/hidden pauses; a localized keyboard toggle freezes/resumes the current frame, and reduced motion disables continuous effects.
+
+Final local validation passed TypeScript, lint, formatting, build, SEO, 19 unit tests and all 103 browser tests without retries. A real 63-second/two-loop observation found no uncovered edges or transparent frames. Twelve before/after captures, a short actual recording, a steady-state trace and paired throttled lab metrics are retained. The paired measurement found unchanged existing CLS and mixed LCP results; no unsupported performance guarantee is made. The initial run exposed a navbar test's live-selector focus race, corrected without changing navigation behavior and documented in QA. See `CINEMATIC_HERO.md`, `MOTION_COVERAGE_MATRIX.md` and the latest QA entry. The latest explicit instruction requires a reviewable PR, with no merge or production deployment.
+
 ## Full-width Hero — 2026-11-06
 
 Replaced the boxed split Hero with one edge-to-edge responsive background and a reading-edge content overlay. The owner explicitly supplied `Luxury Gym with Golden Top Gym Emblem.png`; ten AVIF/WebP derivatives preserve the original and use a separate documented mobile crop. The short supplied personal-training/membership invitation replaces the long service list in Arabic and English. Existing business configuration, original logo, all CTA targets, navbar, footer, pricing, gallery and certificate behavior remain intact.

@@ -8,6 +8,24 @@ import {
 } from '../../src/config/motion';
 
 describe('Motion safety budget', () => {
+  it('keeps the cinematic cycle slow and camera overscan larger than its travel', () => {
+    expect(motion.cinematic.image).toBeGreaterThanOrEqual(24_000);
+    expect(motion.cinematic.image).toBeLessThanOrEqual(32_000);
+    expect(motion.cinematic.light).toBeGreaterThanOrEqual(16_000);
+    expect(motion.cinematic.light).toBeLessThanOrEqual(24_000);
+    for (const camera of [
+      motion.cinematic.desktop,
+      motion.cinematic.tablet,
+      motion.cinematic.mobile,
+    ]) {
+      expect(camera.end).toBeLessThanOrEqual(1.055);
+      expect(camera.start).toBeLessThan(camera.middle);
+      expect(camera.middle).toBeLessThan(camera.end);
+      expect(Math.max(parseFloat(camera.x), parseFloat(camera.y)) / 100).toBeLessThan(
+        camera.start - 1,
+      );
+    }
+  });
   it('caps large lists and rejects negative stagger delays', () => {
     const delays = Array.from({ length: 100 }, (_, index) => staggerDelay(index));
     expect(delays.every((value) => value >= 0 && value <= 320)).toBe(true);

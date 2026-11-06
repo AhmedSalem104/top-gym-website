@@ -23,4 +23,6 @@ Footer groups and the pre-footer CTA reuse shared `footer` motion. Never restart
 
 Current Hero composition, media provenance and post-Hero header inversion: `docs/HERO_REDESIGN.md`. Keep Home mapped to the Hero in ScrollSpy; never observe the full body as a section.
 
+Cinematic Hero: `docs/CINEMATIC_HERO.md`. Camera and lighting own separate CSS transforms; text remains one-time motion. Reuse the existing Hero observer, pause offscreen/hidden documents, preserve the user pause state and disable continuous effects for reduced motion. The latest Hero task explicitly requires review before merge/production, overriding standing publication permission for this change.
+
 Credentials layout, responsive derivatives and certificate-only zoom: `docs/CREDENTIALS_PRESENTATION.md`. Keep document files, redactions, issuer names and training dates intact. Card hover uses independent `translate`; do not compete with shared reveal transforms. The requested new visual-reference image is still pending; the owner subsequently authorized publishing the implemented written-brief design.
