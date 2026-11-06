@@ -53,6 +53,18 @@ export function initMotion() {
   preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const signal = new AbortController();
   let observer: IntersectionObserver | undefined;
+  const hero = document.querySelector<HTMLElement>('[data-header-boundary]');
+  const heroToggle = hero?.querySelector<HTMLButtonElement>('[data-hero-motion-toggle]');
+  let heroVisible = false;
+  let heroPaused = heroToggle?.getAttribute('aria-pressed') === 'true';
+  const updateHero = () => {
+    if (hero)
+      hero.dataset.cinematic =
+        observer && heroVisible && !document.hidden && !preference?.matches && !heroPaused
+          ? 'running'
+          : 'paused';
+    if (heroToggle) heroToggle.disabled = !observer || Boolean(preference?.matches);
+  };
   const pending = new Set<HTMLElement>();
   const complete = (element: HTMLElement) => {
     seen.add(element);
@@ -66,6 +78,8 @@ export function initMotion() {
     observer = new IntersectionObserver((entries) => {
       for (const entry of entries)
         if (entry.target.hasAttribute('data-header-boundary')) {
+          heroVisible = entry.isIntersecting;
+          updateHero();
           document
             .querySelector('.site-header')
             ?.classList.toggle(
@@ -138,6 +152,17 @@ export function initMotion() {
   // Observe the whole hero: a 1px sentinel can skip the viewport on fast anchor jumps.
   const headerBoundary = document.querySelector('[data-header-boundary]');
   if (headerBoundary) observer?.observe(headerBoundary);
+  heroToggle?.addEventListener(
+    'click',
+    () => {
+      heroPaused = !heroPaused;
+      heroToggle.setAttribute('aria-pressed', String(heroPaused));
+      updateHero();
+    },
+    { signal: signal.signal },
+  );
+  document.addEventListener('visibilitychange', updateHero, { signal: signal.signal });
+  updateHero();
   const mutations = new MutationObserver((records) => {
     for (const record of records) {
       for (const node of record.addedNodes) if (node instanceof HTMLElement) register(node);
@@ -170,6 +195,7 @@ export function initMotion() {
   preference.addEventListener(
     'change',
     () => {
+      updateHero();
       if (!preference?.matches) return;
       for (const element of pending) complete(element);
       for (const element of active.keys()) cancelMotion(element);
@@ -178,6 +204,7 @@ export function initMotion() {
   );
 
   dispose = () => {
+    if (hero) hero.dataset.cinematic = 'paused';
     signal.abort();
     observer?.disconnect();
     mutations.disconnect();

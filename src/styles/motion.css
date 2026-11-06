@@ -17,24 +17,12 @@ html {
   animation-delay: calc(var(--motion-step) * 3) !important;
 }
 .hero .actions [data-motion]:not(:first-child),
-.hero .hero-rail,
-.hero .hero-image {
+.hero .hero-rail {
   animation-delay: calc(var(--motion-step) * 3) !important;
-}
-.hero .hero-image {
-  animation-name: hero-image-entrance;
 }
 @keyframes hero-entrance {
   from {
     transform: translateY(var(--motion-distance));
-  }
-  to {
-    transform: none;
-  }
-}
-@keyframes hero-image-entrance {
-  from {
-    transform: scale(1.008);
   }
   to {
     transform: none;

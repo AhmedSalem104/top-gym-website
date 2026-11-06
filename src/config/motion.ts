@@ -14,6 +14,15 @@ export const motion = {
   distance: { reveal: 16, heading: 12, image: 12, hero: 12, footer: 12 },
   stagger: 80,
   delayCap: 240,
+  cinematic: {
+    image: 30_000,
+    light: 22_000,
+    delay: 900,
+    easing: 'cubic-bezier(0.45, 0, 0.55, 1)',
+    desktop: { start: 1.025, middle: 1.04, end: 1.055, x: '0.65%', y: '0.45%' },
+    tablet: { start: 1.015, middle: 1.025, end: 1.035, x: '0.35%', y: '0.25%' },
+    mobile: { start: 1.008, middle: 1.014, end: 1.02, x: '0.18%', y: '0.12%' },
+  },
   easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
   exitEasing: 'cubic-bezier(0.4, 0, 1, 1)',
   // Start just before first paint at the viewport edge. Already visible content never fades out.

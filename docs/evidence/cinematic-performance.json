@@ -1,0 +1,60 @@
+{
+  "method": "Paired local Chromium 390x844 runs, 6x CPU / 1.6Mbps down / 150ms. 3-second idle Hero rAF cadence, not physical-device GPU FPS. Single run per locale/variant; not statistically conclusive.",
+  "browser": "156.0.8078.4",
+  "results": [
+    {
+      "phase": "before",
+      "locale": "ar",
+      "cls": 0.005676534669032591,
+      "lcp": 4744,
+      "interactions": [],
+      "samples": 181,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.700000000000728,
+      "over34": 0
+    },
+    {
+      "phase": "before",
+      "locale": "en",
+      "cls": 0.17690943680639906,
+      "lcp": 2340,
+      "interactions": [],
+      "samples": 181,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.700000000000728,
+      "over34": 0
+    },
+    {
+      "phase": "after",
+      "locale": "ar",
+      "cls": 0.005676534669032591,
+      "lcp": 4120,
+      "interactions": [],
+      "samples": 180,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.700000000000728,
+      "over34": 0,
+      "pauseInteractionDurationsMs": [
+        72,
+        72,
+        72
+      ]
+    },
+    {
+      "phase": "after",
+      "locale": "en",
+      "cls": 0.17690943680639906,
+      "lcp": 2664,
+      "interactions": [],
+      "samples": 180,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.800000000000182,
+      "over34": 0,
+      "pauseInteractionDurationsMs": [
+        88,
+        88,
+        88
+      ]
+    }
+  ]
+}

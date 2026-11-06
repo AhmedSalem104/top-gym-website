@@ -1,0 +1,11 @@
+{
+  "method": "8-second desktop Chromium trace after fonts/image and entrance settled; camera and light running. Counts are trace events, not field FPS/INP.",
+  "counts": {
+    "Layout": 0,
+    "Paint": 0,
+    "UpdateLayoutTree": 0,
+    "CompositeLayers": 0
+  },
+  "longTasksOver50ms": [],
+  "browser": "156.0.8078.4"
+}
