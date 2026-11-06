@@ -2,6 +2,7 @@
 import { t } from '../i18n';
 import type { Locale } from '../config/business';
 import Icon from './Icon.astro';
+import '../styles/lightbox.css';
 interface Props {
   locale: Locale;
 }
@@ -11,11 +12,25 @@ const copy = t(Astro.props.locale);
 <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-caption" data-of={copy.imageOf}>
   <div class="lightbox-toolbar">
     <span id="lightbox-count" aria-live="polite"></span>
-    <button class="icon-button" data-lightbox-close aria-label={copy.close} autofocus>
-      <Icon name="close" />
-    </button>
+    <div class="lightbox-tools">
+      <button
+        class="certificate-zoom"
+        data-lightbox-zoom
+        aria-controls="lightbox-stage"
+        aria-pressed="false"
+        hidden
+      >
+        <Icon name="expand" />
+        <span>{copy.certificateZoomIn}</span>
+      </button>
+      <button class="icon-button" data-lightbox-close aria-label={copy.close} autofocus>
+        <Icon name="close" />
+      </button>
+    </div>
   </div>
-  <img id="lightbox-image" alt="" width="960" height="1280" />
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img id="lightbox-image" alt="" width="960" height="1280" />
+  </div>
   <div class="lightbox-bottom">
     <button class="icon-button" data-lightbox-prev aria-label={copy.previous}>
       <span class="rotate">

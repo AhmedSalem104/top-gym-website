@@ -1,5 +1,9 @@
 # Deployment preparation
 
+## Current publishing authorization — 6 November 2026
+
+The owner explicitly requested merging and publishing PR #16, then instructed: after every completed modification, push and publish. This is standing authorization for the normal protected-PR/Vercel workflow after successful validation; do not repeatedly request permission. A later explicit review-only instruction overrides this preference. Preserve required checks, source integrity and post-deployment verification. Deployment permission does not verify unresolved business facts or enable search indexing automatically.
+
 The owner explicitly authorized merging PR #11 and publishing to Vercel on November 5, 2026. Main merge `4a762f148701676d9589ac4f367178f4a55f451e` triggered the successful production deployment at [TOP GYM](https://top-gym-website.vercel.app/). Anonymous requests to the home page, both languages, logo and pricing PDF return HTTP 200. See [Vercel diagnosis and resolution](VERCEL_DIAGNOSIS.md).
 
 GitHub Actions validates; the Vercel Git integration publishes main and creates protected feature previews. The website remains `noindex, nofollow`, with no canonical origin configured in the deployed build. The supplied production origin is now known; configure `SITE_URL=https://top-gym-website.vercel.app` and deliberately enable indexing after the outstanding content/SEO checks. Deployment authorization does not independently confirm certificate originals, trainer role, image rights or current hours.
@@ -8,7 +12,7 @@ GitHub Actions validates; the Vercel Git integration publishes main and creates 
 2. Obtain owner confirmation of the real HTTPS production origin and hosting destination.
 3. Use Node 24, run `npm ci`, and configure `SITE_URL` and the intended indexing policy. Never invent a domain.
 4. Run `npm run test:all` and review generated screenshots. Run a production-domain metadata check separately before release.
-5. Request explicit authorization for merging into main and for the exact production deployment. These are separate from feature-branch push permission.
+5. Apply the current publishing authorization above. Confirm that no later instruction restricts the change to review only; keep protected-main checks in place.
 6. Build with `PUBLIC_INDEXABLE=true` only when launch is approved. Upload only `dist/` to a static host with support for directory indexes (`/ar/`, `/en/`) and the generated 404 page.
 7. Confirm HTTPS, final redirects/canonical URLs, both locales, sitemap, robots, image/font delivery, phone actions and actual external destinations. Do not infer that a passing localhost test proves external link availability.
 

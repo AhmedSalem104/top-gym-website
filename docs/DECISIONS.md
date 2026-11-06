@@ -17,6 +17,8 @@
 
 Revisit decisions when new owner evidence arrives. Keep source-specific publishing constraints separate from implementation progress.
 
+2026-11-06 publishing preference: the owner explicitly authorized merging/publishing the premium certificate redesign and gave standing permission to push, merge and publish future verified modifications. Use protected PRs and successful checks, then verify the live site; do not re-request approval unless later instructions revoke or narrow this authorization. The additional request removes only the flexed-arm emoji from the Hero brand label, retaining its enlarged TOP GYM text and other service icons.
+
 2026-11-05 motion follow-up: use one native Web Animations/IntersectionObserver system, with CSS micro-interactions and no added motion library. Keep server-rendered content visible, animate each element once on viewport entry, and preserve LCP opacity. Tokens and lifecycle are documented in `MOTION_SYSTEM.md`; per-section evidence is in `MOTION_COVERAGE_MATRIX.md`.
 
 2026-11-05 follow-up: the owner explicitly requested visible certificates and a professional Pinterest hero. Use reviewed redacted supplied documents and distinguish the male-athlete promotional image from real TOP GYM photos. A visible WhatsApp QR was added using the supplied group URL (default destination stated while awaiting the optional destination preference).

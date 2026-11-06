@@ -12,7 +12,7 @@ Build a static bilingual marketing site for the real TOP GYM. Preserve the suppl
 - All photographic human imagery must be male only. Inspect photos, posters and reflections manually. This is not evidence that the business is men-only.
 - Keep source archives, original certificates and unapproved PDFs outside Git. The owner explicitly approved the official pricing PDF under `public/documents/`; preserve its byte-identical source and narrow `.gitignore` exception. Never overwrite originals. Update `docs/asset-manifest.json` for every derivative. Do not publish certificate identifiers or claim unverified qualifications/identity.
 - Prices must match the official 2026-11-05 PDF. Hours are provisional; do not silently mark them verified. WhatsApp is a group invitation, never a private support chat.
-- Work on feature branches with conventional commits. Preserve existing work. No force push, reset, main merge, or production deployment without explicit owner authorization.
+- Work on feature branches with conventional commits. Preserve existing work; never force push or reset. On 2026-11-06 the owner explicitly authorized merging/publishing this update and gave standing authorization to push, merge through the protected PR workflow and publish subsequent verified changes. Do not ask again unless a later instruction limits a change to review only or an essential blocker requires input. Keep required checks and post-deployment verification.
 - Done means implemented, validated, visually reviewed against source, documented with actual evidence, and free of unresolved launch blockers. Never present targets as measurements.
 
 Read `docs/PROJECT.md`, `docs/DECISIONS.md`, `docs/PROGRESS.md`, and `docs/QA_CHECKLIST.md` before resuming. See `docs/CONTENT_INVENTORY.md` for withheld content and `docs/DEPLOYMENT.md` before release.
@@ -23,4 +23,4 @@ Footer groups and the pre-footer CTA reuse shared `footer` motion. Never restart
 
 Current Hero composition, media provenance and post-Hero header inversion: `docs/HERO_REDESIGN.md`. Keep Home mapped to the Hero in ScrollSpy; never observe the full body as a section.
 
-Credentials layout and owner-requested copy removals: `docs/CREDENTIALS_PRESENTATION.md`. Keep document files, redactions, issuer names and training dates intact.
+Credentials layout, responsive derivatives and certificate-only zoom: `docs/CREDENTIALS_PRESENTATION.md`. Keep document files, redactions, issuer names and training dates intact. Card hover uses independent `translate`; do not compete with shared reveal transforms. The requested new visual-reference image is still pending; the owner subsequently authorized publishing the implemented written-brief design.

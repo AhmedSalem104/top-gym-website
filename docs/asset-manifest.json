@@ -42,7 +42,9 @@
       "height": 1536,
       "destinations": [
         "public/media/certificates/tass-nutrition.webp",
-        "public/media/certificates/tass-nutrition-preview.webp"
+        "public/media/certificates/tass-nutrition-preview.webp",
+        "public/media/certificates/tass-nutrition-320.webp",
+        "public/media/certificates/tass-nutrition-960.webp"
       ],
       "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
       "redaction": {
@@ -51,6 +53,27 @@
         "width": 190,
         "height": 34,
         "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      },
+      "responsivePreviews": {
+        "source": "public/media/certificates/tass-nutrition.webp",
+        "sourceSha256": "e39e17552823c53b5dd3d50add50c41a31f19cf5bc2c5f5f6c1ff4c758ff92ee",
+        "processing": "Resize and WebP encoding only, from the existing privacy-redacted lossless copy. No cropping, perspective changes, generative edits or overwritten source files.",
+        "derivatives": [
+          {
+            "path": "public/media/certificates/tass-nutrition-320.webp",
+            "width": 320,
+            "height": 441,
+            "bytes": 50054,
+            "sha256": "38c12c7f8f4b6451616267d7e9f4f37956fbebe3af7a7dcf579199a9cea25d60"
+          },
+          {
+            "path": "public/media/certificates/tass-nutrition-960.webp",
+            "width": 960,
+            "height": 1324,
+            "bytes": 326998,
+            "sha256": "39a149b6232e9a6cd4cee5d003c9e388ae87f9da38214a6fccee68c3f17d91c2"
+          }
+        ]
       }
     },
     {
@@ -61,7 +84,9 @@
       "height": 1089,
       "destinations": [
         "public/media/certificates/pbls-personal-trainer.webp",
-        "public/media/certificates/pbls-personal-trainer-preview.webp"
+        "public/media/certificates/pbls-personal-trainer-preview.webp",
+        "public/media/certificates/pbls-personal-trainer-320.webp",
+        "public/media/certificates/pbls-personal-trainer-960.webp"
       ],
       "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
       "redaction": {
@@ -70,6 +95,27 @@
         "width": 112,
         "height": 43,
         "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      },
+      "responsivePreviews": {
+        "source": "public/media/certificates/pbls-personal-trainer.webp",
+        "sourceSha256": "b8f5e906c1e883bf6f8150723342128dd135acf7b60eb0bc20d4ba5cc40b8d48",
+        "processing": "Resize and WebP encoding only, from the existing privacy-redacted lossless copy. No cropping, perspective changes, generative edits or overwritten source files.",
+        "derivatives": [
+          {
+            "path": "public/media/certificates/pbls-personal-trainer-320.webp",
+            "width": 320,
+            "height": 227,
+            "bytes": 23282,
+            "sha256": "5687192e73f585106ac43ff286038af9c7a04aaa3d78106f96f016838dc17e6f"
+          },
+          {
+            "path": "public/media/certificates/pbls-personal-trainer-960.webp",
+            "width": 960,
+            "height": 681,
+            "bytes": 189376,
+            "sha256": "8b9a7c7b38c6e9fc75e989f1fef1691a7d0e9316e3feec303f5ec44ab89b935e"
+          }
+        ]
       }
     },
     {
@@ -80,7 +126,9 @@
       "height": 1533,
       "destinations": [
         "public/media/certificates/tass-fitness-trainer.webp",
-        "public/media/certificates/tass-fitness-trainer-preview.webp"
+        "public/media/certificates/tass-fitness-trainer-preview.webp",
+        "public/media/certificates/tass-fitness-trainer-320.webp",
+        "public/media/certificates/tass-fitness-trainer-960.webp"
       ],
       "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
       "redaction": {
@@ -89,6 +137,27 @@
         "width": 192,
         "height": 35,
         "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      },
+      "responsivePreviews": {
+        "source": "public/media/certificates/tass-fitness-trainer.webp",
+        "sourceSha256": "e512cc328e862ffb4cce420a81315bc353a00d0359fc821b1deda34d05541dd8",
+        "processing": "Resize and WebP encoding only, from the existing privacy-redacted lossless copy. No cropping, perspective changes, generative edits or overwritten source files.",
+        "derivatives": [
+          {
+            "path": "public/media/certificates/tass-fitness-trainer-320.webp",
+            "width": 320,
+            "height": 432,
+            "bytes": 51256,
+            "sha256": "7d90fc1c2f7f96fb9ae3d688fc260066a6c61b72f37f57bed11a63c063fcd04f"
+          },
+          {
+            "path": "public/media/certificates/tass-fitness-trainer-960.webp",
+            "width": 960,
+            "height": 1297,
+            "bytes": 345956,
+            "sha256": "57584f7c90c8d8014806f507a851d279c134c6658c2168f8be4f4bfef8c8f415"
+          }
+        ]
       }
     },
     {
@@ -99,7 +168,9 @@
       "height": 1077,
       "destinations": [
         "public/media/certificates/pbls-nutrition.webp",
-        "public/media/certificates/pbls-nutrition-preview.webp"
+        "public/media/certificates/pbls-nutrition-preview.webp",
+        "public/media/certificates/pbls-nutrition-320.webp",
+        "public/media/certificates/pbls-nutrition-960.webp"
       ],
       "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
       "redaction": {
@@ -108,6 +179,27 @@
         "width": 126,
         "height": 45,
         "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      },
+      "responsivePreviews": {
+        "source": "public/media/certificates/pbls-nutrition.webp",
+        "sourceSha256": "5dfcd7bcea14c2dbf86d5218589ade58664d1c654b5aea3546e7675cee686981",
+        "processing": "Resize and WebP encoding only, from the existing privacy-redacted lossless copy. No cropping, perspective changes, generative edits or overwritten source files.",
+        "derivatives": [
+          {
+            "path": "public/media/certificates/pbls-nutrition-320.webp",
+            "width": 320,
+            "height": 224,
+            "bytes": 21804,
+            "sha256": "e5029168e6b02ba9f0afba02afe6548619f31f442da9c75ea7503a5a6fe3d3f2"
+          },
+          {
+            "path": "public/media/certificates/pbls-nutrition-960.webp",
+            "width": 960,
+            "height": 673,
+            "bytes": 180342,
+            "sha256": "f20cce5a2e0db2aa3e710e711556f092b85a0e126cfc90bb32d6df1061ca46e4"
+          }
+        ]
       }
     },
     {
@@ -118,7 +210,9 @@
       "height": 1536,
       "destinations": [
         "public/media/certificates/titanium-training.webp",
-        "public/media/certificates/titanium-training-preview.webp"
+        "public/media/certificates/titanium-training-preview.webp",
+        "public/media/certificates/titanium-training-320.webp",
+        "public/media/certificates/titanium-training-960.webp"
       ],
       "decision": "Owner requested visible certificates; publish supplied enhanced copy with opaque registration-number redaction. Original comparison and current trainer role remain unconfirmed.",
       "redaction": {
@@ -127,6 +221,27 @@
         "width": 230,
         "height": 43,
         "method": "Opaque pixels baked into every derivative before resizing; metadata stripped"
+      },
+      "responsivePreviews": {
+        "source": "public/media/certificates/titanium-training.webp",
+        "sourceSha256": "32a6c7c368838f563973e2d5650c1719a11d889c74b9450dbcfb3fe82ac2e0c9",
+        "processing": "Resize and WebP encoding only, from the existing privacy-redacted lossless copy. No cropping, perspective changes, generative edits or overwritten source files.",
+        "derivatives": [
+          {
+            "path": "public/media/certificates/titanium-training-320.webp",
+            "width": 320,
+            "height": 447,
+            "bytes": 54964,
+            "sha256": "c6109ff38e6d0c3e4b0b8253d05bd6aa6a828c7ef4e03040cec5c1a62540d013"
+          },
+          {
+            "path": "public/media/certificates/titanium-training-960.webp",
+            "width": 960,
+            "height": 1342,
+            "bytes": 353384,
+            "sha256": "373ae04ec99c8132209ff347b6c223c1f026b5c74d679c13a0b74e82a6aa7ee4"
+          }
+        ]
       }
     },
     {

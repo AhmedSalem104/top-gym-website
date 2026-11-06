@@ -51,6 +51,8 @@ Following the owner's request to show the missing section, five supplied enhance
 
 `scripts/prepare-certificates.mjs` checks source SHA-256 hashes, applies documented registration-area redactions, strips metadata and creates separate web copies. No AI, documentary text replacement, seal/signature reconstruction or source overwrite is used. The manifest records every output and exact redaction rectangle. Both full copies and previews were visually reviewed after generation.
 
+The 6 November premium certificate showcase adds 320px/960px responsive WebP previews from the existing redacted lossless copies, preserving all original/full-size/680px files. Source hashes are checked by `scripts/prepare-certificate-previews.mjs`; provenance and derivative hashes are in `asset-manifest.json`. Only resizing/encoding is performed. The separately requested new visual-reference image has not been supplied or located; its path was requested and image-to-design comparison remains pending. See `CREDENTIALS_PRESENTATION.md` for the written-brief implementation and evidence.
+
 ## Promotional hero and QR
 
 The owner requested a professional replacement hero from Pinterest. The selected [male-athlete photograph](https://www.pinterest.com/pin/fotos-na-academia-masculina--844636105109617078/) is visibly labeled as promotional imagery, separate from actual TOP GYM equipment/gallery photography. `promotional-media.json` records the exact downloaded URL, hash, dimensions, derivatives and unresolved photographer/reuse-rights status. No facility or trainer identity is inferred from the image. Confirm reuse rights before production launch.

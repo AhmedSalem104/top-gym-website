@@ -121,7 +121,6 @@ html {
     border-color var(--motion-micro);
 }
 .membership-card,
-.credential-card,
 .facility-card,
 .phone-card {
   transition:
@@ -129,7 +128,6 @@ html {
     border-color var(--motion-micro);
 }
 .membership-card:focus-within,
-.credential-card:focus-within,
 .phone-card:focus-visible {
   border-color: var(--color-gold);
 }
@@ -290,7 +288,6 @@ html {
     translate: 0 -1px;
   }
   .membership-card:hover,
-  .credential-card:hover,
   .facility-card:hover,
   .phone-card:hover {
     translate: 0 -1px;
