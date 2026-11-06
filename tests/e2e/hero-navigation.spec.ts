@@ -1,26 +1,37 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { business } from '../../src/config/business';
+import { t } from '../../src/i18n';
 
 for (const locale of ['ar', 'en']) {
   for (const width of [320, 375, 390, 768, 1366, 1440, 1920]) {
     test(`${locale} hero composition and working actions at ${width}`, async ({ page }) => {
-      await page.setViewportSize({ width, height: 900 });
+      await page.setViewportSize({ width, height: width <= 320 ? 740 : width < 768 ? 844 : 900 });
       await page.goto(`/${locale}/`);
       await page.evaluate(() => document.fonts.ready);
       const hero = page.locator('.hero');
       await expect(hero.locator('.hero-label bdi')).toHaveText(business.name);
-      await expect(hero.locator('.hero-services li > span:last-child')).toHaveText(
-        business.hero.services.map((service) => service.text[locale as 'ar' | 'en']),
-      );
+      await expect(hero.locator('.hero-description')).toHaveText(t(locale as 'ar' | 'en').heroText);
+      await expect(hero.locator('.hero-services')).toHaveCount(0);
+      await expect(hero).not.toContainText('💪');
       const image = hero.locator('img');
       await expect(image).toHaveJSProperty('complete', true);
       await expect(image).not.toHaveJSProperty('naturalWidth', 0);
       await expect(image).toHaveAttribute('loading', 'eager');
       await expect(image).toHaveAttribute('fetchpriority', 'high');
+      await expect(image).toHaveCSS('object-fit', 'cover');
+      expect(await image.evaluate((el: HTMLImageElement) => el.currentSrc)).toMatch(
+        width < 768 ? /top-gym-hero-mobile-/ : /top-gym-hero-wide-/,
+      );
       await expect(page.locator('html')).toHaveAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr');
       const geometry = await hero.evaluate((el) => {
         const title = el.querySelector('h1')!;
+        const section = el.getBoundingClientRect();
+        // The root box excludes the existing stable scrollbar gutter; clientWidth
+        // includes that reserved strip in headless Chromium with overlay scrollbars.
+        const pageBox = document.documentElement.getBoundingClientRect();
+        const content = el.querySelector('.hero-content')!.getBoundingClientRect();
+        const container = el.querySelector('.hero-layout')!.getBoundingClientRect();
         const image = el.querySelector('img')!.getBoundingClientRect();
         const heading = title.getBoundingClientRect();
         const primary = el.querySelector('.button-gold')!.getBoundingClientRect();
@@ -33,16 +44,38 @@ for (const locale of ['ar', 'en']) {
             heading.top < image.bottom &&
             heading.bottom > image.top,
           primaryBottom: primary.bottom,
+          viewportHeight: innerHeight,
+          fullBleed:
+            image.left <= section.left + 1 &&
+            image.right >= section.right - 1 &&
+            image.top <= section.top + 1 &&
+            image.bottom >= section.bottom - 1 &&
+            Math.abs(section.left - pageBox.left) <= 1 &&
+            Math.abs(section.right - pageBox.right) <= 1,
+          alignedToReadingEdge:
+            document.dir === 'rtl'
+              ? Math.abs(content.right - container.right) < 1
+              : Math.abs(content.left - container.left) < 1,
+          belowHeader:
+            heading.top >= document.querySelector('.site-header')!.getBoundingClientRect().bottom,
           lineCount: title.querySelectorAll('span, em').length,
         };
       });
       expect(geometry.overflow).toBe(false);
       expect(geometry.titleOverflow).toBe(false);
-      expect(geometry.overlap).toBe(false);
-      expect(geometry.primaryBottom).toBeLessThan(750);
+      expect(geometry.overlap).toBe(true);
+      expect(geometry.fullBleed).toBe(true);
+      expect(geometry.alignedToReadingEdge).toBe(true);
+      expect(geometry.belowHeader).toBe(true);
+      expect(geometry.primaryBottom).toBeLessThan(geometry.viewportHeight - 64);
       expect(geometry.lineCount).toBe(2);
       await expect(hero.locator('.button-dark')).toHaveAttribute('href', business.links.maps);
       await expect(hero.locator('.button-dark')).toHaveAttribute('rel', 'noopener noreferrer');
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      const heroAudit = await new AxeBuilder({ page }).include('.hero').analyze();
+      expect(heroAudit.violations).toEqual([]);
+      expect(await hero.evaluate((el) => el.getAnimations({ subtree: true }).length)).toBe(0);
+      await page.emulateMedia({ reducedMotion: 'no-preference' });
       await hero.locator('.button-gold').click();
       await expect(page).toHaveURL(/#memberships$/);
       await expect

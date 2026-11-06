@@ -1,5 +1,11 @@
 # Motion coverage matrix
 
+## Full-width Hero — 6 November 2026
+
+The owner-supplied background and overlaid content reuse the existing first-paint sequence, CTA feedback and reduced-motion behavior. No motion code or tokens changed. All 20 focused Hero/navigation cases passed locally without retries: two languages, seven composition widths (320–1920px), and three header-boundary widths. They verify full-bleed image geometry, readable two-part headings, first-screen primary CTA, source selection, exact action targets, zero Hero animations in reduced motion, axe scans and unchanged Home/header behavior. The full-suite and throttled-lab outcome are recorded in the latest `QA_CHECKLIST.md` entry; evidence files use `hero-fullbleed-*`.
+
+The historical service-list paragraph below is superseded by the compact supporting paragraph; both use the same entrance primitive.
+
 Audit: 2026-11-05. Before this change the Astro site had color transitions, a gallery hover scale and a reduced-motion stylesheet; no viewport reveal system. All existing section order, targets, business facts and media remain intact during the motion implementation. The separately requested navbar correction restores the source's dark call/gold group hierarchy and segmented language control.
 
 | Section/component          | Implemented behavior                                                                                | Verification                                                                                             |

@@ -1,0 +1,155 @@
+{
+  "method": "Headless Chromium local lab. Bounded scripted slow/fast/down/up scrolling. rAF cadence is not a GPU frame-time measurement or a real-device FPS guarantee. CPU/network emulation is relative to this host.",
+  "results": [
+    {
+      "locale": "ar",
+      "measuredAt": "2026-11-06T14:32:56.507Z",
+      "browser": "156.0.8078.4",
+      "viewport": "390x844 DPR1",
+      "cpuSlowdown": 6,
+      "network": "1.6 Mbps down / 750 Kbps up / 150 ms latency",
+      "samples": 565,
+      "durationMs": 14142.5,
+      "medianFrameIntervalMs": 16.7,
+      "p95FrameIntervalMs": 33.4,
+      "intervalsOver34Ms": 19,
+      "longTasksDuringScroll": [
+        {
+          "start": 10105.399999856949,
+          "duration": 157
+        },
+        {
+          "start": 10294.899999856949,
+          "duration": 54
+        },
+        {
+          "start": 10362.5,
+          "duration": 61
+        },
+        {
+          "start": 10444.199999809265,
+          "duration": 359
+        },
+        {
+          "start": 11554,
+          "duration": 85
+        },
+        {
+          "start": 12028.799999952316,
+          "duration": 263
+        },
+        {
+          "start": 12435.199999809265,
+          "duration": 193
+        },
+        {
+          "start": 12691.599999904633,
+          "duration": 85
+        },
+        {
+          "start": 12828,
+          "duration": 54
+        },
+        {
+          "start": 13145.199999809265,
+          "duration": 82
+        }
+      ],
+      "cls": 0,
+      "lcpMs": 3136,
+      "unseen": [],
+      "runningAnimationsAfterSettling": 0,
+      "brokenImages": [],
+      "consoleErrors": []
+    },
+    {
+      "locale": "en",
+      "measuredAt": "2026-11-06T14:33:13.295Z",
+      "browser": "156.0.8078.4",
+      "viewport": "390x844 DPR1",
+      "cpuSlowdown": 6,
+      "network": "1.6 Mbps down / 750 Kbps up / 150 ms latency",
+      "samples": 587,
+      "durationMs": 14107.8,
+      "medianFrameIntervalMs": 16.7,
+      "p95FrameIntervalMs": 33.4,
+      "intervalsOver34Ms": 24,
+      "longTasksDuringScroll": [
+        {
+          "start": 4166,
+          "duration": 54
+        },
+        {
+          "start": 4644.399999856949,
+          "duration": 75
+        },
+        {
+          "start": 5136,
+          "duration": 58
+        },
+        {
+          "start": 9179.700000047684,
+          "duration": 156
+        },
+        {
+          "start": 9365.5,
+          "duration": 52
+        },
+        {
+          "start": 9448.099999904633,
+          "duration": 65
+        },
+        {
+          "start": 9522.5,
+          "duration": 359
+        },
+        {
+          "start": 10619.599999904633,
+          "duration": 111
+        },
+        {
+          "start": 10821.700000047684,
+          "duration": 54
+        },
+        {
+          "start": 11060.700000047684,
+          "duration": 59
+        },
+        {
+          "start": 11120.200000047684,
+          "duration": 333
+        },
+        {
+          "start": 11517.200000047684,
+          "duration": 57
+        },
+        {
+          "start": 11660.599999904633,
+          "duration": 171
+        },
+        {
+          "start": 11839.200000047684,
+          "duration": 54
+        },
+        {
+          "start": 11893.799999952316,
+          "duration": 82
+        },
+        {
+          "start": 12021,
+          "duration": 50
+        },
+        {
+          "start": 12323.599999904633,
+          "duration": 69
+        }
+      ],
+      "cls": 0,
+      "lcpMs": 2088,
+      "unseen": [],
+      "runningAnimationsAfterSettling": 0,
+      "brokenImages": [],
+      "consoleErrors": []
+    }
+  ]
+}

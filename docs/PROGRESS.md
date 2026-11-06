@@ -1,5 +1,13 @@
 # Implementation progress — 2026-11-05
 
+## Full-width Hero — 2026-11-06
+
+Replaced the boxed split Hero with one edge-to-edge responsive background and a reading-edge content overlay. The owner explicitly supplied `Luxury Gym with Golden Top Gym Emblem.png`; ten AVIF/WebP derivatives preserve the original and use a separate documented mobile crop. The short supplied personal-training/membership invitation replaces the long service list in Arabic and English. Existing business configuration, original logo, all CTA targets, navbar, footer, pricing, gallery and certificate behavior remain intact.
+
+Reused shared first-paint motion with no additional script, observer or dependency. Twenty focused Hero/navigation browser cases passed across 320–1920px, including axe, reduced motion, first-screen CTA visibility and header-boundary behavior. Twenty-eight actual before/after screenshots and throttled performance evidence are in `docs/evidence/hero-fullbleed-*`; see `HERO_REDESIGN.md`, `CONTENT_INVENTORY.md` and the latest `QA_CHECKLIST.md` entry for provenance, composition and measured limitations.
+
+Local TypeScript, lint, formatting, 18 unit tests, build and SEO validation passed. The full browser run passed 87/89 cases; two stale expectations for the previous Hero filename were updated and both affected cases passed on rerun. No application regression was found. Work is on `feat/full-width-hero`; required remote checks and actual protected-PR/Vercel publication results are recorded in the release PR. The owner's standing push/merge/deploy authorization applies.
+
 ## Premium certificate showcase — 2026-11-06
 
 Implemented the requested scoped redesign on `feat/premium-certificates`: centered bilingual introduction and documented name, larger document-first cards, three-plus-two centered desktop grid, two-column tablet and intrinsic-ratio single-column mobile. Original titles, issuers, training periods and privacy redactions remain intact. Ten resize-only responsive derivatives supplement the unchanged full-size and 680px files.

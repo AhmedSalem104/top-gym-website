@@ -8,7 +8,6 @@ interface Props {
 }
 const { locale } = Astro.props;
 const copy = t(locale);
-const sizes = '(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) 49vw, 700px';
 ---
 
 <section class="hero" aria-labelledby="hero-title" data-header-boundary>
@@ -20,22 +19,9 @@ const sizes = '(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) 49vw, 
       <h1 id="hero-title" data-motion="hero">
         <span>{copy.heroLine}</span> <em>{copy.heroGold}</em>
       </h1>
-      <div class="hero-description" data-motion="reveal">
-        <ul class="hero-services" role="list">
-          {business.hero.services.map((service) => (
-            <li>
-              <span class="hero-service-icon" aria-hidden="true">
-                {service.icon}
-              </span>
-              <span>{service.text[locale]}</span>
-            </li>
-          ))}
-        </ul>
-        <p class="hero-invitation">
-          <span aria-hidden="true">📍</span>
-          <span>{copy.heroText}</span>
-        </p>
-      </div>
+      <p class="hero-description" data-motion="reveal">
+        {copy.heroText}
+      </p>
       <div class="actions">
         <a class="button button-gold" href="#memberships" data-motion="reveal">
           {copy.heroMemberships}
@@ -57,27 +43,39 @@ const sizes = '(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) 49vw, 
         </a>
       </div>
     </div>
-    <figure class="hero-visual">
-      <picture class="hero-image hero-promotional" data-motion="hero-image">
-        <source
-          type="image/avif"
-          srcset="/media/promotional-gym-480.avif 480w, /media/promotional-gym-800.avif 800w, /media/promotional-gym-1200.avif 1200w, /media/promotional-gym-1600.avif 1600w"
-          sizes={sizes}
-        />
-        <img
-          src="/media/promotional-gym-1200.webp"
-          srcset="/media/promotional-gym-480.webp 480w, /media/promotional-gym-800.webp 800w, /media/promotional-gym-1200.webp 1200w, /media/promotional-gym-1600.webp 1600w"
-          sizes={sizes}
-          width="4000"
-          height="2997"
-          alt={copy.promotionalHeroAlt}
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </picture>
-    </figure>
   </div>
+  <figure class="hero-visual">
+    <picture class="hero-image hero-promotional" data-motion="hero-image">
+      <source
+        media="(max-width: 767px)"
+        type="image/avif"
+        srcset="/media/top-gym-hero-mobile-360.avif 360w, /media/top-gym-hero-mobile-704.avif 704w"
+        sizes="(max-width: 479px) 480px, 100vw"
+      />
+      <source
+        media="(max-width: 767px)"
+        type="image/webp"
+        srcset="/media/top-gym-hero-mobile-360.webp 360w, /media/top-gym-hero-mobile-704.webp 704w"
+        sizes="(max-width: 479px) 480px, 100vw"
+      />
+      <source
+        type="image/avif"
+        srcset="/media/top-gym-hero-wide-768.avif 768w, /media/top-gym-hero-wide-1200.avif 1200w, /media/top-gym-hero-wide-1672.avif 1672w"
+        sizes="100vw"
+      />
+      <img
+        src="/media/top-gym-hero-wide-1672.webp"
+        srcset="/media/top-gym-hero-wide-768.webp 768w, /media/top-gym-hero-wide-1200.webp 1200w, /media/top-gym-hero-wide-1672.webp 1672w"
+        sizes="100vw"
+        width="1672"
+        height="940"
+        alt={copy.promotionalHeroAlt}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+  </figure>
   <div class="container hero-rail" data-motion="reveal">
     {business.facilities.map((facility) => (
       <a href="#facilities">{facility.title[locale]}</a>
