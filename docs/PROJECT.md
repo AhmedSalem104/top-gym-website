@@ -2,7 +2,7 @@
 
 ## Goal
 
-Deliver a maintainable, premium bilingual gym marketing site faithful to the supplied Stitch Apex Gold design, real photography, official prices and verified contact information. Conversion is through phone, directions and a clearly identified WhatsApp group. No backend, accounts, payment processor or fake booking form.
+Deliver a maintainable, premium bilingual gym marketing site faithful to the supplied Stitch Apex Gold design, real photography, official prices and verified contact information. Conversion is through phone, directions and a clearly identified WhatsApp group. The owner subsequently requested private customer feedback delivered through Gmail; this adds one serverless endpoint. No accounts, payment processor or fake booking form.
 
 ## Repository audit — 2026-11-05
 

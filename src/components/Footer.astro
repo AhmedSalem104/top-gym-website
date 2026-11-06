@@ -2,6 +2,7 @@
 import { business, publicCredentials, type Locale } from '../config/business';
 import { days, formatTime, t } from '../i18n';
 import Icon from './Icon.astro';
+import { feedbackCopy } from '../i18n/feedback';
 interface Props {
   locale: Locale;
 }
@@ -52,6 +53,11 @@ for (const entry of business.hours.days) {
         {copy.navigation}
       </h2>
       <ul>
+        <li data-motion="footer">
+          <a class="footer-link" href="#feedback">
+            {feedbackCopy[locale].link}
+          </a>
+        </li>
         {links.map((id) => (
           <li data-motion="footer">
             <a class="footer-link" href={`#${id}`}>

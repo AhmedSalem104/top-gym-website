@@ -18,7 +18,7 @@ describe('Motion safety budget', () => {
       motion.cinematic.tablet,
       motion.cinematic.mobile,
     ]) {
-      expect(camera.end).toBeLessThanOrEqual(1.055);
+      expect(camera.end).toBeLessThanOrEqual(1.1);
       expect(camera.start).toBeLessThan(camera.middle);
       expect(camera.middle).toBeLessThan(camera.end);
       expect(Math.max(parseFloat(camera.x), parseFloat(camera.y)) / 100).toBeLessThan(

@@ -1,5 +1,17 @@
 # Cinematic Hero — 6 November 2026
 
+## Current owner follow-up: stronger motion and no pause button
+
+The owner explicitly requested more visible movement, removal of the pause button, completion of private feedback, and publication. The background now follows a 24-second cycle; lighting follows a 20-second cycle with 5.5% opacity (3.5% mobile). Desktop scales are 1.03 / 1.06 / 1.09 with total 1.2% / 0.8% horizontal/vertical travel; tablet 1.025 / 1.045 / 1.065 and 0.8% / 0.5%; mobile 1.015 / 1.03 / 1.045 and 0.5% / 0.3%.
+
+The visible control and its manual-pause state/listener/styles were removed. Existing viewport, document visibility, bfcache and OS reduced-motion handling remain. No image, text, CTA, shared easing, observer or JavaScript render loop was added. Text and controls remain stationary after entrance. The image remains high-priority and fully visible from first paint.
+
+Accessibility tradeoff: automatic movement continues beyond five seconds while visible, with no page-level pause control at the owner's explicit request. OS reduced motion disables it, but this alone is not a claim of full WCAG 2.2.2 compliance. No accessibility certification is claimed.
+
+The fourteen cinematic browser cases now verify the absence of the control, stronger-pose coverage, real transform progress, stable text, offscreen/hidden pauses, two-cycle endpoint equivalence, resize and reduced motion. See the current feedback/motion entry in QA_CHECKLIST.md for results. [Before](evidence/feedback-hero-before-ar-1440.webp), [after](evidence/feedback-hero-after-ar-1440.webp), [motion recording](evidence/feedback-hero-motion.webm), [raw lab metrics](evidence/feedback-hero-performance.json).
+
+The initial implementation record below is retained as history; its manual-control, smaller-amplitude and review-only instructions are superseded by this owner follow-up.
+
 ## Scope and visual responsibility
 
 The owner requested continuous cinematic movement of the approved full-width image, then refined the direction to a 24–32 second camera cycle and separate warm lighting. The supplied image, embedded wall emblem, responsive sources, content, layout, CTA targets and original website logo remain unchanged. No unrelated component or business data is edited. The customer-feedback work remains isolated on `feat/customer-feedback`; this branch neither implements nor configures email delivery. There is no membership/payment portal in this repository to alter.

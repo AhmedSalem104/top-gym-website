@@ -11,6 +11,7 @@ const sections = [
   '#schedule',
   '#location',
   '#contact',
+  '#feedback',
   '.final-cta',
   '.site-footer',
 ];

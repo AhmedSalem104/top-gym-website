@@ -80,7 +80,7 @@ for (const locale of ['ar', 'en'] as const) {
           money(plan.prices[duration], locale),
         );
     }
-    await page.locator('summary').click();
+    await page.locator('#memberships summary').click();
     await expect(page.locator('tbody tr')).toHaveCount(6);
     await expect(page.locator('a[href="tel:+201015819700"]').first()).toBeAttached();
     await expect(page.locator('a[href="tel:+201005376843"]').first()).toBeAttached();
@@ -93,7 +93,8 @@ for (const locale of ['ar', 'en'] as const) {
             url,
           ),
       ).toBe(true);
-    await expect(page.locator('form')).toHaveCount(0);
+    await expect(page.locator('form:not([data-feedback-form])')).toHaveCount(0);
+    await expect(page.locator('[data-feedback-form]')).toHaveAttribute('action', '/api/feedback/');
   });
 
   test(`${locale} accessible gallery dialog, focus return and keyboard navigation`, async ({
@@ -202,7 +203,7 @@ test('no-JavaScript content and safe prelaunch metadata', async ({ browser }) =>
   const page = await context.newPage();
   await page.goto('/en/');
   await expect(page.locator('h1')).toBeVisible();
-  await page.locator('summary').click();
+  await page.locator('#memberships summary').click();
   await expect(page.locator('tbody tr')).toHaveCount(6);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);

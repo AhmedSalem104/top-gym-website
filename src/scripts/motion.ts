@@ -54,16 +54,11 @@ export function initMotion() {
   const signal = new AbortController();
   let observer: IntersectionObserver | undefined;
   const hero = document.querySelector<HTMLElement>('[data-header-boundary]');
-  const heroToggle = hero?.querySelector<HTMLButtonElement>('[data-hero-motion-toggle]');
   let heroVisible = false;
-  let heroPaused = heroToggle?.getAttribute('aria-pressed') === 'true';
   const updateHero = () => {
     if (hero)
       hero.dataset.cinematic =
-        observer && heroVisible && !document.hidden && !preference?.matches && !heroPaused
-          ? 'running'
-          : 'paused';
-    if (heroToggle) heroToggle.disabled = !observer || Boolean(preference?.matches);
+        observer && heroVisible && !document.hidden && !preference?.matches ? 'running' : 'paused';
   };
   const pending = new Set<HTMLElement>();
   const complete = (element: HTMLElement) => {
@@ -152,15 +147,6 @@ export function initMotion() {
   // Observe the whole hero: a 1px sentinel can skip the viewport on fast anchor jumps.
   const headerBoundary = document.querySelector('[data-header-boundary]');
   if (headerBoundary) observer?.observe(headerBoundary);
-  heroToggle?.addEventListener(
-    'click',
-    () => {
-      heroPaused = !heroPaused;
-      heroToggle.setAttribute('aria-pressed', String(heroPaused));
-      updateHero();
-    },
-    { signal: signal.signal },
-  );
   document.addEventListener('visibilitychange', updateHero, { signal: signal.signal });
   updateHero();
   const mutations = new MutationObserver((records) => {

@@ -1,5 +1,16 @@
 # Motion coverage matrix
 
+## Feedback and stronger Hero follow-up — 6 November 2026
+
+| Area                  | Shared behavior                                                    | Verification                                                                                         |
+| --------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| Feedback introduction | Existing heading/reveal sequence and bounded group stagger         | Added to all six locale/viewport coverage and no-replay traversals                                   |
+| Feedback form         | One viewport reveal; native focus and CSS star/topic states        | Eight locale/viewport submission and axe cases, keyboard/touch, unavailable/retry/uncertain outcomes |
+| Feedback acceptance   | Existing short feedback variant after actual accepted API result   | Mocked acceptance wait and focus/live-region checks; reduced-motion path                             |
+| Hero camera/light     | 24s / 20s, increased responsive amplitude, no visible pause button | Fourteen cinematic cases: two-cycle poses, real progress, stable content, coverage and lifecycle     |
+
+No extra observer, animation dependency or continuous JavaScript loop was added. Email notifications contain no animation. Current numeric results and limitations are in QA_CHECKLIST.md; older entries below are historical snapshots.
+
 ## Cinematic Hero — 6 November 2026
 
 The existing image is immediately visible inside a dedicated CSS camera wrapper; text/CTAs retain their one-time sequence. A 30s camera path and 22s light cycle share the existing Hero observer and pause for offscreen/hidden/user/reduced-motion states. Twelve locale/viewport cases cover 320/375/390/768/1440/1920, frozen-frame keyboard pause/resume, stable content, two-loop endpoints and full image coverage; two additional cases exercise visibility events, observer failure, resize and retained pause through the bfcache lifecycle. All 14 new cases and all 20 existing Hero/navigation cases passed in the final **103/103 Chromium** run without retries; **19 unit tests** and build/type/lint/format/SEO checks also passed. See `CINEMATIC_HERO.md` and the latest QA entry for actual real-time observation, screenshots, recording and performance limitations. The older static-Hero entries below are historical.

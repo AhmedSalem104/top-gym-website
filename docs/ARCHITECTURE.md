@@ -2,7 +2,7 @@
 
 ## Static rendering
 
-Astro renders `/ar/` and `/en/` through one `Landing` component and section tree. `/` uses `business.defaultLocale`, with a small preference redirect only when an explicit locale was saved. Static HTML contains business content, links, complete prices and hours. No client framework or backend is needed.
+Astro renders `/ar/` and `/en/` through one `Landing` component and section tree. `/` uses `business.defaultLocale`, with a small preference redirect only when an explicit locale was saved. Static HTML contains business content, links, complete prices and hours. The later private-feedback feature uses one Vercel Node API; no client framework is needed. See `CUSTOMER_FEEDBACK.md` for server boundaries and delivery semantics.
 
 `Base.astro` owns language/direction, font imports, metadata, header/footer and shared dialog. Section modules separate visual composition from facts. `business.ts` is the typed source for contacts, hours, prices, links, facilities and the trainer publication gate. Translation files hold presentation labels; numeric prices/contact destinations are not duplicated there. `media.ts` describes reviewed photos.
 
@@ -28,7 +28,7 @@ Sharp creates AVIF/WebP derivatives of owner-supplied photos, preserving source 
 
 ## Quality and deployment
 
-ESLint/TypeScript/Vitest/build run before browser checks. Playwright covers two locales, five widths, menu, prices, links, dialog, preferences, loaded images, errors and axe scans. CI uploads evidence and never deploys. A static host serves `dist/`; there are no secrets or application environment services. All production actions remain subject to owner authorization.
+ESLint/TypeScript/Vitest/build run before browser checks. Playwright covers two locales, responsive widths, menu, prices, links, dialogs, feedback, preferences, loaded images, errors and axe scans. CI uploads evidence and never sends email. Vercel serves `dist/` alongside the native feedback function. Server environment values never use a `PUBLIC_` prefix. All production actions follow owner authorization and protected checks.
 
 ## Static QR image
 

@@ -1,5 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "compilerOptions": { "rewriteRelativeImportExtensions": true },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist", "node_modules", ".local", "playwright-report", "test-results"]
 }

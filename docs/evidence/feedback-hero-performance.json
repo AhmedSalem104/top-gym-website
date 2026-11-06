@@ -1,0 +1,162 @@
+{
+  "note": "Local Chromium rAF samples; not GPU frame throughput or field Web Vitals. 12s steady-state windows after fonts and entrance settle; no network throttling. Mobile CPU 6x, desktop 1x. Before uses preserved cinematic Hero worktree.",
+  "results": [
+    {
+      "phase": "before",
+      "locale": "ar",
+      "width": 390,
+      "cpu": 6,
+      "cls": 0,
+      "lcp": 728,
+      "long": [
+        175,
+        222
+      ],
+      "steadyCls": 0,
+      "frameMedian": 16.699999999999818,
+      "frameP95": 16.700000000000728,
+      "over34": 0,
+      "frames": 720,
+      "textStable": true,
+      "cameraMoved": true,
+      "errors": []
+    },
+    {
+      "phase": "before",
+      "locale": "ar",
+      "width": 1440,
+      "cpu": 1,
+      "cls": 0,
+      "lcp": 296,
+      "long": [
+        150,
+        53
+      ],
+      "steadyCls": 0,
+      "frameMedian": 16.699999999999818,
+      "frameP95": 16.700000000000728,
+      "over34": 0,
+      "frames": 721,
+      "textStable": true,
+      "cameraMoved": true,
+      "errors": []
+    },
+    {
+      "phase": "before",
+      "locale": "en",
+      "width": 390,
+      "cpu": 6,
+      "cls": 0,
+      "lcp": 428,
+      "long": [
+        95,
+        123
+      ],
+      "steadyCls": 0,
+      "frameMedian": 16.699999999999818,
+      "frameP95": 16.700000000000728,
+      "over34": 0,
+      "frames": 720,
+      "textStable": true,
+      "cameraMoved": true,
+      "errors": []
+    },
+    {
+      "phase": "before",
+      "locale": "en",
+      "width": 1440,
+      "cpu": 1,
+      "cls": 0,
+      "lcp": 160,
+      "long": [
+        73
+      ],
+      "steadyCls": 0,
+      "frameMedian": 16.699999999999818,
+      "frameP95": 16.700000000000728,
+      "over34": 0,
+      "frames": 718,
+      "textStable": true,
+      "cameraMoved": true,
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "locale": "ar",
+      "width": 390,
+      "cpu": 6,
+      "cls": 0,
+      "lcp": 684,
+      "long": [
+        189,
+        121
+      ],
+      "steadyCls": 0,
+      "frameMedian": 16.69999999999891,
+      "frameP95": 16.700000000000728,
+      "over34": 0,
+      "frames": 720,
+      "textStable": true,
+      "cameraMoved": true,
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "locale": "ar",
+      "width": 1440,
+      "cpu": 1,
+      "cls": 0,
+      "lcp": 192,
+      "long": [
+        101
+      ],
+      "steadyCls": 0,
+      "frameMedian": 16.699999999999818,
+      "frameP95": 16.799999999999272,
+      "over34": 0,
+      "frames": 706,
+      "textStable": true,
+      "cameraMoved": true,
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "locale": "en",
+      "width": 390,
+      "cpu": 6,
+      "cls": 0,
+      "lcp": 416,
+      "long": [
+        126,
+        120
+      ],
+      "steadyCls": 0,
+      "frameMedian": 16.69999999999891,
+      "frameP95": 16.799999999999272,
+      "over34": 0,
+      "frames": 720,
+      "textStable": true,
+      "cameraMoved": true,
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "locale": "en",
+      "width": 1440,
+      "cpu": 1,
+      "cls": 0,
+      "lcp": 188,
+      "long": [
+        83
+      ],
+      "steadyCls": 0,
+      "frameMedian": 16.699999999999818,
+      "frameP95": 16.700000000000728,
+      "over34": 0,
+      "frames": 720,
+      "textStable": true,
+      "cameraMoved": true,
+      "errors": []
+    }
+  ]
+}
