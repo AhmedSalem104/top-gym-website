@@ -15,7 +15,7 @@ export const motion = {
   stagger: 80,
   delayCap: 240,
   cinematic: {
-    image: 24_000,
+    image: 18_000,
     light: 20_000,
     delay: 900,
     easing: 'cubic-bezier(0.45, 0, 0.55, 1)',
