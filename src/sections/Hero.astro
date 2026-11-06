@@ -15,14 +15,28 @@ const sizes = '(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) 49vw, 
   <div class="container hero-layout">
     <div class="hero-content" data-motion-group>
       <p class="hero-label" data-motion="heading">
-        {copy.heroLabel}
+        <bdi>{business.name}</bdi>
+        <span aria-hidden="true">💪</span>
       </p>
       <h1 id="hero-title" data-motion="hero">
         <span>{copy.heroLine}</span> <em>{copy.heroGold}</em>
       </h1>
-      <p class="hero-description" data-motion="reveal">
-        {copy.heroText}
-      </p>
+      <div class="hero-description" data-motion="reveal">
+        <ul class="hero-services" role="list">
+          {business.hero.services.map((service) => (
+            <li>
+              <span class="hero-service-icon" aria-hidden="true">
+                {service.icon}
+              </span>
+              <span>{service.text[locale]}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="hero-invitation">
+          <span aria-hidden="true">📍</span>
+          <span>{copy.heroText}</span>
+        </p>
+      </div>
       <div class="actions">
         <a class="button button-gold" href="#memberships" data-motion="reveal">
           {copy.heroMemberships}
@@ -63,7 +77,6 @@ const sizes = '(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) 49vw, 
           decoding="async"
         />
       </picture>
-      <figcaption class="hero-photo-note">{copy.promotionalHeroNote}</figcaption>
     </figure>
   </div>
   <div class="container hero-rail" data-motion="reveal">

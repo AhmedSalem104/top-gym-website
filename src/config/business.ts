@@ -34,6 +34,44 @@ export const business = {
   currency: 'EGP',
   timezone: 'Africa/Cairo',
   logo: '/media/top-gym-logo.webp',
+  // Owner-supplied Hero copy, 2026-11-06; not inferred from trainer certificates.
+  hero: {
+    experienceYears: 9,
+    services: [
+      {
+        id: 'personal-training',
+        icon: '🔥',
+        text: {
+          ar: 'تدريب ومتابعة شخصية للوصول لهدفك',
+          en: 'Personal training and ongoing guidance to reach your goal',
+        },
+      },
+      {
+        id: 'fitness-assessment',
+        icon: '📊',
+        text: {
+          ar: 'تقييم شامل للياقة Fitness Assessment',
+          en: 'Comprehensive fitness assessment',
+        },
+      },
+      {
+        id: 'rehabilitation',
+        icon: '🩺',
+        text: {
+          ar: 'تأهيل إصابات وعلاج طبيعي بإشراف متخصصين',
+          en: 'Injury rehabilitation and physiotherapy supervised by specialists',
+        },
+      },
+      {
+        id: 'military-preparation',
+        icon: '🎖',
+        text: {
+          ar: 'متخصصون في التأهيل والاختبارات العسكرية',
+          en: 'Specialists in military preparation and fitness tests',
+        },
+      },
+    ],
+  },
   contacts: [
     {
       id: 'ahmed',

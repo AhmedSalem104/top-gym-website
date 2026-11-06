@@ -179,7 +179,8 @@ for (const locale of ['ar', 'en'] as const) {
       'src',
       '/media/promotional-gym-1200.webp',
     );
-    await expect(page.locator('.hero-photo-note')).toBeVisible();
+    await expect(page.locator('.hero-photo-note')).toHaveCount(0);
+    await expect(page.locator('#about .section-description')).toHaveCount(0);
   });
 }
 test('language switching preserves section and persists explicit preference', async ({ page }) => {

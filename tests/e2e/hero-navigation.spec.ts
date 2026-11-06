@@ -9,6 +9,10 @@ for (const locale of ['ar', 'en']) {
       await page.goto(`/${locale}/`);
       await page.evaluate(() => document.fonts.ready);
       const hero = page.locator('.hero');
+      await expect(hero.locator('.hero-label bdi')).toHaveText(business.name);
+      await expect(hero.locator('.hero-services li > span:last-child')).toHaveText(
+        business.hero.services.map((service) => service.text[locale as 'ar' | 'en']),
+      );
       const image = hero.locator('img');
       await expect(image).toHaveJSProperty('complete', true);
       await expect(image).not.toHaveJSProperty('naturalWidth', 0);

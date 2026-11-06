@@ -48,7 +48,7 @@ manifest.assets.push({
   ...provenance.master,
   destinations: destinations.map((item) => item.path),
   decision:
-    'Owner-requested external promotional hero. Reviewed Unsplash License; visibly distinguished from real TOP GYM photography. See hero-media.json.',
+    'Owner-requested external promotional hero. Reviewed Unsplash License; separate from real TOP GYM photography. Owner removed the visible caption on 2026-11-06; promotional alternative text and provenance remain. See hero-media.json.',
 });
 await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
 console.log(JSON.stringify(provenance));

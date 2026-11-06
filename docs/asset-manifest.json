@@ -403,7 +403,7 @@
         "public/media/promotional-gym-1600.avif",
         "public/media/promotional-gym-1600.webp"
       ],
-      "decision": "Owner-requested external promotional hero. Reviewed Unsplash License; visibly distinguished from real TOP GYM photography. See hero-media.json."
+      "decision": "Owner-requested external promotional hero. Reviewed Unsplash License; separate from real TOP GYM photography. Owner removed the visible caption on 2026-11-06; promotional alternative text and provenance remain. See hero-media.json."
     }
   ]
 }

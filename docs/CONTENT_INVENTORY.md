@@ -1,5 +1,9 @@
 # Source inventory and publishing decisions
 
+## Owner's text update — 2026-11-06
+
+The owner supplied replacement Hero copy stating nine years of experience/trust, personal training and follow-up, comprehensive fitness assessment, injury rehabilitation/physiotherapy supervised by specialists, and military preparation/tests. These statements are published as supplied, with English translations, from `business.hero`. They were not independently verified or inferred from certificate images. No founding date, military affiliation, medical license, practitioner identity or guaranteed result is asserted. The original certificate-holder name remains Ahmed AbdElhamid Salem AbdElhamid Salem. The visible promotional-photo caption and specified About paragraph were removed at the owner's request; image alternative text and media provenance remain accurate.
+
 The machine-readable [asset manifest](asset-manifest.json) inventories the 32 extracted files and the approved pricing PDF with SHA-256 hashes, bytes, image dimensions, duplicates, destination paths and decisions. Archives stay outside Git. At the owner’s explicit request, a byte-identical public copy of the official pricing PDF and two rendered previews are now included; the local original is untouched.
 
 ## Integrated assets
@@ -68,4 +72,4 @@ All six HTML variants were inspected for headings, sections, behaviors and image
 
 ## Current Hero source — 5 November 2026
 
-The latest owner request replaces the previous Pinterest athlete with Risen Wang’s spacious-gym photograph from Unsplash. Reviewed 4000×2997 master and eight optimized derivatives are recorded in `hero-media.json` and the asset manifest. No people observed; published caption identifies promotional imagery. It is not represented as TOP GYM’s premises. The previous Pinterest provenance is historical; its portrait is no longer referenced in the Hero. No membership values or source PDF bytes changed: only the requested duration labels changed.
+The latest owner request replaces the previous Pinterest athlete with Risen Wang’s spacious-gym photograph from Unsplash. Reviewed 4000×2997 master and eight optimized derivatives are recorded in `hero-media.json` and the asset manifest. No people observed. The owner requested removing the visible caption on 6 November; promotional provenance remains in the image alternative text and documentation. It is not represented as TOP GYM’s premises. The previous Pinterest provenance is historical; its portrait is no longer referenced in the Hero. No membership values or source PDF bytes changed: only the requested duration labels changed.

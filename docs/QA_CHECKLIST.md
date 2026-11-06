@@ -1,5 +1,17 @@
 # QA and release checklist
 
+## Hero copy and credentials presentation — 6 November 2026
+
+- Final `npm run test:all`: **18 unit / 81 Chromium tests passed, without retries**, plus typecheck (55 files, no errors/warnings/hints), ESLint, Prettier, production build and isolated SEO checks.
+- Arabic/English Hero at 320/375/390/768/1366/1440/1920px: all four owner-supplied service statements appear; headline fits without image overlap or horizontal overflow; membership/gallery anchors and verified Maps link are preserved. The primary CTA remains above 750px in the test's 900px-high viewport.
+- Arabic/English credentials at 390/768/1440px: correct 1/2/3-column layout, five loaded uncropped documents, unchanged titles/issuers/dates/URLs, every certificate opens with Enter, Escape closes it and focus returns. Axe checks report zero configured-rule violations. Reduced-motion, no-JavaScript, observer failure and full motion cleanup/regression checks pass.
+- Certificate files, logo, gym photographs, membership PDF, prices, contact numbers, hours and destination links are unchanged. New marketing statements come from the owner's supplied text, not an inference from certificates. The supplied certificate-holder name is preserved.
+- 24 real before/after screenshots: `evidence/credentials-{before,after}-{ar,en}-{390,768,1440}.webp` and `evidence/hero-copy-{before,after}-{ar,en}-{390,768,1440}.webp`. Fixed chrome is hidden only for section capture. Representative Arabic desktop/mobile and English tablet views were visually reviewed.
+- Test-development correction: the native lightbox resolves its image URL to an absolute URL; the new assertion now compares with `new URL(source, page.url()).href`. No production image workaround was introduced.
+- No fresh Lighthouse, CLS or frame-performance number is claimed for this content/layout revision. Physical-device/Safari/assistive-technology acceptance and the existing business-source/hour checks remain outstanding. Publication is owner-authorized; the PR release note will record actual GitHub/Vercel/live-check results.
+
+Visual review: [Hero desktop](evidence/hero-copy-after-ar-1440.webp), [Hero mobile](evidence/hero-copy-after-ar-390.webp), [certificates desktop](evidence/credentials-after-ar-1440.webp), [certificates mobile](evidence/credentials-after-ar-390.webp), [English certificates](evidence/credentials-after-en-768.webp).
+
 ## Hero / Home / inverted navigation — 5 November 2026
 
 - Full local Node 24 `npm run test:all` passed: typecheck (54 files, zero diagnostics), lint, formatting, 18 unit tests, production build, isolated SEO fixture and **75 Chromium browser tests** (2.2 minutes, no retries).
@@ -20,7 +32,7 @@ Production preview, Chromium 156, 390×844 DPR1 with touch, 6× CPU slowdown, 1.
 
 Both runs: zero console errors, broken images, unrevealed items or animations left running after settling. Arabic throttled LCP exceeds the 2.5s goal; full-page scrolling still includes long tasks, whose attribution was not profiled in this scoped update. These are local lab samples, not real-user Core Web Vitals, GPU frame timings or a 60fps guarantee. No new Lighthouse score is claimed.
 
-The separately approved title/contact production release was verified: root, Arabic, English, 404 document, logo and PDF returned 200; TOP GYM tab title and captain-prefixed names passed at 390/1440px in both languages, including language/hash preference behavior. The new Hero/header branch has not been merged or deployed to production.
+The separately approved title/contact production release was verified: root, Arabic, English, 404 document, logo and PDF returned 200; TOP GYM tab title and captain-prefixed names passed at 390/1440px in both languages, including language/hash preference behavior. The owner subsequently authorized publication on 6 November: PR #13 merged at ddd9bc871d83440d8bb15902a16f2531acac2a1b. Vercel production returned the new Hero, and 13 live Chromium checks passed.
 
 ## Verified in the local implementation
 
