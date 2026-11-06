@@ -8,7 +8,7 @@ Cards use the existing motion architecture with smooth 280ms lift, gold border/s
 
 Full local validation passed: 56-file typecheck with zero diagnostics, lint, formatting, 18 unit tests, production build, SEO fixture and 89 Chromium tests without retries. Twenty before/after captures cover Arabic/English at 320/390/768/1440/1920px. Details, source limitations, motion coverage and actual measurements are in `CREDENTIALS_PRESENTATION.md`, `MOTION_COVERAGE_MATRIX.md` and the latest `QA_CHECKLIST.md` entry.
 
-The new reference image was not supplied or found; its file path was requested and comparison remains pending. This work follows the explicit written brief. The current request explicitly prohibits main merge and production deployment without new authorization; only a review branch/PR is prepared.
+The new reference image was not supplied or found; its file path was requested and comparison remains pending. This work follows the explicit written brief. The owner subsequently authorized merging/publishing [PR #16](https://github.com/AhmedSalem104/top-gym-website/pull/16), and gave standing publishing permission after future verified changes. The final follow-up removes the flexed-arm emoji from the Hero label and its unused size rule while preserving TOP GYM's enlarged gold text. Release validation and the actual deployment/live-check outcome are recorded in the PR; no successful deployment is inferred merely from authorization.
 
 ## Hero brand legibility — 2026-11-06
 

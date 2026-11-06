@@ -2,7 +2,7 @@
 
 ## Premium showcase revision
 
-The new written brief supersedes the six-cell introduction/card layout below. The newly mentioned reference image is not attached or present in the known project assets; its file path has been requested. Work follows the explicit written specifications only, with visual-reference comparison pending. Do not claim to have inspected or matched that image. This revision is review-only: the owner explicitly withholds main merge and production deployment authorization.
+The new written brief supersedes the six-cell introduction/card layout below. The newly mentioned reference image is not attached or present in the known project assets; its file path has been requested. Work follows the explicit written specifications only, with visual-reference comparison pending. Do not claim to have inspected or matched that image. Initially review-only, this revision was subsequently authorized for merge and publication on 6 November 2026; see `DEPLOYMENT.md` for the owner's standing publishing preference.
 
 Direction: a document-led showcase, with a full-width centered introduction above five authentic certificates. Desktop uses a twelve-column grid (three cards, then two centered); tablet uses two cards per row with a centered remainder; mobile uses one. Preserve DOM reading order and adapt to arbitrary certificate counts without duplicates.
 
