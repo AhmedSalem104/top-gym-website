@@ -1,0 +1,30 @@
+# Template only: do not run until Gate 2/3 is approved for the target environment.
+services:
+  challenge:
+    image: ${CHALLENGE_IMAGE:?Use an immutable approved image digest}
+    init: true
+    restart: unless-stopped
+    user: '1000:1000'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 100
+    stop_grace_period: 45s
+    ports: ['127.0.0.1:4400:4400']
+    env_file: ${CHALLENGE_ENV_FILE:?Private absolute environment file required}
+    environment:
+      NODE_ENV: production
+      CHALLENGE_DB: /data/challenge.sqlite
+      CHALLENGE_BANK_FILE: /run/questions/questions.json
+      CHALLENGE_POLICY_FILE: /run/policy/policy.json
+      CHALLENGE_ALLOW_DRAFT_BANK: 'false'
+    volumes:
+      - ${CHALLENGE_DATA_DIR:?Dedicated private data directory required}:/data
+      - ${CHALLENGE_POLICY_DIR:?Private approved policy directory required}:/run/policy:ro
+      - ${CHALLENGE_BANK_DIR:?Private reviewed question directory required}:/run/questions:ro
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=16m']
+    logging:
+      driver: json-file
+      options: { max-size: '10m', max-file: '3' }

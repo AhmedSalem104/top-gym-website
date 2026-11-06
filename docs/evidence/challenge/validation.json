@@ -1,0 +1,62 @@
+{
+  "recordedAt": "2026-11-06T23:40:01.074332+00:00",
+  "scope": "Gate 1 local only; no real OTP, SMTP, deployment or VPS writes",
+  "runtime": "Windows / Node 24.22.2 / Chromium",
+  "backendTests": {
+    "passed": 45,
+    "skipped": 0
+  },
+  "websiteUnitTests": {
+    "passed": 58,
+    "skipped": 0
+  },
+  "existingBrowser": {
+    "total": 117,
+    "expected": 117,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "ok": true
+  },
+  "challengeBrowser": {
+    "startTime": "2026-11-06T23:34:24.623Z",
+    "duration": 57245.958,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": {
+    "types": "passed",
+    "lint": "passed",
+    "format": "passed",
+    "backendBuild": "passed",
+    "defaultBuild": "passed (4 pages)",
+    "previewBuild": "passed (6 pages)",
+    "seo": "passed",
+    "backendProductionDependencyAudit": "0 known vulnerabilities at inspection time"
+  },
+  "questionBank": {
+    "count": 300,
+    "difficulty": {
+      "medium": 90,
+      "medium-advanced": 150,
+      "advanced": 60
+    },
+    "locales": [
+      "ar",
+      "en"
+    ],
+    "reviewed": 0,
+    "draft": 300,
+    "sha256": "24a76f89efc368c2e0f3a009470f081c4b306c17c590bbc2f95827169ec8dd86",
+    "source": "Private local original-authoring draft; not a public answer bank",
+    "productionEligible": false
+  },
+  "limitations": [
+    "300 draft questions require qualified review",
+    "No approved live OTP/provider or commercial policy",
+    "No staging/production, Linux Docker or Gmail inbox validation",
+    "Lab measurements are not field CWV or capacity guarantees"
+  ]
+}

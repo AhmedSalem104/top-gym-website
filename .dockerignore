@@ -1,0 +1,14 @@
+**/node_modules
+**/.env*
+**/.local
+**/dist
+**/*.sqlite*
+**/*.db*
+.git
+public
+src
+api
+docs
+content/challenge
+test-results
+playwright-report

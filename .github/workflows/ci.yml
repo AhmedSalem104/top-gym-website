@@ -14,7 +14,13 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            services/challenge/package-lock.json
       - run: npm ci
+      - run: npm run challenge:install
+      - run: npm run challenge:check
+      - run: npm run challenge:test
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run format:check
@@ -23,6 +29,8 @@ jobs:
       - run: npm run test:seo
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - run: npm run challenge:preview:build
+      - run: npm run challenge:e2e
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
@@ -30,4 +38,7 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            .local/challenge-report/
+            .local/challenge-results.json
+            .local/challenge-test-results/
           retention-days: 14

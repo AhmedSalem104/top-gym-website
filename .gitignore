@@ -16,3 +16,11 @@ sources/
 *.pdf
 !public/documents/top-gym-memberships-pricing-2026-11-05.pdf
 *.log
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+# Public repository: never publish the production question bank or answer key.
+/content/challenge/questions.txt
+/content/challenge/questions.json
+/content/challenge/reviews.json

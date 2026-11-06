@@ -1,5 +1,9 @@
 # Architecture
 
+## Gated challenge extension
+
+The optional fitness challenge adds a same-origin Vercel BFF and a separate Node 24/Fastify/SQLite VPS service. It does not change the feedback API or create membership/payment logic. Feature UI is disabled by default. Server-authoritative deadlines, unique phone identities, transactional coupons, MFA administration and durable outbox are described in [CHALLENGE.md](CHALLENGE.md) and [CHALLENGE_API.md](CHALLENGE_API.md). Only local Gate 1 is approved; deployment architecture and rollback are in [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md).
+
 ## Static rendering
 
 Astro renders `/ar/` and `/en/` through one `Landing` component and section tree. `/` uses `business.defaultLocale`, with a small preference redirect only when an explicit locale was saved. Static HTML contains business content, links, complete prices and hours. The later private-feedback feature uses one Vercel Node API; no client framework is needed. See `CUSTOMER_FEEDBACK.md` for server boundaries and delivery semantics.

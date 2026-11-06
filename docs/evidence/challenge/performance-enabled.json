@@ -1,0 +1,57 @@
+{
+  "label": "enabled",
+  "measuredAt": "2026-11-06T23:38:19.932Z",
+  "environment": "Local Chromium, loopback, no network throttling; one sample per viewport. Baseline proxy compresses, enabled harness does not: compare decodedScriptBytes, not encoded scriptBytes. Not field CWV/INP or a 60 FPS guarantee.",
+  "samples": [
+    {
+      "width": 390,
+      "cpuSlowdown": 4,
+      "before": {
+        "lcpMs": 476,
+        "cls": 0,
+        "scriptBytes": 44068,
+        "decodedScriptBytes": 44068,
+        "scripts": [
+          "/_astro/Feedback.astro_astro_type_script_index_0_lang.DOSpjRPf.js",
+          "/_astro/Challenge.astro_astro_type_script_index_0_lang.JroIbSVN.js",
+          "/_astro/Base.astro_astro_type_script_index_0_lang.DhGtVvsJ.js",
+          "/_astro/motion.BEL7y3_3.js"
+        ]
+      },
+      "after": {
+        "cls": 0,
+        "maxRecordedInteractionMs": 64,
+        "frameMedianMs": 16.699999999999818,
+        "frameP95Ms": 16.799999999999272,
+        "framesOver34ms": 0,
+        "scriptBytes": 64448,
+        "decodedScriptBytes": 64448
+      }
+    },
+    {
+      "width": 1440,
+      "cpuSlowdown": 1,
+      "before": {
+        "lcpMs": 288,
+        "cls": 0,
+        "scriptBytes": 44068,
+        "decodedScriptBytes": 44068,
+        "scripts": [
+          "/_astro/Feedback.astro_astro_type_script_index_0_lang.DOSpjRPf.js",
+          "/_astro/Challenge.astro_astro_type_script_index_0_lang.JroIbSVN.js",
+          "/_astro/Base.astro_astro_type_script_index_0_lang.DhGtVvsJ.js",
+          "/_astro/motion.BEL7y3_3.js"
+        ]
+      },
+      "after": {
+        "cls": 0,
+        "maxRecordedInteractionMs": 32,
+        "frameMedianMs": 16.699999999999818,
+        "frameP95Ms": 33.40000000000009,
+        "framesOver34ms": 1,
+        "scriptBytes": 64448,
+        "decodedScriptBytes": 64448
+      }
+    }
+  ]
+}

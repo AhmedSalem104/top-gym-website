@@ -1,0 +1,97 @@
+---
+import { challengeCopy, type ChallengeLocale } from '../i18n/challenge';
+import Icon from './Icon.astro';
+import '../styles/challenge.css';
+interface Props {
+  locale: ChallengeLocale;
+}
+const { locale } = Astro.props;
+const c = challengeCopy[locale];
+---
+
+<button
+  class="challenge-launch"
+  type="button"
+  data-challenge-open
+  aria-haspopup="dialog"
+  aria-controls="challenge-dialog"
+>
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    aria-hidden="true"
+  >
+    <path d="M7 3h10v5a5 5 0 0 1-10 0V3Zm0 2H3v3a4 4 0 0 0 5 4m9-7h4v3a4 4 0 0 1-5 4M12 13v5m-5 3h10m-9 0v-3h8v3" />
+  </svg>
+  <span>{c.floating}</span>
+</button>
+<dialog
+  id="challenge-dialog"
+  class="challenge-dialog"
+  aria-labelledby="challenge-title"
+  data-locale={locale}
+  data-unavailable={c.unavailable}
+>
+  <div class="challenge-shell">
+    <header class="challenge-top">
+      <span>{c.badge}</span>
+      <button type="button" class="challenge-close" data-challenge-close aria-label={c.close}>
+        <Icon name="close" />
+      </button>
+    </header>
+    <h2 id="challenge-title" class="challenge-title" tabindex="-1">
+      {c.title}
+    </h2>
+    <p class="challenge-local" data-challenge-local hidden>
+      {c.local}
+    </p>
+    <div data-challenge-stage class="challenge-stage">
+      <p>{c.loading}</p>
+    </div>
+    <p role="status" aria-live="polite" class="challenge-status" data-challenge-status></p>
+  </div>
+</dialog>
+<noscript>
+  <p class="container">
+    {locale === 'ar'
+      ? 'التحدي يحتاج JavaScript واتصالًا بالإنترنت.'
+      : 'The challenge requires JavaScript and an internet connection.'}
+  </p>
+</noscript>
+<script>
+  import { challengeEvent } from '../scripts/challenge-attribution';
+  const launcher = document.querySelector('[data-challenge-open]');
+  const viewed = () => {
+    if (!launcher || document.hidden) return;
+    void fetch('/api/challenge/v1/challenge/event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(challengeEvent('challenge_viewed')),
+    }).catch(() => {});
+    document.removeEventListener('visibilitychange', viewed);
+  };
+  if (document.hidden) document.addEventListener('visibilitychange', viewed);
+  else viewed();
+  let controller: Promise<{ open: () => Promise<void> }> | undefined;
+  document.querySelectorAll<HTMLButtonElement>('[data-challenge-open]').forEach((button) =>
+    button.addEventListener('click', () => {
+      controller ??= import('../scripts/challenge').then((module) => module.initChallenge());
+      void controller
+        .then((c) => c.open())
+        .catch(() => {
+          controller = undefined;
+          const dialog = document.querySelector<HTMLDialogElement>('#challenge-dialog')!;
+          dialog.querySelector<HTMLElement>('[data-challenge-stage]')!.textContent =
+            dialog.dataset.unavailable || '';
+          if (!dialog.open) dialog.showModal();
+          dialog
+            .querySelector('[data-challenge-close]')!
+            .addEventListener('click', () => dialog.close(), { once: true });
+        });
+    }),
+  );
+</script>

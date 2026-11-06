@@ -1,0 +1,11 @@
+{
+  "version": "REPLACE-AFTER-BUSINESS-APPROVAL",
+  "approved": false,
+  "approvedAt": "",
+  "validDays": 0,
+  "packages": [],
+  "durations": [],
+  "newCustomersOnly": false,
+  "combinable": false,
+  "terms": { "ar": "", "en": "" }
+}

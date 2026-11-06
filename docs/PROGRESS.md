@@ -1,5 +1,9 @@
 # Implementation progress — 2026-11-05
 
+## Fitness challenge — local Gate 1 implementation
+
+Backend, dedicated SQLite schema, verified-phone adapter, persisted timing/scoring, one-use coupons, bilingual dialog, MFA administration, first-party attribution, branded email/outbox, local harness and deployment templates are implemented. Actual 300-question authoring draft passes integrity checks but remains private and unreviewed. No VPS/production changes, SMS or real challenge email occurred. Tests/evidence and remaining gates are recorded in [CHALLENGE_QA.md](CHALLENGE_QA.md); the previous audit is [CHALLENGE_AUDIT.md](CHALLENGE_AUDIT.md). Gate 2/3, provider/domain, commercial terms, content review and privacy decisions remain open.
+
 ## Faster Hero image — 2026-11-06
 
 At the owner's request, shortened the existing image cycle from 24 to 18 seconds (approximately 33% faster along the same path). The only application change is the centralized image-duration token. Lighting, amplitude, easing, text, image assets and reduced-motion/offscreen lifecycle remain unchanged. Updated the existing timing safety range to 16–24 seconds.
@@ -187,3 +191,5 @@ The implementation was pushed as `7679d03ce31573d9143e1248f0062cd8c3559cb7`. [Pu
 - Vercel public `/` and `/ar/` return 404. GitHub reports a successful deployment of the **empty main baseline**; website code is still on the feature branch. Feature previews are Ready but require Vercel authentication. Added explicit Astro/build/output settings in `vercel.json`. No main merge, production promotion or authentication/protection change was performed. Dashboard inspection was unavailable; details and exact release steps are in `VERCEL_DIAGNOSIS.md`.
 
 Review: [Arabic footer desktop](evidence/footer-after-ar-1440.webp), [Arabic footer mobile](evidence/footer-after-ar-390.webp), [English footer tablet](evidence/footer-after-en-768.webp), [English CTA](evidence/footer-cta-after-en-1440.webp), [Arabic before recording](evidence/calm-before-ar-1440.webm), [Arabic after recording](evidence/calm-after-ar-1440.webm).
+
+Gate 1 final local verification: 45 backend + 58 website/BFF unit tests, 117 existing browser cases and 15 challenge cases passed. Both builds/types/lint/format/SEO passed. Local 4? CPU flow CLS was 0; measurements and screenshot limits are recorded in `CHALLENGE_QA.md`. No remote push, staging deployment or production mutation was performed.

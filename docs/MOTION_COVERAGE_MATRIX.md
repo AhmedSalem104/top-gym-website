@@ -1,5 +1,18 @@
 # Motion coverage matrix
 
+## Fitness challenge (gated, local only)
+
+| Component         | Motion / interaction                                       | Verification                                                         |
+| ----------------- | ---------------------------------------------------------- | -------------------------------------------------------------------- |
+| Floating entry    | Shared micro hover/focus, no perpetual animation           | Touch/keyboard and responsive browser checks                         |
+| Native dialog     | Shared one-time enter, native focus trap/restoration       | AR/EN, Escape, touch close, reduced motion                           |
+| Questions/options | Shared short feedback; stable option layout                | Real local API progression, failed request recovery                  |
+| Timer             | Transform-only visual fill; server deadline authoritative  | Closed-modal timeout, manipulated/repeated requests in service tests |
+| Results           | Shared entrance, 260 ms count-up and bounded gold confetti | 30% browser flow, 0% timeout, reduced-motion checks                  |
+| Admin             | Shared CSS micro tokens; no decorative loops               | Login/search/redemption and responsive axe checks                    |
+
+Evidence and limits: [CHALLENGE_QA.md](CHALLENGE_QA.md). Existing sections retain their motion architecture.
+
 ## Feedback and stronger Hero follow-up — 6 November 2026
 
 | Area                  | Shared behavior                                                    | Verification                                                                                         |

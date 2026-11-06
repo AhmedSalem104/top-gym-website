@@ -12,3 +12,6 @@ dist/
 .astro/
 *.log
 *.zip
+services/
+content/challenge/
+deploy/

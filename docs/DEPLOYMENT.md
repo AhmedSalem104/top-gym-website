@@ -1,5 +1,9 @@
 # Deployment preparation
 
+## Challenge override: do not deploy automatically
+
+Only Gate 1 local implementation is approved for the new fitness challenge. Earlier standing website publish instructions do not authorize a staging preview or production release of it. See [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md) for private environment variables, isolated SQLite, Docker/Caddy templates, OTP/mail activation, backups and rollback. Keep `PUBLIC_CHALLENGE_ENABLED=false` and do not push a branch that triggers an unapproved Vercel Preview. No backend artifact has been installed on the VPS.
+
 ## Current publishing authorization — 6 November 2026
 
 The owner explicitly requested merging and publishing PR #16, then instructed: after every completed modification, push and publish. This is standing authorization for the normal protected-PR/Vercel workflow after successful validation; do not repeatedly request permission. A later explicit review-only instruction overrides this preference. Preserve required checks, source integrity and post-deployment verification. Deployment permission does not verify unresolved business facts or enable search indexing automatically.

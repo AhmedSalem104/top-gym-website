@@ -1,6 +1,11 @@
 # TOP GYM contributor instructions
 
-Build a bilingual marketing site for the real TOP GYM. Preserve the supplied Apex Gold Stitch direction and business facts. Static Astro pages have one private feedback API; this is not a membership application.
+Build a bilingual marketing site for the real TOP GYM. Preserve the supplied Apex Gold Stitch direction and business facts. Static Astro pages have private feedback and a gated challenge BFF; this is not a membership/payment application.
+
+**Fitness challenge approval override:** only Gate 1 local implementation/tests are approved. Gate 2 staging and Gate 3 production each need separate explicit approval. Do not push if that triggers an unapproved Vercel preview, merge, deploy, or mutate the VPS. This overrides earlier standing publication instructions for this feature. Read `docs/CHALLENGE.md`, `docs/CHALLENGE_API.md`, `docs/CHALLENGE_OPERATIONS.md`, `docs/QUESTION_BANK.md` and `docs/CHALLENGE_QA.md`.
+
+- Challenge backend: `services/challenge` (Node 24/Fastify/SQLite/Argon2/TOTP); run `npm run challenge:install`, `challenge:check`, `challenge:test`, `challenge:preview:build`, `challenge:e2e`. All real OTP/mail/campaign tests require approved staging; local harness uses mock OTP and no email.
+- This GitHub repository is PUBLIC. Never commit `content/challenge/questions.txt`, `questions.json`, private review ledgers, DBs or secrets. Public fixtures are synthetic. Actual 300-question drafts are ignored local artifacts; no production activation before qualified review, approved policy/OTP/domain and retention decisions. Public CI cannot substitute for private-bank release validation.
 
 - Stack: Astro, TypeScript, Tailwind 4/CSS, small DOM scripts. Node 24, npm lockfile.
 - Business facts: `src/config/business.ts`; translations: `src/i18n/index.ts`; media descriptions: `src/content/media.ts`.

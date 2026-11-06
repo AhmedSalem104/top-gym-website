@@ -6,6 +6,7 @@
   "outputDirectory": "dist",
   "trailingSlash": true,
   "functions": {
-    "api/feedback.ts": { "maxDuration": 45 }
+    "api/feedback.ts": { "maxDuration": 45 },
+    "api/challenge/[...path].ts": { "maxDuration": 25 }
   }
 }

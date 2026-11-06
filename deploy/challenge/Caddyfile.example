@@ -1,0 +1,17 @@
+# Merge only after approved DNS/TLS/staging plan. Do not replace the shared Caddyfile.
+# Set CHALLENGE_API_HOST to an approved real DNS hostname; no invented hostname.
+{$CHALLENGE_API_HOST} {
+    request_body {
+        max_size 8KB
+    }
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy no-referrer
+        X-Robots-Tag "noindex, nofollow"
+        Cache-Control no-store
+        -Server
+    }
+    # Do not log URLs, cookies, bodies, OTPs or participant information.
+    # Existing Caddy runs in host-network mode; this address requires that topology.
+    reverse_proxy 127.0.0.1:4400
+}
