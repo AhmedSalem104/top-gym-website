@@ -25,7 +25,7 @@ The owner authorized merging and publishing PR #11 on November 5, 2026. Vercel n
 - Conditional canonical/hreflang/social metadata, an ExerciseGym schema, sitemap, and robots policy.
 - Certificate card/lightbox infrastructure with an explicit publication gate; no placeholder section is shown.
 - GitHub Actions, ESLint, TypeScript checks, Vitest, Playwright and axe accessibility checks.
-- Private bilingual customer feedback: native star ratings, topic chips, optional reply details, secure server validation, Gmail SMTP notifications and a branded HTML/plain-text email. Delivery is enabled only after private server configuration; see [Customer feedback](docs/CUSTOMER_FEEDBACK.md).
+- Private bilingual customer feedback: native star ratings, topic chips, optional reply details, secure server validation, Gmail SMTP notifications and a branded HTML/plain-text email. Production delivery is enabled; a real form submission and Gmail INBOX receipt were verified on 6 November 2026. New deployments require private server configuration; see [Customer feedback](docs/CUSTOMER_FEEDBACK.md).
 
 ## Stack and architecture
 

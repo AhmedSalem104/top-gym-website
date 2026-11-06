@@ -1,5 +1,13 @@
 # Implementation progress — 2026-11-05
 
+## Feedback production activation — 2026-11-06
+
+Resolved the reported unavailable message by completing private Vercel configuration, not by suppressing errors. The owner supplied the Gmail address and accepted Upstash terms. The free Redis resource is connected with automatic upgrades disabled; integration-provided KV REST values were mapped to the server's UPSTASH variables. Sender and recipient use the owner-supplied inbox. No credentials or email address were added to source control or client code.
+
+Redeployed main e64dc05 as production deployment dpl_HqKYRt6gRcjfRpxPF6RJpwsWpw1s. The public endpoint now reports available:true. Live Gmail TLS/authentication and atomic Redis checks passed. Six real, unmocked Arabic/English browser checks at 390/768/1440px passed: enabled form, correct direction, no overflow/page errors and preserved reduced motion. One clearly labeled sample was submitted from the Arabic mobile form; SMTP accepted it and the UI displayed success. An identical-key replay returned stored acceptance. Read-only IMAP EXAMINE INBOX plus an exact test Message-ID search confirmed exactly one received message without fetching unrelated mail or marking it read.
+
+The prior sender/recipient, provider-terms and real-delivery blockers are resolved. Gmail visual light/dark rendering remains unreviewed. See CUSTOMER_FEEDBACK.md and evidence/feedback-activation.json for the dated outcome. Screenshots show the actual available production form, with no mocked readiness. This follow-up changes configuration and documentation only; the published application implementation is unchanged.
+
 ## Private feedback and stronger Hero — 2026-11-06
 
 The owner asked where feedback was, requested stronger background motion and complete removal of the pause button, supplied a private credential file and explicitly instructed publishing after completion. Work continues on feat/feedback-and-hero from merged cinematic main 83ea619, preserving the earlier partial feedback files.

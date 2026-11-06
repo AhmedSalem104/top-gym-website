@@ -1,5 +1,13 @@
 # QA and release checklist
 
+## Feedback activation — 6 November 2026
+
+- Production configuration is complete and redeployed. Public readiness returns HTTP 200 with available:true.
+- Live Gmail TLS authentication and Redis atomic limit/claim/deduplication/completion checks pass; exact temporary test keys were removed.
+- Six unmocked production browser cases pass: Arabic/English at 390/768/1440px, enabled submission, expected direction, no horizontal overflow, no page errors and preserved reduced motion.
+- One labeled test sent through the real Arabic mobile form returned HTTP 200 accepted and a focused localized success state. Same-key replay returned stored acceptance. A read-only exact Message-ID search found exactly one copy in Gmail INBOX; unrelated messages were not fetched or marked read.
+- This resolves the earlier configuration and real-delivery gates below. Gmail visual rendering, physical-device checks and unrelated business-source follow-ups remain separate. Evidence: [activation record](evidence/feedback-activation.json), [Arabic mobile](evidence/feedback-live-ar-390.png), [English desktop](evidence/feedback-live-en-1440.png).
+
 ## Feedback and stronger Hero — 6 November 2026
 
 - 54 unit tests pass, including real schema validation, mocked SMTP options/acceptance/rejection/deadline, safe template output, idempotent concurrency and storage failures. Typecheck reports 74 files and zero errors/warnings/hints; lint/build/SEO fixture checks pass.

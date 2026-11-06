@@ -18,6 +18,7 @@ GitHub Actions validates; the Vercel Git integration publishes main and creates 
 
 ## Host settings
 
+- Feedback was activated on production on 6 November 2026 by completing private Gmail/Redis configuration and redeploying main. A real form submission and exactly one Gmail INBOX receipt were verified; see CUSTOMER_FEEDBACK.md. Environment-variable changes require another deployment to affect running functions. Keep these secrets configured on the existing production project, never in Git or static build assets.
 - Build command: `npm run build`; output directory: `dist`; runtime: Node 24.
 - Private feedback requires `api/feedback.ts`, Gmail server secrets and a shared Redis REST store. See `CUSTOMER_FEEDBACK.md` for the exact configuration, readiness contract and acceptance checks. Other landing-page features remain static. A `dist/`-only deployment has no mail API.
 - Cache hashed `/_astro/` files as immutable. Give HTML short cache lifetimes. Version media filenames if using long immutable caching for `/media/`.
