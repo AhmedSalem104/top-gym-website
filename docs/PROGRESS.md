@@ -1,5 +1,9 @@
 # Implementation progress — 2026-11-05
 
+## Hero brand legibility — 2026-11-06
+
+Increased the existing TOP GYM label from 12px to 20–26px and the decorative flexed-arm emoji to 24–28px, retaining gold, Chivo, the original reading order and shared motion. Removed the old mobile/RTL size overrides. Typecheck (55 files, zero diagnostics), lint, formatting and production build passed; all 20 existing Hero/navigation browser checks passed without retries across both locales and 320–1920px. Four actual screenshots are retained as `evidence/hero-brand-after-{ar,en}-{390,1440}.webp`; Arabic mobile/desktop were visually compared with the prior `hero-copy-after-*` captures. No new performance measurement is claimed.
+
 ## Hero copy and certificate presentation — 2026-11-06
 
 - Removed the requested visible promotional-photo caption and About paragraph in both languages. Accurate photo alternative text and source/license provenance remain.
@@ -7,7 +11,7 @@
 - Integrated the credentials introduction with the five document cards in a three/two/one-column gallery. Clear titles, complete uncropped previews, training dates and enlargement controls preserve every original published document, redaction, issuer and the supplied holder name.
 - Full local `npm run test:all` passed after the final Hero update: typecheck (55 files, zero diagnostics), lint, formatting, 18 unit tests, production build, isolated SEO fixture and **81 Chromium tests with no retries**. Six new certificate scenarios cover every document, keyboard opening/Escape/focus return, loaded images and accessibility in Arabic/English at 390/768/1440px. The 14 existing Hero layout/action scenarios also check the new services across 320–1920px.
 - Captured 24 actual before/after screenshots for Hero copy and credentials at 390/768/1440px in both locales. Representative mobile/tablet/desktop results were visually inspected. No new Lighthouse or frame-rate measurement is claimed; earlier performance evidence remains historical.
-- The owner explicitly requested finishing and publishing these changes. The feature branch is `feat/credentials-presentation`; production delivery will follow successful required GitHub checks. Final merge/deployment/live-check evidence will be recorded in the PR release note.
+- The owner explicitly requested finishing and publishing these changes. [PR #14](https://github.com/AhmedSalem104/top-gym-website/pull/14) merged at `082fa568b0e59e0d0f0e51888f088090ec5ba0fd` after both required quality runs passed. Vercel production completed and 15 live Chromium checks passed without retries; release evidence is recorded in the PR.
 
 ## Hero and navigation follow-ups
 

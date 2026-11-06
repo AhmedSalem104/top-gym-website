@@ -2,6 +2,10 @@
 
 ## Approved direction
 
+### Brand-label legibility — 6 November 2026
+
+The owner requested making “TOP GYM 💪” clearer. Increase the existing gold Chivo label from 12px to a fluid 20–26px, use a compact 1.2 line height, and size the decorative emoji at 24–28px. Retain the original label/heading hierarchy, 12px gap, restrained gold line and shared entrance. Remove conflicting mobile/RTL 12px overrides so both languages receive the same improvement. No content, image, logo or interaction changes are required.
+
 ### Owner's copy revision — 6 November 2026
 
 The owner replaced the earlier “Your strength starts here” text with TOP GYM, “9 سنين خبرة وثقة”, four service statements, and “ابدأ رحلتك معانا وخلي هدفك خطتنا”. The new layout presents a compact TOP GYM/💪 label, a two-line white/gold heading, four aligned service rows and a separated invitation before the existing three actions. The owner-provided emojis are decorative (`aria-hidden`); the complete meaning remains in readable text. Arabic and English share this composition.
