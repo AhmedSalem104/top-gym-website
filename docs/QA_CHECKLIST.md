@@ -1,5 +1,26 @@
 # QA and release checklist
 
+## Feedback and stronger Hero — 6 November 2026
+
+- 54 unit tests pass, including real schema validation, mocked SMTP options/acceptance/rejection/deadline, safe template output, idempotent concurrency and storage failures. Typecheck reports 74 files and zero errors/warnings/hints; lint/build/SEO fixture checks pass.
+- Browser coverage adds native stars/topics, optional details, keyboard, honest server-confirmed success, unavailable configuration, uncertain outcomes and retry identity. AR/EN form layouts are checked at 320/390/768/1440 with zero axe violations in the configured scans. The whole site's existing 320–1920px coverage remains.
+- Initial full browser run: 112 passed, three stale test assumptions failed. Pricing selectors now target their own disclosure; the no-fake-form assertion excludes the intentional feedback form and verifies its API action. Corrected cases passed. Final protected CI provides the complete release run.
+- Curated before/after form/Hero screenshots and sample email previews are in evidence/feedback-*.webp. Section screenshots hide fixed chrome; complete browser tests retain it. Form preview GET was mocked available solely for UI screenshots; no email was sent. Email previews are Chromium rendering, not Gmail.
+- Two-cycle pose inspection confirms no uncovered image edges and identical loop endpoints. Fourteen cinematic cases preserve real CSS progress, stationary text/CTA geometry, observer/visibility/bfcache/resize and OS reduced-motion behavior after removing the control.
+
+| Locale / width / CPU | Before local LCP | After local LCP | Before / after CLS | After rAF p95 |
+| -------------------- | ---------------: | --------------: | -----------------: | ------------: |
+| Arabic / 390 / 6×    |            728ms |           684ms |              0 / 0 |        16.7ms |
+| Arabic / 1440 / 1×   |            296ms |           192ms |              0 / 0 |        16.8ms |
+| English / 390 / 6×   |            428ms |           416ms |              0 / 0 |        16.8ms |
+| English / 1440 / 1×  |            160ms |           188ms |              0 / 0 |        16.7ms |
+
+These are single local Chromium observations without network throttling, not Lighthouse scores or field Web Vitals. The 12-second steady-state windows after fonts/entrance settle have zero CLS, no intervals over 34ms, moving camera transforms and stable heading geometry. rAF cadence does not measure GPU frame throughput; startup long tasks remain in the raw record. Some static checks ran during the end of collection, so this is not an isolated performance benchmark. No INP or universal 60fps claim is made. [Raw observations](evidence/feedback-hero-performance.json), [14-second recording](evidence/feedback-hero-motion.webm).
+
+- Actual Vercel preview function returns HTTP 200 unavailable readiness after fixing .ts import emission; production credentials are never used by CI.
+- Outstanding integration gates: owner-provided Gmail sender/recipient addresses, Upstash terms/configuration, real SMTP acceptance and inbox receipt, actual Gmail light/dark rendering. No successful email delivery is claimed.
+- Accessibility limitation: the owner explicitly removed the visible pause control. OS reduced motion disables continuous effects; full WCAG 2.2.2 compliance is not claimed. Physical devices/Safari/screen readers remain outside this Chromium lab run.
+
 ## Cinematic Hero — 6 November 2026
 
 - Final `npm run test:all` passed: TypeScript (58 files, zero errors/warnings/hints), ESLint, formatting, **19 unit tests**, production build, isolated SEO fixture checks and **all 103 Chromium cases without retries** (3.1 minutes). The 14 new camera/lifecycle cases and 20 existing Hero/navigation cases cover Arabic/English widths 320/375/390/768/1440/1920, keyboard pause/resume without reset, stable text/CTA geometry, offscreen pause, simulated hidden-document/bfcache events, resize, observer failure, reduced motion, loop endpoints, exact CTA targets and existing axe scans. The rest of the full suite checks the unchanged site sections and interactions.

@@ -1,6 +1,6 @@
 # TOP GYM contributor instructions
 
-Build a static bilingual marketing site for the real TOP GYM. Preserve the supplied Apex Gold Stitch direction and business facts. This is not a membership application.
+Build a bilingual marketing site for the real TOP GYM. Preserve the supplied Apex Gold Stitch direction and business facts. Static Astro pages have one private feedback API; this is not a membership application.
 
 - Stack: Astro, TypeScript, Tailwind 4/CSS, small DOM scripts. Node 24, npm lockfile.
 - Business facts: `src/config/business.ts`; translations: `src/i18n/index.ts`; media descriptions: `src/content/media.ts`.
@@ -23,6 +23,8 @@ Footer groups and the pre-footer CTA reuse shared `footer` motion. Never restart
 
 Current Hero composition, media provenance and post-Hero header inversion: `docs/HERO_REDESIGN.md`. Keep Home mapped to the Hero in ScrollSpy; never observe the full body as a section.
 
-Cinematic Hero: `docs/CINEMATIC_HERO.md`. Camera and lighting own separate CSS transforms; text remains one-time motion. Reuse the existing Hero observer, pause offscreen/hidden documents, preserve the user pause state and disable continuous effects for reduced motion. The latest Hero task explicitly requires review before merge/production, overriding standing publication permission for this change.
+Cinematic Hero: `docs/CINEMATIC_HERO.md`. Camera and lighting own separate CSS transforms; text remains one-time motion. Reuse the existing Hero observer, pause offscreen/hidden documents and disable continuous effects for reduced motion. The owner explicitly requested stronger movement, removal of the visible pause control, and publication of this update. Keep the accessibility tradeoff documented.
+
+Private feedback: `docs/CUSTOMER_FEEDBACK.md`; `src/sections/Feedback.astro`, `src/scripts/feedback.ts`, `src/server/feedback/`, `api/feedback.ts`. Keep secrets server-only and ignored. Use mocked SMTP in CI, never real customer messages. Success means SMTP acceptance, not confirmed inbox placement. Preserve atomic rate limits/idempotency, fixed sender, validation and fail-closed configuration. `npm run preview:email` generates labeled samples without sending mail.
 
 Credentials layout, responsive derivatives and certificate-only zoom: `docs/CREDENTIALS_PRESENTATION.md`. Keep document files, redactions, issuer names and training dates intact. Card hover uses independent `translate`; do not compete with shared reveal transforms. The requested new visual-reference image is still pending; the owner subsequently authorized publishing the implemented written-brief design.

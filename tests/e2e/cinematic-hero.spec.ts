@@ -1,8 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('camera keeps coverage on resize and retains manual pause across bfcache lifecycle', async ({
-  page,
-}) => {
+test('camera keeps coverage on resize and resumes across bfcache lifecycle', async ({ page }) => {
   await page.goto('/ar/');
   const hero = page.locator('.hero');
   await expect(hero).toHaveAttribute('data-cinematic', 'running');
@@ -21,13 +19,12 @@ test('camera keeps coverage on resize and retains manual pause across bfcache li
       }),
     ).toBe(true);
   }
-  await hero.locator('[data-hero-motion-toggle]').click();
+  await expect(hero.locator('[data-hero-motion-toggle]')).toHaveCount(0);
   await page.evaluate(() => {
     dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true }));
     dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true }));
   });
-  await expect(hero.locator('[data-hero-motion-toggle]')).toHaveAttribute('aria-pressed', 'true');
-  await expect(hero).toHaveAttribute('data-cinematic', 'paused');
+  await expect(hero).toHaveAttribute('data-cinematic', 'running');
 });
 
 for (const locale of ['ar', 'en']) {
@@ -39,10 +36,9 @@ for (const locale of ['ar', 'en']) {
       await page.goto(`/${locale}/`);
       const hero = page.locator('.hero');
       const image = hero.locator('.hero-camera');
-      const toggle = hero.locator('[data-hero-motion-toggle]');
       await page.evaluate(() => document.fonts.ready);
       await expect(hero).toHaveAttribute('data-cinematic', 'running');
-      await expect(toggle).toBeEnabled();
+      await expect(hero.locator('[data-hero-motion-toggle]')).toHaveCount(0);
       await expect(image).toHaveCSS('animation-play-state', 'running');
       const sample = () =>
         hero.evaluate((el) => {
@@ -68,16 +64,6 @@ for (const locale of ['ar', 'en']) {
         .poll(() => image.evaluate((el) => getComputedStyle(el).transform))
         .not.toBe(start);
       expect(await sample()).toEqual(geometry);
-      // Keyboard access pauses the current frame, rather than resetting it.
-      await toggle.focus();
-      await page.keyboard.press('Space');
-      await expect(toggle).toHaveAttribute('aria-pressed', 'true');
-      await expect(image).toHaveCSS('animation-play-state', 'paused');
-      const frozen = await image.evaluate((el) => getComputedStyle(el).transform);
-      await page.waitForTimeout(200);
-      expect(await image.evaluate((el) => getComputedStyle(el).transform)).toBe(frozen);
-      await page.keyboard.press('Space');
-      await expect(image).toHaveCSS('animation-play-state', 'running');
       await page
         .locator('#memberships')
         .evaluate((el) => el.scrollIntoView({ behavior: 'instant' }));
@@ -90,7 +76,7 @@ for (const locale of ['ar', 'en']) {
         animation.pause();
         const timing = animation.effect!.getTiming();
         const duration = Number(timing.duration);
-        const states = [0, 0.5, 1, 1.5, 2].map((cycle) => {
+        const states = [0, 0.33, 0.66, 1, 1.66, 2].map((cycle) => {
           animation.currentTime = Number(timing.delay) + duration * cycle;
           const rect = el.getBoundingClientRect();
           const section = el.closest('.hero')!.getBoundingClientRect();
@@ -107,7 +93,7 @@ for (const locale of ['ar', 'en']) {
         return states;
       });
       expect(bounds.every((state) => state.covers)).toBe(true);
-      expect(bounds[0].transform).toBe(bounds[4].transform);
+      expect(bounds[0].transform).toBe(bounds[5].transform);
       await page.emulateMedia({ reducedMotion: 'reduce' });
       await expect(hero).toHaveAttribute('data-cinematic', 'paused');
       expect(await hero.evaluate((el) => el.getAnimations({ subtree: true }).length)).toBe(0);
@@ -143,5 +129,5 @@ test('cinematic lifecycle pauses hidden documents and observer failure stays sta
   });
   await page.reload();
   await expect(page.locator('.hero-camera')).toHaveCSS('animation-play-state', 'paused');
-  await expect(page.locator('[data-hero-motion-toggle]')).toBeDisabled();
+  await expect(page.locator('[data-hero-motion-toggle]')).toHaveCount(0);
 });

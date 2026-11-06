@@ -43,7 +43,7 @@ for (const locale of ['ar', 'en'] as const) {
       await expect(cta.locator(`a[href="tel:${business.contacts[0].phone}"]`)).toBeAttached();
       await expect(cta.locator(`a[href="${business.links.maps}"]`)).toBeAttached();
       const links = footer.locator('.footer-navigation a');
-      await expect(links).toHaveCount(7);
+      await expect(links).toHaveCount(8);
       for (const link of await links.all()) {
         const href = (await link.getAttribute('href'))!;
         await link.click();

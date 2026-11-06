@@ -1,5 +1,9 @@
 # Decision log
 
+2026-11-06 feedback follow-up: add one native Vercel Node function to the static Astro site, with Zod validation, Gmail SMTP, a branded escaped HTML/plain-text template and atomic Redis limits/idempotency. Keep secrets server-only and store no feedback text in Redis. Success means SMTP acceptance, never guaranteed inbox placement. Network/storage/rate-limit retries retain the same key; only definitive rejection/validation permits a new one. Missing configuration fails closed with an honest visible message. The owner authorized completing and publishing the update; Gmail sender/recipient and provider terms remain external setup inputs.
+
+2026-11-06 stronger Hero follow-up: increase responsive camera amplitude and reduce its cycle to 24 seconds, retain separate 20-second low-opacity lighting, and remove the visible pause control exactly as requested. Preserve OS reduced motion and offscreen/hidden lifecycle. Document the resulting WCAG 2.2.2 limitation rather than claiming full compliance. No new image, animation framework or JavaScript render loop.
+
 | Date       | Decision                                                | Reason                                                                                                             |
 | ---------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | 2026-11-05 | Astro static output with TypeScript and Tailwind 4      | Empty repository; marketing scope needs no backend or hydrated UI framework                                        |

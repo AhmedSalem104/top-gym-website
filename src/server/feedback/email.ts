@@ -1,0 +1,100 @@
+import type { Feedback } from './schema.ts';
+import { feedbackCopy } from '../../i18n/feedback.ts';
+
+export const escapeHtml = (value: string) =>
+  value.replace(
+    /[&<>"']/g,
+    (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
+  );
+export function feedbackEmail(feedback: Feedback, date = new Date()) {
+  const copy = feedbackCopy[feedback.locale];
+  const dir = feedback.locale === 'ar' ? 'rtl' : 'ltr';
+  const timestamp = new Intl.DateTimeFormat(feedback.locale === 'ar' ? 'ar-EG' : 'en-GB', {
+    timeZone: 'Africa/Cairo',
+    dateStyle: 'long',
+    timeStyle: 'short',
+  }).format(date);
+  const topics = feedback.categories.map((category) => copy.topics[category]).join(' / ');
+  const stars = '★'.repeat(feedback.rating) + '☆'.repeat(5 - feedback.rating);
+  const name = feedback.name || (feedback.locale === 'ar' ? 'لم يُذكر الاسم' : 'No name provided');
+  const row = (label: string, value: string) =>
+    '<tr><td style="padding:8px 0;color:#5c6168;font-size:13px">' +
+    label +
+    '</td><td dir="auto" style="padding:8px 0;color:#17191C;font-size:14px;text-align:end">' +
+    escapeHtml(value) +
+    '</td></tr>';
+  const subject = '[TOP GYM WEBSITE] Customer Feedback — ' + feedback.rating + '/5';
+  const html = [
+    '<!doctype html><html lang="' +
+      feedback.locale +
+      '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>TOP GYM Customer Feedback</title></head>',
+    '<body style="margin:0;padding:0;background:#eef0f2;font-family:Tahoma,Arial,sans-serif;color:#17191C">',
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px">',
+    '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;border:1px solid #d3a44d;border-radius:14px;overflow:hidden;background:#ffffff">',
+    '<tr><td style="background:#0B0D0F;padding:32px;color:#F8F9FA;border-top:5px solid #E59500">',
+    '<p style="margin:0 0 20px;font-size:28px;font-weight:bold;color:#E59500" dir="ltr">TOP GYM</p>',
+    '<p style="margin:0 0 12px;color:#c7cbd0;letter-spacing:1px;font-size:10px">OFFICIAL WEBSITE NOTIFICATION</p>',
+    '<h1 dir="rtl" style="margin:0 0 12px;font-size:26px;line-height:1.6;color:#F8F9FA">وصل تقييم جديد من الموقع!</h1>',
+    '<p style="margin:0;color:#F8F9FA;font-size:17px">New Customer Feedback</p><p style="margin:18px 0 0;color:#E59500;font-size:12px;font-weight:bold">SOURCE: TOP GYM WEBSITE</p></td></tr>',
+    '<tr><td dir="' + dir + '" style="padding:30px;background:#ffffff;color:#17191C">',
+    '<p dir="ltr" style="margin:0;color:#a96500;font-size:34px;letter-spacing:4px">' +
+      stars +
+      '</p>',
+    '<p style="margin:8px 0 24px;font-size:20px;font-weight:bold"><span dir="ltr" style="unicode-bidi:isolate">' +
+      feedback.rating +
+      ' / 5</span> — ' +
+      escapeHtml(copy.ratings[feedback.rating - 1]) +
+      '</p>',
+    '<p style="margin:0 0 10px;color:#5c6168;font-size:12px">' + escapeHtml(copy.message) + '</p>',
+    '<table role="presentation" width="100%"><tr><td dir="auto" style="background:#f7f7f5;color:#17191C;border-' +
+      (dir === 'rtl' ? 'right' : 'left') +
+      ':3px solid #E59500;padding:22px;font-size:16px;line-height:1.9;overflow-wrap:anywhere;word-break:break-word">',
+    escapeHtml(feedback.message).replace(/\n/g, '<br>'),
+    '</td></tr></table><table role="presentation" width="100%" style="margin-top:24px;border-top:1px solid #e4e5e7">',
+    row(feedback.locale === 'ar' ? 'الاسم' : 'Name', name),
+    feedback.email
+      ? row(feedback.locale === 'ar' ? 'بريد التواصل' : 'Contact email', feedback.email)
+      : '',
+    row(feedback.locale === 'ar' ? 'المواضيع' : 'Topics', topics),
+    row(feedback.locale === 'ar' ? 'وقت الإرسال — القاهرة' : 'Submitted — Cairo', timestamp),
+    row(
+      feedback.locale === 'ar' ? 'يرغب في الرد' : 'Reply requested',
+      feedback.replyRequested
+        ? feedback.locale === 'ar'
+          ? 'نعم'
+          : 'Yes'
+        : feedback.locale === 'ar'
+          ? 'لا'
+          : 'No',
+    ),
+    '</table>',
+    feedback.email
+      ? '<p style="margin:24px 0 0"><a href="mailto:' +
+        escapeHtml(encodeURIComponent(feedback.email)) +
+        '" style="display:inline-block;background:#E59500;color:#0B0D0F;padding:12px 22px;text-decoration:none;font-weight:bold;border-radius:5px">' +
+        (feedback.locale === 'ar' ? 'الرد على العميل' : 'Reply to customer') +
+        '</a></p>'
+      : '',
+    '</td></tr><tr><td style="padding:24px 30px;background:#f0f1f2;border-top:1px solid #d8d9dc;color:#454b52;font-size:12px;line-height:1.8">',
+    '<strong style="color:#17191C">TOP GYM — CUSTOMER EXPERIENCE</strong>',
+    '<p dir="rtl">تم إرسال هذه الرسالة تلقائيًا من نموذج تقييم العملاء على الموقع الرسمي لتوب جيم.</p>',
+    '<p>This notification was automatically generated by the TOP GYM website customer feedback form.</p>',
+    '</td></tr></table></td></tr></table></body></html>',
+  ].join('');
+  const text = [
+    'TOP GYM WEBSITE — CUSTOMER FEEDBACK',
+    'Rating: ' + feedback.rating + '/5 — ' + copy.ratings[feedback.rating - 1],
+    'Topics: ' + topics,
+    '',
+    feedback.message,
+    '',
+    'Name: ' + name,
+    ...(feedback.email ? ['Contact email: ' + feedback.email] : []),
+    'Reply requested: ' + (feedback.replyRequested ? 'Yes' : 'No'),
+    'Submitted (Africa/Cairo): ' + timestamp,
+    'Source: TOP GYM Website',
+    '',
+    'This private notification was generated by the TOP GYM website customer feedback form.',
+  ].join('\n');
+  return { subject, html, text };
+}

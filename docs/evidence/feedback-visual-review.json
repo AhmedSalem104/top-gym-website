@@ -1,0 +1,139 @@
+{
+  "note": "Email previews use labeled sample data in Chromium, not Gmail. Form configuration GET is mocked available; no mail is sent. Section captures hide fixed chrome.",
+  "observations": [
+    {
+      "version": "before",
+      "locale": "ar",
+      "width": 390,
+      "feedbackSections": 0
+    },
+    {
+      "version": "after",
+      "locale": "ar",
+      "width": 390,
+      "feedbackSections": 1,
+      "overflow": false
+    },
+    {
+      "version": "before",
+      "locale": "ar",
+      "width": 768,
+      "feedbackSections": 0
+    },
+    {
+      "version": "after",
+      "locale": "ar",
+      "width": 768,
+      "feedbackSections": 1,
+      "overflow": false
+    },
+    {
+      "version": "before",
+      "locale": "ar",
+      "width": 1440,
+      "feedbackSections": 0
+    },
+    {
+      "version": "after",
+      "locale": "ar",
+      "width": 1440,
+      "feedbackSections": 1,
+      "overflow": false
+    },
+    {
+      "version": "before",
+      "locale": "en",
+      "width": 390,
+      "feedbackSections": 0
+    },
+    {
+      "version": "after",
+      "locale": "en",
+      "width": 390,
+      "feedbackSections": 1,
+      "overflow": false
+    },
+    {
+      "version": "before",
+      "locale": "en",
+      "width": 768,
+      "feedbackSections": 0
+    },
+    {
+      "version": "after",
+      "locale": "en",
+      "width": 768,
+      "feedbackSections": 1,
+      "overflow": false
+    },
+    {
+      "version": "before",
+      "locale": "en",
+      "width": 1440,
+      "feedbackSections": 0
+    },
+    {
+      "version": "after",
+      "locale": "en",
+      "width": 1440,
+      "feedbackSections": 1,
+      "overflow": false
+    },
+    {
+      "kind": "email-browser-preview",
+      "locale": "ar",
+      "width": 390,
+      "mode": "light",
+      "overflow": false
+    },
+    {
+      "kind": "email-browser-preview",
+      "locale": "ar",
+      "width": 390,
+      "mode": "dark",
+      "overflow": false
+    },
+    {
+      "kind": "email-browser-preview",
+      "locale": "ar",
+      "width": 768,
+      "mode": "light",
+      "overflow": false
+    },
+    {
+      "kind": "email-browser-preview",
+      "locale": "ar",
+      "width": 768,
+      "mode": "dark",
+      "overflow": false
+    },
+    {
+      "kind": "email-browser-preview",
+      "locale": "en",
+      "width": 390,
+      "mode": "light",
+      "overflow": false
+    },
+    {
+      "kind": "email-browser-preview",
+      "locale": "en",
+      "width": 390,
+      "mode": "dark",
+      "overflow": false
+    },
+    {
+      "kind": "email-browser-preview",
+      "locale": "en",
+      "width": 768,
+      "mode": "light",
+      "overflow": false
+    },
+    {
+      "kind": "email-browser-preview",
+      "locale": "en",
+      "width": 768,
+      "mode": "dark",
+      "overflow": false
+    }
+  ]
+}

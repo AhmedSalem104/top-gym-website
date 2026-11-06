@@ -1,0 +1,198 @@
+---
+import type { Locale } from '../config/business';
+import { feedbackCategories, feedbackLimits } from '../config/feedback';
+import { feedbackCopy } from '../i18n/feedback';
+import Icon from '../components/Icon.astro';
+import '../styles/feedback.css';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = feedbackCopy[locale];
+---
+
+<section id="feedback" class="section feedback-section" aria-labelledby="feedback-title">
+  <div class="container feedback-layout">
+    <div class="feedback-intro" data-motion-group>
+      <p class="eyebrow" data-motion="heading">
+        {copy.eyebrow}
+      </p>
+      <h2 id="feedback-title" data-motion="heading">
+        {copy.title} <em>{copy.gold}</em>
+      </h2>
+      <p class="feedback-lead" data-motion="reveal">
+        {copy.intro}
+      </p>
+      <div class="feedback-private" data-motion="reveal">
+        <Icon name="chat" size={26} />
+        <div>
+          <h3>{copy.privateTitle}</h3>
+          <p>{copy.privateText}</p>
+        </div>
+      </div>
+    </div>
+    <form
+      class="feedback-form"
+      data-feedback-form
+      data-locale={locale}
+      action="/api/feedback/"
+      method="post"
+      novalidate
+      data-motion="reveal"
+    >
+      <p class="feedback-required">{copy.required}</p>
+      <fieldset class="feedback-step" aria-describedby="rating-hint feedback-error-rating">
+        <legend>
+          <span class="feedback-step-number" aria-hidden="true">
+            01
+          </span>
+          {copy.rating}
+        </legend>
+        <p id="rating-hint" class="feedback-hint">
+          {copy.ratingHint}
+        </p>
+        <div class="feedback-stars">
+          {[1, 2, 3, 4, 5].map((score) => (
+            <label class="feedback-star">
+              <input
+                type="radio"
+                name="rating"
+                value={score}
+                required
+                aria-label={score + ' ' + copy.stars + ' — ' + copy.ratings[score - 1]}
+              />
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m12 2.5 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9Z" />
+              </svg>
+              <span aria-hidden="true">{score.toLocaleString(locale)}</span>
+            </label>
+          ))}
+        </div>
+        <p class="feedback-rating-description" data-rating-description aria-live="polite">
+          {copy.ratingHint}
+        </p>
+        <p id="feedback-error-rating" class="feedback-error" data-error="rating"></p>
+      </fieldset>
+      <fieldset class="feedback-step" aria-describedby="category-hint feedback-error-categories">
+        <legend>
+          <span class="feedback-step-number" aria-hidden="true">
+            02
+          </span>
+          {copy.categories}
+        </legend>
+        <p id="category-hint" class="feedback-hint">
+          {copy.categoryHint}
+        </p>
+        <div class="feedback-topics">
+          {feedbackCategories.map((category) => (
+            <label class="feedback-topic">
+              <input type="checkbox" name="categories" value={category} />
+              <span>{copy.topics[category]}</span>
+            </label>
+          ))}
+        </div>
+        <p id="feedback-error-categories" class="feedback-error" data-error="categories"></p>
+      </fieldset>
+      <div class="feedback-step">
+        <label class="feedback-message-label" for="feedback-message">
+          <span class="feedback-step-number" aria-hidden="true">
+            03
+          </span>
+          {copy.message}
+        </label>
+        <textarea
+          id="feedback-message"
+          name="message"
+          rows="5"
+          minlength={feedbackLimits.messageMin}
+          maxlength={feedbackLimits.messageMax}
+          placeholder={copy.placeholder}
+          required
+          dir="auto"
+          aria-describedby="feedback-length feedback-error-message"
+        ></textarea>
+        <div class="feedback-message-meta">
+          <p id="feedback-length" class="feedback-hint">
+            {copy.lengthHint}
+          </p>
+          <span data-character-count aria-hidden="true" dir="ltr">
+            0 / 2000
+          </span>
+        </div>
+        <p id="feedback-error-message" class="feedback-error" data-error="message"></p>
+      </div>
+      <details class="feedback-details">
+        <summary>
+          {copy.optional}
+          <Icon name="plus" size={18} />
+        </summary>
+        <div class="feedback-details-fields">
+          <div>
+            <label for="feedback-name">{copy.name}</label>
+            <input
+              id="feedback-name"
+              name="name"
+              type="text"
+              maxlength={feedbackLimits.nameMax}
+              autocomplete="name"
+              dir="auto"
+              aria-describedby="feedback-error-name"
+            />
+            <p id="feedback-error-name" class="feedback-error" data-error="name"></p>
+          </div>
+          <div>
+            <label for="feedback-email">{copy.email}</label>
+            <input
+              id="feedback-email"
+              name="email"
+              type="email"
+              maxlength={feedbackLimits.emailMax}
+              autocomplete="email"
+              dir="ltr"
+              aria-describedby="feedback-error-email"
+            />
+            <p id="feedback-error-email" class="feedback-error" data-error="email"></p>
+          </div>
+          <label class="feedback-reply">
+            <input
+              type="checkbox"
+              name="replyRequested"
+              aria-describedby="feedback-error-replyRequested"
+            />
+            <span>{copy.reply}</span>
+          </label>
+          <p class="feedback-hint">{copy.replyHint}</p>
+          <p
+            id="feedback-error-replyRequested"
+            class="feedback-error"
+            data-error="replyRequested"
+          ></p>
+        </div>
+      </details>
+      <div class="feedback-trap" aria-hidden="true">
+        <label for="feedback-website">Website</label>
+        <input id="feedback-website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <p class="feedback-privacy">{copy.privacy}</p>
+      <div class="feedback-submit-row">
+        <button class="button button-gold" type="submit" data-feedback-submit disabled>
+          <span>{copy.send}</span>
+          <Icon name="arrow" />
+        </button>
+      </div>
+      <p
+        class="feedback-status"
+        data-feedback-status
+        role="status"
+        aria-live="polite"
+        tabindex="-1"
+      ></p>
+      <noscript>
+        <p>{copy.noJs}</p>
+      </noscript>
+    </form>
+  </div>
+</section>
+<script>
+  import '../scripts/feedback';
+</script>

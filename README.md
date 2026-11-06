@@ -25,15 +25,17 @@ The owner authorized merging and publishing PR #11 on November 5, 2026. Vercel n
 - Conditional canonical/hreflang/social metadata, an ExerciseGym schema, sitemap, and robots policy.
 - Certificate card/lightbox infrastructure with an explicit publication gate; no placeholder section is shown.
 - GitHub Actions, ESLint, TypeScript checks, Vitest, Playwright and axe accessibility checks.
+- Private bilingual customer feedback: native star ratings, topic chips, optional reply details, secure server validation, Gmail SMTP notifications and a branded HTML/plain-text email. Delivery is enabled only after private server configuration; see [Customer feedback](docs/CUSTOMER_FEEDBACK.md).
 
 ## Stack and architecture
 
-Astro produces static HTML. TypeScript holds business data and small browser enhancements. Tailwind 4 supplies CSS infrastructure alongside the design-specific token stylesheet. There is no React runtime, backend, database, payment flow, tracking script, or fake form.
+Astro produces static HTML. TypeScript holds business data and small browser enhancements. Tailwind 4 supplies CSS infrastructure alongside the design-specific token stylesheet. One Vercel Node function handles private customer feedback with Nodemailer, Zod and shared Redis rate/idempotency records. No message content is stored in Redis. There is no React runtime, payment flow or tracking script.
 
 Exact package versions are pinned in `package.json` and `package-lock.json`. Fonts are self-hosted through Fontsource: Barlow Condensed, Chivo, and Cairo. Sharp prepares authorized media; Vitest covers data and hours; Playwright/axe cover browser behavior.
 
 ```text
 .github/                 CI, issue forms and PR template
+api/feedback.ts          Vercel server-only feedback endpoint
 docs/                    Project memory, provenance, evidence and launch checklist
 public/media/            Reviewed web derivatives only
 scripts/                 Reproducible media and performance tools
@@ -48,6 +50,7 @@ src/
   scripts/               Minimal browser interaction logic
   sections/              Landing page sections
   styles/                Tokens, responsive layout and reduced motion
+  server/feedback/       Validation, abuse protection, SMTP and email template
   utils/                 Cairo operating-hours calculation
 tests/                   Unit and browser tests
 ```
@@ -146,7 +149,7 @@ Copy `.env.example` to `.env` only when needed:
 
 Without an approved domain, canonical/hreflang and absolute social URLs are omitted, sitemap is empty, and robots disallows crawling. With an approved origin, both locales get canonical and alternate links and branded social metadata. The root is a nonindexed preference entrypoint. Structured data never invents address, coordinates, ratings, trainer identity or confirmed hours.
 
-Deploy `dist/` to a static host after completing [deployment preparation](docs/DEPLOYMENT.md). There is no deploy step in CI. Production deployment and merging into main require explicit owner authorization.
+Deploy through the linked Vercel project after completing [deployment preparation](docs/DEPLOYMENT.md). It serves `dist/` and builds `api/feedback.ts` as a Node function. A static-only host cannot send feedback. CI validates without production secrets or real mail. The owner has authorized publication of this update through the protected PR workflow.
 
 ## Git workflow and project status
 

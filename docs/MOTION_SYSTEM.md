@@ -2,7 +2,7 @@
 
 ## Architecture
 
-The site remains static Astro with shared Arabic/English components. Native Web Animations own viewport entrances/dialogs; CSS owns first-paint hero motion and hover/focus/press states. All share the same configuration tokens. There are no animation packages, hydration islands, scroll handlers or perpetual JavaScript render loops. The owner-requested cinematic Hero adds two CSS cycles while visible, described in `CINEMATIC_HERO.md`; these pause offscreen, in hidden documents, on user request and for reduced motion.
+The site remains static Astro with shared Arabic/English components. Native Web Animations own viewport entrances/dialogs; CSS owns first-paint hero motion and hover/focus/press states. All share the same configuration tokens. There are no animation packages, hydration islands, scroll handlers or perpetual JavaScript render loops. The cinematic Hero adds two CSS cycles while visible, described in `CINEMATIC_HERO.md`; these pause offscreen, in hidden documents and for reduced motion. The owner subsequently requested stronger motion and removal of the visible pause button; the documented accessibility tradeoff remains explicit.
 
 - `src/config/motion.ts`: timings, easing, distances, variants, viewport trigger and stagger budget. `Base.astro` emits the same tokens as CSS variables.
 - `src/scripts/motion.ts`: one IntersectionObserver shared by all reveals and the Hero boundary; one child-list MutationObserver for new/remounted content; delegated keyboard-focus handling; cancellation and lifecycle cleanup. After the Hero leaves the viewport above, the header becomes #FFAD26 with black links and focus rings. Its height remains unchanged.

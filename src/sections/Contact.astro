@@ -3,6 +3,7 @@ import { business, type Locale } from '../config/business';
 import { t } from '../i18n';
 import SectionHeading from '../components/SectionHeading.astro';
 import Icon from '../components/Icon.astro';
+import Feedback from './Feedback.astro';
 interface Props {
   locale: Locale;
 }
@@ -119,6 +120,7 @@ const copy = t(locale);
     </div>
   </div>
 </section>
+<Feedback locale={locale} />
 <section class="section final-cta" aria-labelledby="footer-cta-title">
   <div class="container">
     <div class="footer-cta-panel" data-motion-group>

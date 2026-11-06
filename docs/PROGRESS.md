@@ -1,5 +1,23 @@
 # Implementation progress — 2026-11-05
 
+## Private feedback and stronger Hero — 2026-11-06
+
+The owner asked where feedback was, requested stronger background motion and complete removal of the pause button, supplied a private credential file and explicitly instructed publishing after completion. Work continues on feat/feedback-and-hero from merged cinematic main 83ea619, preserving the earlier partial feedback files.
+
+Implemented the actual bilingual feedback section after Contact, with stars, topic chips, bounded message, optional name/email/reply preference, privacy copy and honest pending/accepted/error states. Footer and mobile menu link directly to it. Static Astro pages now have one native Vercel Node API with Zod, encrypted Gmail SMTP, fixed sender/recipient, escaped branded HTML/plain-text mail, atomic rate limits and idempotency. No feedback content is stored in Redis or published as testimonials.
+
+Camera motion is stronger at 24 seconds with separate 20-second lighting. The pause button and manual state are removed; reduced motion and offscreen/hidden lifecycle remain. Existing imagery, business facts, memberships, certificates and navigation logic are preserved. See CUSTOMER_FEEDBACK.md and CINEMATIC_HERO.md.
+
+Validation: 54 unit tests, typecheck (74 files, zero diagnostics), lint, production build and isolated SEO fixture passed. The initial 115-case browser run passed 112 and exposed old tests assuming a single disclosure and no forms anywhere. Those assumptions were scoped to memberships/no fake booking forms; affected cases passed afterward. The final release CI reruns the complete updated suite, including two extra retry regression scenarios.
+
+Actual before/after captures cover both locales at 390/768/1440. Email browser previews cover both locales at 390/768 in light/dark preference with labeled sample data. Visual review corrected Arabic score order, character-counter direction and empty-textarea alignment. Twelve-second steady Hero samples recorded stable text, zero CLS and no intervals over 34ms in eight before/after runs; see QA_CHECKLIST.md for limits and raw measurements.
+
+Hosted validation exposed an emitted-TypeScript import error in the first preview; the corrected second preview returned HTTP 200 available:false at /api/feedback/. Preview: https://top-gym-website-67uspruyj-ahmedsalem104s-projects.vercel.app. This is not proof of email delivery.
+
+Configuration state: Vercel login succeeded. The supplied local file contains only an app password, without an email address. Its normalized value and a generated HMAC key were stored as sensitive production environment variables; neither is in Git or browser output. Sender and recipient addresses are still requested. Free Upstash provisioning (automatic upgrades disabled) requires the owner's provider-terms acceptance; the CLI wait expired without acceptance. No paid plan was selected. Until complete, the public form clearly states unavailable and cannot fake success. Real SMTP/inbox/Gmail rendering remain unverified.
+
+The latest explicit user instruction authorizes pushing, protected merging and publication of the verified update; it supersedes the earlier review-only wording retained in historical entries.
+
 ## Cinematic living Hero — 2026-11-06
 
 Implemented the latest scoped Hero motion brief on `feat/cinematic-hero`, isolated from the in-progress customer-feedback worktree. The approved image/embedded emblem and text remain intact. A dedicated camera wrapper owns a 30-second CSS path; a separate low-opacity gold layer owns a 22-second cycle. Desktop/tablet/mobile amplitudes are centralized. The existing observer and lifecycle handle offscreen/hidden pauses; a localized keyboard toggle freezes/resumes the current frame, and reduced motion disables continuous effects.

@@ -19,19 +19,6 @@ const cinematicVariables = Object.entries(motion.cinematic)
 ---
 
 <section class="hero" aria-labelledby="hero-title" data-header-boundary style={cinematicVariables}>
-  <button
-    class="hero-motion-control"
-    type="button"
-    data-hero-motion-toggle
-    aria-pressed="false"
-    aria-label={locale === 'ar' ? 'إيقاف حركة الخلفية' : 'Pause background motion'}
-    disabled
-  >
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-      <path d="M4 3h3v10H4zm5 0h3v10H9z" />
-    </svg>
-    <span>{locale === 'ar' ? 'إيقاف حركة الخلفية' : 'Pause background motion'}</span>
-  </button>
   <div class="container hero-layout">
     <div class="hero-content" data-motion-group>
       <p class="hero-label" data-motion="heading">
