@@ -1,9 +1,8 @@
-// Loopback-only isolated harness. Mock OTP/mail; never deploy or use real credentials.
+// Loopback-only isolated harness. No SMS/mail; never deploy or use real credentials.
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, sep, extname } from 'node:path';
 import { createApp } from '../services/challenge/dist/app.js';
-import { createOtp } from '../services/challenge/dist/otp.js';
 import { config, fixtureBank } from '../services/challenge/tests/fixtures.ts';
 import { totp } from '../services/challenge/dist/security.js';
 import { loadBank } from '../services/challenge/dist/bank.js';
@@ -18,7 +17,7 @@ const bank =
   process.env.CHALLENGE_PREVIEW_BANK === 'real'
     ? loadBank('content/challenge/questions.json', true)
     : fixtureBank;
-const { app, admin, engine } = createApp(c, bank, createOtp(c));
+const { app, admin, engine } = createApp(c, bank);
 const secret = 'GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ';
 await admin.create('local-admin@example.test', 'Local-test-password-only!', secret);
 await admin.create('local-ar-admin@example.test', 'Local-test-password-only!', secret);

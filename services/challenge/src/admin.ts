@@ -186,7 +186,7 @@ export class Admin {
       args.push(query.status);
     } else if (query.status === 'zero') clauses.push('s.score=0');
     const from =
-      ' FROM participants p JOIN challenge_sessions s ON s.id=p.session_id JOIN verified_phone_identities i ON i.id=p.phone_id LEFT JOIN coupons c ON c.participant_id=p.id LEFT JOIN coupon_redemptions r ON r.coupon_id=c.id';
+      ' FROM participants p JOIN challenge_sessions s ON s.id=p.session_id JOIN phone_identities i ON i.id=p.phone_id LEFT JOIN coupons c ON c.participant_id=p.id LEFT JOIN coupon_redemptions r ON r.coupon_id=c.id';
     const where = clauses.length ? ' WHERE ' + clauses.join(' AND ') : '';
     const total = s.get<{ n: number }>('SELECT count(*) n' + from + where, ...args)!.n;
     const order =
@@ -274,7 +274,7 @@ export class Admin {
     );
     if (!coupon) throw new Fault('coupon_not_found', 404);
     const p = s.get<{ details_cipher: string; phone_cipher: string }>(
-      'SELECT p.details_cipher,i.phone_cipher FROM participants p JOIN verified_phone_identities i ON i.id=p.phone_id WHERE p.id=?',
+      'SELECT p.details_cipher,i.phone_cipher FROM participants p JOIN phone_identities i ON i.id=p.phone_id WHERE p.id=?',
       coupon.participant_id,
     )!;
     const policy = s.get<{ body: string }>(

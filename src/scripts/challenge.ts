@@ -45,12 +45,21 @@ export function initChallenge() {
     timer: ReturnType<typeof setInterval> | undefined,
     busy = false,
     state: State | undefined,
-    verification = '',
     lastQuestion = '',
     revision = 0,
     recoverQueued = false;
   let finishCount = () => {};
   const registrationKey = crypto.randomUUID();
+  // Keep only a random retry secret. Phone/name are never placed in web storage.
+  let enrollmentKey = crypto.randomUUID();
+  try {
+    const saved = sessionStorage.getItem('tg-challenge-entry');
+    if (saved && /^[a-f0-9-]{36}$/i.test(saved))
+      enrollmentKey = saved as `${string}-${string}-${string}-${string}-${string}`;
+    sessionStorage.setItem('tg-challenge-entry', enrollmentKey);
+  } catch {
+    /* The HttpOnly session still supports normal refresh recovery. */
+  }
   const terms = (text: Localized | undefined) => {
     if (text) {
       const d = el('details', undefined, 'challenge-terms');
@@ -94,6 +103,7 @@ export function initChallenge() {
     stage.replaceChildren();
     status.textContent = '';
     dialog.scrollTop = 0;
+    dialog.dataset.step = 'entry';
   };
   const lock = (value: boolean) => {
     busy = value;
@@ -139,45 +149,21 @@ export function initChallenge() {
     p.maxLength = 40;
     p.placeholder = '01xxxxxxxxx';
     form.append(el('p', c.phoneHint, 'challenge-hint'));
-    const submit = el('button', c.sendCode, 'challenge-primary');
+    const submit = el('button', c.continue, 'challenge-primary');
     submit.type = 'submit';
     form.append(submit);
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       void run(async () => {
-        const result = await challengeApi<{ verification: string }>('verification/request', {
-          phone: p.value,
-        });
-        verification = result.verification;
-        codeStep();
-      });
-    });
-    stage.append(form);
-  }
-  function codeStep() {
-    reset();
-    stage.append(el('p', c.otpSent));
-    const form = el('form');
-    const code = input(form, 'code', c.code);
-    code.inputMode = 'numeric';
-    code.autocomplete = 'one-time-code';
-    code.pattern = '[0-9]{6}';
-    code.maxLength = 6;
-    const submit = el('button', c.verify, 'challenge-primary');
-    submit.type = 'submit';
-    form.append(submit);
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      void run(async () => {
-        state = await challengeApi<State>('verification/confirm', {
-          verification,
-          code: code.value,
-        });
+        state = await challengeApi<State>(
+          'challenge/enroll',
+          { phone: p.value },
+          { 'Idempotency-Key': enrollmentKey },
+        );
         render(state);
       });
     });
-    stage.append(form, button(c.sendCode, phoneStep, 'challenge-secondary'));
-    code.focus();
+    stage.append(form);
   }
   function render(s: State) {
     if (!dialog.open) return;
@@ -186,7 +172,7 @@ export function initChallenge() {
     reset();
     if (s.status === 'eligible') {
       stage.append(
-        el('p', c.verified + ' · ' + s.maskedPhone, 'challenge-kicker'),
+        el('p', c.entered + ' · ' + s.maskedPhone, 'challenge-kicker'),
         el('p', c.intro, 'challenge-intro'),
         el('p', c.rules, 'challenge-rules'),
         button(
@@ -205,6 +191,7 @@ export function initChallenge() {
       return;
     }
     if (s.question) {
+      dialog.dataset.step = 'question';
       const q = s.question;
       lastQuestion = q.id;
       const header = el('div', undefined, 'challenge-progress');
@@ -276,6 +263,7 @@ export function initChallenge() {
       }
       return;
     }
+    dialog.dataset.step = 'result';
     const score = s.score || 0;
     const result = el('div', undefined, 'challenge-result');
     const value = el('strong', `${s.discount || 0}%`, 'challenge-result-value');
@@ -297,9 +285,6 @@ export function initChallenge() {
       name.minLength = 2;
       name.maxLength = 100;
       form.append(el('p', s.maskedPhone, 'challenge-kicker'));
-      const email = input(form, 'email', c.email, 'email', false);
-      email.autocomplete = 'email';
-      email.maxLength = 254;
       const check = (label: string, required: boolean) => {
         const l = el('label', undefined, 'challenge-check');
         const cb = el('input');
@@ -309,8 +294,7 @@ export function initChallenge() {
         form.append(l);
         return cb;
       };
-      const consent = check(c.consent, true),
-        marketing = check(c.marketing, false);
+      const consent = check(c.consent, true);
       form.append(el('p', c.privacy, 'challenge-hint'));
       const submit = el('button', c.save, 'challenge-primary');
       submit.type = 'submit';
@@ -323,9 +307,7 @@ export function initChallenge() {
               'challenge/finalize',
               {
                 name: name.value.trim(),
-                email: email.value.trim(),
                 consent: consent.checked,
-                marketingConsent: marketing.checked,
               },
               { 'Idempotency-Key': registrationKey },
             ),

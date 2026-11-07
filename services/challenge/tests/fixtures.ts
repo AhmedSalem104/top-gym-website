@@ -23,10 +23,8 @@ export function config(overrides: Partial<Config> = {}): Config {
     CHALLENGE_GATEWAY_KEY: randomBytes(32).toString('hex'),
     CHALLENGE_BANK_FILE: 'unused',
     CHALLENGE_ALLOW_DRAFT_BANK: 'true',
-    OTP_PROVIDER: 'mock',
     SMTP_HOST: 'smtp.gmail.com',
     SMTP_PORT: '465',
-    CHALLENGE_CUSTOMER_EMAIL_ENABLED: 'false',
     policy: {
       version: 'TEST-NOT-REDEEMABLE',
       approved: true,

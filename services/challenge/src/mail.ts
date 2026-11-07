@@ -106,7 +106,7 @@ export function challengeEmail(data: MailData, audience: 'admin' | 'customer') {
 export function mailData(s: Store, sessionId: string): MailData {
   const session = s.get<Session>('SELECT * FROM challenge_sessions WHERE id=?', sessionId)!;
   const p = s.get<{ details_cipher: string; phone_cipher: string }>(
-    'SELECT p.details_cipher,i.phone_cipher FROM participants p JOIN verified_phone_identities i ON i.id=p.phone_id WHERE p.session_id=?',
+    'SELECT p.details_cipher,i.phone_cipher FROM participants p JOIN phone_identities i ON i.id=p.phone_id WHERE p.session_id=?',
     sessionId,
   )!;
   const details = JSON.parse(unseal(s.config.CHALLENGE_DATA_KEY, p.details_cipher)) as Details;

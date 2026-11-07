@@ -1,5 +1,9 @@
 # Deployment preparation
 
+## Direct-entry update — 7 November 2026
+
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+
 ## Challenge code publication ? 7 November 2026
 
 The owner explicitly authorized pushing and publishing after the local handoff. Publish the verified code through the protected PR/Vercel workflow; the challenge remains disabled until its activation prerequisites are satisfied. See [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md) for private environment variables, isolated SQLite, Docker/Caddy templates, OTP/mail activation, backups and rollback. Keep `PUBLIC_CHALLENGE_ENABLED=false`; do not activate mock OTP, unreviewed questions or invented commercial terms. No backend artifact has been installed on the VPS.

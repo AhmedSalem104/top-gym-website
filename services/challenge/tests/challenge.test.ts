@@ -1,7 +1,6 @@
 import { afterEach, describe, it, expect, vi } from 'vitest';
 import { randomUUID } from 'node:crypto';
 import { createApp } from '../src/app.ts';
-import { createOtp } from '../src/otp.ts';
 import { config, fixtureBank, clock } from './fixtures.ts';
 import { phone, totp, seal, unseal } from '../src/security.ts';
 import { readConfig } from '../src/config.ts';
@@ -13,7 +12,7 @@ const running: ReturnType<typeof createApp>[] = [];
 function setup() {
   const time = clock(),
     c = config();
-  const a = createApp(c, fixtureBank, createOtp(c), () => time.value);
+  const a = createApp(c, fixtureBank, () => time.value);
   running.push(a);
   return { ...a, c, time };
 }
@@ -21,8 +20,7 @@ afterEach(async () => {
   for (const a of running.splice(0)) await a.app.close();
 });
 async function player(a: ReturnType<typeof setup>, number = '01012345678') {
-  const verification = await a.engine.requestVerification(number, '127.0.0.1');
-  return a.engine.confirmVerification(verification.verification, '246810', '127.0.0.1');
+  return a.engine.enroll(number, '127.0.0.1', randomUUID());
 }
 function answer(a: ReturnType<typeof setup>, identity: string, right = true, key = randomUUID()) {
   const state = a.engine.sync(identity);
@@ -44,9 +42,7 @@ function answer(a: ReturnType<typeof setup>, identity: string, right = true, key
 }
 const details = {
   name: 'Test Customer',
-  email: 'customer@example.test',
   consent: true as const,
-  marketingConsent: false,
 };
 const eligibility = {
   package: 'gym' as const,
@@ -84,30 +80,41 @@ describe('challenge invariants', () => {
     duplicate[1].question = duplicate[0].question;
     expect(() => validateBank(duplicate, true)).toThrow('Duplicate');
   });
-  it('never accepts mock OTP or drafts in production config', () => {
+  it('never accepts HTTP or drafts in production config', () => {
     const c = config();
     expect(() =>
       readConfig({ ...c, NODE_ENV: 'production' } as unknown as NodeJS.ProcessEnv),
     ).toThrow();
   });
-  it('requires verification and bounds code attempts', async () => {
+  it('requires a secret session and marks entered numbers as unverified', async () => {
     const a = setup();
-    expect(() => a.engine.identity('forged')).toThrow('verification_required');
-    const v = await a.engine.requestVerification('01012345678', 'client');
-    for (let i = 0; i < 5; i++)
-      await expect(
-        a.engine.confirmVerification(v.verification, '111111', 'client'),
-      ).rejects.toThrow('invalid_verification');
-    await expect(a.engine.confirmVerification(v.verification, '246810', 'client')).rejects.toThrow(
-      'invalid_verification',
-    );
+    expect(() => a.engine.identity('forged')).toThrow('session_required');
+    const p = await player(a);
+    expect(a.engine.identity(p.token)).toBe(p.identity);
+    expect(
+      a.store.get<{ ownership_verified: number }>('SELECT ownership_verified FROM phone_identities')
+        ?.ownership_verified,
+    ).toBe(0);
   });
-  it('limits OTP requests by canonical phone', async () => {
-    const a = setup();
-    for (let i = 0; i < 3; i++) await a.engine.requestVerification('01012345678', 'client');
-    await expect(a.engine.requestVerification('+201012345678', 'other-device')).rejects.toThrow(
-      'rate_limited',
-    );
+  it('limits enrollment retries without contacting an OTP provider', () => {
+    const a = setup(),
+      key = randomUUID();
+    for (let i = 0; i < 8; i++) a.engine.enroll('01012345678', 'client', key);
+    expect(() => a.engine.enroll('+201012345678', 'other-device', key)).toThrow('rate_limited');
+  });
+  it('retries the same enrollment without issuing another identity, and never extends expiry', () => {
+    const a = setup(),
+      key = randomUUID(),
+      p = a.engine.enroll('01012345678', 'client', key);
+    a.time.advance(1000);
+    expect(a.engine.enroll('+201012345678', 'client', key)).toEqual(p);
+    expect(a.store.all('SELECT * FROM phone_identities')).toHaveLength(1);
+    expect(() => a.engine.enroll('01012345679', 'client', key)).toThrow('entry_unavailable');
+    a.time.advance(86400000);
+    a.engine.sweep();
+    expect(() => a.engine.enroll('01012345678', 'client', key)).toThrow('entry_unavailable');
+    expect(() => a.engine.identity(p.token)).toThrow('session_required');
+    expect(() => a.engine.enroll('01012345679', 'client', key)).toThrow('entry_unavailable');
   });
   it('starts once across devices, hides answer keys and fixes selection', async () => {
     const a = setup(),
@@ -116,9 +123,7 @@ describe('challenge invariants', () => {
     a.time.advance(1000);
     const two = a.engine.start(p.identity, 'en', {});
     expect(two.question).toEqual(one.question);
-    const p2 = await player(a, '+201012345678');
-    expect(p2.identity).toBe(p.identity);
-    expect(a.engine.start(p2.identity, 'en', {}).question).toEqual(one.question);
+    await expect(player(a, '+201012345678')).rejects.toThrow('entry_unavailable');
     const rows = a.store.all<Round>('SELECT * FROM challenge_session_questions');
     expect(rows).toHaveLength(3);
     expect(new Set(rows.map((r) => r.question_id)).size).toBe(3);
@@ -213,7 +218,11 @@ describe('challenge invariants', () => {
     a.engine.start(p.identity, 'en', {});
     expect(() => a.engine.finalize(p.identity, details, randomUUID())).toThrow('not_completed');
     expect(() =>
-      a.engine.finalize(p.identity, { ...details, email: 'x\r\nBcc:bad' }, randomUUID()),
+      a.engine.finalize(
+        p.identity,
+        { ...details, email: 'x\r\nBcc:bad' } as unknown as typeof details,
+        randomUUID(),
+      ),
     ).toThrow();
   });
   it('restores all writes when coupon issuance fails', async () => {
@@ -231,13 +240,62 @@ describe('challenge invariants', () => {
   });
 });
 describe('HTTP and administrative boundaries', () => {
+  it('enrolls without OTP, protects duplicate entries and rejects email collection', async () => {
+    const a = setup(),
+      key = randomUUID();
+    const headers = { origin: a.c.CHALLENGE_ORIGIN, 'idempotency-key': key };
+    const entry = await a.app.inject({
+      method: 'POST',
+      url: '/v1/challenge/enroll',
+      headers,
+      payload: { phone: '01012345678' },
+    });
+    expect(entry.statusCode).toBe(200);
+    expect(entry.json()).toMatchObject({ status: 'eligible' });
+    expect(entry.headers['set-cookie']).toContain('HttpOnly');
+    const retry = await a.app.inject({
+      method: 'POST',
+      url: '/v1/challenge/enroll',
+      headers,
+      payload: { phone: '+201012345678' },
+    });
+    expect(retry.headers['set-cookie']).toBe(entry.headers['set-cookie']);
+    const duplicate = await a.app.inject({
+      method: 'POST',
+      url: '/v1/challenge/enroll',
+      headers: { ...headers, 'idempotency-key': randomUUID() },
+      payload: { phone: '01012345678' },
+    });
+    expect(duplicate.statusCode).toBe(409);
+    expect(duplicate.json()).toEqual({ code: 'entry_unavailable' });
+    expect(duplicate.headers['set-cookie']).toBeUndefined();
+    const cookie = String(entry.headers['set-cookie']).split(';')[0];
+    const rejected = await a.app.inject({
+      method: 'POST',
+      url: '/v1/challenge/finalize',
+      headers: { ...headers, cookie },
+      payload: { name: 'Example', email: 'test@example.test', consent: true },
+    });
+    expect(rejected.statusCode).toBe(422);
+    for (const route of ['request', 'confirm'])
+      expect(
+        (
+          await a.app.inject({
+            method: 'POST',
+            url: '/v1/verification/' + route,
+            headers,
+            payload: {},
+          })
+        ).statusCode,
+      ).toBe(404);
+  });
   it('blocks missing origin, oversized bodies, unverified sessions and unauthorized administration', async () => {
     const a = setup();
     expect(
       (
         await a.app.inject({
           method: 'POST',
-          url: '/v1/verification/request',
+          url: '/v1/challenge/enroll',
           payload: { phone: '01012345678' },
         })
       ).statusCode,
@@ -246,7 +304,7 @@ describe('HTTP and administrative boundaries', () => {
       (
         await a.app.inject({
           method: 'POST',
-          url: '/v1/verification/request',
+          url: '/v1/challenge/enroll',
           headers: { origin: a.c.CHALLENGE_ORIGIN },
           payload: { phone: 'a'.repeat(9000) },
         })

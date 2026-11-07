@@ -1,5 +1,9 @@
 # Fitness challenge — implementation and approval boundaries
 
+## Direct-entry update — 7 November 2026
+
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+
 ## Current status
 
 Gate 1 implementation was explicitly authorized by the owner after the read-only infrastructure audit. This feature was implemented for local review on `feat/fitness-challenge`. On 7 November the owner subsequently authorized pushing and publishing. The verified code is being released through GitHub/Vercel with the public challenge disabled. It is not installed on the VPS or activated for real participants. The authorization does not replace the outstanding OTP/domain, commercial policy, content review and operational prerequisites; isolated backend acceptance testing remains outstanding.
@@ -10,11 +14,11 @@ The implementation does not create a gym membership, process payments, or integr
 
 1. An opt-in, lightweight floating button opens a native accessible dialog. Arabic RTL and English LTR share one controller.
 2. Rules disclose one attempt, three questions, five server seconds per question, latency implications and uninterrupted expiry when disconnected.
-3. An Egyptian number is normalized, rate-limited and verified through the selected OTP adapter. Local preview uses mock OTP and clearly invalid sample coupons.
+3. An Egyptian number is normalized and rate-limited with no OTP. It is explicitly unverified; only the original secret session can recover the same attempt. Local coupons remain test-only.
 4. A unique phone identity starts exactly one persisted session. Three distinct questions and shuffled opaque answer IDs are selected server-side using cryptographic randomness.
 5. Each accepted answer advances atomically. Timeouts persist and advance from the previous deadline, including while the browser is closed.
 6. The backend calculates `score × 10`: 0%, 10%, 20% or 30%. The result is available before the name form. Eligible results receive a short count-up and finite gold confetti; reduced-motion users receive a static result.
-7. Name, optional email and participation consent finalize the record. Marketing consent is separately optional and does not send marketing messages.
+7. Name and participation consent finalize the record. No participant email or marketing consent is collected.
 8. Finalization atomically stores one participant, at most one coupon, first-party events and durable notification jobs. Zero score creates no coupon.
 9. Administration authenticates with password plus TOTP, searches participants, reviews answers, checks coupon terms, and atomically redeems once.
 
@@ -25,7 +29,6 @@ flowchart LR
     Visitor[Browser: Astro AR / EN] -->|same-origin HTTPS| Gateway[Vercel challenge BFF]
     Gateway -->|signed HTTPS requests| API[Dedicated Fastify service]
     API --> DB[(Private local SQLite WAL)]
-    API --> OTP[Approved OTP provider]
     API --> Bank[Reviewed server-only question bank]
     DB --> Outbox[Bounded email worker]
     Outbox --> Gmail[Gmail SMTP]
@@ -41,7 +44,7 @@ flowchart LR
 
 ## Security and privacy model
 
-The browser receives only the current question with opaque shuffled option IDs, server time and the persisted deadline. Correct answers, future questions, coupon creation and scores remain server-side. Phone identity has a database uniqueness constraint independent of cookies, IP addresses or browser storage. Re-verifying the same phone resumes the same attempt, even on another device.
+The browser receives only the current question with opaque shuffled option IDs, server time and the persisted deadline. Correct answers, future questions, coupon creation and scores remain server-side. Phone identity has a database uniqueness constraint independent of cookies, IP addresses or browser storage. The original session resumes the attempt. Another device cannot recover results merely by entering the same phone.
 
 Participant data, phone numbers, TOTP seeds and coupon codes use AES-256-GCM. Exact-match phone/name/coupon lookups use keyed HMAC, not unsalted predictable hashes. Independent encryption, lookup and gateway keys must be backed up privately. This is application-level protection, **not whole-database encryption**: metadata, administrators' email addresses, questions and timestamps remain readable to a database-file holder. Encrypted off-host backups and restrictive OS permissions are required.
 
@@ -63,7 +66,7 @@ npm run challenge:preview:build
 npm run challenge:preview
 ```
 
-Open `http://127.0.0.1:4340/ar/` or `/en/`. The harness binds loopback, uses an in-memory database, sends **no SMS or email**, and resets on restart. It rejects production/Vercel execution. OTP is `246810` locally. Synthetic predictable questions are the default for automation.
+Open `http://127.0.0.1:4340/ar/` or `/en/`. The harness binds loopback, uses an in-memory database, sends **no SMS or email**, and resets on restart. It rejects production/Vercel execution. There is no participant OTP step. Synthetic predictable questions are the default for automation.
 
 The opt-in build lives in `.local/challenge-preview`, separate from the normal `dist/` output. Challenge reports and traces live under `.local/challenge-report`, `.local/challenge-results.json` and `.local/challenge-test-results`.
 
@@ -84,7 +87,7 @@ Normal `npm run build` leaves the challenge hidden unless `PUBLIC_CHALLENGE_ENAB
 ## Remaining activation decisions
 
 1. Approve a TOP GYM API hostname, DNS owner and isolated staging origin/data directory. Existing LogicFit hostnames are not implicitly authorized for this service.
-2. Approve an OTP provider, Egyptian delivery requirements and cost cap. A Twilio Verify adapter exists as an option; no account, purchase, SMS or live verification has occurred.
+2. OTP was removed at the owner’s request. Account for the documented unverified-number abuse and recovery limitations.
 3. Approve eligible packages/durations, expiration, first-time-customer rules, combining offers and localized terms. `policy.example.json` intentionally fails validation.
 4. Complete qualified scientific and bilingual review of all 300 questions, plus actual difficulty/reading-time review. See [question review](QUESTION_BANK.md).
 5. Resolve the fixed five-second accessibility/fairness limitation explicitly. No extra time or client-authoritative extension has been silently introduced.

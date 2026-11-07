@@ -1,5 +1,9 @@
 # QA and release checklist
 
+## Direct-entry update — 7 November 2026
+
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+
 ## Fitness challenge release gate
 
 Use [CHALLENGE_QA.md](CHALLENGE_QA.md) for local evidence. Public CI uses synthetic questions, never the private answer bank. Before activation: qualified review of every real question; approved OTP/budget and successful staging verification; approved discount policy; isolated HTTPS/BFF; real authorized inbox/Gmail rendering; Linux container/backup/restore/load tests; retention and five-second accessibility decision; separate Gate 2 and Gate 3 approvals. Existing website checks must continue to pass. Local results are not deployment evidence.

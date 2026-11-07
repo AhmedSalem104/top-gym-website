@@ -27,7 +27,14 @@ const c = challengeCopy[locale];
   >
     <path d="M7 3h10v5a5 5 0 0 1-10 0V3Zm0 2H3v3a4 4 0 0 0 5 4m9-7h4v3a4 4 0 0 1-5 4M12 13v5m-5 3h10m-9 0v-3h8v3" />
   </svg>
-  <span>{c.floating}</span>
+  <span class="challenge-launch-label">
+    <strong>{c.floating}</strong>
+    <small>{c.floatingHint}</small>
+  </span>
+  <span class="challenge-launch-reward">
+    <small>{c.upTo}</small>
+    <strong dir="ltr">30%</strong>
+  </span>
 </button>
 <dialog
   id="challenge-dialog"
@@ -76,6 +83,18 @@ const c = challengeCopy[locale];
   };
   if (document.hidden) document.addEventListener('visibilitychange', viewed);
   else viewed();
+  const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
+  const updateLauncher = () =>
+    launcher?.classList.toggle(
+      'is-resting',
+      document.hidden ||
+        Boolean(document.querySelector<HTMLDialogElement>('#challenge-dialog')?.open) ||
+        motionQuery.matches,
+    );
+  document.addEventListener('visibilitychange', updateLauncher);
+  motionQuery.addEventListener('change', updateLauncher);
+  document.querySelector('#challenge-dialog')?.addEventListener('toggle', updateLauncher);
+  updateLauncher();
   let controller: Promise<{ open: () => Promise<void> }> | undefined;
   document.querySelectorAll<HTMLButtonElement>('[data-challenge-open]').forEach((button) =>
     button.addEventListener('click', () => {

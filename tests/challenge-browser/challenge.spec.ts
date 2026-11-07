@@ -5,6 +5,43 @@ const evidence = 'docs/evidence/challenge';
 test.beforeAll(async () => {
   await mkdir(evidence, { recursive: true });
 });
+test('gold invitation motion is bounded, stable, and disabled with reduced motion', async ({
+  page,
+}) => {
+  await mkdir('docs/evidence/challenge-entry', { recursive: true });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/ar/');
+  const launch = page.locator('[data-challenge-open]');
+  await expect(launch).toContainText('على قيمة اشتراكك');
+  const before = await launch.boundingBox();
+  const animation = await launch.evaluate((node) => {
+    const style = getComputedStyle(node, '::before');
+    return {
+      name: style.animationName,
+      duration: style.animationDuration,
+      iterations: style.animationIterationCount,
+    };
+  });
+  expect(animation).toEqual({ name: 'challenge-invitation', duration: '2.2s', iterations: '2' });
+  await launch.hover();
+  await page.waitForTimeout(4600);
+  expect((await launch.boundingBox())!.width).toBe(before!.width);
+  expect(
+    await launch.evaluate(
+      (node) =>
+        node.getAnimations({ subtree: true }).filter((a) => a.playState === 'running').length,
+    ),
+  ).toBe(0);
+  await launch.screenshot({ path: 'docs/evidence/challenge-entry/after-button-1440.png' });
+  await page.screenshot({ path: 'docs/evidence/challenge-entry/after-landing-1440.png' });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  expect(await launch.evaluate((node) => getComputedStyle(node, '::before').animationName)).toBe(
+    'none',
+  );
+  await page.setViewportSize({ width: 390, height: 844 });
+  await launch.screenshot({ path: 'docs/evidence/challenge-entry/after-button-390.png' });
+  await page.screenshot({ path: 'docs/evidence/challenge-entry/after-landing-390.png' });
+});
 for (const locale of ['ar', 'en'])
   for (const width of [320, 390, 768, 1440]) {
     test(`${locale} ${width}: responsive intro, keyboard and reduced motion`, async ({ page }) => {
@@ -18,6 +55,13 @@ for (const locale of ['ar', 'en'])
       await page.keyboard.press('Enter');
       await expect(page.locator('#challenge-dialog')).toBeVisible();
       await expect(page.locator('#challenge-dialog input[type=tel]')).toBeVisible();
+      await expect(page.locator('#challenge-title')).toContainText(
+        locale === 'ar' ? 'قيمة الاشتراك' : 'membership',
+      );
+      const bounds = await page.locator('#challenge-dialog').boundingBox();
+      expect(bounds!.height).toBeLessThanOrEqual(622);
+      expect(bounds!.width).toBeLessThanOrEqual(562);
+      await expect(page.locator('#challenge-dialog input[name=code]')).toHaveCount(0);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
         true,
       );
@@ -33,7 +77,7 @@ for (const locale of ['ar', 'en'])
     });
   }
 for (const [index, locale] of ['ar', 'en'].entries())
-  test(`${locale}: verified attempt, real API scoring, private registration and recovery`, async ({
+  test(`${locale}: entered-phone attempt, real API scoring, private registration and recovery`, async ({
     page,
   }) => {
     await page.setViewportSize({ width: locale === 'ar' ? 390 : 1440, height: 950 });
@@ -43,10 +87,8 @@ for (const [index, locale] of ['ar', 'en'].entries())
     const modal = page.locator('#challenge-dialog');
     await modal.locator('input[name=phone]').fill(`0101234567${index}`);
     await modal.locator('button[type=submit]').click();
-    await modal.locator('input[name=code]').fill('246810');
-    await modal.locator('button[type=submit]').click();
     await expect(
-      modal.getByText(locale === 'ar' ? 'تم التحقق من رقمك' : 'Your number is verified', {
+      modal.getByText(locale === 'ar' ? 'رقم المشاركة' : 'Participation number', {
         exact: false,
       }),
     ).toBeVisible();
@@ -66,7 +108,7 @@ for (const [index, locale] of ['ar', 'en'].entries())
     await modal
       .locator('input[name=name]')
       .fill(locale === 'ar' ? 'اختبار محلي' : 'Local test participant');
-    await modal.locator('input[name=email]').fill('test@example.test');
+    await expect(modal.locator('input[name=email], input[name=code]')).toHaveCount(0);
     await modal.locator('input[type=checkbox]').first().check();
     await modal.locator('button[type=submit]').click();
     await expect(modal.locator('.challenge-coupon code')).toHaveText(/^TOP-[A-F0-9]{20}$/);
@@ -84,8 +126,6 @@ test('server timeout survives closed modal and refresh; no zero-score coupon', a
   await page.locator('[data-challenge-open]').click();
   const modal = page.locator('#challenge-dialog');
   await modal.locator('input[name=phone]').fill('01012345672');
-  await modal.locator('button[type=submit]').click();
-  await modal.locator('input[name=code]').fill('246810');
   await modal.locator('button[type=submit]').click();
   await modal.getByRole('button', { name: 'Ready? Start the challenge' }).click();
   await expect(modal.locator('.challenge-question')).toBeVisible();
@@ -109,8 +149,7 @@ test('hidden entry requires real login, and admin searches and redeems once', as
     expect(r.ok()).toBe(true);
     return r.json();
   };
-  const verification = await post('verification/request', { phone: '01012345679' });
-  await post('verification/confirm', { verification: verification.verification, code: '246810' });
+  await post('challenge/enroll', { phone: '01012345679' });
   let seeded = await post('challenge/start', { locale: 'en', attribution: {} });
   for (let i = 0; i < 3; i++)
     seeded = await post('challenge/answer', {
@@ -121,7 +160,6 @@ test('hidden entry requires real login, and admin searches and redeems once', as
   await post('challenge/finalize', {
     name: 'Admin seeded participant',
     consent: true,
-    marketingConsent: false,
   });
   await page.goto('/en/');
   const entry = page.locator('[data-admin-entry]');
@@ -175,8 +213,6 @@ test('slow CPU, failed answer recovery, timer authority and no layout shift on o
   await page.locator('[data-challenge-open]').click();
   const modal = page.locator('#challenge-dialog');
   await modal.locator('input[name=phone]').fill('01012345675');
-  await modal.locator('button[type=submit]').click();
-  await modal.locator('input[name=code]').fill('246810');
   await modal.locator('button[type=submit]').click();
   await modal.getByRole('button', { name: 'Ready? Start the challenge' }).click();
   await page.route('**/api/challenge/v1/challenge/answer', (route) => route.abort());

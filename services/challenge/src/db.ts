@@ -18,19 +18,35 @@ export class Store {
     this.db.pragma('busy_timeout = 150');
     this.db.pragma('journal_mode = WAL');
     this.db.pragma('synchronous = FULL');
+    this.db
+      .transaction(() => {
+        const legacy = this.db
+          .prepare(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='verified_phone_identities'",
+          )
+          .get();
+        if (legacy) {
+          this.db.exec('ALTER TABLE verified_phone_identities RENAME TO phone_identities');
+          this.db.exec('ALTER TABLE phone_identities RENAME COLUMN verified_at TO registered_at');
+          this.db.exec(
+            'ALTER TABLE phone_identities ADD COLUMN ownership_verified INTEGER NOT NULL DEFAULT 1 CHECK(ownership_verified IN (0,1))',
+          );
+        }
+      })
+      .immediate();
     this.db.exec(`
       CREATE TABLE IF NOT EXISTS schema_version (version INTEGER PRIMARY KEY);
-      INSERT OR IGNORE INTO schema_version VALUES (1);
+      INSERT OR IGNORE INTO schema_version VALUES (2);
       CREATE TABLE IF NOT EXISTS rate_limits (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS gateway_nonces (nonce TEXT PRIMARY KEY, expires INTEGER NOT NULL);
-      CREATE TABLE IF NOT EXISTS verified_phone_identities (id TEXT PRIMARY KEY, phone_hash TEXT UNIQUE NOT NULL, phone_cipher TEXT NOT NULL, verified_at INTEGER NOT NULL);
-      CREATE TABLE IF NOT EXISTS phone_verifications (id TEXT PRIMARY KEY, phone_hash TEXT NOT NULL, phone_cipher TEXT NOT NULL, expires INTEGER NOT NULL, attempts INTEGER NOT NULL DEFAULT 0, state TEXT NOT NULL CHECK(state IN ('pending','verified','failed')));
-      CREATE TABLE IF NOT EXISTS browser_sessions (token_hash TEXT PRIMARY KEY, phone_id TEXT NOT NULL REFERENCES verified_phone_identities(id), expires INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS phone_identities (id TEXT PRIMARY KEY, phone_hash TEXT UNIQUE NOT NULL, phone_cipher TEXT NOT NULL, registered_at INTEGER NOT NULL, ownership_verified INTEGER NOT NULL DEFAULT 0 CHECK(ownership_verified IN (0,1)));
+      CREATE TABLE IF NOT EXISTS browser_sessions (token_hash TEXT PRIMARY KEY, phone_id TEXT NOT NULL REFERENCES phone_identities(id), expires INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS phone_entry_claims (token_hash TEXT PRIMARY KEY, phone_id TEXT UNIQUE NOT NULL REFERENCES phone_identities(id), expires INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS discount_policy_versions (version TEXT PRIMARY KEY, body TEXT NOT NULL);
-      CREATE TABLE IF NOT EXISTS challenge_sessions (id TEXT PRIMARY KEY, phone_id TEXT UNIQUE NOT NULL REFERENCES verified_phone_identities(id), policy_version TEXT NOT NULL REFERENCES discount_policy_versions(version), bank_version TEXT NOT NULL, locale TEXT NOT NULL CHECK(locale IN ('ar','en')), status TEXT NOT NULL CHECK(status IN ('active','completed','registered')), score INTEGER NOT NULL DEFAULT 0 CHECK(score BETWEEN 0 AND 3), started_at INTEGER NOT NULL, completed_at INTEGER, registered_at INTEGER, attribution TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS challenge_sessions (id TEXT PRIMARY KEY, phone_id TEXT UNIQUE NOT NULL REFERENCES phone_identities(id), policy_version TEXT NOT NULL REFERENCES discount_policy_versions(version), bank_version TEXT NOT NULL, locale TEXT NOT NULL CHECK(locale IN ('ar','en')), status TEXT NOT NULL CHECK(status IN ('active','completed','registered')), score INTEGER NOT NULL DEFAULT 0 CHECK(score BETWEEN 0 AND 3), started_at INTEGER NOT NULL, completed_at INTEGER, registered_at INTEGER, attribution TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS challenge_session_questions (session_id TEXT NOT NULL REFERENCES challenge_sessions(id), ordinal INTEGER NOT NULL CHECK(ordinal BETWEEN 1 AND 3), question_id TEXT NOT NULL, snapshot TEXT NOT NULL, option_order TEXT NOT NULL, starts INTEGER NOT NULL, deadline INTEGER NOT NULL, PRIMARY KEY(session_id, ordinal), UNIQUE(session_id,question_id), CHECK(deadline = starts + 5000));
       CREATE TABLE IF NOT EXISTS challenge_answers (session_id TEXT NOT NULL, ordinal INTEGER NOT NULL, option_id TEXT, correct INTEGER NOT NULL CHECK(correct IN (0,1)), timed_out INTEGER NOT NULL CHECK(timed_out IN (0,1)), received_at INTEGER NOT NULL, request_key TEXT, PRIMARY KEY(session_id,ordinal), FOREIGN KEY(session_id,ordinal) REFERENCES challenge_session_questions(session_id,ordinal));
-      CREATE TABLE IF NOT EXISTS participants (id TEXT PRIMARY KEY, session_id TEXT UNIQUE NOT NULL REFERENCES challenge_sessions(id), phone_id TEXT UNIQUE NOT NULL REFERENCES verified_phone_identities(id), details_cipher TEXT NOT NULL, name_search TEXT NOT NULL, consent_at INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS participants (id TEXT PRIMARY KEY, session_id TEXT UNIQUE NOT NULL REFERENCES challenge_sessions(id), phone_id TEXT UNIQUE NOT NULL REFERENCES phone_identities(id), details_cipher TEXT NOT NULL, name_search TEXT NOT NULL, consent_at INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS coupons (id TEXT PRIMARY KEY, participant_id TEXT UNIQUE NOT NULL REFERENCES participants(id), session_id TEXT UNIQUE NOT NULL REFERENCES challenge_sessions(id), code_hash TEXT UNIQUE NOT NULL, code_cipher TEXT NOT NULL, discount INTEGER NOT NULL CHECK(discount IN (10,20,30)), state TEXT NOT NULL CHECK(state IN ('issued','redeemed','voided')), created_at INTEGER NOT NULL, expires INTEGER NOT NULL, CHECK(expires > created_at));
       CREATE TABLE IF NOT EXISTS admin_users (id TEXT PRIMARY KEY, email TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, totp_cipher TEXT NOT NULL, last_totp INTEGER NOT NULL DEFAULT -1, role TEXT NOT NULL CHECK(role IN ('viewer','redeemer','owner')), disabled INTEGER NOT NULL DEFAULT 0);
       CREATE TABLE IF NOT EXISTS admin_sessions (token_hash TEXT PRIMARY KEY, admin_id TEXT NOT NULL REFERENCES admin_users(id), csrf_hash TEXT NOT NULL, expires INTEGER NOT NULL, touched INTEGER NOT NULL);
@@ -45,7 +61,6 @@ export class Store {
       CREATE INDEX IF NOT EXISTS participant_search ON participants(name_search);
       CREATE INDEX IF NOT EXISTS mail_due ON email_delivery_jobs(state,available_at);
       CREATE INDEX IF NOT EXISTS event_type ON conversion_events(type,created_at);
-      CREATE INDEX IF NOT EXISTS verification_phone ON phone_verifications(phone_hash,expires);
     `);
   }
   get<T>(sql: string, ...args: unknown[]): T | undefined {

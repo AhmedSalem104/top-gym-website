@@ -1,9 +1,8 @@
 import { randomInt, randomUUID, randomBytes } from 'node:crypto';
 import { z } from 'zod';
 import { Store } from './db.ts';
-import { Fault, opaque, phone, seal, unseal, text, email } from './security.ts';
+import { Fault, phone, seal, unseal, text } from './security.ts';
 import type { Question } from './bank.ts';
-import type { OtpProvider } from './otp.ts';
 import type { Policy } from './config.ts';
 
 export const attributionSchema = z
@@ -23,9 +22,7 @@ export const attributionSchema = z
 export const registrationSchema = z
   .object({
     name: text(2, 100),
-    email,
     consent: z.literal(true),
-    marketingConsent: z.boolean().default(false),
   })
   .strict();
 export type Details = z.infer<typeof registrationSchema>;
@@ -62,28 +59,16 @@ export interface Coupon {
   created_at: number;
   expires: number;
 }
-interface Verification {
-  id: string;
-  phone_hash: string;
-  phone_cipher: string;
-  expires: number;
-  attempts: number;
-  state: string;
-}
 export class Engine {
   constructor(
     readonly store: Store,
     readonly bank: { questions: Question[]; version: string },
-    readonly otp: OtpProvider,
   ) {}
   available() {
     const c = this.store.config;
     return (
       c.CHALLENGE_ENABLED === 'true' &&
       Boolean(c.policy) &&
-      c.OTP_PROVIDER !== 'disabled' &&
-      (c.OTP_PROVIDER !== 'twilio' ||
-        Boolean(c.TWILIO_ACCOUNT_SID && c.TWILIO_AUTH_TOKEN && c.TWILIO_VERIFY_SERVICE_SID)) &&
       this.bank.questions.length === 300 &&
       (c.NODE_ENV !== 'production' ||
         (Boolean(c.SMTP_USER && c.SMTP_APP_PASSWORD && c.CHALLENGE_ADMIN_EMAIL) &&
@@ -95,71 +80,52 @@ export class Engine {
   private enabled() {
     if (!this.available()) throw new Fault('unavailable', 503);
   }
-  async requestVerification(input: string, ip: string) {
+  enroll(input: string, ip: string, key: string) {
     this.enabled();
-    const p = phone(input);
-    const s = this.store;
-    s.limit('otp-ip:' + ip, 10, 3600000);
-    s.limit('otp-phone:' + p, 3, 600000);
-    s.limit('otp-day:' + p, 6, 86400000);
-    s.limit('otp-global', 100, 3600000);
-    const id = opaque();
-    const hash = s.hash(id);
-    const now = s.now();
-    s.run(
-      'INSERT INTO phone_verifications VALUES(?,?,?,?,0,?)',
-      hash,
-      s.hash(p),
-      seal(s.config.CHALLENGE_DATA_KEY, p),
-      now + 600000,
-      'pending',
-    );
-    try {
-      await this.otp.request(p);
-    } catch {
-      s.run("UPDATE phone_verifications SET state='failed' WHERE id=?", hash);
-      throw new Fault('verification_unavailable', 503);
-    }
-    return { verification: id, expiresAt: now + 600000 };
-  }
-  async confirmVerification(id: string, code: string, ip: string) {
-    const s = this.store;
-    s.limit('verify-ip:' + ip, 25, 600000);
-    const hash = s.hash(id);
-    const v = s.atomic(() => {
-      const v = s.get<Verification>('SELECT * FROM phone_verifications WHERE id=?', hash);
-      if (!v || v.expires <= s.now() || v.state !== 'pending' || v.attempts >= 5)
-        throw new Fault('invalid_verification', 422);
-      s.run('UPDATE phone_verifications SET attempts=attempts+1 WHERE id=?', hash);
-      return v;
-    });
-    if (!(await this.otp.confirm(unseal(s.config.CHALLENGE_DATA_KEY, v.phone_cipher), code)))
-      throw new Fault('invalid_verification', 422);
+    const p = phone(input),
+      s = this.store;
+    // A retry key is a random browser secret, never the phone number itself.
+    if (!/^[a-f0-9-]{36}$/i.test(key)) throw new Fault('invalid_request', 422);
+    s.limit('enroll-ip:' + ip, 12, 3600000);
+    s.limit('enroll-phone:' + p, 8, 3600000);
+    s.limit('enroll-global', 200, 3600000);
+    const token = s.hash('enroll-token:' + key),
+      tokenHash = s.hash(token),
+      phoneHash = s.hash(p);
     return s.atomic(() => {
-      if (
-        s.run(
-          "UPDATE phone_verifications SET state='verified' WHERE id=? AND state='pending' AND expires>?",
-          hash,
-          s.now(),
-        ).changes !== 1
-      )
-        throw new Fault('invalid_verification', 422);
-      const identity =
-        s.get<{ id: string }>(
-          'SELECT id FROM verified_phone_identities WHERE phone_hash=?',
-          v.phone_hash,
-        )?.id || randomUUID();
+      const previous = s.get<{ phone_id: string; phone_hash: string; expires: number }>(
+        'SELECT b.phone_id,i.phone_hash,b.expires FROM phone_entry_claims b JOIN phone_identities i ON i.id=b.phone_id WHERE b.token_hash=?',
+        tokenHash,
+      );
+      if (previous) {
+        if (
+          previous.phone_hash !== phoneHash ||
+          previous.expires <= s.now() ||
+          !s.get(
+            'SELECT token_hash FROM browser_sessions WHERE token_hash=? AND expires>?',
+            tokenHash,
+            s.now(),
+          )
+        )
+          throw new Fault('entry_unavailable', 409);
+        return { token, identity: previous.phone_id };
+      }
+      if (s.get('SELECT id FROM phone_identities WHERE phone_hash=?', phoneHash))
+        throw new Fault('entry_unavailable', 409);
+      const identity = randomUUID();
       s.run(
-        'INSERT INTO verified_phone_identities VALUES(?,?,?,?) ON CONFLICT(phone_hash) DO UPDATE SET verified_at=excluded.verified_at',
+        'INSERT INTO phone_identities(id,phone_hash,phone_cipher,registered_at,ownership_verified) VALUES(?,?,?,?,0)',
         identity,
-        v.phone_hash,
-        v.phone_cipher,
+        phoneHash,
+        seal(s.config.CHALLENGE_DATA_KEY, p),
         s.now(),
       );
-      const token = opaque();
+      s.run('INSERT INTO browser_sessions VALUES(?,?,?)', tokenHash, identity, s.now() + 86400000);
+      // Retain the spent retry secret hash after session cleanup; it must never
+      // become a new identity's token when a browser reuses an expired key.
       s.run(
-        'INSERT INTO browser_sessions VALUES(?,?,?)',
-        s.hash(token),
+        'INSERT INTO phone_entry_claims VALUES(?,?,?)',
+        tokenHash,
         identity,
         s.now() + 86400000,
       );
@@ -172,7 +138,7 @@ export class Engine {
       this.store.hash(token),
       this.store.now(),
     );
-    if (!found) throw new Fault('verification_required', 401);
+    if (!found) throw new Fault('session_required', 401);
     return found.phone_id;
   }
   private own(identity: string) {
@@ -332,7 +298,7 @@ export class Engine {
     const s = this.store;
     const session = this.own(identity);
     const p = s.get<{ phone_cipher: string }>(
-      'SELECT phone_cipher FROM verified_phone_identities WHERE id=?',
+      'SELECT phone_cipher FROM phone_identities WHERE id=?',
       identity,
     )!;
     const maskedPhone = '•••• ' + unseal(s.config.CHALLENGE_DATA_KEY, p.phone_cipher).slice(-4);
@@ -443,13 +409,6 @@ export class Engine {
         session.id,
         now,
       );
-      if (details.email && s.config.CHALLENGE_CUSTOMER_EMAIL_ENABLED === 'true')
-        s.run(
-          "INSERT INTO email_delivery_jobs VALUES(?,?,'customer','queued',0,?,NULL,NULL)",
-          randomUUID(),
-          session.id,
-          now,
-        );
       s.run('INSERT INTO idempotency_records VALUES(?,?,?,?)', scope, key, fingerprint, '{}');
       s.event(
         session.id + ':registered',
@@ -469,7 +428,6 @@ export class Engine {
     const now = s.now();
     s.run('DELETE FROM rate_limits WHERE expires<?', now);
     s.run('DELETE FROM gateway_nonces WHERE expires<?', now);
-    s.run('DELETE FROM phone_verifications WHERE expires<?', now - 3600000);
     s.run('DELETE FROM browser_sessions WHERE expires<?', now);
     s.run('DELETE FROM admin_sessions WHERE expires<? OR touched<?', now, now - 1800000);
   }

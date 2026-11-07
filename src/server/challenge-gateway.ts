@@ -1,6 +1,6 @@
 import { createHmac, randomBytes } from 'node:crypto';
 const routes =
-  /^\/v1\/(?:challenge\/(?:info|start|session|sync|answer|finalize|result|event)|verification\/(?:request|confirm)|admin\/(?:login|logout|me|summary|participants(?:\/(?:search|[a-f0-9-]{36}))?|coupons\/(?:lookup|redeem)|audit))$/;
+  /^\/v1\/(?:challenge\/(?:info|enroll|start|session|sync|answer|finalize|result|event)|admin\/(?:login|logout|me|summary|participants(?:\/(?:search|[a-f0-9-]{36}))?|coupons\/(?:lookup|redeem)|audit))$/;
 export async function challengeGateway(
   request: Request,
   env: Record<string, string | undefined> = process.env,
