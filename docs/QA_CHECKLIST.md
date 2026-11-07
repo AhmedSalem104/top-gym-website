@@ -1,5 +1,9 @@
 # QA and release checklist
 
+## Ten-second timer and rapid logo entry — 7 November 2026
+
+The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. Participation remains closed pending reviewed private questions and approved commercial terms.
+
 ## Logo password access — 7 November 2026
 
 Verify five-click/keyboard/touch entry, a single password field, wrong-password errors, session authorization/logout, shared throttling, reduced motion and both languages. Preserve participant/coupon records during password rotation. See [administrator access](ADMIN_ACCESS.md) and the release PR for measured results.

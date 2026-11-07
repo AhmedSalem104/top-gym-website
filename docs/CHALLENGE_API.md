@@ -13,7 +13,7 @@ The static Astro deployment uses an explicit `vercel.json` rewrite from `/api/ch
 | Method / backend path         | Request                                 | Result / authorization                                                                                             |
 | ----------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | GET `/health`                 | none                                    | Minimal process liveness; no secrets or dependency diagnostics                                                     |
-| GET `/v1/challenge/info`      | none                                    | `available`, `questions:3`, `seconds:5`, `discounts:[0,10,20,30]`, bilingual terms, `mode:local/live`              |
+| GET `/v1/challenge/info`      | none                                    | `available`, `questions:3`, `seconds:10`, `discounts:[0,10,20,30]`, bilingual terms, `mode:local/live`             |
 | POST `/v1/challenge/enroll`   | `{phone}` + UUID `Idempotency-Key`      | Sets original player cookie. Unverified identity, unique phone; generic duplicate error without result disclosure. |
 | POST `/v1/challenge/start`    | `{locale,attribution?}`                 | Requires original player cookie; returns existing attempt or creates exactly one                                   |
 | GET `/v1/challenge/session`   | cookie                                  | Own persisted state without forcing a timeout transition                                                           |
@@ -37,7 +37,7 @@ Example active response (illustrative data, not an actual participant):
     "ordinal": 1,
     "total": 3,
     "startsAt": 1794052800000,
-    "deadlineAt": 1794052805000,
+    "deadlineAt": 1794052810000,
     "text": { "ar": "نص السؤال", "en": "Question text" },
     "options": [{ "id": "opaque-random-option-id", "text": { "ar": "اختيار", "en": "Option" } }]
   }
@@ -48,17 +48,17 @@ There are always four options in real responses. No `correct`, explanation, opti
 
 Names: trimmed 2–100 characters; no controls or directional overrides. Email is rejected as an extra field. Egyptian/Persian numerals in telephone input normalize to `+201[0125]xxxxxxxx`; this establishes syntactic validity only. There is no phone-ownership verification.
 
-## Five-second timer protocol
+## Ten-second timer protocol
 
 - Start transaction selects one random question from each difficulty band, shuffles their order, and randomizes opaque option IDs. This keeps difficulty exposure comparable without predictable questions. Snapshots freeze each question/version for this attempt.
-- Question 1 starts at authoritative server time; `deadline = starts + 5000` is a database check constraint.
+- Question 1 starts at authoritative server time; new attempts use `deadline = starts + 10000` from `services/challenge/src/timing.ts`. Schema v3 permits historical 5,000 ms rounds as well as new 10,000 ms rounds.
 - An answer is accepted only when the current question matches, its option belongs to the stored mapping and receipt time is strictly **before** the deadline.
 - Early completion starts the next question at server receipt time. A timeout starts the next at the expired question's deadline, not at reconnection time.
-- An indexed maintenance sweep runs once a second; POST sync/start/answer also reconciles. Thus worker restart, background tabs, offline periods and page refresh cannot reset the clock. After a 15-second complete disconnect, all unanswered questions can be timed out.
-- A browser countdown uses `performance.now()` only for display. It cannot extend the persisted deadline. Latency means less than five seconds may be visible; the UI discloses this before starting.
+- An indexed maintenance sweep runs once a second; POST sync/start/answer also reconciles. Thus worker restart, background tabs, offline periods and page refresh cannot reset the clock. After a 30-second complete disconnect, all unanswered questions can be timed out.
+- A browser countdown uses `performance.now()` only for display. It cannot extend the persisted deadline. Latency means less than ten seconds may be visible; the UI discloses this before starting.
 - Idempotency keys bind to a request fingerprint. Reusing a key with changed content is rejected. Transaction constraints enforce one answer per ordinal even with different keys or concurrent tabs.
 
-The synchronous SQLite transaction never includes SMTP network activity. Five seconds is preserved exactly; fairness alternatives such as readiness handshakes, increased time or a non-timed alternative require explicit approval, not an implementation shortcut.
+The synchronous SQLite transaction never includes SMTP network activity. The owner explicitly increased the duration to ten seconds on 7 November 2026. Existing attempts retain their stored duration; retries and migration never extend a deadline. Other fairness alternatives such as readiness handshakes or an untimed alternative remain separate policy decisions.
 
 ## Administration
 
@@ -81,7 +81,7 @@ Redemption checks the immutable policy snapshot, expiration and state. Staff att
 
 ## Database schema
 
-Schema version 1 is a new, isolated database. Schema version 2 preserves and renames any legacy phone identities and marks new entries unverified; see CHALLENGE_SIMPLE_ENTRY.md. The service must use a private local disk, never a public/static directory or network filesystem.
+Schema version 1 is a new, isolated database. Schema version 2 preserves and renames any legacy phone identities and marks new entries unverified; see CHALLENGE_SIMPLE_ENTRY.md. Schema v3 changes the question deadline constraint through an atomic table rebuild, preserving every row, dependent index/trigger and answer foreign key. It validates foreign keys before commit and restores enforcement afterward; reopening does not repeat the migration. The service must use a private local disk, never a public/static directory or network filesystem.
 
 | Table                            | Purpose and principal constraint                                                                  |
 | -------------------------------- | ------------------------------------------------------------------------------------------------- |

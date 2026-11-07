@@ -207,6 +207,7 @@ export function initChallenge() {
       heading.tabIndex = -1;
       const options = el('div', undefined, 'challenge-options');
       const remainingAtArrival = Math.max(0, q.deadlineAt - s.serverNow);
+      const duration = q.deadlineAt - q.startsAt;
       const received = performance.now();
       let expiring = false;
       const key = crypto.randomUUID();
@@ -244,7 +245,7 @@ export function initChallenge() {
       const tick = () => {
         const remaining = Math.max(0, remainingAtArrival - (performance.now() - received));
         time.textContent = `${Math.ceil(remaining / 1000)} ${c.seconds}`;
-        bar.style.transform = `scaleX(${remaining / 5000})`;
+        bar.style.transform = `scaleX(${duration > 0 ? Math.min(1, remaining / duration) : 0})`;
         if (remaining <= 0 && !expiring) {
           expiring = true;
           stop();

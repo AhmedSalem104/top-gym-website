@@ -2,6 +2,35 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { challengeCopy } from '../../src/i18n/challenge';
 
+for (const touch of [false, true])
+  test(`rapid logo gesture remains open after extra taps: touch=${touch}`, async ({ browser }) => {
+    const context = await browser.newContext({
+      baseURL: 'http://127.0.0.1:4340',
+      viewport: { width: touch ? 390 : 1440, height: 844 },
+      hasTouch: touch,
+      isMobile: touch,
+    });
+    const page = await context.newPage();
+    try {
+      await page.goto('/');
+      const rect = (await page.locator('[data-admin-logo] img').boundingBox())!;
+      const dialog = page.locator('#admin-access-dialog');
+      // Fixed screen coordinates reproduce an actual rapid gesture; a locator
+      // would wait for the modal to disappear before delivering the extra tap.
+      for (let n = 1; n <= 8; n++) {
+        if (touch) await page.touchscreen.tap(rect.x + rect.width / 2, rect.y + rect.height / 2);
+        else await page.mouse.click(rect.x + rect.width / 2, rect.y + rect.height / 2);
+        if (n < 5) await expect(dialog).not.toBeVisible();
+        else await expect(dialog).toBeVisible();
+      }
+      await dialog.locator('[data-admin-access-close]').click();
+      await expect(dialog).not.toBeVisible();
+      await expect(page.locator('[data-admin-logo]')).toBeFocused();
+    } finally {
+      await context.close();
+    }
+  });
+
 for (const locale of ['ar', 'en'] as const)
   for (const width of [320, 390, 768, 1440])
     test(`${locale} ${width}: five logo clicks open the password dialog`, async ({ page }) => {

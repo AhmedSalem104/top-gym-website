@@ -1,5 +1,9 @@
 # Decision log
 
+## Ten-second timer and rapid logo entry — 7 November 2026
+
+The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. Participation remains closed pending reviewed private questions and approved commercial terms.
+
 ## Logo password access — 7 November 2026
 
 The latest owner instruction supersedes mandatory email/TOTP for normal owner entry. Bind password-only authentication to one privately configured owner account, reuse Argon2/session/CSRF/rate limits, and retain MFA for other accounts. Five logo clicks are discovery only. See [rationale and controls](ADMIN_ACCESS.md).

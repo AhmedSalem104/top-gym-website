@@ -72,9 +72,8 @@ const c = challengeCopy[locale];
     dialog
       .querySelector('[data-admin-access-close]')!
       .addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', (event) => {
-      if (event.target === dialog) dialog.close();
-    });
+    // Extra taps in the logo gesture land on the backdrop after the fifth tap.
+    // Keep the prompt open until deliberate close-button or Escape dismissal.
     logo.addEventListener('click', (event) => {
       // Ordinary logo clicks retain Home navigation. Only the fifth opens the dialog.
       if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;

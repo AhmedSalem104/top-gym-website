@@ -47,6 +47,72 @@ async function complete(s: Store) {
   return { engine, p, result };
 }
 describe('persistence and adversarial boundaries', () => {
+  it('migrates five-second storage without changing saved answers, coupons or active deadlines', async () => {
+    const { c } = persistent(),
+      time = clock();
+    const original = new Store(c, () => time.value);
+    const { engine, result } = await complete(original);
+    const active = engine.enroll('01012345679', 'local', randomUUID());
+    engine.start(active.identity, 'en', {});
+    const oldSchema = original
+      .get<{ sql: string }>(
+        "SELECT sql FROM sqlite_master WHERE name='challenge_session_questions'",
+      )!
+      .sql.replace('challenge_session_questions', 'legacy_questions')
+      .replace('deadline - starts IN (5000, 10000)', 'deadline = starts + 5000');
+    original.db.pragma('foreign_keys = OFF');
+    original.db.exec(`${oldSchema};
+      INSERT INTO legacy_questions SELECT session_id,ordinal,question_id,snapshot,option_order,starts,starts+5000 FROM challenge_session_questions;
+      DROP TABLE challenge_session_questions;
+      ALTER TABLE legacy_questions RENAME TO challenge_session_questions;
+      DELETE FROM schema_version WHERE version=3;
+      CREATE INDEX legacy_question_time ON challenge_session_questions(starts);
+    `);
+    original.db.pragma('foreign_keys = ON');
+    const tables = [
+      'challenge_session_questions',
+      'challenge_answers',
+      'participants',
+      'coupons',
+      'email_delivery_jobs',
+    ];
+    const before = tables.map((table) => original.all(`SELECT * FROM ${table}`));
+    const legacyRound = engine.sync(active.identity).question!;
+    original.close();
+    const migrated = new Store(c, () => time.value);
+    try {
+      expect(tables.map((table) => migrated.all(`SELECT * FROM ${table}`))).toEqual(before);
+      expect(migrated.db.pragma('foreign_key_check')).toEqual([]);
+      expect(migrated.db.pragma('foreign_keys', { simple: true })).toBe(1);
+      expect(migrated.db.pragma('integrity_check', { simple: true })).toBe('ok');
+      expect(migrated.get('SELECT version FROM schema_version WHERE version=3')).toBeTruthy();
+      expect(
+        migrated.get("SELECT name FROM sqlite_master WHERE name='legacy_question_time'"),
+      ).toBeTruthy();
+      const current = new Engine(migrated, fixtureBank);
+      expect(current.sync(active.identity).question).toEqual(legacyRound);
+      time.advance(5000);
+      const nextLegacy = current.sync(active.identity).question!;
+      expect(nextLegacy.ordinal).toBe(2);
+      expect(nextLegacy.deadlineAt - nextLegacy.startsAt).toBe(5000);
+      const fresh = current.enroll('01012345670', 'local', randomUUID());
+      const q = current.start(fresh.identity, 'en', {}).question!;
+      expect(q.deadlineAt - q.startsAt).toBe(10000);
+      expect(() =>
+        migrated.run('UPDATE challenge_session_questions SET deadline=starts+11000'),
+      ).toThrow();
+      expect(migrated.all('SELECT * FROM coupons')).toHaveLength(result.coupon ? 1 : 0);
+    } finally {
+      migrated.close();
+    }
+    const reopened = new Store(c, () => time.value);
+    try {
+      expect(reopened.db.pragma('foreign_key_check')).toEqual([]);
+      expect(reopened.all('SELECT * FROM challenge_session_questions')).toHaveLength(9);
+    } finally {
+      reopened.close();
+    }
+  });
   it.skipIf(!existsSync('../../content/challenge/questions.json'))(
     'validates the PRIVATE authored bank; requires private artifact outside public CI',
     () => {

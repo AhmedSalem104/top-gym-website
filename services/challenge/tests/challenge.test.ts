@@ -131,13 +131,13 @@ describe('challenge invariants', () => {
       new Set(rows.map((r) => (JSON.parse(r.snapshot) as { difficulty: string }).difficulty)).size,
     ).toBe(3);
     expect(JSON.stringify(one)).not.toMatch(/correct|explanation|snapshot|option_order/);
-    expect(one.question!.deadlineAt - one.question!.startsAt).toBe(5000);
+    expect(one.question!.deadlineAt - one.question!.startsAt).toBe(10000);
   });
   it('rejects an answer at the deadline and advances without timer reset', async () => {
     const a = setup(),
       p = await player(a);
     const q = a.engine.start(p.identity, 'en', {}).question!;
-    a.time.advance(5000);
+    a.time.advance(10000);
     const result = a.engine.answer(
       p.identity,
       { question: q.id, option: q.options[0].id },
@@ -145,9 +145,26 @@ describe('challenge invariants', () => {
     );
     expect(result.question?.ordinal).toBe(2);
     expect(result.question?.startsAt).toBe(q.deadlineAt);
+    expect(result.question!.deadlineAt - result.question!.startsAt).toBe(10000);
     expect(
       a.store.get<{ timed_out: number }>('SELECT timed_out FROM challenge_answers')?.timed_out,
     ).toBe(1);
+  });
+  it('advertises ten seconds and accepts an answer just before the deadline after refresh', async () => {
+    const a = setup(),
+      p = await player(a);
+    expect((await a.app.inject('/v1/challenge/info')).json().seconds).toBe(10);
+    const first = a.engine.start(p.identity, 'en', {}).question!;
+    a.time.advance(6000);
+    expect(a.engine.sync(p.identity).question).toEqual(first);
+    expect(a.engine.start(p.identity, 'ar', {}).question).toEqual(first);
+    a.time.advance(3999);
+    const next = answer(a, p.identity);
+    expect(next.question?.ordinal).toBe(2);
+    expect(next.question!.deadlineAt - next.question!.startsAt).toBe(10000);
+    expect(a.store.get<{ correct: number }>('SELECT correct FROM challenge_answers')?.correct).toBe(
+      1,
+    );
   });
   it('finishes all timeouts when disconnected and does not give another attempt', async () => {
     const a = setup(),
@@ -161,7 +178,7 @@ describe('challenge invariants', () => {
     expect(
       a.store.get<{ completed_at: number }>('SELECT completed_at FROM challenge_sessions')!
         .completed_at,
-    ).toBe(q.startsAt + 15000);
+    ).toBe(q.startsAt + 30000);
     expect(a.engine.start(p.identity, 'ar', {}).status).toBe('completed');
   });
   it.each([0, 1, 2, 3])(

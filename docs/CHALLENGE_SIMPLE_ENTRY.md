@@ -8,7 +8,7 @@ The owner explicitly requested removal of participant OTP and post-quiz email co
 
 - Filled brand-gold invitation, trophy, two-line membership-discount label and an explicit **up to 30%** cap. A compositor-only light sweep runs twice for 4.4 seconds total, then stops; hover/press remain responsive. Reduced motion disables it. Hidden tabs and an open dialog pause the invitation.
 - Dialog maximum width reduced from 680 to 560 px and height from 820 to 620 px. Stable bounded geometry prevents question-to-question shifts; small screens and long results scroll inside the dialog. The title explicitly says the discount applies to the membership price in Arabic and English.
-- Enter an Egyptian mobile number, continue, then deliberately start the unchanged three-question/five-second challenge. There is no SMS, provider dependency or participant verification endpoint.
+- Enter an Egyptian mobile number, continue, then deliberately start the three-question/ten-second challenge (duration increased by the owner on 7 November 2026). There is no SMS, provider dependency or participant verification endpoint.
 - After questions, the only personal-information field is the name. Participation consent remains; optional marketing consent and email are removed. The server rejects extra email fields and creates only an administration notification job for new registrations.
 
 ## Identity and recovery
