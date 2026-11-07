@@ -2,6 +2,12 @@
 
 **Latest update — 7 November 2026:** the production challenge is active and publicly reports `available: true`. See [verified release status](CHALLENGE_LIVE_STATUS.md). Earlier “closed” and “pending” entries record the state before activation.
 
+## Admin dashboard simplification — 7 November 2026
+
+Reorganized the challenge admin overview into four primary metrics plus compact score/status totals, widened the content area, and collapsed secondary email/conversion and audit information. Coupon redemption now starts from an **Activate coupon** button in each eligible participant row; the coupon's approved package, duration, customer, and offer conditions remain confirmed inline, then the backend atomically redeems it once. The separate code lookup panel was removed because admins can search directly by coupon code. Mobile participant records render as readable labeled cards instead of a clipped wide table. Arabic/English labels and the existing role controls are preserved.
+
+Validation: typecheck, lint, production build, and all 38 isolated challenge browser tests passed. The tests verified row-based activation, eligibility confirmation, successful redemption, refreshed status and metrics, Arabic and English, responsive administration at 320/390/768/1440px, and accessibility checks. Screenshots: [Arabic mobile](evidence/challenge/admin-ar-320.png), [Arabic desktop](evidence/challenge/admin-ar-1440.png), [English desktop](evidence/challenge/admin-en-1440.png), and [coupon activation](evidence/challenge/admin-activate-en-1440.png). No production customer or coupon data was used.
+
 ## Ten-second timer and rapid logo entry — 7 November 2026
 
 The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. The prior closed state was superseded; see [current production status](CHALLENGE_LIVE_STATUS.md).
