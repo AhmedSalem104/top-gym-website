@@ -8,6 +8,10 @@ Reorganized the challenge admin overview into four primary metrics plus compact 
 
 Validation: typecheck, lint, production build, and all 38 isolated challenge browser tests passed. The tests verified row-based activation, eligibility confirmation, successful redemption, refreshed status and metrics, Arabic and English, responsive administration at 320/390/768/1440px, and accessibility checks. Screenshots: [Arabic mobile](evidence/challenge/admin-ar-320.png), [Arabic desktop](evidence/challenge/admin-ar-1440.png), [English desktop](evidence/challenge/admin-en-1440.png), and [coupon activation](evidence/challenge/admin-activate-en-1440.png). No production customer or coupon data was used.
 
+## Coupon text and activation button — 7 November 2026
+
+Production `/challenge/info` returned the approved English policy normally, but its Arabic `terms` field is literally stored as question marks. Added a defensive Arabic display fallback that translates the exact existing English policy for both the public challenge and admin coupon details when that malformed value is received. The row activation button is now smaller with dark, high-contrast text; the confirmation button is compact and remains legible while disabled. The local UI path is covered with a unit test. The backend policy source still needs correction so every API consumer receives valid Arabic; its Vercel server-only backend host was not available through the permitted local access and no unrelated VPS was touched.
+
 ## Ten-second timer and rapid logo entry — 7 November 2026
 
 The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. The prior closed state was superseded; see [current production status](CHALLENGE_LIVE_STATUS.md).

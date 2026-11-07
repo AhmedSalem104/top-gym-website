@@ -3,6 +3,7 @@ import { playMotion } from './motion';
 import { motion } from '../config/motion';
 import { challengeApi, ApiError } from './challenge-api';
 import { challengeAttribution, challengeEvent } from './challenge-attribution';
+import { localizedChallengeTerms } from './challenge-terms';
 
 type Localized = { ar: string; en: string };
 interface State {
@@ -63,7 +64,7 @@ export function initChallenge() {
   const terms = (text: Localized | undefined) => {
     if (text) {
       const d = el('details', undefined, 'challenge-terms');
-      d.append(el('summary', c.terms), el('p', text[locale]));
+      d.append(el('summary', c.terms), el('p', localizedChallengeTerms(text, locale)));
       stage.append(d);
     }
   };

@@ -142,6 +142,8 @@ export const challengeCopy = {
     cancel: 'إلغاء',
     moreStats: 'إحصاءات إضافية',
     confirmRedeem: 'أؤكد مراجعة الشروط وهوية صاحب الكوبون. لا يمكن استخدامه مرة ثانية.',
+    couponTermsFallback:
+      'الكوبون صالح لمدة 30 يومًا من تاريخ إصداره، ويُستخدم مرة واحدة للعملاء الجدد فقط على أي اشتراك متاح في باقة حديد أو حديد وكارديو وبأي مدة. لا يمكن دمجه مع أي عرض أو خصم آخر. تتحدد نسبة الخصم وفقًا لنتيجة التحدي، بحد أقصى 30%. يُرجى تقديم الكوبون للجيم قبل إتمام الاشتراك؛ ويعتمد قبوله على أن يكون صالحًا وغير مستخدم.',
     audit: 'سجل العمليات',
     events: 'أحداث التحويل',
     mailJobs: 'حالة إشعارات البريد',
@@ -297,6 +299,8 @@ export const challengeCopy = {
     moreStats: 'Additional activity',
     confirmRedeem:
       'I have checked the terms and the coupon holder. This coupon cannot be used again.',
+    couponTermsFallback:
+      'The coupon is valid for 30 days from issue and may be used once by new customers only on any available Gym or Gym + Cardio package and duration. It cannot be combined with another offer or discount. The discount percentage is determined by the challenge result, up to 30%. Present the coupon to the gym before completing the membership; final acceptance depends on the coupon being valid and unused.',
     audit: 'Audit history',
     events: 'Conversion events',
     mailJobs: 'Email notification status',

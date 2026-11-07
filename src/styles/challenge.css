@@ -682,7 +682,28 @@ html[dir='rtl'] .admin-access-dialog h2 {
 }
 .challenge-admin table .challenge-admin-activate {
   border-color: var(--color-gold);
-  color: var(--color-gold);
+  color: var(--color-canvas);
+  background: var(--color-gold);
+  min-height: 36px;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.challenge-admin table .challenge-admin-activate:hover {
+  color: var(--color-canvas);
+  background: var(--color-hover);
+}
+.challenge-admin .challenge-admin-activation-actions button {
+  min-height: 38px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+.challenge-admin .challenge-admin-activation-actions .challenge-primary:disabled {
+  opacity: 1;
+  color: var(--color-canvas);
+  background: #b77b1a;
+  cursor: not-allowed;
 }
 .challenge-admin-activation {
   padding: 16px;
@@ -837,7 +858,8 @@ html[dir='rtl'] .admin-access-dialog h2 {
     flex-wrap: wrap;
   }
   .challenge-admin-row-actions button {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
+    max-width: 100%;
   }
   .challenge-admin-table tbody tr.challenge-admin-action-row {
     display: block;
