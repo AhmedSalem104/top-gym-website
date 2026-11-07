@@ -6,7 +6,10 @@
   "outputDirectory": "dist",
   "trailingSlash": true,
   "rewrites": [
-    { "source": "/api/challenge/:path*", "destination": "/api/challenge?__tg_route=:path*" }
+    {
+      "source": "/api/challenge/v1/:__tg_path*/",
+      "destination": "/api/challenge/?__tg_route=v1/:__tg_path*"
+    }
   ],
   "functions": {
     "api/feedback.ts": { "maxDuration": 45 },

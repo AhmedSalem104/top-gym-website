@@ -20,8 +20,8 @@ const request = (
 afterEach(() => vi.unstubAllGlobals());
 describe('challenge BFF security boundary', () => {
   it.each([
-    '/api/challenge/?__tg_route=v1/admin/participants&page=2',
-    '/api/challenge/v1/admin/participants/?__tg_route=v1/admin/secrets&page=2',
+    '/api/challenge/?__tg_route=v1/admin/participants&__tg_path=admin/participants&page=2',
+    '/api/challenge/v1/admin/participants/?__tg_route=v1/admin/secrets&__tg_path=admin/secrets&page=2',
   ])('preserves the canonical allowlisted path through Vercel rewrites: %s', async (path) => {
     const fetch = vi.fn(async (url: URL, options: RequestInit) => {
       expect(url.href).toBe('https://api.example.test/v1/admin/participants?page=2');

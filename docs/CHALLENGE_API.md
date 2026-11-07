@@ -4,7 +4,7 @@ Browser prefix: `/api/challenge/v1`. Backend prefix: `/v1`. All responses use `C
 
 ## Vercel routing
 
-The static Astro deployment uses an explicit `vercel.json` rewrite from `/api/challenge/:path*` to the native `api/challenge.ts` function. The gateway normalizes the allowlisted original/rewritten route, removes the internal `__tg_route` parameter, rejects ambiguity and signs the canonical backend path/query. Preview inspection caught a platform 404 with the previous framework-style catch-all filename; a successful function build alone did not verify routing. See [Vercel rewrites](https://vercel.com/docs/routing/rewrites).
+The static Astro deployment uses an explicit `vercel.json` rewrite from `/api/challenge/v1/:__tg_path*/` to the native `api/challenge.ts` function. The gateway normalizes the allowlisted original/rewritten route, removes the internal `__tg_route` and Vercel-added `__tg_path` parameters, rejects ambiguity and signs the canonical backend path/query. Preview inspection caught a platform 404 with the previous framework-style catch-all filename; a successful function build alone did not verify routing. The source/destination explicitly retain the trailing slash required by this project; nested calls must reach the function after the canonical redirect. See [Vercel rewrites](https://vercel.com/docs/routing/rewrites).
 
 ## Public contracts
 

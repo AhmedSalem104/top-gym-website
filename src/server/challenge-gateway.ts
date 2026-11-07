@@ -16,13 +16,16 @@ export async function challengeGateway(
   // Support both the original URL and the rewritten destination URL; never
   // forward the internal routing parameter or allow it to override a real path.
   const rewritten = url.searchParams.getAll('__tg_route');
-  if (rewritten.length > 1) return fail(400, 'invalid_request');
+  if (rewritten.length > 1 || url.searchParams.getAll('__tg_path').length > 1)
+    return fail(400, 'invalid_request');
   const pathname = url.pathname.replace(/\/$/, '');
   const path =
     pathname === '/api/challenge'
       ? '/' + (rewritten[0] || '').replace(/\/$/, '')
       : pathname.replace(/^\/api\/challenge(?=\/)/, '');
   url.searchParams.delete('__tg_route');
+  // Vercel also appends named source captures to the destination query.
+  url.searchParams.delete('__tg_path');
   if (!routes.test(path) || !['GET', 'POST'].includes(request.method))
     return fail(404, 'not_found');
   if (!env.CHALLENGE_BACKEND_URL || !env.CHALLENGE_GATEWAY_KEY || !env.CHALLENGE_ORIGIN)
