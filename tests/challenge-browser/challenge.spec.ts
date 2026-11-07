@@ -184,13 +184,16 @@ test('hidden entry requires real login, and admin searches and redeems once', as
   await page.getByLabel('Search exact full name, phone or coupon').fill('Admin seeded participant');
   await page.getByRole('button', { name: 'Search', exact: true }).click();
   await expect(page.locator('tbody tr')).toHaveCount(1);
-  const coupon = await page.locator('tbody tr').first().locator('td').nth(6).innerText();
-  await page.getByLabel('Code', { exact: true }).fill(coupon);
-  await page.getByRole('button', { name: 'Look up coupon' }).click();
+  const participantRow = page.locator('tbody tr').first();
+  await participantRow.getByRole('button', { name: 'Activate coupon' }).click();
+  await expect(page.locator('.challenge-admin-activation')).toBeVisible();
+  await page.screenshot({ path: `${evidence}/admin-activate-en-1440.png`, fullPage: true });
   await page
     .getByLabel('I have checked the terms and the coupon holder. This coupon cannot be used again.')
     .check();
   await page.getByRole('button', { name: 'Confirm redemption' }).click();
+  await expect(page.locator('.challenge-admin-activation')).toHaveCount(0);
+  await expect(page.locator('tbody tr').first().locator('td').nth(6)).toHaveText('Redeemed');
   await expect(page.getByRole('button', { name: 'Confirm redemption' })).toHaveCount(0);
   await page.screenshot({ path: `${evidence}/admin-en-1440.png`, fullPage: true });
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);

@@ -123,14 +123,23 @@ export async function initAdmin() {
       conversions: { type: string; count: number }[];
     }>('summary');
     const kpis = node('div', undefined, 'challenge-admin-kpis');
+    const breakdown = node('div', undefined, 'challenge-admin-breakdown');
     function renderMetrics(summary: Awaited<ReturnType<typeof getSummary>>) {
       kpis.replaceChildren();
+      breakdown.replaceChildren();
       const metrics: [string, number][] = [
         [c.participants, summary.participants],
         [c.completed, summary.completed],
-        [c.issued, summary.issued],
-        [c.redeemed, summary.redeemed],
         [c.unredeemed, summary.unredeemed],
+        [c.redeemed, summary.redeemed],
+      ];
+      for (const [label, value] of metrics) {
+        const card = node('div', undefined, 'challenge-admin-kpi');
+        card.append(node('span', label), node('strong', String(value)));
+        kpis.append(card);
+      }
+      const compact: [string, number][] = [
+        [c.issued, summary.issued],
         [c.expired, summary.expired],
         [c.zero, summary.scores.find((x) => x.score === 0)?.count || 0],
         ...[10, 20, 30].map(
@@ -141,15 +150,15 @@ export async function initAdmin() {
             ],
         ),
       ];
-      for (const [label, value] of metrics) {
-        const card = node('div', undefined, 'challenge-admin-kpi');
-        card.append(node('span', label), node('strong', String(value)));
-        kpis.append(card);
+      for (const [label, value] of compact) {
+        const item = node('span', undefined, 'challenge-admin-stat');
+        item.append(node('span', label), node('strong', String(value)));
+        breakdown.append(item);
       }
     }
     const getSummary = () => invoke<typeof summary>('summary');
     renderMetrics(summary);
-    content.append(kpis);
+    content.append(kpis, breakdown);
     const panel = node('section', undefined, 'challenge-admin-panel');
     panel.append(node('h2', c.participants));
     const toolbar = node('form', undefined, 'challenge-admin-toolbar');
@@ -215,7 +224,6 @@ export async function initAdmin() {
       [
         c.name,
         c.phoneColumn,
-        c.emailColumn,
         c.date,
         c.score,
         c.discount,
@@ -234,23 +242,48 @@ export async function initAdmin() {
       for (const p of r.items) {
         const row = node('tr');
         const statusText = c.statuses[p.status as keyof typeof c.statuses] || c.noCoupon;
-        for (const value of [
-          p.name,
-          p.phone,
-          p.email || '—',
-          format(p.createdAt),
-          `${p.score}/3`,
-          `${p.discount}%`,
-          p.coupon || '—',
-          statusText,
-          p.redeemedAt ? format(p.redeemedAt) : '—',
+        for (const [label, value] of [
+          [c.name, p.name],
+          [c.phoneColumn, p.phone],
+          [c.date, format(p.createdAt)],
+          [c.score, `${p.score}/3`],
+          [c.discount, `${p.discount}%`],
+          [c.coupon, p.coupon || '—'],
+          [c.status, statusText],
+          [c.redeemed, p.redeemedAt ? format(p.redeemedAt) : '—'],
         ]) {
           const td = node('td', value);
           td.dir = 'auto';
+          td.dataset.label = label;
           row.append(td);
         }
         const td = node('td');
-        td.append(button(c.details, () => void task(() => detail(p))));
+        td.dataset.label = c.details;
+        const actions = node('div', undefined, 'challenge-admin-row-actions');
+        actions.append(button(c.details, () => void task(() => detail(p))));
+        if (p.coupon && p.status === 'issued' && role !== 'viewer') {
+          const activate = button(
+            c.activateCoupon,
+            () =>
+              void task(async () => {
+                const coupon = await invoke<Coupon>('coupons/lookup', { code: p.coupon });
+                const detailRow = node('tr', undefined, 'challenge-admin-action-row');
+                const detailCell = node('td');
+                detailCell.colSpan = 9;
+                const panel = node('section', undefined, 'challenge-admin-activation');
+                detailCell.append(panel);
+                detailRow.append(detailCell);
+                const existing = row.nextElementSibling;
+                if (existing?.classList.contains('challenge-admin-action-row')) existing.remove();
+                row.after(detailRow);
+                showCoupon(coupon, panel, () => detailRow.remove());
+              }),
+            true,
+          );
+          activate.classList.add('challenge-admin-activate');
+          actions.append(activate);
+        }
+        td.append(actions);
         row.append(td);
         body.append(row);
       }
@@ -297,7 +330,11 @@ export async function initAdmin() {
         }[];
       }>('participants/' + p.id);
       detailPanel.hidden = false;
-      detailPanel.replaceChildren(node('h2', p.name), node('p', p.phone));
+      detailPanel.replaceChildren(
+        node('h2', p.name),
+        node('p', p.phone),
+        ...(p.email ? [node('p', `${c.emailColumn}: ${p.email}`)] : []),
+      );
       for (const q of r.questions) {
         const card = node('article', undefined, 'challenge-admin-record');
         card.append(
@@ -323,41 +360,19 @@ export async function initAdmin() {
       detailPanel.tabIndex = -1;
       detailPanel.focus();
     }
-    const redeemPanel = node('section', undefined, 'challenge-admin-panel');
-    redeemPanel.append(node('h2', c.checkCoupon));
-    const form = node('form');
-    const couponCode = field(form, c.codeLabel);
-    couponCode.required = true;
-    couponCode.maxLength = 40;
-    couponCode.dir = 'ltr';
-    const lookup = node('button', c.lookup, 'challenge-primary');
-    lookup.type = 'submit';
-    form.append(lookup);
-    redeemPanel.append(form);
-    const couponDetails = node('div');
-    redeemPanel.append(couponDetails);
-    content.append(redeemPanel);
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      void task(async () => {
-        const result = await invoke<Coupon>('coupons/lookup', { code: couponCode.value.trim() });
-        showCoupon(result);
-      });
-    });
-    function showCoupon(coupon: Coupon) {
-      couponDetails.replaceChildren();
-      const card = node('div', undefined, 'challenge-admin-record');
+    function showCoupon(coupon: Coupon, target: HTMLElement, onClose: () => void) {
+      target.replaceChildren();
+      const card = node('div', undefined, 'challenge-admin-activation-content');
       card.append(
-        node('h3', `${coupon.discount}% · ${coupon.participant.name}`),
-        node('code', coupon.code),
-        node('p', coupon.phone),
-        node('p', c.statuses[coupon.state as keyof typeof c.statuses]),
-        node('p', c.expires + ' ' + format(coupon.expiresAt)),
+        node('h3', `${c.activateCoupon} · ${coupon.discount}%`),
+        node('p', `${coupon.participant.name} · ${coupon.phone}`),
+        node('p', `${coupon.code} · ${c.expires} ${format(coupon.expiresAt)}`),
         node('p', coupon.terms[locale]),
       );
       if (coupon.redemption)
         card.append(node('p', c.redeemed + ' ' + format(coupon.redemption.redeemed_at)));
       if (coupon.state === 'issued' && role !== 'viewer') {
+        const eligibility = node('div', undefined, 'challenge-admin-eligibility');
         const selection = (label: string, values: string[], labels: Record<string, string>) => {
           const wrap = node('label', label, 'challenge-field'),
             select = node('select');
@@ -367,7 +382,7 @@ export async function initAdmin() {
             select.append(option);
           }
           wrap.append(select);
-          card.append(wrap);
+          eligibility.append(wrap);
           return select;
         };
         const pack = selection(c.package, coupon.policy.packages, c.packages),
@@ -377,7 +392,7 @@ export async function initAdmin() {
             input = node('input');
           input.type = 'checkbox';
           wrap.append(input, node('span', label));
-          card.append(wrap);
+          eligibility.append(wrap);
           return input;
         };
         const newCustomer = flag(c.newCustomer),
@@ -393,21 +408,19 @@ export async function initAdmin() {
             if (!check.checked) return;
             redeem.disabled = true;
             void task(async () => {
-              showCoupon(
-                await invoke<Coupon>(
-                  'coupons/redeem',
-                  {
-                    code: coupon.code,
-                    confirm: true,
-                    eligibility: {
-                      package: pack.value,
-                      duration: duration.value,
-                      newCustomer: newCustomer.checked,
-                      otherOffer: otherOffer.checked,
-                    },
+              await invoke<Coupon>(
+                'coupons/redeem',
+                {
+                  code: coupon.code,
+                  confirm: true,
+                  eligibility: {
+                    package: pack.value,
+                    duration: duration.value,
+                    newCustomer: newCustomer.checked,
+                    otherOffer: otherOffer.checked,
                   },
-                  key,
-                ),
+                },
+                key,
               );
               renderMetrics(await getSummary());
               await list();
@@ -421,11 +434,21 @@ export async function initAdmin() {
         check.addEventListener('change', () => {
           redeem.disabled = !check.checked;
         });
-        card.append(label, redeem);
+        eligibility.append(label);
+        const actions = node('div', undefined, 'challenge-admin-activation-actions');
+        actions.append(redeem, button(c.cancel, onClose));
+        eligibility.append(actions);
+        card.append(eligibility);
       }
-      couponDetails.append(card);
+      target.append(card);
     }
-    const operations = node('section', undefined, 'challenge-admin-panel');
+    const operations = node(
+      'details',
+      undefined,
+      'challenge-admin-panel challenge-admin-secondary',
+    );
+    const operationsSummary = node('summary', c.moreStats);
+    operations.append(operationsSummary);
     operations.append(node('h2', c.mailJobs));
     const operation = (key: string) => c.operations[key as keyof typeof c.operations] || key;
     for (const item of summary.email)
@@ -436,9 +459,9 @@ export async function initAdmin() {
     content.append(operations);
     if (role === 'owner') {
       let before: number | undefined;
-      const audit = node('section', undefined, 'challenge-admin-panel'),
+      const audit = node('details', undefined, 'challenge-admin-panel challenge-admin-secondary'),
         entries = node('div');
-      audit.append(node('h2', c.audit), entries);
+      audit.append(node('summary', c.audit), entries);
       const more = button(c.next, () => void task(loadAudit));
       audit.append(more);
       content.append(audit);
@@ -463,7 +486,9 @@ export async function initAdmin() {
         before = r.items.at(-1)?.id;
         more.disabled = r.items.length < 50;
       }
-      await loadAudit();
+      audit.addEventListener('toggle', () => {
+        if (audit.open && !entries.childElementCount) void task(loadAudit);
+      });
     }
   }
   try {
