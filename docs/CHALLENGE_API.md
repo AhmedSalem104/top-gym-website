@@ -1,5 +1,7 @@
 # Challenge API, persisted state and invariants
 
+Owner access also supports `POST /v1/admin/access` with a strict password-only body, gated by private `CHALLENGE_PASSWORD_ADMIN_EMAIL`. It returns the existing session/CSRF contract. See [current administrator access](ADMIN_ACCESS.md); the five-click logo is only a discovery action.
+
 Browser prefix: `/api/challenge/v1`. Backend prefix: `/v1`. All responses use `Cache-Control: no-store`; errors expose stable codes, not provider messages, submitted data or secrets. JSON only for POST; maximum 8 KiB. Dates are UTC Unix milliseconds unless otherwise stated. Display uses `Africa/Cairo` through Intl.
 
 ## Vercel routing

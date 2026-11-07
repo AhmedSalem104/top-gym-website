@@ -1,0 +1,105 @@
+---
+import { business, type Locale } from '../config/business';
+import { challengeCopy } from '../i18n/challenge';
+import Icon from './Icon.astro';
+import '../styles/challenge.css';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = challengeCopy[locale];
+---
+
+<dialog
+  class="admin-access-dialog"
+  id="admin-access-dialog"
+  aria-labelledby="admin-access-title"
+  aria-describedby="admin-access-intro"
+  data-locale={locale}
+  data-destination={`/${locale}/challenge-admin/`}
+>
+  <div class="admin-access-panel">
+    <button
+      class="challenge-close admin-access-close"
+      type="button"
+      data-admin-access-close
+      aria-label={c.accessClose}
+    >
+      <Icon name="close" />
+    </button>
+    <img class="admin-access-logo" src={business.logo} width="68" height="68" alt="TOP GYM" />
+    <span class="challenge-kicker" aria-hidden="true">
+      TOP GYM
+    </span>
+    <h2 id="admin-access-title">{c.accessTitle}</h2>
+    <p id="admin-access-intro">{c.accessIntro}</p>
+    <div data-admin-access-form></div>
+  </div>
+</dialog>
+<script>
+  import { adminPasswordForm } from '../scripts/admin-password-form';
+  import { playMotion } from '../scripts/motion';
+  import type { ChallengeLocale } from '../i18n/challenge';
+  const dialog = document.querySelector<HTMLDialogElement>('#admin-access-dialog');
+  const logo = document.querySelector<HTMLAnchorElement>('[data-admin-logo]');
+  if (dialog && logo) {
+    const host = dialog.querySelector<HTMLElement>('[data-admin-access-form]')!;
+    const panel = dialog.querySelector<HTMLElement>('.admin-access-panel')!;
+    let clicks = 0,
+      last = 0;
+    document.addEventListener('click', (event) => {
+      if (event.target instanceof Node && !logo.contains(event.target)) clicks = 0;
+    });
+    const clear = () => {
+      host.replaceChildren();
+      if (!document.querySelector('dialog[open]')) document.body.classList.remove('dialog-open');
+      logo.focus({ preventScroll: true });
+    };
+    dialog.addEventListener('close', clear);
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const controls = [...dialog.querySelectorAll<HTMLElement>('button:not(:disabled), input')];
+      const first = controls[0],
+        last = controls.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    });
+    dialog
+      .querySelector('[data-admin-access-close]')!
+      .addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    logo.addEventListener('click', (event) => {
+      // Ordinary logo clicks retain Home navigation. Only the fifth opens the dialog.
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      const now = performance.now();
+      clicks = now - last > 2500 ? 1 : clicks + 1;
+      last = now;
+      if (clicks !== 5) {
+        if (event.detail === 0) {
+          event.preventDefault();
+          location.hash = 'top';
+          logo.focus({ preventScroll: true });
+        }
+        return;
+      }
+      clicks = 0;
+      event.preventDefault();
+      document.querySelector<HTMLButtonElement>('.menu-toggle[aria-expanded="true"]')?.click();
+      const { form, input } = adminPasswordForm(dialog.dataset.locale as ChallengeLocale, () => {
+        if (dialog.open) location.assign(dialog.dataset.destination!);
+      });
+      host.replaceChildren(form);
+      dialog.showModal();
+      document.body.classList.add('dialog-open');
+      input.focus({ preventScroll: true });
+      void playMotion(panel, 'enter');
+    });
+  }
+</script>

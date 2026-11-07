@@ -12,7 +12,10 @@ if (process.env.VERCEL || process.env.NODE_ENV === 'production')
   throw new Error('Local harness only');
 const port = Number(process.env.CHALLENGE_TEST_PORT || 4340);
 if (!Number.isInteger(port) || port < 1024 || port > 65534) throw new Error('Invalid test port');
-const c = config({ CHALLENGE_ORIGIN: `http://127.0.0.1:${port}` });
+const c = config({
+  CHALLENGE_ORIGIN: `http://127.0.0.1:${port}`,
+  CHALLENGE_PASSWORD_ADMIN_EMAIL: 'local-admin@example.test',
+});
 const bank =
   process.env.CHALLENGE_PREVIEW_BANK === 'real'
     ? loadBank('content/challenge/questions.json', true)

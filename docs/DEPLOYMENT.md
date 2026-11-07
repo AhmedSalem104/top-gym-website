@@ -1,5 +1,9 @@
 # Deployment preparation
 
+## Logo password access — 7 November 2026
+
+For the owner-requested password-only login, publish the tested backend first and configure only the private CHALLENGE_PASSWORD_ADMIN_EMAIL selector; rotate the database hash and revoke owner sessions after a backup. Then release the BFF/dialog through protected main. See [deployment, rollback and credentials handling](ADMIN_ACCESS.md).
+
 ## Challenge visibility correction — 7 November 2026
 
 See [production visibility](CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.

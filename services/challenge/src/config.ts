@@ -35,6 +35,8 @@ const envSchema = z.object({
   SMTP_USER: z.union([z.email().max(254), z.literal('')]).optional(),
   SMTP_APP_PASSWORD: z.string().optional(),
   CHALLENGE_ADMIN_EMAIL: z.union([z.email().max(254), z.literal('')]).optional(),
+  // Explicit owner opt-in; the password hash stays in the private database.
+  CHALLENGE_PASSWORD_ADMIN_EMAIL: z.union([z.email().max(254), z.literal('')]).optional(),
 });
 export type Config = z.infer<typeof envSchema> & { policy?: Policy };
 export function readConfig(env: NodeJS.ProcessEnv = process.env): Config {

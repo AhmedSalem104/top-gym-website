@@ -19,6 +19,27 @@ const request = (
   });
 afterEach(() => vi.unstubAllGlobals());
 describe('challenge BFF security boundary', () => {
+  it('forwards owner access through the signed HTTPS gateway, preserving private cookies', async () => {
+    const fetch = vi.fn(async (url: URL) => {
+      expect(url.pathname).toBe('/v1/admin/access');
+      return Response.json(
+        { csrf: 'test-csrf', role: 'owner' },
+        {
+          headers: {
+            'Set-Cookie': '__Host-tg_admin=test-only; Path=/; Secure; HttpOnly; SameSite=Lax',
+          },
+        },
+      );
+    });
+    vi.stubGlobal('fetch', fetch);
+    const response = await challengeGateway(
+      request('admin/access', { password: 'test-only-password' }),
+      env,
+    );
+    expect(response.status).toBe(200);
+    expect(response.headers.get('set-cookie')).toContain('HttpOnly');
+    expect(response.headers.get('cache-control')).toBe('no-store');
+  });
   it('allows direct phone enrollment and refuses removed verification routes', async () => {
     const fetch = vi.fn(async () => Response.json({ status: 'eligible' }));
     vi.stubGlobal('fetch', fetch);

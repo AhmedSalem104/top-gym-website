@@ -182,6 +182,15 @@ export function createApp(
     store.event(store.hash(b.key + ':' + b.event), b.event, null, JSON.stringify(b.attribution));
     return { accepted: true };
   });
+  app.post('/v1/admin/access', async (req, reply) => {
+    const b = z
+      .object({ password: z.string().min(1).max(128) })
+      .strict()
+      .parse(req.body);
+    const r = await admin.loginOwner(b.password, req.trustedIp!);
+    reply.header('Set-Cookie', setCookie('admin', r.token, 28800));
+    return { csrf: r.csrf, role: r.role };
+  });
   app.post('/v1/admin/login', async (req, reply) => {
     const b = z
       .object({
