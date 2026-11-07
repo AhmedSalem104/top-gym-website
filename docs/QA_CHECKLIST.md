@@ -1,8 +1,10 @@
 # QA and release checklist
 
+**Latest status — 7 November 2026:** production readiness and the bilingual entry UI have been verified; a live participant transaction was deliberately not created. See [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md) for exact checks and limitations. Earlier closed-admission entries are historical.
+
 ## Ten-second timer and rapid logo entry — 7 November 2026
 
-The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. Participation remains closed pending reviewed private questions and approved commercial terms.
+The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. The prior closed state was superseded; see [current production status](CHALLENGE_LIVE_STATUS.md).
 
 ## Logo password access — 7 November 2026
 
@@ -18,7 +20,7 @@ Actual Linux, TLS, signed API, real owner MFA, SMTP/inbox and restore results: [
 
 ## Direct-entry update — 7 November 2026
 
-The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. The later production and review checks are recorded in [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md).
 
 ## Fitness challenge release gate
 

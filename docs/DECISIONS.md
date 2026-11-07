@@ -1,8 +1,10 @@
 # Decision log
 
+**Latest status — 7 November 2026:** the challenge is live. See [current production state](CHALLENGE_LIVE_STATUS.md); closed-admission notes below are historical decisions.
+
 ## Ten-second timer and rapid logo entry — 7 November 2026
 
-The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. Participation remains closed pending reviewed private questions and approved commercial terms.
+The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. The entry records the pre-activation decision state; the current release is active as documented in [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md).
 
 ## Logo password access — 7 November 2026
 
@@ -18,7 +20,7 @@ The owner explicitly asked to continue the missing setup. Use a trusted Let's En
 
 ## Direct-entry update — 7 November 2026
 
-The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. The later activation and content-review status is recorded in [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md).
 
 7 November 2026 publication update: the owner explicitly authorized pushing and publishing. Use the protected GitHub PR and Vercel workflow with the challenge disabled. Live participation remains unavailable until the provider/domain, policy, reviewed bank and backend acceptance requirements are met; do not treat deployment approval as approval of unspecified offer terms.
 

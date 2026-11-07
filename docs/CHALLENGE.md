@@ -1,10 +1,12 @@
 # Fitness challenge — implementation and approval boundaries
 
-**Current infrastructure:** the owner authorized continuing activation. The separate VPS backend and trusted IP HTTPS are installed, with signed Vercel connection settings, private SMTP and owner authentication. Admissions remain closed pending content/business inputs. [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md) supersedes the historical no-installation statements below.
+**Latest status (7 November 2026):** the challenge is active on production. See [live status](CHALLENGE_LIVE_STATUS.md) for verified readiness, current terms, and the explicitly limited AI-assisted question review. Closed-admission statements in the dated history below describe earlier releases.
+
+**Infrastructure history:** the separate VPS backend, trusted IP HTTPS, signed Vercel connection, private SMTP and owner authentication were installed before activation. The current state is active; see [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md).
 
 ## Direct-entry update — 7 November 2026
 
-The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. The current contract is [documented here](CHALLENGE_SIMPLE_ENTRY.md); the production activation and review limitation are [recorded here](CHALLENGE_LIVE_STATUS.md). A challenge attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged.
 
 ## Current status
 

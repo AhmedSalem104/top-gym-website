@@ -1,10 +1,12 @@
-# Private question bank and scientific review
+# Private question bank and review status
+
+> **Production status (7 November 2026):** a private 300-question bank is active. It passed the production structural validator and its runtime metadata records an AI-assisted editorial/source review. This is **not** an independent qualified fitness, nutrition, medical, or Arabic-language review. Source references are topic-level and are not a signed per-question approval. See [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md). Do not describe the bank as expert-certified.
 
 The original authoring draft contains exactly 300 bilingual questions: 90 medium, 150 medium-advanced and 60 advanced. Each has an ID, topic, Arabic/English stem, four translated choices, one correct index, explanation and review status. The local files are `content/challenge/questions.txt` and `questions.json`; a public checksum/count manifest contains no answers.
 
 A checksum-verified private local backup was also placed under the owner's `Documents/TOP GYM Private/challenge-bank-24a76f89` folder, with Windows access restricted to the current user and SYSTEM. This is a local preservation copy, not an off-host backup or approved private content repository.
 
-**All 300 are drafts. Zero entries claim independent scientific approval.** Automated structure/uniqueness validation and an initial editorial duplicate review passed locally. Difficulty is an authoring allocation, not an empirical calibration. Five-second reading feasibility and scientific correctness still require qualified review.
+The repository copy remains a draft and is not the production bank. The private runtime copy is a separate artifact. Its automated production validator reports all entries as reviewed because runtime readiness requires review metadata; that metadata explicitly identifies an AI-assisted review and does not establish expert approval. The difficulty allocation is not empirical calibration. Scientific accuracy, difficulty, translation quality, and suitability under the timer still need a qualified human review.
 
 ## Private artifact boundary
 

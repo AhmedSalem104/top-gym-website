@@ -1,8 +1,10 @@
 # Deployment preparation
 
+**Latest status (7 November 2026):** production challenge admissions are active. See [live status and evidence](CHALLENGE_LIVE_STATUS.md). Closed-admission and pending-input statements in dated sections below are historical.
+
 ## Ten-second timer and rapid logo entry — 7 November 2026
 
-The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. Participation remains closed pending reviewed private questions and approved commercial terms.
+The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. The closing state described in this historical entry was superseded; see [current production status](CHALLENGE_LIVE_STATUS.md).
 
 ## Logo password access — 7 November 2026
 
@@ -10,19 +12,19 @@ For the owner-requested password-only login, publish the tested backend first an
 
 ## Challenge visibility correction — 7 November 2026
 
-See [production visibility](CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.
+See [production visibility](CHALLENGE_VISIBILITY.md) for how the launcher and authenticated admin shell were exposed. Current admissions are active; the older closed-state behavior is historical. See [live status](CHALLENGE_LIVE_STATUS.md) for the running configuration.
 
 ## Challenge backend installed — 7 November 2026
 
-See [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md): isolated VPS service, trusted IP certificate/renewal, private SMTP/admin setup and server-only Vercel configuration are installed. Public admission remains closed until the owner's terms and reviewed questions exist. Earlier no-VPS-installation entries below are historical.
+See [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md): the isolated VPS service, trusted IP certificate/renewal, private SMTP/admin setup and server-only Vercel configuration are installed. Public admission is active; earlier closed-state notes below are historical.
 
 ## Direct-entry update — 7 November 2026
 
-The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required.
 
 ## Challenge code publication ? 7 November 2026
 
-The owner explicitly authorized pushing and publishing after the local handoff. Publish the verified code through the protected PR/Vercel workflow; the challenge remains disabled until its activation prerequisites are satisfied. See [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md) for private environment variables, isolated SQLite, Docker/Caddy templates, OTP/mail activation, backups and rollback. Keep `PUBLIC_CHALLENGE_ENABLED=false`; do not activate mock OTP, unreviewed questions or invented commercial terms. No backend artifact has been installed on the VPS.
+This paragraph records the pre-activation publication state. The challenge is currently live; see [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md). Preserve the private Vercel/VPS configuration, SQLite data, backups, and rollback image; never publish the local harness or private bank.
 
 ## Current publishing authorization — 6 November 2026
 

@@ -6,11 +6,11 @@ Administrator access now uses five consecutive header-logo clicks and a password
 
 ## Challenge visibility correction — 7 November 2026
 
-See [production visibility](docs/CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.
+The fitness challenge is now active in production. See [live status, verification, offer settings, and the question-review limitation](docs/CHALLENGE_LIVE_STATUS.md). Earlier closed-admissions notes below describe previous releases.
 
-Challenge backend installation and the exact remaining activation inputs: [current operations status](docs/CHALLENGE_ACTIVATION.md). The VPS service is installed with trusted HTTPS; public participation remains closed pending actual coupon terms and reviewed questions.
+For backend architecture, security controls, backups, and rollback, see [challenge operations](docs/CHALLENGE_OPERATIONS.md) and [activation history](docs/CHALLENGE_ACTIVATION.md).
 
-The latest challenge update uses direct mobile-number entry without SMS/OTP, collects only a name after the quiz, and presents a compact animated membership-discount invitation. See [current entry and security contract](docs/CHALLENGE_SIMPLE_ENTRY.md). Code publication is authorized; live activation still depends on the backend, reviewed private questions and commercial configuration.
+The challenge uses direct mobile-number entry without visitor SMS/OTP, collects only a name after the quiz, and presents a compact animated membership-discount invitation. The production API is active; see [current entry and security contract](docs/CHALLENGE_SIMPLE_ENTRY.md) and [live status](docs/CHALLENGE_LIVE_STATUS.md).
 
 A premium Arabic/English gym landing page based on the supplied **Google Stitch Apex Gold** design and authentic TOP GYM equipment photographs. Visitors can explore the gym, compare two membership packages across six durations, view provisional opening hours, call the team, get directions, and join the WhatsApp group.
 
@@ -24,11 +24,11 @@ The owner authorized merging and publishing PR #11 on November 5, 2026. Vercel n
 
 ## Features
 
-**New, gated development feature:** the fitness challenge, lead capture, single-use coupons and MFA-protected administration are implemented for local review. The code is being released with the public challenge disabled; the backend is not yet installed on the VPS. See [implementation and local preview](docs/CHALLENGE.md), [API/schema](docs/CHALLENGE_API.md), [operations](docs/CHALLENGE_OPERATIONS.md) and [actual QA evidence](docs/CHALLENGE_QA.md). The owner authorized code publication on 7 November 2026; live challenge activation remains blocked by the documented configuration, content and business prerequisites.
+**Active feature:** the fitness challenge, lead capture, single-use coupons, and protected administration are running in production. Visitors enter a mobile number without SMS/OTP, answer three questions, and can receive a score-based coupon. The private runtime question bank has an AI-assisted editorial review only; it is not expert-certified. See [live status](docs/CHALLENGE_LIVE_STATUS.md), [implementation](docs/CHALLENGE.md), [API/schema](docs/CHALLENGE_API.md), [operations](docs/CHALLENGE_OPERATIONS.md), and [QA evidence](docs/CHALLENGE_QA.md).
 
-The actual 300 bilingual draft questions and answer keys are delivered privately in ignored local files because this repository is public. [The public manifest](content/challenge/manifest.json) records counts/checksum only. Scientific review, OTP selection/budget, commercial terms and staging configuration remain activation blockers; see [question review](docs/QUESTION_BANK.md).
+The 300 bilingual production questions and answer keys are stored only in restricted VPS mounts because this repository is public. The repository copy remains a draft; [the public manifest](content/challenge/manifest.json) contains counts/checksum only. Qualified human scientific and Arabic-language review remains outstanding; see [question review](docs/QUESTION_BANK.md).
 
-Local challenge preview: install both lockfiles, run `npm run challenge:build`, `npm run challenge:preview:build`, then `npm run challenge:preview`; open `http://127.0.0.1:4340/ar/`. This loopback-only harness uses mock OTP, synthetic non-redeemable coupons and no email/SMS. Detailed test credentials and actual-question preview instructions are in the feature documentation.
+Local challenge preview: install both lockfiles, run `npm run challenge:build`, `npm run challenge:preview:build`, then `npm run challenge:preview`; open `http://127.0.0.1:4340/ar/`. This loopback-only harness uses synthetic questions and non-redeemable coupons, and sends no email/SMS. Detailed test instructions are in the feature documentation.
 
 - Shared Arabic RTL and English LTR pages, localized copy, EGP prices and times, persistent explicit language choice.
 - Original supplied logo; five genuine gym photographs; a spacious-gym promotional hero by Risen Wang with recorded provenance; local fonts.
