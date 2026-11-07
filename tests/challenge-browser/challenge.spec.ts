@@ -5,7 +5,7 @@ const evidence = 'docs/evidence/challenge';
 test.beforeAll(async () => {
   await mkdir(evidence, { recursive: true });
 });
-test('gold invitation motion is bounded, stable, and disabled with reduced motion', async ({
+test('gold invitation motion loops smoothly, stays stable, and disables with reduced motion', async ({
   page,
 }) => {
   await mkdir('docs/evidence/challenge-entry', { recursive: true });
@@ -22,7 +22,11 @@ test('gold invitation motion is bounded, stable, and disabled with reduced motio
       iterations: style.animationIterationCount,
     };
   });
-  expect(animation).toEqual({ name: 'challenge-invitation', duration: '2.2s', iterations: '2' });
+  expect(animation).toEqual({
+    name: 'challenge-invitation',
+    duration: '3.2s',
+    iterations: 'infinite',
+  });
   await launch.hover();
   await page.waitForTimeout(4600);
   expect((await launch.boundingBox())!.width).toBe(before!.width);
@@ -31,7 +35,7 @@ test('gold invitation motion is bounded, stable, and disabled with reduced motio
       (node) =>
         node.getAnimations({ subtree: true }).filter((a) => a.playState === 'running').length,
     ),
-  ).toBe(0);
+  ).toBe(1);
   await launch.screenshot({ path: 'docs/evidence/challenge-entry/after-button-1440.png' });
   await page.screenshot({ path: 'docs/evidence/challenge-entry/after-landing-1440.png' });
   await page.emulateMedia({ reducedMotion: 'reduce' });

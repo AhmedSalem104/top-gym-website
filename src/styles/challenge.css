@@ -932,15 +932,20 @@ html[dir='rtl'] .admin-access-dialog h2 {
   }
 }
 
-/* A short invitation sweep, not an endless attention loop. Independent from hover translate. */
+/* A restrained, repeating invitation sweep; transform-only and independent from hover movement. */
 .challenge-launch::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(110deg, transparent 25%, #fff6 48%, transparent 72%);
+  z-index: 0;
+  background: linear-gradient(110deg, transparent 25%, #fff9 48%, transparent 72%);
   transform: translateX(-130%);
-  animation: challenge-invitation 2200ms var(--motion-ease) 2;
+  animation: challenge-invitation 3200ms var(--motion-ease) infinite;
+}
+.challenge-launch > * {
+  position: relative;
+  z-index: 1;
 }
 .challenge-launch.is-resting::before {
   animation-play-state: paused;
@@ -980,10 +985,10 @@ html[dir='rtl'] .admin-access-dialog h2 {
 }
 @keyframes challenge-invitation {
   0%,
-  18% {
+  60% {
     transform: translateX(-130%);
   }
-  80%,
+  82%,
   100% {
     transform: translateX(130%);
   }

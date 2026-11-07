@@ -14,8 +14,6 @@ const links = [
   'gallery',
   'memberships',
   ...(publicCredentials.length ? ['credentials'] : []),
-  'schedule',
-  'location',
 ] as (keyof typeof copy)[];
 // Group consecutive rows with identical hours; business configuration remains authoritative.
 const hours: { first: number; last: number; opens: number; closes: number }[] = [];
