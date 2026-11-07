@@ -1,5 +1,9 @@
 # Challenge operations and release gates
 
+## Current installation
+
+The owner subsequently authorized continuing the missing backend work. The dedicated service, trusted IP HTTPS/renewal, private SMTP/admin setup and Vercel connection settings are now installed with admissions closed. See [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md) for verified evidence, actual remaining inputs and private handoff locations. The initial unexecuted-template/no-VPS-installation statements below describe the earlier release.
+
 ## Direct-entry update — 7 November 2026
 
 The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.

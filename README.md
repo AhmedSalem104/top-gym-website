@@ -1,5 +1,7 @@
 # TOP GYM
 
+Challenge backend installation and the exact remaining activation inputs: [current operations status](docs/CHALLENGE_ACTIVATION.md). The VPS service is installed with trusted HTTPS; public participation remains closed pending actual coupon terms and reviewed questions.
+
 The latest challenge update uses direct mobile-number entry without SMS/OTP, collects only a name after the quiz, and presents a compact animated membership-discount invitation. See [current entry and security contract](docs/CHALLENGE_SIMPLE_ENTRY.md). Code publication is authorized; live activation still depends on the backend, reviewed private questions and commercial configuration.
 
 A premium Arabic/English gym landing page based on the supplied **Google Stitch Apex Gold** design and authentic TOP GYM equipment photographs. Visitors can explore the gym, compare two membership packages across six durations, view provisional opening hours, call the team, get directions, and join the WhatsApp group.

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import type { Config } from './config.ts';
 const localized = z
   .object({ ar: z.string().min(1).max(500), en: z.string().min(1).max(500) })
   .strict();
@@ -55,4 +56,20 @@ export function loadBank(path: string, allowDraft: boolean) {
     questions: validateBank(JSON.parse(raw), allowDraft),
     version: createHash('sha256').update(raw).digest('hex'),
   };
+}
+
+// Infrastructure can be installed with admissions closed before private content
+// is approved. A missing bank is the only tolerated error, and only while off.
+// Invalid, unreadable and unreviewed supplied files must still fail startup.
+export function loadRuntimeBank(config: Config) {
+  try {
+    return loadBank(
+      config.CHALLENGE_BANK_FILE,
+      config.NODE_ENV !== 'production' && config.CHALLENGE_ALLOW_DRAFT_BANK === 'true',
+    );
+  } catch (error) {
+    if (config.CHALLENGE_ENABLED === 'false' && (error as NodeJS.ErrnoException).code === 'ENOENT')
+      return { questions: [] as Question[], version: 'unconfigured' };
+    throw error;
+  }
 }

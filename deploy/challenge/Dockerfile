@@ -1,14 +1,17 @@
-# Build from the repository root. Staging/production execution needs its own gate.
-FROM node:24.20.0-bookworm-slim AS build
+# Node 24.21.0, pinned to the verified official image digest.
+ARG NODE_IMAGE=node@sha256:0e0ff40c39bc087845bfb27465a0df4ea419520094bc35842ff83dd8cbe6f9b6
+FROM ${NODE_IMAGE} AS build
 RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY services/challenge/package*.json ./
 RUN npm ci
 COPY services/challenge/tsconfig.json ./
 COPY services/challenge/src ./src
-RUN npm run build && npm prune --omit=dev
+COPY services/challenge/tests ./tests
+# Exercise native SQLite/Argon2 on Linux before the deployable artifact exists.
+RUN npm run build && npm test && npm prune --omit=dev
 
-FROM node:24.20.0-bookworm-slim
+FROM ${NODE_IMAGE}
 ENV NODE_ENV=production CHALLENGE_HOST=0.0.0.0 CHALLENGE_PORT=4400
 WORKDIR /app
 COPY --from=build --chown=node:node /app/package*.json ./

@@ -1,5 +1,7 @@
 # Direct phone entry and compact invitation — 7 November 2026
 
+Infrastructure follow-up: the authorized backend is now installed with trusted HTTPS, private Gmail configuration and an owner account. See [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md). Actual coupon terms and reviewed content remain outstanding; the public challenge is not yet active.
+
 The owner explicitly requested removal of participant OTP and post-quiz email collection, a clearer animated invitation, a smaller dialog, and production publication. This supersedes the earlier OTP requirement. Administrator password/TOTP authentication is unrelated and remains intact.
 
 ## Experience

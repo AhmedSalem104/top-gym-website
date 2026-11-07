@@ -1,5 +1,9 @@
 # Implementation progress — 2026-11-05
 
+## Isolated backend installation — 7 November 2026
+
+The owner asked to continue the missing production setup. Installed the separate VPS service with trusted IP HTTPS, renewal timer, independent private keys/SQLite, existing authorized Gmail configuration and a new password/TOTP owner. Signed API/admin acceptance, actual SMTP/one-message inbox confirmation and an online backup/restore check passed. Local checks: 62 website/BFF and 48 backend tests; Linux image: 47 passed/one private-bank check skipped. Existing applications remained healthy and their proxy files unchanged. Details and still-missing coupon terms/question review: [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md). Public participation is not yet activated; no fake policy or draft questions were published.
+
 ## Direct-entry update — 7 November 2026
 
 The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.

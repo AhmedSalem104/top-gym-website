@@ -1,5 +1,9 @@
 # Decision log
 
+## Backend activation preparation — 7 November 2026
+
+The owner explicitly asked to continue the missing setup. Use a trusted Let's Encrypt IP certificate with automated six-hour renewal instead of making an unprovided hostname a technical blocker. Keep the existing Caddy installation and add one isolated site. Start the real backend with no questions only when admissions are explicitly off; malformed/unreviewed supplied banks and enabled-without-bank still fail. This permits real TLS, signed API, MFA, SMTP and backup acceptance without publishing drafts or inventing coupon terms. See [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md).
+
 ## Direct-entry update — 7 November 2026
 
 The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.

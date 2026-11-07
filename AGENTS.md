@@ -1,5 +1,7 @@
 # TOP GYM contributor instructions
 
+**Current backend state:** the owner authorized continuing activation; the dedicated VPS service, trusted IP HTTPS, renewal timer, private SMTP/admin setup and Vercel server configuration are installed. Read `docs/CHALLENGE_ACTIVATION.md` before operations. Admissions and public UI remain off pending actual coupon terms and reviewed questions; do not repeat the obsolete claim that no backend is installed.
+
 Build a bilingual marketing site for the real TOP GYM. Preserve the supplied Apex Gold Stitch direction and business facts. Static Astro pages have private feedback and a gated challenge BFF; this is not a membership/payment application.
 
 **Fitness challenge release authorization:** the owner explicitly authorized production publication and requested removal of participant OTP and email collection. Use direct unverified phone entry; never claim ownership verification or restore a result from a phone number alone. Preserve administrator MFA. Read `docs/CHALLENGE_SIMPLE_ENTRY.md` for the current contract, migration, risks and still-missing activation inputs. Publish verified changes through protected PRs without asking again; never activate draft questions, test credentials or invented commercial terms.
