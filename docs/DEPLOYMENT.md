@@ -1,8 +1,8 @@
 # Deployment preparation
 
-## Challenge override: do not deploy automatically
+## Challenge code publication ? 7 November 2026
 
-Only Gate 1 local implementation is approved for the new fitness challenge. Earlier standing website publish instructions do not authorize a staging preview or production release of it. See [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md) for private environment variables, isolated SQLite, Docker/Caddy templates, OTP/mail activation, backups and rollback. Keep `PUBLIC_CHALLENGE_ENABLED=false` and do not push a branch that triggers an unapproved Vercel Preview. No backend artifact has been installed on the VPS.
+The owner explicitly authorized pushing and publishing after the local handoff. Publish the verified code through the protected PR/Vercel workflow; the challenge remains disabled until its activation prerequisites are satisfied. See [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md) for private environment variables, isolated SQLite, Docker/Caddy templates, OTP/mail activation, backups and rollback. Keep `PUBLIC_CHALLENGE_ENABLED=false`; do not activate mock OTP, unreviewed questions or invented commercial terms. No backend artifact has been installed on the VPS.
 
 ## Current publishing authorization — 6 November 2026
 

@@ -2,7 +2,7 @@
 
 ## Current status
 
-Gate 1 implementation was explicitly authorized by the owner after the read-only infrastructure audit. This feature is implemented for local review on `feat/fitness-challenge`. **It is not activated on Vercel or installed on the VPS.** Gate 2 requires an approved isolated staging environment and permission for state-changing staging tests. Gate 3 requires separate production approval. These specific gates override earlier standing website publication instructions.
+Gate 1 implementation was explicitly authorized by the owner after the read-only infrastructure audit. This feature was implemented for local review on `feat/fitness-challenge`. On 7 November the owner subsequently authorized pushing and publishing. The verified code is being released through GitHub/Vercel with the public challenge disabled. It is not installed on the VPS or activated for real participants. The authorization does not replace the outstanding OTP/domain, commercial policy, content review and operational prerequisites; isolated backend acceptance testing remains outstanding.
 
 The implementation does not create a gym membership, process payments, or integrate a member portal. Existing website prices, contacts, hours, gallery, certificates, feedback and hero are preserved.
 
@@ -90,7 +90,7 @@ Normal `npm run build` leaves the challenge hidden unless `PUBLIC_CHALLENGE_ENAB
 5. Resolve the fixed five-second accessibility/fairness limitation explicitly. No extra time or client-authoritative extension has been silently introduced.
 6. Approve retention, privacy notice/contact process, administrative operators and MFA recovery procedure. Erasing identity history conflicts with a lifetime one-attempt rule; that policy needs an explicit decision.
 7. Configure private SMTP and optional customer-email policy for the new VPS service. Verify a real authorized test inbox and Gmail rendering in staging. Existing feedback credentials were not copied.
-8. Approve Gate 2; validate load, Docker image, HTTPS, OTP, mail, backups, restore, operators and regressions. Then request Gate 3 separately.
+8. Establish the isolated backend staging target and validate load, Docker image, HTTPS, OTP, mail, backups, restore, operators and regressions before activating live participation. The 7 November code-publication authorization does not establish that these acceptance checks passed.
 
 ## Further documentation
 

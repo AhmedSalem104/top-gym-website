@@ -2,7 +2,7 @@
 
 ## Gated challenge extension
 
-The optional fitness challenge adds a same-origin Vercel BFF and a separate Node 24/Fastify/SQLite VPS service. It does not change the feedback API or create membership/payment logic. Feature UI is disabled by default. Server-authoritative deadlines, unique phone identities, transactional coupons, MFA administration and durable outbox are described in [CHALLENGE.md](CHALLENGE.md) and [CHALLENGE_API.md](CHALLENGE_API.md). Only local Gate 1 is approved; deployment architecture and rollback are in [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md).
+The optional fitness challenge adds a same-origin Vercel BFF and a separate Node 24/Fastify/SQLite VPS service. It does not change the feedback API or create membership/payment logic. Feature UI is disabled by default. Server-authoritative deadlines, unique phone identities, transactional coupons, MFA administration and durable outbox are described in [CHALLENGE.md](CHALLENGE.md) and [CHALLENGE_API.md](CHALLENGE_API.md). The owner subsequently authorized code publication with the challenge disabled; backend deployment architecture and rollback are in [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md).
 
 ## Static rendering
 

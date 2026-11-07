@@ -1,5 +1,7 @@
 # Decision log
 
+7 November 2026 publication update: the owner explicitly authorized pushing and publishing. Use the protected GitHub PR and Vercel workflow with the challenge disabled. Live participation remains unavailable until the provider/domain, policy, reviewed bank and backend acceptance requirements are met; do not treat deployment approval as approval of unspecified offer terms.
+
 ## Fitness challenge — Gate 1
 
 The owner approved local implementation after the read-only audit. Staging and production remain separate gates. Chosen architecture: same-origin Vercel BFF, signed HTTPS to a separate Fastify/SQLite service, no member/payment integration; encrypted sensitive columns, phone uniqueness, persisted five-second deadlines, transactional issuance/redemption and durable outbox. No OTP provider or discount policy was silently approved. GitHub is public, so the actual 300-question draft and answers remain private ignored artifacts; release requires qualified review. Details and residual risks: [CHALLENGE.md](CHALLENGE.md), [CHALLENGE_API.md](CHALLENGE_API.md), [QUESTION_BANK.md](QUESTION_BANK.md).

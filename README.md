@@ -12,7 +12,7 @@ The owner authorized merging and publishing PR #11 on November 5, 2026. Vercel n
 
 ## Features
 
-**New, gated development feature:** the fitness challenge, lead capture, single-use coupons and MFA-protected administration are implemented for local review. They are not deployed. The existing live site remains unchanged. See [implementation and local preview](docs/CHALLENGE.md), [API/schema](docs/CHALLENGE_API.md), [operations](docs/CHALLENGE_OPERATIONS.md) and [actual QA evidence](docs/CHALLENGE_QA.md). Gate 2 staging and Gate 3 production require separate approval.
+**New, gated development feature:** the fitness challenge, lead capture, single-use coupons and MFA-protected administration are implemented for local review. The code is being released with the public challenge disabled; the backend is not yet installed on the VPS. See [implementation and local preview](docs/CHALLENGE.md), [API/schema](docs/CHALLENGE_API.md), [operations](docs/CHALLENGE_OPERATIONS.md) and [actual QA evidence](docs/CHALLENGE_QA.md). The owner authorized code publication on 7 November 2026; live challenge activation remains blocked by the documented configuration, content and business prerequisites.
 
 The actual 300 bilingual draft questions and answer keys are delivered privately in ignored local files because this repository is public. [The public manifest](content/challenge/manifest.json) records counts/checksum only. Scientific review, OTP selection/budget, commercial terms and staging configuration remain activation blockers; see [question review](docs/QUESTION_BANK.md).
 

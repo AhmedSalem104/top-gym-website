@@ -6,4 +6,4 @@ The public feature remains disabled. The public repository intentionally exclude
 
 Validation and screenshots: [CHALLENGE_QA.md](CHALLENGE_QA.md). Architecture, secure configuration, remaining business decisions and operations: [CHALLENGE.md](CHALLENGE.md).
 
-Only Gate 1 local implementation was approved. Do not merge/deploy. A branch push may trigger Vercel Preview, so the remote branch/PR must wait for approved Gate 2 scope. Gate 3 production requires separate explicit authorization.
+On 7 November 2026 the owner explicitly authorized pushing and publishing. Merge through required quality checks and publish to Vercel with the challenge disabled. Activation still needs the approved OTP/domain, commercial policy, reviewed private question bank and backend acceptance evidence. This PR does not install the backend on the VPS.

@@ -2,7 +2,7 @@
 
 ## Environment and isolation
 
-Gate 1 local implementation only is authorized. No VPS container, database, DNS, certificate, user, package or directory was created. Gate 2 requires an isolated staging target and state-changing test approval; Gate 3 is separate. Earlier standing website publication authorization does not override these gates.
+The initial implementation was limited to Gate 1. On 7 November 2026 the owner explicitly authorized pushing and publishing the verified changes. This release uses the protected GitHub/Vercel workflow with challenge participation disabled. No VPS container, database, DNS, certificate, user, package or directory has been created for the feature. Backend staging/acceptance and activation inputs remain outstanding; publication is not evidence of successful backend deployment.
 
 Proposed live data location: `/var/lib/top-gym-challenge/challenge.sqlite`, on local ext4 outside web roots and separate from LogicFit. Staging needs different storage, keys, origin, OTP service and recipient inbox. Do not use production customer data or implicitly repair unrelated services/backups.
 
@@ -74,4 +74,4 @@ Release sequence:
 5. After Gate 3, back up, deploy backend with admissions off, verify, publish approved frontend, enable admissions and monitor.
 6. Roll back by disabling admissions and restoring the previous compatible image/frontend. Preserve DB, keys, results and redemptions. Never recreate the DB or blindly restore an old backup that could re-enable spent coupons. Future schema changes need tested migrations and rollback/forward-recovery plans.
 
-A public branch push may trigger Vercel Preview. Until Gate 2 scope is approved, keep the verified commit local rather than implicitly deploying a remote preview.
+The 7 November authorization permits the branch push, Vercel Preview, protected merge and production publication of the disabled feature. Never deploy the local test harness or enable live participation before the documented activation requirements are met.
