@@ -122,6 +122,11 @@ for (const [index, locale] of ['ar', 'en'].entries())
     const whatsappUrl = new URL(
       (await modal.locator('.challenge-coupon-whatsapp').getAttribute('href'))!,
     );
+    const whatsappCta = modal.locator('.challenge-coupon-whatsapp');
+    await whatsappCta.hover();
+    expect(await whatsappCta.evaluate((node) => getComputedStyle(node).color)).toBe(
+      'rgb(11, 13, 15)',
+    );
     expect(whatsappUrl.origin + whatsappUrl.pathname).toBe('https://wa.me/201015819700');
     expect(whatsappUrl.searchParams.get('text')).toContain(coupon);
     expect(whatsappUrl.searchParams.get('text')).toContain(
@@ -219,7 +224,9 @@ test('hidden entry requires real login, and admin searches and redeems once', as
   await expect(page.getByRole('button', { name: 'Confirm redemption' })).toHaveCount(0);
   await page.screenshot({ path: `${evidence}/admin-en-1440.png`, fullPage: true });
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
-  await page.getByRole('button', { name: 'Sign out' }).click();
+  await page.goBack();
+  await expect(page).toHaveURL(/\/en\/$/);
+  await page.goto('/en/challenge-admin/');
   await expect(page.locator('input[type=password]')).toBeVisible();
 });
 

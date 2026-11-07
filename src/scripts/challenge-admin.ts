@@ -46,6 +46,7 @@ export async function initAdmin() {
     status = root.querySelector<HTMLElement>('[data-admin-status]')!;
   let csrf = '',
     role = '',
+    backGuardArmed = false,
     page = 1,
     search = '',
     filter = 'all',
@@ -75,6 +76,27 @@ export async function initAdmin() {
       'X-CSRF-Token': csrf,
       ...(key ? { 'Idempotency-Key': key } : {}),
     });
+  const armBackLogout = () => {
+    if (backGuardArmed) return;
+    backGuardArmed = true;
+    history.pushState({ topGymAdminGuard: true }, '', location.href);
+    window.addEventListener(
+      'popstate',
+      () => {
+        const home = `/${locale}/`;
+        if (!csrf) {
+          location.replace(home);
+          return;
+        }
+        const request = invoke('logout', {});
+        csrf = '';
+        role = '';
+        status.textContent = c.logout;
+        void request.catch(() => {}).finally(() => location.replace(home));
+      },
+      { once: true },
+    );
+  };
   const task = async (fn: () => Promise<void>, successMessage = '') => {
     status.textContent = c.loading;
     try {
@@ -90,6 +112,7 @@ export async function initAdmin() {
     const { form } = adminPasswordForm(locale, async (session) => {
       csrf = session.csrf;
       role = session.role;
+      armBackLogout();
       await task(dashboard);
     });
     form.classList.add('challenge-admin-panel', 'challenge-admin-login');
@@ -496,6 +519,7 @@ export async function initAdmin() {
     const session = await invoke<{ role: string; csrf: string }>('me');
     csrf = session.csrf;
     role = session.role;
+    armBackLogout();
     await task(dashboard);
   } catch {
     login();

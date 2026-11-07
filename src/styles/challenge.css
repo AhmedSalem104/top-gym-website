@@ -396,6 +396,13 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
 .challenge-coupon-whatsapp:hover {
   box-shadow: 0 6px 20px #e5950033;
 }
+.challenge-primary.challenge-coupon-whatsapp,
+.challenge-primary.challenge-coupon-whatsapp:visited,
+.challenge-primary.challenge-coupon-whatsapp:hover,
+.challenge-primary.challenge-coupon-whatsapp:focus-visible,
+.challenge-primary.challenge-coupon-whatsapp:active {
+  color: var(--color-canvas);
+}
 .challenge-coupon-whatsapp:focus-visible,
 .challenge-coupon-copy:focus-visible {
   outline: 2px solid var(--color-gold);
