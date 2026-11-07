@@ -1,5 +1,9 @@
 # Deployment preparation
 
+## Challenge backend installed — 7 November 2026
+
+See [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md): isolated VPS service, trusted IP certificate/renewal, private SMTP/admin setup and server-only Vercel configuration are installed. Public admission remains closed until the owner's terms and reviewed questions exist. Earlier no-VPS-installation entries below are historical.
+
 ## Direct-entry update — 7 November 2026
 
 The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.

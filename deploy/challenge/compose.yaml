@@ -18,7 +18,8 @@ services:
       NODE_ENV: production
       CHALLENGE_DB: /data/challenge.sqlite
       CHALLENGE_BANK_FILE: /run/questions/questions.json
-      CHALLENGE_POLICY_FILE: /run/policy/policy.json
+      # Omit from the private env file until real terms are approved.
+      # CHALLENGE_POLICY_FILE=/run/policy/policy.json
       CHALLENGE_ALLOW_DRAFT_BANK: 'false'
     volumes:
       - ${CHALLENGE_DATA_DIR:?Dedicated private data directory required}:/data

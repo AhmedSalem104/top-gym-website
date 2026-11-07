@@ -1,5 +1,7 @@
 # Fitness challenge — implementation and approval boundaries
 
+**Current infrastructure:** the owner authorized continuing activation. The separate VPS backend and trusted IP HTTPS are installed, with signed Vercel connection settings, private SMTP and owner authentication. Admissions remain closed pending content/business inputs. [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md) supersedes the historical no-installation statements below.
+
 ## Direct-entry update — 7 November 2026
 
 The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.

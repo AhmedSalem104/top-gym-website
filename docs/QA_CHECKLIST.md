@@ -1,5 +1,9 @@
 # QA and release checklist
 
+## Backend activation preparation — 7 November 2026
+
+Actual Linux, TLS, signed API, real owner MFA, SMTP/inbox and restore results: [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md). The closed-startup tests require an absent bank plus explicit admissions-off; corrupt/unreviewed supplied content and enabled-without-bank still fail. Public live participation is outstanding, not a passing test. No existing frontend layout changed.
+
 ## Direct-entry update — 7 November 2026
 
 The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.

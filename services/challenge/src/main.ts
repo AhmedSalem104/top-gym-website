@@ -1,14 +1,11 @@
 import { readConfig } from './config.ts';
-import { loadBank } from './bank.ts';
+import { loadRuntimeBank } from './bank.ts';
 import { createApp } from './app.ts';
 import { deliverNext, smtpSender } from './mail.ts';
 
 process.umask(0o077);
 const config = readConfig();
-const bank = loadBank(
-  config.CHALLENGE_BANK_FILE,
-  config.NODE_ENV !== 'production' && config.CHALLENGE_ALLOW_DRAFT_BANK === 'true',
-);
+const bank = loadRuntimeBank(config);
 const { app, engine, store } = createApp(config, bank);
 let busy = false;
 let pending: Promise<unknown> = Promise.resolve();
