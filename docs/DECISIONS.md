@@ -1,5 +1,9 @@
 # Decision log
 
+## Challenge visibility correction — 7 November 2026
+
+See [production visibility](CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.
+
 ## Backend activation preparation — 7 November 2026
 
 The owner explicitly asked to continue the missing setup. Use a trusted Let's Encrypt IP certificate with automated six-hour renewal instead of making an unprovided hostname a technical blocker. Keep the existing Caddy installation and add one isolated site. Start the real backend with no questions only when admissions are explicitly off; malformed/unreviewed supplied banks and enabled-without-bank still fail. This permits real TLS, signed API, MFA, SMTP and backup acceptance without publishing drafts or inventing coupon terms. See [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md).

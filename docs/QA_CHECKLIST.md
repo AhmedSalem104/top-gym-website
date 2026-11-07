@@ -1,5 +1,9 @@
 # QA and release checklist
 
+## Challenge visibility correction — 7 November 2026
+
+See [production visibility](CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.
+
 ## Backend activation preparation — 7 November 2026
 
 Actual Linux, TLS, signed API, real owner MFA, SMTP/inbox and restore results: [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md). The closed-startup tests require an absent bank plus explicit admissions-off; corrupt/unreviewed supplied content and enabled-without-bank still fail. Public live participation is outstanding, not a passing test. No existing frontend layout changed.

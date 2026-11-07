@@ -1,5 +1,9 @@
 # TOP GYM
 
+## Challenge visibility correction — 7 November 2026
+
+See [production visibility](docs/CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.
+
 Challenge backend installation and the exact remaining activation inputs: [current operations status](docs/CHALLENGE_ACTIVATION.md). The VPS service is installed with trusted HTTPS; public participation remains closed pending actual coupon terms and reviewed questions.
 
 The latest challenge update uses direct mobile-number entry without SMS/OTP, collects only a name after the quiz, and presents a compact animated membership-discount invitation. See [current entry and security contract](docs/CHALLENGE_SIMPLE_ENTRY.md). Code publication is authorized; live activation still depends on the backend, reviewed private questions and commercial configuration.

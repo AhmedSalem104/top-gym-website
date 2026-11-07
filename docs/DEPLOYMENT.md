@@ -1,5 +1,9 @@
 # Deployment preparation
 
+## Challenge visibility correction — 7 November 2026
+
+See [production visibility](CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.
+
 ## Challenge backend installed — 7 November 2026
 
 See [CHALLENGE_ACTIVATION.md](CHALLENGE_ACTIVATION.md): isolated VPS service, trusted IP certificate/renewal, private SMTP/admin setup and server-only Vercel configuration are installed. Public admission remains closed until the owner's terms and reviewed questions exist. Earlier no-VPS-installation entries below are historical.

@@ -104,6 +104,7 @@ export function initChallenge() {
     status.textContent = '';
     dialog.scrollTop = 0;
     dialog.dataset.step = 'entry';
+    title.textContent = c.title;
   };
   const lock = (value: boolean) => {
     busy = value;
@@ -138,7 +139,6 @@ export function initChallenge() {
       render(state);
     });
   }
-  const retry = () => stage.append(button(c.retry, () => void recover(), 'challenge-secondary'));
   function phoneStep() {
     reset();
     stage.append(el('p', c.intro, 'challenge-intro'), el('p', c.rules, 'challenge-rules'));
@@ -402,8 +402,34 @@ export function initChallenge() {
     if (!document.hidden && dialog.open && state?.status === 'active') void recover();
   });
   window.addEventListener('pagehide', stop);
+  function unavailable() {
+    reset();
+    dialog.dataset.step = 'unavailable';
+    title.textContent = c.unavailableTitle;
+    const card = el('div', undefined, 'challenge-availability');
+    card.append(el('p', c.unavailable));
+    const actions = el('div', undefined, 'challenge-availability-actions');
+    const memberships = el('a', c.memberships, 'challenge-primary');
+    memberships.href = '#memberships';
+    memberships.addEventListener('click', () => {
+      close();
+      const target = document.querySelector<HTMLElement>('#memberships');
+      if (target) {
+        target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+      }
+    });
+    const contact = el('a', c.callGym, 'challenge-secondary');
+    contact.href = dialog.dataset.contact!;
+    actions.append(memberships, contact);
+    card.append(actions);
+    stage.append(
+      card,
+      button(c.availabilityRetry, () => void open(), 'challenge-secondary'),
+    );
+  }
   async function open() {
-    opener = document.activeElement as HTMLElement;
+    if (!dialog.open) opener = document.activeElement as HTMLElement;
     const version = ++revision;
     if (!dialog.open) dialog.showModal();
     title.focus();
@@ -429,8 +455,8 @@ export function initChallenge() {
         } catch {
           /* Availability message does not disclose another identity. */
         }
-        reset();
-        stage.append(el('p', c.unavailable));
+        if (version !== revision) return;
+        unavailable();
         return;
       }
       void challengeApi('challenge/event', challengeEvent('challenge_opened')).catch(() => {});
@@ -439,15 +465,17 @@ export function initChallenge() {
         if (version !== revision) return;
         render(restored);
       } catch (e) {
+        if (version !== revision) return;
         if (e instanceof ApiError && e.status === 401) {
           phoneStep();
           terms(info.terms || undefined);
         } else throw e;
       }
     } catch (e) {
+      if (version !== revision) return;
       reset();
       message(e);
-      retry();
+      stage.append(button(c.availabilityRetry, () => void open(), 'challenge-secondary'));
     }
   }
   return { open };

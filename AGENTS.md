@@ -1,6 +1,6 @@
 # TOP GYM contributor instructions
 
-**Current backend state:** the owner authorized continuing activation; the dedicated VPS service, trusted IP HTTPS, renewal timer, private SMTP/admin setup and Vercel server configuration are installed. Read `docs/CHALLENGE_ACTIVATION.md` before operations. Admissions and public UI remain off pending actual coupon terms and reviewed questions; do not repeat the obsolete claim that no backend is installed.
+**Current challenge state:** the dedicated VPS service, trusted IP HTTPS, renewal timer, private SMTP/admin setup and Vercel server configuration are installed. The public launcher and admin shell are published independently of admissions. Read `docs/CHALLENGE_VISIBILITY.md` and `docs/CHALLENGE_ACTIVATION.md` before operations. Admissions remain closed pending actual coupon terms and reviewed questions. Do not confuse a successful deployment, visible interface or healthy API with an active campaign.
 
 Build a bilingual marketing site for the real TOP GYM. Preserve the supplied Apex Gold Stitch direction and business facts. Static Astro pages have private feedback and a gated challenge BFF; this is not a membership/payment application.
 
