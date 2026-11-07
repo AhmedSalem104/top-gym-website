@@ -4,6 +4,16 @@ import { dirname } from 'node:path';
 import type { Config } from './config.ts';
 import { digest, Fault } from './security.ts';
 
+// Retain historical five-second rounds without rewriting deadlines or results.
+const questionTable = (name: string) => `CREATE TABLE ${name} (
+  session_id TEXT NOT NULL REFERENCES challenge_sessions(id),
+  ordinal INTEGER NOT NULL CHECK(ordinal BETWEEN 1 AND 3),
+  question_id TEXT NOT NULL, snapshot TEXT NOT NULL, option_order TEXT NOT NULL,
+  starts INTEGER NOT NULL, deadline INTEGER NOT NULL,
+  PRIMARY KEY(session_id, ordinal), UNIQUE(session_id,question_id),
+  CHECK(deadline - starts IN (5000, 10000))
+)`;
+
 export class Store {
   readonly db: Database.Database;
   constructor(
@@ -44,7 +54,7 @@ export class Store {
       CREATE TABLE IF NOT EXISTS phone_entry_claims (token_hash TEXT PRIMARY KEY, phone_id TEXT UNIQUE NOT NULL REFERENCES phone_identities(id), expires INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS discount_policy_versions (version TEXT PRIMARY KEY, body TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS challenge_sessions (id TEXT PRIMARY KEY, phone_id TEXT UNIQUE NOT NULL REFERENCES phone_identities(id), policy_version TEXT NOT NULL REFERENCES discount_policy_versions(version), bank_version TEXT NOT NULL, locale TEXT NOT NULL CHECK(locale IN ('ar','en')), status TEXT NOT NULL CHECK(status IN ('active','completed','registered')), score INTEGER NOT NULL DEFAULT 0 CHECK(score BETWEEN 0 AND 3), started_at INTEGER NOT NULL, completed_at INTEGER, registered_at INTEGER, attribution TEXT NOT NULL);
-      CREATE TABLE IF NOT EXISTS challenge_session_questions (session_id TEXT NOT NULL REFERENCES challenge_sessions(id), ordinal INTEGER NOT NULL CHECK(ordinal BETWEEN 1 AND 3), question_id TEXT NOT NULL, snapshot TEXT NOT NULL, option_order TEXT NOT NULL, starts INTEGER NOT NULL, deadline INTEGER NOT NULL, PRIMARY KEY(session_id, ordinal), UNIQUE(session_id,question_id), CHECK(deadline = starts + 5000));
+      ${questionTable('IF NOT EXISTS challenge_session_questions')};
       CREATE TABLE IF NOT EXISTS challenge_answers (session_id TEXT NOT NULL, ordinal INTEGER NOT NULL, option_id TEXT, correct INTEGER NOT NULL CHECK(correct IN (0,1)), timed_out INTEGER NOT NULL CHECK(timed_out IN (0,1)), received_at INTEGER NOT NULL, request_key TEXT, PRIMARY KEY(session_id,ordinal), FOREIGN KEY(session_id,ordinal) REFERENCES challenge_session_questions(session_id,ordinal));
       CREATE TABLE IF NOT EXISTS participants (id TEXT PRIMARY KEY, session_id TEXT UNIQUE NOT NULL REFERENCES challenge_sessions(id), phone_id TEXT UNIQUE NOT NULL REFERENCES phone_identities(id), details_cipher TEXT NOT NULL, name_search TEXT NOT NULL, consent_at INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS coupons (id TEXT PRIMARY KEY, participant_id TEXT UNIQUE NOT NULL REFERENCES participants(id), session_id TEXT UNIQUE NOT NULL REFERENCES challenge_sessions(id), code_hash TEXT UNIQUE NOT NULL, code_cipher TEXT NOT NULL, discount INTEGER NOT NULL CHECK(discount IN (10,20,30)), state TEXT NOT NULL CHECK(state IN ('issued','redeemed','voided')), created_at INTEGER NOT NULL, expires INTEGER NOT NULL, CHECK(expires > created_at));
@@ -62,6 +72,38 @@ export class Store {
       CREATE INDEX IF NOT EXISTS mail_due ON email_delivery_jobs(state,available_at);
       CREATE INDEX IF NOT EXISTS event_type ON conversion_events(type,created_at);
     `);
+    try {
+      this.migrateQuestionTiming();
+    } catch (error) {
+      this.db.close();
+      throw error;
+    }
+  }
+  private migrateQuestionTiming() {
+    if (this.get('SELECT version FROM schema_version WHERE version=3')) return;
+    // SQLite's table-rebuild migration: disable FKs outside the transaction,
+    // retain all rows and child references, then validate before committing.
+    this.db.pragma('foreign_keys = OFF');
+    try {
+      this.atomic(() => {
+        if (this.get('SELECT version FROM schema_version WHERE version=3')) return;
+        const dependencies = this.all<{ sql: string }>(
+          "SELECT sql FROM sqlite_master WHERE tbl_name='challenge_session_questions' AND type IN ('index','trigger') AND sql IS NOT NULL",
+        );
+        this.db.exec(`
+          ${questionTable('challenge_session_questions_v3')};
+          INSERT INTO challenge_session_questions_v3 SELECT * FROM challenge_session_questions;
+          DROP TABLE challenge_session_questions;
+          ALTER TABLE challenge_session_questions_v3 RENAME TO challenge_session_questions;
+        `);
+        for (const dependency of dependencies) this.db.exec(dependency.sql);
+        if (this.all('PRAGMA foreign_key_check').length)
+          throw new Error('Question timing migration failed foreign-key validation');
+        this.run('INSERT INTO schema_version VALUES(3)');
+      });
+    } finally {
+      this.db.pragma('foreign_keys = ON');
+    }
   }
   get<T>(sql: string, ...args: unknown[]): T | undefined {
     return this.db.prepare(sql).get(...args) as T | undefined;

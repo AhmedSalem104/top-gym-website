@@ -55,6 +55,9 @@ for (const locale of ['ar', 'en'])
       await page.keyboard.press('Enter');
       await expect(page.locator('#challenge-dialog')).toBeVisible();
       await expect(page.locator('#challenge-dialog input[type=tel]')).toBeVisible();
+      await expect(page.locator('.challenge-intro')).toContainText(
+        locale === 'ar' ? '١٠ ثوانٍ' : '10 seconds',
+      );
       await expect(page.locator('#challenge-title')).toContainText(
         locale === 'ar' ? 'قيمة الاشتراك' : 'membership',
       );
@@ -122,15 +125,25 @@ for (const [index, locale] of ['ar', 'en'].entries())
     ).toEqual([]);
   });
 test('server timeout survives closed modal and refresh; no zero-score coupon', async ({ page }) => {
+  test.setTimeout(60000);
   await page.goto('/en/');
   await page.locator('[data-challenge-open]').click();
   const modal = page.locator('#challenge-dialog');
   await modal.locator('input[name=phone]').fill('01012345672');
   await modal.locator('button[type=submit]').click();
+  const started = page.waitForResponse((response) => response.url().endsWith('/challenge/start'));
   await modal.getByRole('button', { name: 'Ready? Start the challenge' }).click();
+  const issued = (await (await started).json()).question;
+  expect(issued.deadlineAt - issued.startsAt).toBe(10000);
   await expect(modal.locator('.challenge-question')).toBeVisible();
+  await expect(modal.getByRole('timer')).toHaveText(/^(10|[1-9]) seconds$/);
+  expect(
+    await modal
+      .locator('.challenge-timer-fill')
+      .evaluate((node) => new DOMMatrix(getComputedStyle(node).transform).a),
+  ).toBeLessThanOrEqual(1);
   await page.keyboard.press('Escape');
-  await page.waitForTimeout(15500);
+  await page.waitForTimeout(30500);
   await page.reload();
   await page.locator('[data-challenge-open]').click();
   await expect(modal.locator('.challenge-result-value')).toHaveText('0%');

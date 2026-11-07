@@ -1,5 +1,9 @@
 # Implementation progress — 2026-11-05
 
+## Ten-second timer and rapid logo entry — 7 November 2026
+
+The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. Participation remains closed pending reviewed private questions and approved commercial terms.
+
 ## Logo password access — 7 November 2026
 
 Implemented the owner-requested logo/password dialog, shared dashboard login and opt-in server authentication. The footer-dot entry was removed. See [access contract and validation](ADMIN_ACCESS.md); final release evidence is in the PR.

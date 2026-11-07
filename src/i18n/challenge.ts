@@ -49,7 +49,7 @@ export const challengeCopy = {
     floatingHint: 'على قيمة اشتراكك',
     upTo: 'لحد',
     close: 'إغلاق التحدي',
-    intro: '٣ أسئلة. ٥ ثوانٍ لكل سؤال. كل إجابة صحيحة تكسبك ١٠٪، بحد أقصى ٣٠٪.',
+    intro: '٣ أسئلة. ١٠ ثوانٍ لكل سؤال. كل إجابة صحيحة تكسبك ١٠٪، بحد أقصى ٣٠٪.',
     rules:
       'محاولة واحدة لكل رقم موبايل مُدخل. الوقت يبدأ على الخادم، وقد يقل الوقت الظاهر مع بطء الاتصال. إغلاق النافذة أو انقطاع الإنترنت لا يوقف التحدي.',
     phone: 'رقم الموبايل',
@@ -203,7 +203,7 @@ export const challengeCopy = {
     floatingHint: 'On your membership price',
     upTo: 'UP TO',
     close: 'Close challenge',
-    intro: '3 questions. 5 seconds each. Every correct answer earns 10%, up to 30%.',
+    intro: '3 questions. 10 seconds each. Every correct answer earns 10%, up to 30%.',
     rules:
       'One attempt per entered mobile number. Time starts on the server; slow connections reduce visible time. Closing this window or losing connection does not pause the challenge.',
     phone: 'Mobile number',

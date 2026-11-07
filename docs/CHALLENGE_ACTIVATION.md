@@ -39,7 +39,7 @@ No frontend layout or business content changed in this infrastructure release. T
 
 1. Owner's coupon rules: eligible packages and durations, expiry, new-customer restriction and whether offers combine. The owner has been asked; no answer has been assumed.
 2. Scientific and bilingual review of all 300 private draft questions, with real sources and reviewer provenance. No review status was falsely promoted. See [QUESTION_BANK.md](QUESTION_BANK.md).
-3. Owner operational acceptance: authenticator enrollment, privacy/retention and backup destinations, and the documented five-second accessibility/latency tradeoff.
+3. Owner operational acceptance: password-only owner access, privacy/retention and backup destinations, and the documented timed-question accessibility/latency tradeoff (now ten seconds at the owner’s request).
 
 After those inputs: install the actual private reviewed bank and policy; run isolated final journey/restore checks; restart only this service with admissions enabled; verify an authorized real end-to-end submission and monitor. `PUBLIC_CHALLENGE_ENABLED=true` exposes the interface, not permission to issue coupons. Deployment permission already exists; do not request it again.
 

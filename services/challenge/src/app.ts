@@ -6,6 +6,7 @@ import { Admin, redemptionSchema } from './admin.ts';
 import { Fault, digest, equal } from './security.ts';
 import type { Config } from './config.ts';
 import type { Question } from './bank.ts';
+import { QUESTION_DURATION_MS } from './timing.ts';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -122,7 +123,7 @@ export function createApp(
   app.get('/v1/challenge/info', async () => ({
     available: engine.available(),
     questions: 3,
-    seconds: 5,
+    seconds: QUESTION_DURATION_MS / 1000,
     discounts: [0, 10, 20, 30],
     terms: c.policy?.terms || null,
     mode: c.NODE_ENV === 'production' ? 'live' : 'local',

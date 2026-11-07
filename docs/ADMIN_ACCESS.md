@@ -4,7 +4,7 @@ The owner explicitly requested five consecutive clicks on the logo, a password-o
 
 ## User experience
 
-Click/tap the **header TOP GYM logo five times**, with no gap longer than 2.5 seconds. Ordinary clicks still navigate Home; an intervening click elsewhere resets the sequence. Keyboard Enter supports the same interaction. The fifth click opens a compact Arabic/English black-and-gold dialog, focuses the password field and makes the background inert. Escape/close restore focus and clear entered credentials. Motion uses the shared entrance and reduced-motion behavior.
+Click/tap the **header TOP GYM logo five times**, with no gap longer than 2.5 seconds. Ordinary clicks still navigate Home; an intervening click elsewhere resets the sequence. Keyboard Enter supports the same interaction. The fifth click opens a compact Arabic/English black-and-gold dialog, focuses the password field and makes the background inert. Backdrop clicks do not dismiss this password prompt: an extra tap in the rapid logo gesture otherwise lands outside the newly opened dialog and immediately closes it. Escape/close restore focus and clear entered credentials. Motion uses the shared entrance and reduced-motion behavior.
 
 The shared password form has a visible label, show/hide control, loading/disabled state, localized error and retry. A successful server response sets a private cookie before navigating to the localized dashboard. No email or authenticator code is requested. The dashboard's signed-out screen uses the same form; direct access still requires authentication. Closing a pending dialog cannot trigger a late redirect.
 

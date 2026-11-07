@@ -4,6 +4,7 @@ import { Store } from './db.ts';
 import { Fault, phone, seal, unseal, text } from './security.ts';
 import type { Question } from './bank.ts';
 import type { Policy } from './config.ts';
+import { QUESTION_DURATION_MS } from './timing.ts';
 
 export const attributionSchema = z
   .object({
@@ -196,7 +197,7 @@ export class Engine {
           JSON.stringify(q),
           JSON.stringify(order),
           start,
-          start + 5000,
+          start + QUESTION_DURATION_MS,
         );
       }
       s.event(id + ':started', 'challenge_started', id, attr);
@@ -222,7 +223,7 @@ export class Engine {
       s.run(
         'UPDATE challenge_session_questions SET starts=?,deadline=? WHERE session_id=? AND ordinal=?',
         at,
-        at + 5000,
+        at + (round.deadline - round.starts),
         session,
         round.ordinal + 1,
       );
