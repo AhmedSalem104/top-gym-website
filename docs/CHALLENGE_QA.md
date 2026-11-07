@@ -80,3 +80,7 @@ Each frame sample contains 120 intervals. Mobile had zero intervals above 34 ms;
 Raw measurements: [baseline](evidence/challenge/performance-baseline.json), [enabled](evidence/challenge/performance-enabled.json). Reproduce with `node scripts/measure-challenge.mjs baseline http://127.0.0.1:4330` and `node scripts/measure-challenge.mjs enabled http://127.0.0.1:4340` against the documented local servers.
 
 Additional visual comparisons: [mobile before](evidence/challenge/landing-before-390.png), [mobile after](evidence/challenge/landing-after-390.png), [desktop before](evidence/challenge/landing-before-1440.png), [desktop after](evidence/challenge/landing-after-1440.png), [Arabic admin mobile](evidence/challenge/admin-ar-390.png), [sample Arabic email](evidence/challenge/email-ar-390-dark.png).
+
+## Publication routing correction ? 7 November 2026
+
+The first Vercel Preview built successfully but its native catch-all function returned platform 404. The release correction uses a fixed `api/challenge.ts` function and explicit rewrite. Three additional unit cases verify original/rewritten canonical paths, exact upstream signatures, internal-parameter removal and ambiguous-route rejection. The website/BFF suite now has **61 passing tests**; initial Gate 1 counts above remain historical. The feature stays disabled pending activation inputs.

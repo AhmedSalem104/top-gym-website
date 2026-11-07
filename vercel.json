@@ -5,8 +5,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "trailingSlash": true,
+  "rewrites": [
+    { "source": "/api/challenge/:path*", "destination": "/api/challenge?__tg_route=:path*" }
+  ],
   "functions": {
     "api/feedback.ts": { "maxDuration": 45 },
-    "api/challenge/[...path].ts": { "maxDuration": 25 }
+    "api/challenge.ts": { "maxDuration": 25 }
   }
 }

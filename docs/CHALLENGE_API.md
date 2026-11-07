@@ -2,6 +2,10 @@
 
 Browser prefix: `/api/challenge/v1`. Backend prefix: `/v1`. All responses use `Cache-Control: no-store`; errors expose stable codes, not provider messages, submitted data or secrets. JSON only for POST; maximum 8 KiB. Dates are UTC Unix milliseconds unless otherwise stated. Display uses `Africa/Cairo` through Intl.
 
+## Vercel routing
+
+The static Astro deployment uses an explicit `vercel.json` rewrite from `/api/challenge/:path*` to the native `api/challenge.ts` function. The gateway normalizes the allowlisted original/rewritten route, removes the internal `__tg_route` parameter, rejects ambiguity and signs the canonical backend path/query. Preview inspection caught a platform 404 with the previous framework-style catch-all filename; a successful function build alone did not verify routing. See [Vercel rewrites](https://vercel.com/docs/routing/rewrites).
+
 ## Public contracts
 
 | Method / backend path           | Request                                              | Result / authorization                                                                                |

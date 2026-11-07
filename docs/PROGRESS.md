@@ -193,3 +193,5 @@ The implementation was pushed as `7679d03ce31573d9143e1248f0062cd8c3559cb7`. [Pu
 Review: [Arabic footer desktop](evidence/footer-after-ar-1440.webp), [Arabic footer mobile](evidence/footer-after-ar-390.webp), [English footer tablet](evidence/footer-after-en-768.webp), [English CTA](evidence/footer-cta-after-en-1440.webp), [Arabic before recording](evidence/calm-before-ar-1440.webm), [Arabic after recording](evidence/calm-after-ar-1440.webm).
 
 Gate 1 final local verification: 45 backend + 58 website/BFF unit tests, 117 existing browser cases and 15 challenge cases passed. Both builds/types/lint/format/SEO passed. Local 4? CPU flow CLS was 0; measurements and screenshot limits are recorded in `CHALLENGE_QA.md`. No remote push, staging deployment or production mutation was performed.
+
+7 November publication follow-up: authenticated Vercel Preview inspection found the native catch-all filename built but returned platform 404. Replaced it with a fixed function plus explicit rewrite and canonical route validation; added rewrite/signature/ambiguity tests. Production merge waits for new preview and required checks.

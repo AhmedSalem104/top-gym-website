@@ -33,7 +33,7 @@ flowchart LR
 ```
 
 - `services/challenge`: isolated Node 24 / TypeScript / Fastify 5 service. Own locked dependencies, tests and build. SQLite 3.53.4 is bundled by the installed better-sqlite3 version.
-- `api/challenge/[...path].ts`, `src/server/challenge-gateway.ts`: route-allowlisted Vercel BFF. No SQLite or question-bank dependency in Vercel.
+- `api/challenge.ts`, `src/server/challenge-gateway.ts`: route-allowlisted Vercel BFF. No SQLite or question-bank dependency in Vercel.
 - `src/components/Challenge.astro`, `src/scripts/challenge*.ts`, `src/styles/challenge.css`: lazy client experience and first-party attribution. No animation framework or React hydration.
 - `src/pages/[locale]/challenge-admin.astro`: noindex administration shell; every data/action endpoint requires backend authentication. A five-click footer detail reveals the entry link only.
 - `content/challenge`: 300 original bilingual **draft** questions, excluded from Vercel uploads and public assets. Production validation rejects every unreviewed entry.

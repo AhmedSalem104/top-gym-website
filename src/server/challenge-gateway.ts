@@ -11,12 +11,22 @@ export async function challengeGateway(
     'X-Robots-Tag': 'noindex',
   };
   const fail = (status: number, code: string) => Response.json({ code }, { status, headers });
-  if (!env.CHALLENGE_BACKEND_URL || !env.CHALLENGE_GATEWAY_KEY || !env.CHALLENGE_ORIGIN)
-    return fail(503, 'unavailable');
-  const url = new URL(request.url),
-    path = url.pathname.replace(/^\/api\/challenge/, '').replace(/\/$/, '');
+  const url = new URL(request.url);
+  // Astro's static deployment needs an explicit rewrite to one native function.
+  // Support both the original URL and the rewritten destination URL; never
+  // forward the internal routing parameter or allow it to override a real path.
+  const rewritten = url.searchParams.getAll('__tg_route');
+  if (rewritten.length > 1) return fail(400, 'invalid_request');
+  const pathname = url.pathname.replace(/\/$/, '');
+  const path =
+    pathname === '/api/challenge'
+      ? '/' + (rewritten[0] || '').replace(/\/$/, '')
+      : pathname.replace(/^\/api\/challenge(?=\/)/, '');
+  url.searchParams.delete('__tg_route');
   if (!routes.test(path) || !['GET', 'POST'].includes(request.method))
     return fail(404, 'not_found');
+  if (!env.CHALLENGE_BACKEND_URL || !env.CHALLENGE_GATEWAY_KEY || !env.CHALLENGE_ORIGIN)
+    return fail(503, 'unavailable');
   if (
     request.headers.get('sec-fetch-site') === 'cross-site' ||
     (request.method === 'POST' && request.headers.get('origin') !== env.CHALLENGE_ORIGIN)

@@ -19,6 +19,44 @@ const request = (
   });
 afterEach(() => vi.unstubAllGlobals());
 describe('challenge BFF security boundary', () => {
+  it.each([
+    '/api/challenge/?__tg_route=v1/admin/participants&page=2',
+    '/api/challenge/v1/admin/participants/?__tg_route=v1/admin/secrets&page=2',
+  ])('preserves the canonical allowlisted path through Vercel rewrites: %s', async (path) => {
+    const fetch = vi.fn(async (url: URL, options: RequestInit) => {
+      expect(url.href).toBe('https://api.example.test/v1/admin/participants?page=2');
+      const h = options.headers as Record<string, string>;
+      const signature = createHmac('sha256', Buffer.from(env.CHALLENGE_GATEWAY_KEY, 'hex'))
+        .update(
+          [
+            'GET',
+            '/v1/admin/participants?page=2',
+            h['x-tg-time'],
+            h['x-tg-nonce'],
+            'unknown',
+            '',
+          ].join('\n'),
+        )
+        .digest('hex');
+      expect(h['x-tg-signature']).toBe(signature);
+      return Response.json({ items: [] });
+    });
+    vi.stubGlobal('fetch', fetch);
+    expect((await challengeGateway(new Request(origin + path), env)).status).toBe(200);
+    expect(fetch).toHaveBeenCalledOnce();
+  });
+  it('rejects ambiguous or unapproved rewritten routes without contacting the backend', async () => {
+    const fetch = vi.fn();
+    vi.stubGlobal('fetch', fetch);
+    for (const query of [
+      '__tg_route=v1/admin/secrets',
+      '__tg_route=v1/challenge/info&__tg_route=v1/admin/me',
+    ])
+      expect(
+        (await challengeGateway(new Request(origin + '/api/challenge?' + query), env)).status,
+      ).toBeGreaterThanOrEqual(400);
+    expect(fetch).not.toHaveBeenCalled();
+  });
   it('fails closed without configuration or with non-TLS backend', async () => {
     expect((await challengeGateway(request(), {})).status).toBe(503);
     expect(
