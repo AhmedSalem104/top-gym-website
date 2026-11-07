@@ -1,5 +1,8 @@
 export const challengeCopy = {
   ar: {
+    unavailableTitle: 'المشاركة غير متاحة حاليًا.',
+    availabilityRetry: 'تحقق من إتاحة التحدي',
+    callGym: 'اتصل بالجيم',
     package: 'الباقة',
     duration: 'مدة الاشتراك',
     newCustomer: 'عميل جديد حسب سياسة الجيم',
@@ -144,6 +147,9 @@ export const challengeCopy = {
     refresh: 'تحديث',
   },
   en: {
+    unavailableTitle: 'Entries are currently closed.',
+    availabilityRetry: 'Check challenge availability',
+    callGym: 'Call the gym',
     package: 'Package',
     duration: 'Membership duration',
     newCustomer: 'New customer under gym policy',

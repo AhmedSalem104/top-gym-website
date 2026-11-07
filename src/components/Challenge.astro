@@ -1,6 +1,7 @@
 ---
 import { challengeCopy, type ChallengeLocale } from '../i18n/challenge';
 import Icon from './Icon.astro';
+import { business } from '../config/business';
 import '../styles/challenge.css';
 interface Props {
   locale: ChallengeLocale;
@@ -42,6 +43,7 @@ const c = challengeCopy[locale];
   aria-labelledby="challenge-title"
   data-locale={locale}
   data-unavailable={c.unavailable}
+  data-contact={`tel:${business.contacts[0].phone}`}
 >
   <div class="challenge-shell">
     <header class="challenge-top">

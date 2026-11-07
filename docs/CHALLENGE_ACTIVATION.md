@@ -10,7 +10,7 @@ The owner asked to continue after the missing backend configuration was diagnose
 - The service starts with admissions explicitly closed and no bank file. Only an absent file is tolerated in this state. Enabling admissions without a bank still fails startup; supplied corrupt/unreviewed files still fail even with admissions closed. `/health` indicates process health; signed `/v1/challenge/info` truthfully reports `available:false`.
 - A separate, additive Caddy site handles the VPS IP. Existing application/storage configurations are byte-identical and their health remained successful. Caddy was gracefully reloaded, not upgraded or stopped.
 - A publicly trusted Let's Encrypt IP certificate was issued after a successful staging issuance. TLS validation is enabled end to end. A six-hour systemd renewal timer is installed; its first normal check succeeded. Certificate management uses a pinned Certbot 5.4.0 image and a dedicated webroot, without stopping port 80/443 services.
-- The three server-only Vercel variables are configured: `CHALLENGE_BACKEND_URL`, `CHALLENGE_ORIGIN`, `CHALLENGE_GATEWAY_KEY`. A new deployment is required to pick them up. The public UI flag remains off pending the content/business inputs below.
+- The three server-only Vercel variables are configured: `CHALLENGE_BACKEND_URL`, `CHALLENGE_ORIGIN`, `CHALLENGE_GATEWAY_KEY`. PR #24 deployed them successfully. The subsequent [visibility correction](CHALLENGE_VISIBILITY.md) enables the public interface independently of admissions; content/business inputs below still control participation.
 
 IP certificates require short lifetimes and automated renewal; see [Let's Encrypt's Certbot instructions](https://letsencrypt.org/2026/03/11/shorter-certs-certbot). The shared Caddy instance reads the managed certificate files, and the renewal wrapper validates/reloads Caddy only after the certificate changes. A dedicated DNS hostname can replace the IP later without changing the browser's same-origin API.
 
@@ -39,7 +39,7 @@ No frontend layout or business content changed in this infrastructure release. T
 2. Scientific and bilingual review of all 300 private draft questions, with real sources and reviewer provenance. No review status was falsely promoted. See [QUESTION_BANK.md](QUESTION_BANK.md).
 3. Owner operational acceptance: authenticator enrollment, privacy/retention and backup destinations, and the documented five-second accessibility/latency tradeoff.
 
-After those inputs: install the actual private reviewed bank and policy; run isolated final journey/restore checks; restart only this service with admissions enabled; publish `PUBLIC_CHALLENGE_ENABLED=true`; verify an authorized real end-to-end submission and monitor. Deployment permission already exists; do not request it again.
+After those inputs: install the actual private reviewed bank and policy; run isolated final journey/restore checks; restart only this service with admissions enabled; verify an authorized real end-to-end submission and monitor. `PUBLIC_CHALLENGE_ENABLED=true` exposes the interface, not permission to issue coupons. Deployment permission already exists; do not request it again.
 
 ## Rollback
 
