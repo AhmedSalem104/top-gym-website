@@ -116,6 +116,28 @@ for (const [index, locale] of ['ar', 'en'].entries())
     await modal.locator('button[type=submit]').click();
     await expect(modal.locator('.challenge-coupon code')).toHaveText(/^TOP-[A-F0-9]{20}$/);
     const coupon = await modal.locator('.challenge-coupon code').innerText();
+    await expect(modal.locator('.challenge-coupon p').nth(1)).toContainText(
+      locale === 'ar' ? 'صالح حتى' : 'Valid until',
+    );
+    const whatsappUrl = new URL(
+      (await modal.locator('.challenge-coupon-whatsapp').getAttribute('href'))!,
+    );
+    expect(whatsappUrl.origin + whatsappUrl.pathname).toBe('https://wa.me/201015819700');
+    expect(whatsappUrl.searchParams.get('text')).toContain(coupon);
+    expect(whatsappUrl.searchParams.get('text')).toContain(
+      locale === 'ar' ? '01012345670' : '01012345671',
+    );
+    expect(whatsappUrl.searchParams.get('text')).toContain(
+      locale === 'ar' ? 'اختبار محلي' : 'Local test participant',
+    );
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+    await modal
+      .getByRole('button', { name: locale === 'ar' ? 'انسخ الكوبون' : 'Copy coupon' })
+      .click();
+    await expect(modal.locator('[data-challenge-status]')).toHaveText(
+      locale === 'ar' ? 'تم نسخ الكوبون.' : 'Coupon copied.',
+    );
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(coupon);
     await modal.screenshot({ path: `${evidence}/result-${locale}.png` });
     await page.reload();
     await page.locator('[data-challenge-open]').click();

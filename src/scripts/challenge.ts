@@ -4,6 +4,8 @@ import { motion } from '../config/motion';
 import { challengeApi, ApiError } from './challenge-api';
 import { challengeAttribution, challengeEvent } from './challenge-attribution';
 import { localizedChallengeTerms } from './challenge-terms';
+import { couponWhatsAppUrl } from './challenge-coupon';
+import { business } from '../config/business';
 
 type Localized = { ar: string; en: string };
 interface State {
@@ -49,6 +51,8 @@ export function initChallenge() {
     lastQuestion = '',
     revision = 0,
     recoverQueued = false;
+  let participantName = '',
+    participantPhone = '';
   let finishCount = () => {};
   const registrationKey = crypto.randomUUID();
   // Keep only a random retry secret. Phone/name are never placed in web storage.
@@ -161,6 +165,7 @@ export function initChallenge() {
           { phone: p.value },
           { 'Idempotency-Key': enrollmentKey },
         );
+        participantPhone = p.value.trim();
         render(state);
       });
     });
@@ -304,6 +309,7 @@ export function initChallenge() {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         void run(async () => {
+          participantName = name.value.trim();
           render(
             await challengeApi<State>(
               'challenge/finalize',
@@ -324,21 +330,50 @@ export function initChallenge() {
         const card = el('div', undefined, 'challenge-coupon');
         const code = el('code', s.coupon.code);
         code.dir = 'ltr';
+        const expires = new Intl.DateTimeFormat(locale === 'ar' ? 'ar-EG' : 'en-GB', {
+          dateStyle: 'medium',
+          timeZone: 'Africa/Cairo',
+        }).format(s.coupon.expiresAt);
         card.append(
           el('span', c.coupon),
           code,
           el('p', c.statuses[s.coupon.state]),
-          el(
-            'p',
-            c.expires +
-              ' ' +
-              new Intl.DateTimeFormat(locale === 'ar' ? 'ar-EG' : 'en-GB', {
-                dateStyle: 'medium',
-                timeZone: 'Africa/Cairo',
-              }).format(s.coupon.expiresAt),
-          ),
+          el('p', `${c.expires} ${expires}`),
         );
+        const couponActions = el('div', undefined, 'challenge-coupon-actions');
+        const copy = button(
+          c.copyCode,
+          () => {
+            if (!navigator.clipboard?.writeText) {
+              status.textContent = c.copyFailed;
+              return;
+            }
+            void navigator.clipboard
+              .writeText(s.coupon!.code)
+              .then(() => (status.textContent = c.copiedCode))
+              .catch(() => (status.textContent = c.copyFailed));
+          },
+          'challenge-secondary',
+        );
+        copy.classList.add('challenge-coupon-copy');
+        couponActions.append(copy);
+        const contact = business.contacts.find((item) => item.id === 'ahmed')!;
+        const message = c.whatsappCouponMessage({
+          name: participantName || (locale === 'ar' ? 'الاسم' : 'your name'),
+          phone: participantPhone || s.maskedPhone,
+          discount: s.coupon.discount,
+          code: s.coupon.code,
+          expires,
+        });
+        const whatsapp = el('a', c.whatsappSubscribe, 'challenge-primary');
+        whatsapp.classList.add('challenge-coupon-whatsapp');
+        whatsapp.href = couponWhatsAppUrl(contact.phone, message);
+        whatsapp.target = '_blank';
+        whatsapp.rel = 'noopener noreferrer';
+        couponActions.append(whatsapp);
+        card.append(couponActions);
         stage.append(card);
+        void playMotion(whatsapp, 'enter');
       } else stage.append(el('p', c.noCoupon));
       terms(s.terms);
       const link = el('a', c.memberships, 'challenge-secondary');

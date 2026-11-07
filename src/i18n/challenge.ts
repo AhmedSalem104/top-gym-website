@@ -80,6 +80,19 @@ export const challengeCopy = {
     save: 'احفظ نتيجتي',
     saved: 'نتيجتك اتسجلت.',
     coupon: 'كوبونك',
+    couponUsed: (code: string) => `كوبونك ${code} تم استخدامه.`,
+    copyCode: 'انسخ الكوبون',
+    copiedCode: 'تم نسخ الكوبون.',
+    copyFailed: 'تعذر النسخ تلقائيًا. اضغط مطولًا على الكود لنسخه.',
+    whatsappSubscribe: 'أرسل طلب الاشتراك على واتساب',
+    whatsappCouponMessage: (details: {
+      name: string;
+      phone: string;
+      discount: number;
+      code: string;
+      expires: string;
+    }) =>
+      `السلام عليكم، أنا ${details.name}، ورقم موبايلي ${details.phone}. أنهيت تحدي TOP GYM وحصلت على خصم ${details.discount}% بالكوبون ${details.code} الصالح حتى ${details.expires}. أرغب في الاشتراك واستخدام الكوبون.`,
     expires: 'صالح حتى',
     noCoupon: 'لا يوجد كوبون لهذه النتيجة.',
     terms: 'شروط الاستخدام',
@@ -241,6 +254,19 @@ export const challengeCopy = {
     save: 'Save my result',
     saved: 'Your result is saved.',
     coupon: 'Your coupon',
+    couponUsed: (code: string) => `Your coupon ${code} has been redeemed.`,
+    copyCode: 'Copy coupon',
+    copiedCode: 'Coupon copied.',
+    copyFailed: 'Could not copy automatically. Press and hold the code to copy it.',
+    whatsappSubscribe: 'Send subscription request on WhatsApp',
+    whatsappCouponMessage: (details: {
+      name: string;
+      phone: string;
+      discount: number;
+      code: string;
+      expires: string;
+    }) =>
+      `Hello, my name is ${details.name} and my phone number is ${details.phone}. I completed the TOP GYM challenge and earned ${details.discount}% off with coupon ${details.code}, valid until ${details.expires}. I would like to subscribe and use the coupon.`,
     expires: 'Valid until',
     noCoupon: 'No coupon was issued for this result.',
     terms: 'Redemption terms',
