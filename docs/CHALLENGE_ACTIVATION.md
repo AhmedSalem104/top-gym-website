@@ -1,4 +1,6 @@
-# Backend installation and activation status — 7 November 2026
+# Backend installation and activation history — 7 November 2026
+
+> Current production state is recorded in [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md). The service was activated after the later owner instruction; the initial closed-admissions notes below are historical baseline evidence.
 
 The owner asked to continue after the missing backend configuration was diagnosed. This authorizes the isolated backend installation, secure Vercel connection and acceptance work. It does **not** supply commercial coupon terms or attest that draft questions have been reviewed.
 

@@ -27,11 +27,11 @@ Schema version 2 renames the legacy `verified_phone_identities` table to `phone_
 
 Customer mail rendering is retained only for backward compatibility with already queued historical data; no new customer delivery job or customer-email collection can be created. The existing separate public feedback form is unchanged.
 
-## Publication and remaining activation inputs
+## Publication and activation status
 
-The owner has authorized production publication; do not ask for publishing permission again. Activation still requires actual infrastructure and content/business configuration: approved HTTPS backend address, reviewed private question bank, commercial coupon terms, secure operator/SMTP configuration and isolated deployment acceptance. Questions and commercial decisions cannot be fabricated by setting a feature flag. OTP is no longer an activation dependency.
+The owner repeatedly authorized production activation. The feature is now live; current service checks and active terms are recorded in [CHALLENGE_LIVE_STATUS.md](CHALLENGE_LIVE_STATUS.md). The deployed question bank has an AI-assisted editorial/source review only, not qualified human review. OTP is not used for participants. New phone entries are unverified, as explicitly reflected in the application contract.
 
-The live feature remains disabled if those inputs are unavailable. Never deploy the local test harness, draft questions, fake coupons or test administrator credentials. Preview at `http://127.0.0.1:4340/ar/` uses local-only data and sends no SMS or email.
+Production is active. Never deploy the local test harness, synthetic coupons or test administrator credentials. Preview at `http://127.0.0.1:4340/ar/` uses local-only data and sends no SMS or email.
 
 ## Verification
 
