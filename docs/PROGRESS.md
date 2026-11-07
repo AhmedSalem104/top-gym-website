@@ -1,5 +1,9 @@
 # Implementation progress — 2026-11-05
 
+## Logo password access — 7 November 2026
+
+Implemented the owner-requested logo/password dialog, shared dashboard login and opt-in server authentication. The footer-dot entry was removed. See [access contract and validation](ADMIN_ACCESS.md); final release evidence is in the PR.
+
 ## Challenge visibility correction — 7 November 2026
 
 See [production visibility](CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.

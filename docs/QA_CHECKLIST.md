@@ -1,5 +1,9 @@
 # QA and release checklist
 
+## Logo password access — 7 November 2026
+
+Verify five-click/keyboard/touch entry, a single password field, wrong-password errors, session authorization/logout, shared throttling, reduced motion and both languages. Preserve participant/coupon records during password rotation. See [administrator access](ADMIN_ACCESS.md) and the release PR for measured results.
+
 ## Challenge visibility correction — 7 November 2026
 
 See [production visibility](CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.

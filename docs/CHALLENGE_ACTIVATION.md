@@ -16,6 +16,8 @@ IP certificates require short lifetimes and automated renewal; see [Let's Encryp
 
 ## Private operations handoff
 
+The later owner request changes normal access to a five-click logo password dialog. [Current access and rotation procedure](ADMIN_ACCESS.md) supersedes required-authenticator instructions in the original installation record below. Other service configuration remains unchanged.
+
 An owner account uses a newly generated strong password and TOTP seed. No bootstrap values are retained in the service environment or Git. The private administrator enrollment and separate service-key backup are in the owner's restricted local `Documents/TOP GYM Private/activation-20261107` directory. Never attach these files to an issue/PR or a public page. The administrator must enroll the seed in their authenticator before normal use. Participant OTP remains removed.
 
 Existing authorized Gmail configuration was transferred through encrypted SSH into the private service environment without printing it. One clearly labeled technical test was sent from the VPS using the real notification template, with no participant/coupon creation. SMTP acceptance and exactly one INBOX match were independently confirmed using read-only IMAP and the exact Message-ID. No unrelated mail was fetched or marked read. Gmail visual rendering was not newly inspected.

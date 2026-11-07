@@ -401,14 +401,98 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
     opacity: 0;
   }
 }
-.challenge-admin-entry {
-  background: transparent;
-  border: 0;
-  padding: 0 10px;
+.admin-access-dialog {
+  width: min(440px, calc(100vw - 32px));
+  height: fit-content;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-gold);
+  border-radius: 18px;
+  overflow: auto;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  box-shadow: 0 24px 80px #0008;
+}
+[data-admin-logo] {
+  touch-action: manipulation;
+}
+.admin-access-dialog::backdrop {
+  background: #000c;
+}
+.admin-access-panel {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: clamp(20px, 5vw, 32px);
+}
+.admin-access-close {
+  position: absolute;
+  inset-block-start: 16px;
+  inset-inline-end: 16px;
+}
+.admin-access-logo {
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+.admin-access-dialog h2,
+html[dir='rtl'] .admin-access-dialog h2 {
+  font-size: clamp(24px, 5vw, 30px);
+  line-height: 1.45;
+  text-transform: none;
+}
+.admin-access-panel > p {
   color: var(--color-muted);
-  min-width: 44px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.admin-password-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+.admin-password-control {
+  display: grid;
+  gap: 4px;
+}
+.admin-password-control input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: 400 16px var(--font-body);
+}
+.admin-password-toggle {
+  justify-self: end;
   min-height: 44px;
-  font-size: 16px;
+  padding: 6px 2px;
+  color: var(--color-muted);
+  font: 400 13px var(--font-body);
+  background: none;
+  border: 0;
+  transition: color var(--motion-micro) var(--motion-ease);
+}
+.admin-password-toggle:hover {
+  color: var(--color-gold);
+}
+.admin-access-status {
+  min-height: 1.7em;
+  color: var(--color-gold);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.admin-password-form button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+@media (prefers-reduced-motion: reduce) {
+  .admin-password-toggle {
+    transition: none;
+  }
 }
 .challenge-admin {
   max-width: 1320px;

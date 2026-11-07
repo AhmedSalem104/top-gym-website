@@ -162,16 +162,11 @@ test('hidden entry requires real login, and admin searches and redeems once', as
     consent: true,
   });
   await page.goto('/en/');
-  const entry = page.locator('[data-admin-entry]');
-  await entry.scrollIntoViewIfNeeded();
+  const entry = page.locator('[data-admin-logo]');
   for (let i = 0; i < 5; i++) await entry.click();
-  await page.getByRole('link', { name: 'Administrator sign in' }).click();
   await expect(page.locator('input[type=password]')).toBeVisible();
-  const code = (await (await request.get('/__test/totp')).json()).code;
-  await page.getByLabel('Administrator email').fill('local-admin@example.test');
   await page.getByLabel('Password', { exact: true }).fill('Local-test-password-only!');
-  await page.getByLabel('Authenticator code').fill(code);
-  await page.getByRole('button', { name: 'Secure sign in' }).click();
+  await page.getByRole('button', { name: 'Open dashboard' }).click();
   await expect(page.locator('.challenge-admin-kpis')).toBeVisible();
   await page.getByLabel('Search exact full name, phone or coupon').fill('Admin seeded participant');
   await page.getByRole('button', { name: 'Search', exact: true }).click();
@@ -239,16 +234,10 @@ test('slow CPU, failed answer recovery, timer authority and no layout shift on o
   await session.send('Emulation.setCPUThrottlingRate', { rate: 1 });
 });
 
-test('Arabic administration, language switch and four responsive widths', async ({
-  page,
-  request,
-}) => {
+test('Arabic administration, language switch and four responsive widths', async ({ page }) => {
   await page.goto('/ar/challenge-admin/');
-  const code = (await (await request.get('/__test/totp')).json()).code;
-  await page.getByLabel('بريد المسؤول').fill('local-ar-admin@example.test');
   await page.getByLabel('كلمة المرور', { exact: true }).fill('Local-test-password-only!');
-  await page.getByLabel('رمز تطبيق المصادقة').fill(code);
-  await page.getByRole('button', { name: 'دخول آمن' }).click();
+  await page.getByRole('button', { name: 'فتح لوحة البيانات' }).click();
   await expect(page.locator('.challenge-admin-kpis')).toBeVisible();
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 950 });

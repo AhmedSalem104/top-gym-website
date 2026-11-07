@@ -1,5 +1,9 @@
 # Decision log
 
+## Logo password access — 7 November 2026
+
+The latest owner instruction supersedes mandatory email/TOTP for normal owner entry. Bind password-only authentication to one privately configured owner account, reuse Argon2/session/CSRF/rate limits, and retain MFA for other accounts. Five logo clicks are discovery only. See [rationale and controls](ADMIN_ACCESS.md).
+
 ## Challenge visibility correction — 7 November 2026
 
 See [production visibility](CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.

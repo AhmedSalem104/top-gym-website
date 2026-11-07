@@ -20,6 +20,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Lightbox from '../components/Lightbox.astro';
 import Challenge from '../components/Challenge.astro';
+import AdminAccess from '../components/AdminAccess.astro';
 interface Props {
   locale: Locale;
   root?: boolean;
@@ -110,6 +111,7 @@ const schema = {
     <Footer locale={locale} />
     <Lightbox locale={locale} />
     {import.meta.env.PUBLIC_CHALLENGE_ENABLED === 'true' && <Challenge locale={locale} />}
+    {import.meta.env.PUBLIC_CHALLENGE_ENABLED === 'true' && <AdminAccess locale={locale} />}
     <script>
       import '../scripts/site';
     </script>

@@ -1,5 +1,9 @@
 # TOP GYM
 
+## Logo password access — 7 November 2026
+
+Administrator access now uses five consecutive header-logo clicks and a password-only dialog, as explicitly requested by the owner. See [access instructions and security](docs/ADMIN_ACCESS.md).
+
 ## Challenge visibility correction — 7 November 2026
 
 See [production visibility](docs/CHALLENGE_VISIBILITY.md): enable the production build flag to expose the launcher and authenticated admin shell independently of backend admissions. Closed admissions display honest availability with real membership/contact actions. Existing backend/TLS/SMTP are installed; draft questions and unapproved coupon terms remain excluded. Earlier disabled-UI/no-backend entries below describe previous releases.

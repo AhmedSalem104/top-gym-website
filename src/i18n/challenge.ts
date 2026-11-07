@@ -1,5 +1,12 @@
 export const challengeCopy = {
   ar: {
+    accessTitle: 'لوحة إدارة توب جيم',
+    accessIntro: 'أدخل كلمة المرور للوصول إلى بيانات المشاركين والكوبونات.',
+    accessSubmit: 'فتح لوحة البيانات',
+    accessShow: 'إظهار كلمة المرور',
+    accessHide: 'إخفاء كلمة المرور',
+    accessInvalid: 'كلمة المرور غير صحيحة. راجعها وحاول مرة أخرى.',
+    accessClose: 'إغلاق نافذة الإدارة',
     unavailableTitle: 'المشاركة غير متاحة حاليًا.',
     availabilityRetry: 'تحقق من إتاحة التحدي',
     callGym: 'اتصل بالجيم',
@@ -147,6 +154,13 @@ export const challengeCopy = {
     refresh: 'تحديث',
   },
   en: {
+    accessTitle: 'TOP GYM administration',
+    accessIntro: 'Enter your password to view participants and manage coupons.',
+    accessSubmit: 'Open dashboard',
+    accessShow: 'Show password',
+    accessHide: 'Hide password',
+    accessInvalid: 'Incorrect password. Check it and try again.',
+    accessClose: 'Close administrator sign in',
     unavailableTitle: 'Entries are currently closed.',
     availabilityRetry: 'Check challenge availability',
     callGym: 'Call the gym',

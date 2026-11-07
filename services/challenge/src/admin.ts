@@ -48,7 +48,12 @@ export class Admin {
       role,
     );
   }
-  async login(email: string, password: string, code: string, ip: string) {
+  async loginOwner(password: string, ip: string) {
+    const email = this.s.config.CHALLENGE_PASSWORD_ADMIN_EMAIL;
+    if (!email) throw new Fault('unavailable', 503);
+    return this.login(email, password, undefined, ip);
+  }
+  async login(email: string, password: string, code: string | undefined, ip: string) {
     const s = this.s;
     s.limit('admin-ip:' + ip, 10, 900000);
     s.limit('admin-account:' + email.toLowerCase(), 5, 900000);
@@ -69,15 +74,22 @@ export class Admin {
     } finally {
       this.logins--;
     }
-    const step = user
-      ? matchTotp(unseal(s.config.CHALLENGE_DATA_KEY, user.totp_cipher), code, s.now())
-      : -1;
-    if (!user || !valid || user.disabled || step < 0) {
+    const passwordOnly =
+      code === undefined &&
+      Boolean(s.config.CHALLENGE_PASSWORD_ADMIN_EMAIL) &&
+      email.toLowerCase() === s.config.CHALLENGE_PASSWORD_ADMIN_EMAIL?.toLowerCase() &&
+      user?.role === 'owner';
+    const step =
+      user && code !== undefined
+        ? matchTotp(unseal(s.config.CHALLENGE_DATA_KEY, user.totp_cipher), code, s.now())
+        : -1;
+    if (!user || !valid || user.disabled || (!passwordOnly && step < 0)) {
       s.audit('anonymous', 'login_failed', s.hash(email.toLowerCase()));
       throw new Fault('invalid_login', 401);
     }
     return s.atomic(() => {
       if (
+        !passwordOnly &&
         s.run('UPDATE admin_users SET last_totp=? WHERE id=? AND last_totp<?', step, user.id, step)
           .changes !== 1
       )

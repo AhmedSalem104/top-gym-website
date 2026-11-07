@@ -1,5 +1,6 @@
 import { challengeCopy, challengeError, type ChallengeLocale } from '../i18n/challenge';
 import { challengeApi, ApiError } from './challenge-api';
+import { adminPasswordForm } from './admin-password-form';
 const node = <K extends keyof HTMLElementTagNameMap>(tag: K, text?: string, className?: string) => {
   const n = document.createElement(tag);
   if (text) n.textContent = text;
@@ -85,42 +86,12 @@ export async function initAdmin() {
   };
   function login() {
     content.replaceChildren();
-    const form = node('form', undefined, 'challenge-admin-panel challenge-admin-login');
-    const email = field(form, c.adminEmail, 'email');
-    email.required = true;
-    email.autocomplete = 'username';
-    email.maxLength = 254;
-    const password = field(form, c.password, 'password');
-    password.required = true;
-    password.autocomplete = 'current-password';
-    password.maxLength = 128;
-    const code = field(form, c.mfa);
-    code.required = true;
-    code.inputMode = 'numeric';
-    code.autocomplete = 'one-time-code';
-    code.pattern = '[0-9]{6}';
-    code.maxLength = 6;
-    const submit = node('button', c.login, 'challenge-primary');
-    submit.type = 'submit';
-    form.append(submit);
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      submit.disabled = true;
-      void task(async () => {
-        const r = await invoke<{ csrf: string; role: string }>('login', {
-          email: email.value.trim(),
-          password: password.value,
-          code: code.value,
-        });
-        csrf = r.csrf;
-        role = r.role;
-        password.value = '';
-        code.value = '';
-        await dashboard();
-      }).finally(() => {
-        submit.disabled = false;
-      });
+    const { form } = adminPasswordForm(locale, async (session) => {
+      csrf = session.csrf;
+      role = session.role;
+      await task(dashboard);
     });
+    form.classList.add('challenge-admin-panel', 'challenge-admin-login');
     content.append(form);
   }
   async function dashboard() {

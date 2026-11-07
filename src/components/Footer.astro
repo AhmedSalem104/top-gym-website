@@ -149,17 +149,6 @@ for (const entry of business.hours.days) {
   <div class="container footer-bottom" data-motion="fade">
     <p>
       © <span data-year>{new Date().getFullYear()}</span> {business.name}. {copy.rights}
-      {import.meta.env.PUBLIC_CHALLENGE_ENABLED === 'true' && (
-        <button
-          type="button"
-          class="challenge-admin-entry"
-          data-admin-entry
-          data-admin-url={`/${locale}/challenge-admin/`}
-          aria-label={locale === 'ar' ? 'علامة توب جيم' : 'TOP GYM brand detail'}
-        >
-          ·
-        </button>
-      )}
     </p>
     <a class="footer-back-top" href="#top" data-back-top>
       {copy.backTop}
@@ -178,29 +167,3 @@ for (const entry of business.hours.days) {
     {copy.group}
   </a>
 </div>
-<script>
-  const entry = document.querySelector<HTMLButtonElement>('[data-admin-entry]');
-  let clicks = 0,
-    last = 0,
-    revealed: HTMLAnchorElement | undefined;
-  entry?.addEventListener('click', () => {
-    const now = Date.now();
-    clicks = now - last > 2500 ? 1 : clicks + 1;
-    last = now;
-    if (clicks === 5) {
-      clicks = 0;
-      if (revealed) {
-        revealed.focus();
-        return;
-      }
-      const link = document.createElement('a');
-      link.href = entry.dataset.adminUrl!;
-      link.textContent =
-        document.documentElement.lang === 'ar' ? 'دخول الإدارة' : 'Administrator sign in';
-      link.className = 'footer-link';
-      entry.after(link);
-      revealed = link;
-      link.focus();
-    }
-  });
-</script>
