@@ -80,6 +80,19 @@ export const challengeCopy = {
     save: 'احفظ نتيجتي',
     saved: 'نتيجتك اتسجلت.',
     coupon: 'كوبونك',
+    couponUsed: (code: string) => `كوبونك ${code} تم استخدامه.`,
+    copyCode: 'انسخ الكوبون',
+    copiedCode: 'تم نسخ الكوبون.',
+    copyFailed: 'تعذر النسخ تلقائيًا. اضغط مطولًا على الكود لنسخه.',
+    whatsappSubscribe: 'أرسل طلب الاشتراك على واتساب',
+    whatsappCouponMessage: (details: {
+      name: string;
+      phone: string;
+      discount: number;
+      code: string;
+      expires: string;
+    }) =>
+      `السلام عليكم، أنا ${details.name}، ورقم موبايلي ${details.phone}. أنهيت تحدي TOP GYM وحصلت على خصم ${details.discount}% بالكوبون ${details.code} الصالح حتى ${details.expires}. أرغب في الاشتراك واستخدام الكوبون.`,
     expires: 'صالح حتى',
     noCoupon: 'لا يوجد كوبون لهذه النتيجة.',
     terms: 'شروط الاستخدام',
@@ -142,6 +155,8 @@ export const challengeCopy = {
     cancel: 'إلغاء',
     moreStats: 'إحصاءات إضافية',
     confirmRedeem: 'أؤكد مراجعة الشروط وهوية صاحب الكوبون. لا يمكن استخدامه مرة ثانية.',
+    couponTermsFallback:
+      'الكوبون صالح لمدة 30 يومًا من تاريخ إصداره، ويُستخدم مرة واحدة للعملاء الجدد فقط على أي اشتراك متاح في باقة حديد أو حديد وكارديو وبأي مدة. لا يمكن دمجه مع أي عرض أو خصم آخر. تتحدد نسبة الخصم وفقًا لنتيجة التحدي، بحد أقصى 30%. يُرجى تقديم الكوبون للجيم قبل إتمام الاشتراك؛ ويعتمد قبوله على أن يكون صالحًا وغير مستخدم.',
     audit: 'سجل العمليات',
     events: 'أحداث التحويل',
     mailJobs: 'حالة إشعارات البريد',
@@ -239,6 +254,19 @@ export const challengeCopy = {
     save: 'Save my result',
     saved: 'Your result is saved.',
     coupon: 'Your coupon',
+    couponUsed: (code: string) => `Your coupon ${code} has been redeemed.`,
+    copyCode: 'Copy coupon',
+    copiedCode: 'Coupon copied.',
+    copyFailed: 'Could not copy automatically. Press and hold the code to copy it.',
+    whatsappSubscribe: 'Send subscription request on WhatsApp',
+    whatsappCouponMessage: (details: {
+      name: string;
+      phone: string;
+      discount: number;
+      code: string;
+      expires: string;
+    }) =>
+      `Hello, my name is ${details.name} and my phone number is ${details.phone}. I completed the TOP GYM challenge and earned ${details.discount}% off with coupon ${details.code}, valid until ${details.expires}. I would like to subscribe and use the coupon.`,
     expires: 'Valid until',
     noCoupon: 'No coupon was issued for this result.',
     terms: 'Redemption terms',
@@ -297,6 +325,8 @@ export const challengeCopy = {
     moreStats: 'Additional activity',
     confirmRedeem:
       'I have checked the terms and the coupon holder. This coupon cannot be used again.',
+    couponTermsFallback:
+      'The coupon is valid for 30 days from issue and may be used once by new customers only on any available Gym or Gym + Cardio package and duration. It cannot be combined with another offer or discount. The discount percentage is determined by the challenge result, up to 30%. Present the coupon to the gym before completing the membership; final acceptance depends on the coupon being valid and unused.',
     audit: 'Audit history',
     events: 'Conversion events',
     mailJobs: 'Email notification status',

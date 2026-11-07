@@ -8,6 +8,10 @@ Reorganized the challenge admin overview into four primary metrics plus compact 
 
 Validation: typecheck, lint, production build, and all 38 isolated challenge browser tests passed. The tests verified row-based activation, eligibility confirmation, successful redemption, refreshed status and metrics, Arabic and English, responsive administration at 320/390/768/1440px, and accessibility checks. Screenshots: [Arabic mobile](evidence/challenge/admin-ar-320.png), [Arabic desktop](evidence/challenge/admin-ar-1440.png), [English desktop](evidence/challenge/admin-en-1440.png), and [coupon activation](evidence/challenge/admin-activate-en-1440.png). No production customer or coupon data was used.
 
+## Coupon text and activation button — 7 November 2026
+
+Production `/challenge/info` returned the approved English policy normally, but its Arabic `terms` field is literally stored as question marks. Added a defensive Arabic display fallback that translates the exact existing English policy for both the public challenge and admin coupon details when that malformed value is received. The row activation button is now smaller with dark, high-contrast text; the confirmation button is compact and remains legible while disabled. The local UI path is covered with a unit test. The backend policy source still needs correction so every API consumer receives valid Arabic; its Vercel server-only backend host was not available through the permitted local access and no unrelated VPS was touched.
+
 ## Ten-second timer and rapid logo entry — 7 November 2026
 
 The owner requested ten seconds per question and reported that the logo entry did not work. See [implementation, migration, reproduction and release checks](CHALLENGE_TIMER_UPDATE.md). Earlier five-second records describe the previous release. The prior closed state was superseded; see [current production status](CHALLENGE_LIVE_STATUS.md).
@@ -223,3 +227,11 @@ Review: [Arabic footer desktop](evidence/footer-after-ar-1440.webp), [Arabic foo
 Gate 1 final local verification: 45 backend + 58 website/BFF unit tests, 117 existing browser cases and 15 challenge cases passed. Both builds/types/lint/format/SEO passed. Local 4? CPU flow CLS was 0; measurements and screenshot limits are recorded in `CHALLENGE_QA.md`. No remote push, staging deployment or production mutation was performed.
 
 7 November publication follow-up: authenticated Vercel Preview inspection found the native catch-all filename built but returned platform 404. Replaced it with a fixed function plus explicit rewrite and canonical route validation; added rewrite/signature/ambiguity tests. Production merge waits for new preview and required checks.
+
+## Coupon activation and winner follow-up — 2026-11-07
+
+- Reduced the coupon activation button dimensions, corrected its foreground/background contrast, and added a localized post-redemption confirmation containing the coupon code. If the API's Arabic terms are corrupted, the frontend uses the exact Arabic translation of the current English terms rather than displaying question marks.
+- On successful challenge registration with an eligible coupon, the result now shows the Cairo-timezone expiry date, a copy-to-clipboard button with an accessible status message, and a WhatsApp subscription-request link to the configured Ahmed contact (+201015819700). The user-initiated message includes the participant name, entered phone, discount percentage, coupon code and expiry. It is localized and URL-encoded; the link does not send anything until clicked.
+- The WhatsApp action enters using the shared motion primitive, has restrained brand hover/focus styling and respects reduced-motion. Zero-score results still have no coupon, copy action or coupon WhatsApp message.
+- Validation: typecheck and lint pass; 66 unit tests pass; challenge preview build passes; 3 focused Chromium tests pass, including Arabic/English result screens, expiry display, copy confirmation and personalized WhatsApp link. Updated result captures: `docs/evidence/challenge/result-ar.png` and `docs/evidence/challenge/result-en.png`.
+- Limitation: production challenge API currently returns literal question marks for Arabic terms. The website now has a safe display fallback, but correcting the API's stored policy still requires access to the private backend configuration. No backend secrets or production coupon records were changed.

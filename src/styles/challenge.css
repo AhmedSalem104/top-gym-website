@@ -371,6 +371,42 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
   overflow-wrap: anywhere;
   user-select: all;
 }
+.challenge-coupon-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.challenge-coupon-actions > a,
+.challenge-coupon-actions > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  max-width: 100%;
+  padding: 10px 14px;
+  text-align: center;
+  text-decoration: none;
+}
+.challenge-coupon-whatsapp {
+  transition:
+    box-shadow var(--motion-micro, 200ms) var(--motion-ease, ease),
+    background-color var(--motion-micro, 200ms) var(--motion-ease, ease);
+}
+.challenge-coupon-whatsapp:hover {
+  box-shadow: 0 6px 20px #e5950033;
+}
+.challenge-coupon-whatsapp:focus-visible,
+.challenge-coupon-copy:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+@media (max-width: 480px) {
+  .challenge-coupon-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
 .challenge-confetti {
   position: absolute;
   inset: 0;
@@ -682,7 +718,28 @@ html[dir='rtl'] .admin-access-dialog h2 {
 }
 .challenge-admin table .challenge-admin-activate {
   border-color: var(--color-gold);
-  color: var(--color-gold);
+  color: var(--color-canvas);
+  background: var(--color-gold);
+  min-height: 36px;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.challenge-admin table .challenge-admin-activate:hover {
+  color: var(--color-canvas);
+  background: var(--color-hover);
+}
+.challenge-admin .challenge-admin-activation-actions button {
+  min-height: 38px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+.challenge-admin .challenge-admin-activation-actions .challenge-primary:disabled {
+  opacity: 1;
+  color: var(--color-canvas);
+  background: #b77b1a;
+  cursor: not-allowed;
 }
 .challenge-admin-activation {
   padding: 16px;
@@ -837,7 +894,8 @@ html[dir='rtl'] .admin-access-dialog h2 {
     flex-wrap: wrap;
   }
   .challenge-admin-row-actions button {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
+    max-width: 100%;
   }
   .challenge-admin-table tbody tr.challenge-admin-action-row {
     display: block;

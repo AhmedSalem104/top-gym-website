@@ -1,6 +1,7 @@
 import { challengeCopy, challengeError, type ChallengeLocale } from '../i18n/challenge';
 import { challengeApi, ApiError } from './challenge-api';
 import { adminPasswordForm } from './admin-password-form';
+import { localizedChallengeTerms } from './challenge-terms';
 const node = <K extends keyof HTMLElementTagNameMap>(tag: K, text?: string, className?: string) => {
   const n = document.createElement(tag);
   if (text) n.textContent = text;
@@ -74,11 +75,11 @@ export async function initAdmin() {
       'X-CSRF-Token': csrf,
       ...(key ? { 'Idempotency-Key': key } : {}),
     });
-  const task = async (fn: () => Promise<void>) => {
+  const task = async (fn: () => Promise<void>, successMessage = '') => {
     status.textContent = c.loading;
     try {
       await fn();
-      status.textContent = '';
+      status.textContent = successMessage;
     } catch (e) {
       status.textContent = e instanceof ApiError ? challengeError(e.code, locale) : c.connection;
       if (e instanceof ApiError && e.status === 401) login();
@@ -367,7 +368,7 @@ export async function initAdmin() {
         node('h3', `${c.activateCoupon} · ${coupon.discount}%`),
         node('p', `${coupon.participant.name} · ${coupon.phone}`),
         node('p', `${coupon.code} · ${c.expires} ${format(coupon.expiresAt)}`),
-        node('p', coupon.terms[locale]),
+        node('p', localizedChallengeTerms(coupon.terms, locale)),
       );
       if (coupon.redemption)
         card.append(node('p', c.redeemed + ' ' + format(coupon.redemption.redeemed_at)));
@@ -424,7 +425,7 @@ export async function initAdmin() {
               );
               renderMetrics(await getSummary());
               await list();
-            }).finally(() => {
+            }, c.couponUsed(coupon.code)).finally(() => {
               redeem.disabled = !check.checked;
             });
           },
