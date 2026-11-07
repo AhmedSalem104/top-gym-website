@@ -1,10 +1,14 @@
 # Challenge operations and release gates
 
+## Direct-entry update — 7 November 2026
+
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+
 ## Environment and isolation
 
 The initial implementation was limited to Gate 1. On 7 November 2026 the owner explicitly authorized pushing and publishing the verified changes. This release uses the protected GitHub/Vercel workflow with challenge participation disabled. No VPS container, database, DNS, certificate, user, package or directory has been created for the feature. Backend staging/acceptance and activation inputs remain outstanding; publication is not evidence of successful backend deployment.
 
-Proposed live data location: `/var/lib/top-gym-challenge/challenge.sqlite`, on local ext4 outside web roots and separate from LogicFit. Staging needs different storage, keys, origin, OTP service and recipient inbox. Do not use production customer data or implicitly repair unrelated services/backups.
+Proposed live data location: `/var/lib/top-gym-challenge/challenge.sqlite`, on local ext4 outside web roots and separate from LogicFit. Staging needs different storage, keys, origin and recipient inbox. Do not use production customer data or implicitly repair unrelated services/backups.
 
 ## Packaging
 
@@ -21,12 +25,12 @@ Vercel server-only settings: `CHALLENGE_BACKEND_URL` (approved HTTPS origin), `C
 The VPS `.env.example` documents:
 
 - Runtime: `NODE_ENV=production`, host `0.0.0.0` inside the isolated container, port 4400, private DB/bank/policy paths.
-- `CHALLENGE_ENABLED`: admission switch; false stops new attempts while existing verified sessions may recover/finalize.
-- `CHALLENGE_ALLOW_DRAFT_BANK=false`; production rejects mock OTP and drafts regardless of flags.
+- `CHALLENGE_ENABLED`: admission switch; false stops new attempts while existing original sessions may recover/finalize.
+- `CHALLENGE_ALLOW_DRAFT_BANK=false`; production rejects draft banks regardless of flags.
 - Three different random 32-byte hex `CHALLENGE_DATA_KEY`, `CHALLENGE_HASH_KEY`, `CHALLENGE_GATEWAY_KEY`. Keep keys separately backed up; loss makes protected data unrecoverable.
 - Rotate encryption/lookup keys only through an explicitly reviewed data migration. Blind replacement would break decryption and canonical phone uniqueness; do not treat it as an ordinary environment edit.
-- `OTP_PROVIDER=disabled` until approved. Twilio Verify is an implemented option, with private account/auth/service configuration. No account, SMS purchase or live verification occurred.
-- Gmail host `smtp.gmail.com`, port 465 TLS or 587 STARTTLS, private `SMTP_USER`, `SMTP_APP_PASSWORD`, `CHALLENGE_ADMIN_EMAIL`. Customer email stays disabled until approved.
+- No participant OTP adapter or SMS credentials are required. New phone entries are explicitly unverified; administration still uses password plus TOTP.
+- Gmail host `smtp.gmail.com`, port 465 TLS or 587 STARTTLS, private `SMTP_USER`, `SMTP_APP_PASSWORD`, `CHALLENGE_ADMIN_EMAIL`. No new customer-email job is generated.
 
 Use a private secret manager or mode-0600 file outside checkout. Never paste secrets into chat/PRs, print environment values or use `PUBLIC_` for private settings. Existing feedback secrets were not copied; configure the new service securely when approved.
 
@@ -34,7 +38,7 @@ The policy example intentionally fails validation. Required commercial choices: 
 
 ## HTTPS and administrator access
 
-Prefer an approved DNS hostname with a publicly trusted certificate and additive Caddy reverse proxy to loopback port 4400. The template assumes the observed host-network Caddy topology; adapt if topology changes. Never overwrite the shared Caddy configuration or expose the backend port publicly. No DNS/certificate action is authorized yet. Raw-IP HTTPS needs a trusted certificate for the exact IP plus reliable renewal; none was verified.
+Prefer an approved DNS hostname with a publicly trusted certificate and additive Caddy reverse proxy to loopback port 4400. The template assumes the observed host-network Caddy topology; adapt if topology changes. Never overwrite the shared Caddy configuration or expose the backend port publicly. No TOP GYM API hostname or DNS control has been supplied. Raw-IP HTTPS needs a trusted certificate for the exact IP plus reliable renewal; none was verified.
 
 The browser uses same-origin Vercel; the backend validates signed requests, freshness, nonce replay and payload. Direct browser CORS access is not enabled. Never disable TLS verification or trust arbitrary forwarded IP headers outside this path.
 
@@ -46,7 +50,7 @@ Registration stores unique outbox jobs atomically. One guarded worker sends outs
 
 States: queued → sending → accepted; definitive failures retry with bounded backoff up to five attempts. Ambiguous timeout/interrupted sends become **uncertain**, never blindly resent. Review authorized inbox/provider evidence before any manually approved retry. Dashboard exposes queue/failure counts. Accepted means SMTP accepted, not confirmed inbox delivery. A mail outage never rolls back a valid coupon.
 
-Real Gmail acceptance, inbox placement and Gmail light/dark rendering remain staging checks. `npm run challenge:email` generates 16 labeled samples without sending. Customer emails require both approval/configuration and an actually provided address.
+Real Gmail acceptance, inbox placement and Gmail light/dark rendering remain staging checks. `npm run challenge:email` generates 16 labeled samples without sending. Legacy queued customer-email records may remain readable; new participation collects no email.
 
 ## Backup, restore and retention
 
@@ -61,7 +65,7 @@ Expired temporary sessions/nonces/rate limits are cleaned. Participant/audit ret
 
 ## Monitoring, capacity and rollback
 
-Monitor health, p95/p99 request latency, status/error counts, SQLite busy events, event-loop delay, memory/CPU, disk/WAL, NTP, OTP failure/spending, email queue age/failures and backup age. Logs must not contain headers, cookies, OTPs, bodies, URL search PII or customer messages. Request logging is disabled; operational errors use stable codes.
+Monitor health, p95/p99 request latency, status/error counts, SQLite busy events, event-loop delay, memory/CPU, disk/WAL, NTP, enrollment abuse rates, email queue age/failures and backup age. Logs must not contain headers, cookies, OTPs, bodies, URL search PII or customer messages. Request logging is disabled; operational errors use stable codes.
 
 No throughput or campaign-size guarantee is claimed. Staging must test finite bursts with synthetic participants and mocked paid providers under the proposed limits. If write contention grows, control admissions or plan a server database; never share WAL over NFS or add uncoordinated hosts.
 
@@ -69,7 +73,7 @@ Release sequence:
 
 1. Approve Gate 2 target, cost controls, policy, reviewed bank, privacy/retention and operators.
 2. Build/scan immutable Linux image, provision isolated secrets/mounts, add only approved DNS/TLS/proxy configuration.
-3. Verify HTTPS/BFF/cookies, MFA, real OTP and authorized email, backups/restore, bursts, accessibility and website regressions.
+3. Verify HTTPS/BFF/cookies, MFA, direct enrollment and authorized administration email, backups/restore, bursts, accessibility and website regressions.
 4. Present evidence and a concrete Gate 3 release proposal; do not merge automatically.
 5. After Gate 3, back up, deploy backend with admissions off, verify, publish approved frontend, enable admissions and monitor.
 6. Roll back by disabling admissions and restoring the previous compatible image/frontend. Preserve DB, keys, results and redemptions. Never recreate the DB or blindly restore an old backup that could re-enable spent coupons. Future schema changes need tested migrations and rollback/forward-recovery plans.

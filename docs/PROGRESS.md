@@ -1,5 +1,9 @@
 # Implementation progress — 2026-11-05
 
+## Direct-entry update — 7 November 2026
+
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+
 ## Fitness challenge — local Gate 1 implementation
 
 Backend, dedicated SQLite schema, verified-phone adapter, persisted timing/scoring, one-use coupons, bilingual dialog, MFA administration, first-party attribution, branded email/outbox, local harness and deployment templates are implemented. Actual 300-question authoring draft passes integrity checks but remains private and unreviewed. No VPS/production changes, SMS or real challenge email occurred. Tests/evidence and remaining gates are recorded in [CHALLENGE_QA.md](CHALLENGE_QA.md); the previous audit is [CHALLENGE_AUDIT.md](CHALLENGE_AUDIT.md). The owner subsequently authorized code publication on 7 November 2026. Backend staging acceptance, provider/domain, commercial terms, content review and privacy decisions remain open.

@@ -244,7 +244,7 @@ export async function initAdmin() {
       [
         c.name,
         c.phoneColumn,
-        c.email,
+        c.emailColumn,
         c.date,
         c.score,
         c.discount,

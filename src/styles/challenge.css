@@ -6,12 +6,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 15px 20px;
+  padding: 12px 16px;
+  overflow: hidden;
+  isolation: isolate;
   border: 1px solid var(--color-gold);
   border-radius: 100px;
-  background: var(--color-canvas);
-  color: var(--color-gold);
-  font-size: 13px;
+  background: var(--color-gold);
+  color: var(--color-canvas);
+  font-size: 14px;
   font-weight: 700;
   box-shadow: 0 8px 28px #0005;
   transition:
@@ -20,13 +22,13 @@
     translate var(--motion-micro) var(--motion-ease);
 }
 .challenge-launch:hover {
-  background: var(--color-gold);
+  background: var(--color-hover);
   color: var(--color-canvas);
   translate: 0 -2px;
 }
 .challenge-dialog {
-  width: min(680px, calc(100vw - 24px));
-  height: min(820px, calc(100dvh - 24px));
+  width: min(560px, calc(100vw - 24px));
+  height: min(620px, calc(100dvh - 24px));
   max-height: calc(100dvh - 24px);
   margin: auto;
   padding: 0;
@@ -42,7 +44,7 @@
   background: #000c;
 }
 .challenge-shell {
-  padding: clamp(20px, 4vw, 36px);
+  padding: clamp(16px, 3vw, 24px);
   position: relative;
   background: radial-gradient(ellipse at 0 0, #e5950012, transparent 50%);
 }
@@ -51,7 +53,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   color: var(--color-gold);
   font: 700 12px var(--font-body);
   letter-spacing: 0.08em;
@@ -68,9 +70,9 @@
   flex-shrink: 0;
 }
 .challenge-dialog .challenge-title {
-  font-size: clamp(27px, 4vw, 40px);
+  font-size: clamp(25px, 3vw, 32px);
   line-height: 1.25;
-  margin: 0 0 24px;
+  margin: 0 0 14px;
   text-transform: none;
 }
 .challenge-dialog .challenge-title:focus:not(:focus-visible) {
@@ -81,23 +83,23 @@
   outline-offset: 6px;
 }
 html[dir='rtl'] .challenge-dialog .challenge-title {
-  font-size: clamp(25px, 4vw, 34px);
+  font-size: clamp(24px, 3vw, 30px);
   line-height: 1.5;
 }
 .challenge-stage {
   display: grid;
-  gap: 20px;
+  gap: 12px;
 }
 .challenge-stage p {
-  line-height: 1.8;
+  line-height: 1.65;
 }
 .challenge-intro {
-  font-size: 19px;
+  font-size: 15px;
   color: var(--color-ink);
 }
 .challenge-rules,
 .challenge-local {
-  padding: 14px 16px;
+  padding: 10px 12px;
   background: var(--color-surface);
   border-inline-start: 2px solid var(--color-gold);
   border-radius: 4px;
@@ -105,14 +107,14 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
 }
 .challenge-local {
   color: var(--color-gold);
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 .challenge-local[hidden] {
   display: none;
 }
 .challenge-stage form {
   display: grid;
-  gap: 18px;
+  gap: 12px;
 }
 .challenge-field {
   display: grid;
@@ -133,8 +135,7 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
   font: inherit;
   box-sizing: border-box;
 }
-.challenge-field input[type='tel'],
-.challenge-field input[autocomplete='one-time-code'] {
+.challenge-field input[type='tel'] {
   direction: ltr;
   text-align: start;
   letter-spacing: 0.08em;
@@ -270,17 +271,17 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
 .challenge-result {
   position: relative;
   overflow: hidden;
-  padding: 24px 8px;
+  padding: 12px 4px;
   text-align: center;
   display: grid;
   justify-items: center;
-  gap: 12px;
+  gap: 6px;
   border-bottom: 1px solid var(--color-line);
 }
 .challenge-result-value {
   min-width: 3ch;
   font:
-    800 clamp(80px, 14vw, 124px)/1 'Barlow Condensed',
+    800 clamp(56px, 10vw, 80px)/1 'Barlow Condensed',
     sans-serif;
   color: var(--color-gold);
   font-variant-numeric: tabular-nums;
@@ -291,8 +292,8 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
   font-variant-numeric: tabular-nums;
 }
 .challenge-result h3 {
-  font-size: 24px !important;
-  line-height: 1.6 !important;
+  font-size: 20px !important;
+  line-height: 1.45 !important;
   text-transform: none;
 }
 .challenge-registration h4 {
@@ -518,7 +519,7 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
     bottom: 88px;
     inset-inline-end: 14px;
     padding: 12px 16px;
-    font-size: 11px;
+    font-size: 12px;
     max-width: calc(100vw - 28px);
   }
   .challenge-options {
@@ -555,6 +556,83 @@ html[dir='rtl'] .challenge-dialog .challenge-title {
     translate: none !important;
   }
   .challenge-confetti {
+    display: none;
+  }
+}
+
+/* A short invitation sweep, not an endless attention loop. Independent from hover translate. */
+.challenge-launch::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 25%, #fff6 48%, transparent 72%);
+  transform: translateX(-130%);
+  animation: challenge-invitation 2200ms var(--motion-ease) 2;
+}
+.challenge-launch.is-resting::before {
+  animation-play-state: paused;
+}
+.challenge-launch-label {
+  display: grid;
+  gap: 2px;
+  text-align: start;
+}
+.challenge-launch-label strong {
+  font-size: inherit;
+}
+.challenge-launch-label small {
+  font-size: 11px;
+  font-weight: 500;
+}
+.challenge-launch-reward {
+  display: grid;
+  justify-items: center;
+  padding-inline-start: 12px;
+  border-inline-start: 1px solid #0b0d0f40;
+}
+.challenge-launch-reward small {
+  font-size: 10px;
+}
+.challenge-launch-reward strong {
+  font-size: 22px;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.challenge-launch:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 4px;
+}
+.challenge-launch:active {
+  translate: 0 1px;
+}
+@keyframes challenge-invitation {
+  0%,
+  18% {
+    transform: translateX(-130%);
+  }
+  80%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+@media (max-width: 767px) {
+  .challenge-launch {
+    bottom: calc(84px + env(safe-area-inset-bottom));
+    gap: 9px;
+    padding: 10px 13px;
+  }
+  .challenge-launch > svg {
+    width: 21px;
+    height: 21px;
+  }
+  .challenge-launch-label small {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .challenge-launch::before {
+    animation: none;
     display: none;
   }
 }

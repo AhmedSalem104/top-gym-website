@@ -7,7 +7,6 @@ import Database from 'better-sqlite3';
 import { Store } from '../src/db.ts';
 import { Engine, type Round } from '../src/engine.ts';
 import { createApp } from '../src/app.ts';
-import { createOtp } from '../src/otp.ts';
 import { Admin, type AdminUser } from '../src/admin.ts';
 import { digest } from '../src/security.ts';
 import { loadBank } from '../src/bank.ts';
@@ -29,9 +28,8 @@ function persistent() {
   return { dir, c };
 }
 async function complete(s: Store) {
-  const engine = new Engine(s, fixtureBank, createOtp(s.config));
-  const v = await engine.requestVerification('01012345678', 'local');
-  const p = await engine.confirmVerification(v.verification, '246810', 'local');
+  const engine = new Engine(s, fixtureBank);
+  const p = engine.enroll('01012345678', 'local', randomUUID());
   engine.start(p.identity, 'en', {});
   for (let i = 0; i < 3; i++) {
     const state = engine.sync(p.identity),
@@ -43,7 +41,7 @@ async function complete(s: Store) {
   }
   const result = engine.finalize(
     p.identity,
-    { name: 'Local persisted test', consent: true, marketingConsent: false },
+    { name: 'Local persisted test', consent: true },
     randomUUID(),
   );
   return { engine, p, result };
@@ -68,7 +66,7 @@ describe('persistence and adversarial boundaries', () => {
     try {
       expect(restored.db.pragma('integrity_check', { simple: true })).toBe('ok');
       expect(restored.db.pragma('foreign_key_check')).toEqual([]);
-      const engine = new Engine(restored, fixtureBank, createOtp(c));
+      const engine = new Engine(restored, fixtureBank);
       expect(engine.identity(p.token)).toBe(p.identity);
       expect(engine.start(p.identity, 'ar', {}).coupon?.code).toBe(result.coupon!.code);
       expect(restored.all('SELECT * FROM participants')).toHaveLength(1);
@@ -139,10 +137,9 @@ describe('persistence and adversarial boundaries', () => {
       c = config({
         NODE_ENV: 'production',
         CHALLENGE_ORIGIN: 'https://site.example.test',
-        OTP_PROVIDER: 'disabled',
         CHALLENGE_ALLOW_DRAFT_BANK: 'false',
       });
-    const { app } = createApp(c, fixtureBank, createOtp(c), () => time.value);
+    const { app } = createApp(c, fixtureBank, () => time.value);
     try {
       const path = '/v1/challenge/info',
         timestamp = String(time.value),
@@ -166,48 +163,50 @@ describe('persistence and adversarial boundaries', () => {
       await app.close();
     }
   });
-  it('handles OTP outage without issuing an identity or leaking provider text', async () => {
-    const c = config(),
-      s = new Store(c);
-    const engine = new Engine(s, fixtureBank, {
-      request: async () => {
-        throw new Error('private gateway message');
-      },
-      confirm: async () => false,
-    });
+  it('migrates legacy verified identities without falsely verifying new entries', () => {
+    const { c } = persistent();
+    const old = new Database(c.CHALLENGE_DB);
+    old.exec(`CREATE TABLE verified_phone_identities(id TEXT PRIMARY KEY,phone_hash TEXT UNIQUE NOT NULL,phone_cipher TEXT NOT NULL,verified_at INTEGER NOT NULL);
+      INSERT INTO verified_phone_identities VALUES('old','old-hash','old-cipher',123);
+      CREATE TABLE browser_sessions(token_hash TEXT PRIMARY KEY,phone_id TEXT NOT NULL REFERENCES verified_phone_identities(id),expires INTEGER NOT NULL);
+      INSERT INTO browser_sessions VALUES('old-session','old',9999999999999);`);
+    old.close();
+    const store = new Store(c);
     try {
-      await expect(engine.requestVerification('01012345678', 'client')).rejects.toThrow(
-        'verification_unavailable',
-      );
-      expect(s.all('SELECT * FROM verified_phone_identities')).toHaveLength(0);
-      expect(s.get<{ state: string }>('SELECT state FROM phone_verifications')!.state).toBe(
-        'failed',
-      );
+      expect(
+        store.get(
+          'SELECT registered_at,ownership_verified FROM phone_identities WHERE id=?',
+          'old',
+        ),
+      ).toEqual({ registered_at: 123, ownership_verified: 1 });
+      new Engine(store, fixtureBank).enroll('01012345678', 'client', randomUUID());
+      expect(
+        store.get('SELECT ownership_verified FROM phone_identities WHERE id<>?', 'old'),
+      ).toEqual({ ownership_verified: 0 });
+      expect(store.db.pragma('foreign_key_check')).toEqual([]);
+      expect(
+        store.get('SELECT phone_id FROM browser_sessions WHERE token_hash=?', 'old-session'),
+      ).toEqual({ phone_id: 'old' });
     } finally {
-      s.close();
+      store.close();
     }
   });
-  it.each(['rejected', 'timeout', 'approved'])(
-    'exercises configured OTP adapter with mocked %s transport',
-    async (mode) => {
-      const c = config({
-        OTP_PROVIDER: 'twilio',
-        TWILIO_ACCOUNT_SID: 'AC' + '1'.repeat(32),
-        TWILIO_VERIFY_SERVICE_SID: 'VA' + '2'.repeat(32),
-        TWILIO_AUTH_TOKEN: 'test-only',
-      });
-      const fetch = vi.fn(async () => {
-        if (mode === 'timeout') throw new Error('timeout');
-        return Response.json({ status: 'approved' }, { status: mode === 'rejected' ? 503 : 200 });
-      });
-      vi.stubGlobal('fetch', fetch);
-      const otp = createOtp(c);
-      if (mode === 'approved') expect(await otp.confirm('+201012345678', '123456')).toBe(true);
-      else
-        await expect(otp.confirm('+201012345678', '123456')).rejects.toThrow(
-          'verification_unavailable',
-        );
-      expect(fetch).toHaveBeenCalledTimes(1);
-    },
-  );
+  it('rejects repeated concurrent phone claims and never exposes the first session', async () => {
+    const { c } = persistent(),
+      first = new Store(c),
+      second = new Store(c);
+    try {
+      const a = new Engine(first, fixtureBank),
+        b = new Engine(second, fixtureBank);
+      const owner = a.enroll('01012345678', 'client-a', randomUUID());
+      expect(() => b.enroll('+201012345678', 'client-b', randomUUID())).toThrow(
+        'entry_unavailable',
+      );
+      expect(second.all('SELECT * FROM browser_sessions')).toHaveLength(1);
+      expect(a.identity(owner.token)).toBe(owner.identity);
+    } finally {
+      first.close();
+      second.close();
+    }
+  });
 });

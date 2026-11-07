@@ -6,7 +6,6 @@ import { Admin, redemptionSchema } from './admin.ts';
 import { Fault, digest, equal } from './security.ts';
 import type { Config } from './config.ts';
 import type { Question } from './bank.ts';
-import type { OtpProvider } from './otp.ts';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -28,11 +27,10 @@ const cookie = (value: string | undefined, name: string) =>
 export function createApp(
   c: Config,
   bank: { questions: Question[]; version: string },
-  otp: OtpProvider,
   now?: () => number,
 ) {
   const store = new Store(c, now),
-    engine = new Engine(store, bank, otp),
+    engine = new Engine(store, bank),
     admin = new Admin(store);
   const app = Fastify({
     logger: false,
@@ -129,19 +127,16 @@ export function createApp(
     terms: c.policy?.terms || null,
     mode: c.NODE_ENV === 'production' ? 'live' : 'local',
   }));
-  app.post('/v1/verification/request', async (req) => {
+  app.post('/v1/challenge/enroll', async (req, reply) => {
     const b = z
       .object({ phone: z.string().max(40) })
       .strict()
       .parse(req.body);
-    return engine.requestVerification(b.phone, req.trustedIp!);
-  });
-  app.post('/v1/verification/confirm', async (req, reply) => {
-    const b = z
-      .object({ verification: id, code: z.string().regex(/^\d{6}$/) })
-      .strict()
-      .parse(req.body);
-    const r = await engine.confirmVerification(b.verification, b.code, req.trustedIp!);
+    const r = engine.enroll(
+      b.phone,
+      req.trustedIp!,
+      z.uuid().parse(req.headers['idempotency-key']),
+    );
     reply.header('Set-Cookie', setCookie('player', r.token, 86400));
     return engine.sync(r.identity);
   });

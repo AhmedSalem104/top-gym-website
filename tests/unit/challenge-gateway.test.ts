@@ -19,6 +19,16 @@ const request = (
   });
 afterEach(() => vi.unstubAllGlobals());
 describe('challenge BFF security boundary', () => {
+  it('allows direct phone enrollment and refuses removed verification routes', async () => {
+    const fetch = vi.fn(async () => Response.json({ status: 'eligible' }));
+    vi.stubGlobal('fetch', fetch);
+    expect(
+      (await challengeGateway(request('challenge/enroll', { phone: '01012345678' }), env)).status,
+    ).toBe(200);
+    expect((await challengeGateway(request('verification/request'), env)).status).toBe(404);
+    expect((await challengeGateway(request('verification/confirm'), env)).status).toBe(404);
+    expect(fetch).toHaveBeenCalledOnce();
+  });
   it.each([
     '/api/challenge/?__tg_route=v1/admin/participants&__tg_path=admin/participants&page=2',
     '/api/challenge/v1/admin/participants/?__tg_route=v1/admin/secrets&__tg_path=admin/secrets&page=2',

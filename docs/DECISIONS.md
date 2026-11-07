@@ -1,5 +1,9 @@
 # Decision log
 
+## Direct-entry update — 7 November 2026
+
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+
 7 November 2026 publication update: the owner explicitly authorized pushing and publishing. Use the protected GitHub PR and Vercel workflow with the challenge disabled. Live participation remains unavailable until the provider/domain, policy, reviewed bank and backend acceptance requirements are met; do not treat deployment approval as approval of unspecified offer terms.
 
 ## Fitness challenge — Gate 1

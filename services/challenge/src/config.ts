@@ -30,16 +30,11 @@ const envSchema = z.object({
   CHALLENGE_POLICY_FILE: z.string().optional(),
   CHALLENGE_BANK_FILE: z.string().default('../../content/challenge/questions.json'),
   CHALLENGE_ALLOW_DRAFT_BANK: z.enum(['true', 'false']).default('false'),
-  OTP_PROVIDER: z.enum(['disabled', 'twilio', 'mock']).default('disabled'),
-  TWILIO_ACCOUNT_SID: z.string().optional(),
-  TWILIO_AUTH_TOKEN: z.string().optional(),
-  TWILIO_VERIFY_SERVICE_SID: z.string().optional(),
   SMTP_HOST: z.literal('smtp.gmail.com').default('smtp.gmail.com'),
   SMTP_PORT: z.enum(['465', '587']).default('465'),
   SMTP_USER: z.union([z.email().max(254), z.literal('')]).optional(),
   SMTP_APP_PASSWORD: z.string().optional(),
   CHALLENGE_ADMIN_EMAIL: z.union([z.email().max(254), z.literal('')]).optional(),
-  CHALLENGE_CUSTOMER_EMAIL_ENABLED: z.enum(['true', 'false']).default('false'),
 });
 export type Config = z.infer<typeof envSchema> & { policy?: Policy };
 export function readConfig(env: NodeJS.ProcessEnv = process.env): Config {
@@ -55,9 +50,7 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env): Config {
     throw new Error('Invalid origin');
   if (
     c.NODE_ENV === 'production' &&
-    (url.protocol !== 'https:' ||
-      c.OTP_PROVIDER === 'mock' ||
-      c.CHALLENGE_ALLOW_DRAFT_BANK === 'true')
+    (url.protocol !== 'https:' || c.CHALLENGE_ALLOW_DRAFT_BANK === 'true')
   )
     throw new Error('Unsafe production configuration');
   if (

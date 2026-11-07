@@ -1,5 +1,9 @@
 # Architecture
 
+## Direct-entry update — 7 November 2026
+
+The owner requested a stronger animated invitation, compact membership-discount dialog, name-only personal details after the quiz, removal of participant OTP, and production publication. See [CHALLENGE_SIMPLE_ENTRY.md](CHALLENGE_SIMPLE_ENTRY.md) for the current contract and residual risks. One attempt is tied to an **entered, unverified** canonical number; recovery requires the original secret session, never the phone alone. Admin MFA is unchanged. OTP approval is no longer required. Backend HTTPS, approved commercial terms, private-bank review and operational acceptance remain activation inputs, not another publishing-permission request.
+
 ## Gated challenge extension
 
 The optional fitness challenge adds a same-origin Vercel BFF and a separate Node 24/Fastify/SQLite VPS service. It does not change the feedback API or create membership/payment logic. Feature UI is disabled by default. Server-authoritative deadlines, unique phone identities, transactional coupons, MFA administration and durable outbox are described in [CHALLENGE.md](CHALLENGE.md) and [CHALLENGE_API.md](CHALLENGE_API.md). The owner subsequently authorized code publication with the challenge disabled; backend deployment architecture and rollback are in [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md).

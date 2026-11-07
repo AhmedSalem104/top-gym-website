@@ -8,19 +8,18 @@ The static Astro deployment uses an explicit `vercel.json` rewrite from `/api/ch
 
 ## Public contracts
 
-| Method / backend path           | Request                                              | Result / authorization                                                                                |
-| ------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| GET `/health`                   | none                                                 | Minimal process liveness; no secrets or dependency diagnostics                                        |
-| GET `/v1/challenge/info`        | none                                                 | `available`, `questions:3`, `seconds:5`, `discounts:[0,10,20,30]`, bilingual terms, `mode:local/live` |
-| POST `/v1/verification/request` | `{phone}`                                            | Opaque `verification`, `expiresAt`; no disclosure of prior participation                              |
-| POST `/v1/verification/confirm` | `{verification,code}`                                | Sets player session cookie; returns own eligible/active/completed/registered state                    |
-| POST `/v1/challenge/start`      | `{locale,attribution?}`                              | Requires verified player cookie; returns existing attempt or creates exactly one                      |
-| GET `/v1/challenge/session`     | cookie                                               | Own persisted state without forcing a timeout transition                                              |
-| POST `/v1/challenge/sync`       | `{}`                                                 | Reconciles deadlines atomically and returns own state                                                 |
-| POST `/v1/challenge/answer`     | `{question,option}` + `Idempotency-Key`              | Current selected question only; authoritative evaluation and next state                               |
-| POST `/v1/challenge/finalize`   | `{name,email?,consent:true,marketingConsent?}` + key | Atomic registration, eligible coupon and outbox jobs                                                  |
-| GET `/v1/challenge/result`      | cookie                                               | Own state/result; never another participant's data                                                    |
-| POST `/v1/challenge/event`      | `{event,key,attribution}`                            | Only `challenge_viewed` or `challenge_opened`; deduplicated, rate-limited                             |
+| Method / backend path         | Request                                 | Result / authorization                                                                                             |
+| ----------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| GET `/health`                 | none                                    | Minimal process liveness; no secrets or dependency diagnostics                                                     |
+| GET `/v1/challenge/info`      | none                                    | `available`, `questions:3`, `seconds:5`, `discounts:[0,10,20,30]`, bilingual terms, `mode:local/live`              |
+| POST `/v1/challenge/enroll`   | `{phone}` + UUID `Idempotency-Key`      | Sets original player cookie. Unverified identity, unique phone; generic duplicate error without result disclosure. |
+| POST `/v1/challenge/start`    | `{locale,attribution?}`                 | Requires original player cookie; returns existing attempt or creates exactly one                                   |
+| GET `/v1/challenge/session`   | cookie                                  | Own persisted state without forcing a timeout transition                                                           |
+| POST `/v1/challenge/sync`     | `{}`                                    | Reconciles deadlines atomically and returns own state                                                              |
+| POST `/v1/challenge/answer`   | `{question,option}` + `Idempotency-Key` | Current selected question only; authoritative evaluation and next state                                            |
+| POST `/v1/challenge/finalize` | `{name,consent:true}` + key             | Atomic registration, eligible coupon and outbox jobs                                                               |
+| GET `/v1/challenge/result`    | cookie                                  | Own state/result; never another participant's data                                                                 |
+| POST `/v1/challenge/event`    | `{event,key,attribution}`               | Only `challenge_viewed` or `challenge_opened`; deduplicated, rate-limited                                          |
 
 Attribution accepts bounded `source`, `medium`, `campaign`, `content`, path-only `landing`, and `entry` (`floating`, `footer`, `direct`). Browser fields map from the corresponding UTM parameters. No full referral URL or query-string PII is saved. Do not place personal information in UTMs.
 
@@ -43,9 +42,9 @@ Example active response (illustrative data, not an actual participant):
 }
 ```
 
-There are always four options in real responses. No `correct`, explanation, option-index map or future question appears in a public response. State/result includes localized policy terms, score/discount only after completion and the coupon only after registration. Phone ownership is recovered by re-verifying the same canonical number; name submission cannot replace it.
+There are always four options in real responses. No `correct`, explanation, option-index map or future question appears in a public response. State/result includes localized policy terms, score/discount only after completion and the coupon only after registration. Recovery requires the original secret session; a phone number alone never authorizes access. Name submission cannot replace the enrolled number.
 
-Names: trimmed 2–100 characters; no controls or directional overrides. Email: optional, valid syntax, at most 254. OTP: six ASCII digits; use keyboard numeric input. Egyptian/Persian numerals in telephone input are normalized. Supported mobiles normalize to `+201[0125]xxxxxxxx`; this establishes syntactic validity, not ownership until OTP succeeds.
+Names: trimmed 2–100 characters; no controls or directional overrides. Email is rejected as an extra field. Egyptian/Persian numerals in telephone input normalize to `+201[0125]xxxxxxxx`; this establishes syntactic validity only. There is no phone-ownership verification.
 
 ## Five-second timer protocol
 
@@ -57,7 +56,7 @@ Names: trimmed 2–100 characters; no controls or directional overrides. Email: 
 - A browser countdown uses `performance.now()` only for display. It cannot extend the persisted deadline. Latency means less than five seconds may be visible; the UI discloses this before starting.
 - Idempotency keys bind to a request fingerprint. Reusing a key with changed content is rejected. Transaction constraints enforce one answer per ordinal even with different keys or concurrent tabs.
 
-The synchronous SQLite transaction never includes OTP or SMTP network activity. Five seconds is preserved exactly; fairness alternatives such as readiness handshakes, increased time or a non-timed alternative require explicit approval, not an implementation shortcut.
+The synchronous SQLite transaction never includes SMTP network activity. Five seconds is preserved exactly; fairness alternatives such as readiness handshakes, increased time or a non-timed alternative require explicit approval, not an implementation shortcut.
 
 ## Administration
 
@@ -80,28 +79,27 @@ Redemption checks the immutable policy snapshot, expiration and state. Staff att
 
 ## Database schema
 
-Schema version 1 is a new, isolated database. No existing database is migrated. The service must use a private local disk, never a public/static directory or network filesystem.
+Schema version 1 is a new, isolated database. Schema version 2 preserves and renames any legacy phone identities and marks new entries unverified; see CHALLENGE_SIMPLE_ENTRY.md. The service must use a private local disk, never a public/static directory or network filesystem.
 
-| Table                            | Purpose and principal constraint                                                           |
-| -------------------------------- | ------------------------------------------------------------------------------------------ |
-| `schema_version`                 | Explicit schema version; future changes require reviewed migration/rollback                |
-| `verified_phone_identities`      | Unique keyed phone hash, encrypted number, latest verification                             |
-| `phone_verifications`            | Hashed opaque ID, encrypted number, ten-minute expiry, five code attempts                  |
-| `browser_sessions`               | Hashed token, identity FK, 24-hour expiry                                                  |
-| `discount_policy_versions`       | Immutable JSON per version; changing existing version rejected                             |
-| `challenge_sessions`             | Unique phone identity, bank/policy version, status, score 0–3, attribution                 |
-| `challenge_session_questions`    | PK(session,ordinal 1–3), unique(session,question), frozen document/options, deadline check |
-| `challenge_answers`              | PK(session,ordinal), FK to selected question, accepted choice or timeout                   |
-| `participants`                   | Unique session and phone; encrypted name/email/consent, keyed exact-name search            |
-| `coupons`                        | Unique participant/session/code hash; encrypted code; 10/20/30 only; issue/expiry/state    |
-| `coupon_redemptions`             | Unique coupon and request key; administrator FK, timestamp, eligibility attestation        |
-| `admin_users`                    | Unique email, Argon2id, encrypted TOTP, replay step, role/disabled flag                    |
-| `admin_sessions`                 | Hashed session/CSRF, absolute expiry and idle timestamp                                    |
-| `audit_logs`                     | Actor, action, opaque reference and time; no raw submitted content                         |
-| `email_delivery_jobs`            | Unique(session,audience), queued/sending/accepted/uncertain/failed, bounded retries        |
-| `conversion_events`              | Unique event key; typed internal event and bounded attribution                             |
-| `rate_limits` / `gateway_nonces` | Durable abuse controls / signed-request replay prevention                                  |
-| `idempotency_records`            | Scoped unique key, payload fingerprint, response marker                                    |
+| Table                            | Purpose and principal constraint                                                                  |
+| -------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `schema_version`                 | Explicit schema version; future changes require reviewed migration/rollback                       |
+| `phone_identities`               | Unique keyed phone hash, encrypted number, registration time and explicit ownership_verified flag |
+| `browser_sessions`               | Hashed token, identity FK, 24-hour expiry                                                         |
+| `discount_policy_versions`       | Immutable JSON per version; changing existing version rejected                                    |
+| `challenge_sessions`             | Unique phone identity, bank/policy version, status, score 0–3, attribution                        |
+| `challenge_session_questions`    | PK(session,ordinal 1–3), unique(session,question), frozen document/options, deadline check        |
+| `challenge_answers`              | PK(session,ordinal), FK to selected question, accepted choice or timeout                          |
+| `participants`                   | Unique session and phone; encrypted name/consent, keyed exact-name search                         |
+| `coupons`                        | Unique participant/session/code hash; encrypted code; 10/20/30 only; issue/expiry/state           |
+| `coupon_redemptions`             | Unique coupon and request key; administrator FK, timestamp, eligibility attestation               |
+| `admin_users`                    | Unique email, Argon2id, encrypted TOTP, replay step, role/disabled flag                           |
+| `admin_sessions`                 | Hashed session/CSRF, absolute expiry and idle timestamp                                           |
+| `audit_logs`                     | Actor, action, opaque reference and time; no raw submitted content                                |
+| `email_delivery_jobs`            | Unique(session,audience), queued/sending/accepted/uncertain/failed, bounded retries               |
+| `conversion_events`              | Unique event key; typed internal event and bounded attribution                                    |
+| `rate_limits` / `gateway_nonces` | Durable abuse controls / signed-request replay prevention                                         |
+| `idempotency_records`            | Scoped unique key, payload fingerprint, response marker                                           |
 
 The reviewed question bank is a versioned backend JSON artifact, rather than a mutable `challenge_questions` table. Attempts persist selected snapshots, so a later content update cannot alter an existing result. Versioned content is easier to review and never distributed as a browser bundle.
 
@@ -109,6 +107,6 @@ SQLite uses foreign keys, WAL, `synchronous=FULL`, 150 ms busy timeout and short
 
 ## Abuse limits and safe errors
 
-OTP request: 3/phone/10 min, 6/phone/day, 10/IP/hour, 100 globally/hour. Verify: 25/IP/10 min and five attempts per verification. Login: 5/account and 10/IP per 15 min; two concurrent password checks. API: 180/IP/min. Event: 20/IP/min. Admin coupon lookup: 30/admin/min. Limits are application defaults, not an approved SMS spending budget or DDoS guarantee.
+Enrollment: 8/phone/hour, 12/IP/hour, 200 globally/hour. Login: 5/account and 10/IP per 15 min; two concurrent password checks. API: 180/IP/min. Event: 20/IP/min. Admin coupon lookup: 30/admin/min. Limits are application defaults, not a throughput promise or DDoS guarantee.
 
-Errors include `invalid_request`, `invalid_phone`, `invalid_verification`, `verification_unavailable`, `verification_required`, `invalid_login`, `authentication_required`, `forbidden`, `blocked`, `rate_limited`, `busy`, `idempotency_conflict`, `already_registered`, `coupon_not_found`, `coupon_unavailable`, `policy_mismatch`, and `unavailable`. Retries never create extra attempts, participants or coupons.
+Errors include `invalid_request`, `invalid_phone`, `session_required`, `entry_unavailable`, `invalid_login`, `authentication_required`, `forbidden`, `blocked`, `rate_limited`, `busy`, `idempotency_conflict`, `already_registered`, `coupon_not_found`, `coupon_unavailable`, `policy_mismatch`, and `unavailable`. Retries never create extra attempts, participants or coupons.
