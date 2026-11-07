@@ -1,0 +1,62 @@
+---
+import '@fontsource/barlow-condensed/700.css';
+import '@fontsource/chivo/400.css';
+import '@fontsource-variable/cairo';
+import '../../styles/global.css';
+import '../../styles/challenge.css';
+import { business } from '../../config/business';
+import { challengeCopy, type ChallengeLocale } from '../../i18n/challenge';
+import { motionCssVariables } from '../../config/motion';
+export function getStaticPaths() {
+  return import.meta.env.PUBLIC_CHALLENGE_ENABLED === 'true'
+    ? ['ar', 'en'].map((locale) => ({ params: { locale } }))
+    : [];
+}
+const locale = Astro.params.locale as ChallengeLocale,
+  c = challengeCopy[locale];
+---
+
+<!doctype html>
+<html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>TOP GYM</title>
+    <style is:inline set:html={motionCssVariables} />
+  </head>
+  <body>
+    <main class="challenge-admin" data-admin-root data-locale={locale}>
+      <header class="challenge-admin-header">
+        <a href={`/${locale}/`} class="challenge-admin-brand">
+          <img src={business.logo} width="52" height="52" alt="" />
+          <span>TOP GYM</span>
+        </a>
+        <a
+          href={`/${locale === 'ar' ? 'en' : 'ar'}/challenge-admin/`}
+          class="challenge-secondary"
+          lang={locale === 'ar' ? 'en' : 'ar'}
+        >
+          {locale === 'ar' ? 'EN' : 'AR'}
+        </a>
+        <a href={`/${locale}/`}>{c.back}</a>
+      </header>
+      <h1>{c.admin}</h1>
+      <p>{c.adminIntro}</p>
+      <p role="status" aria-live="polite" class="challenge-status" data-admin-status></p>
+      <div data-admin-content>
+        <p>{c.loading}</p>
+      </div>
+      <noscript>
+        {locale === 'ar'
+          ? 'JavaScript مطلوب لتسجيل الدخول إلى الإدارة.'
+          : 'JavaScript is required to sign in.'}
+      </noscript>
+    </main>
+    <script>
+      import { initAdmin } from '../../scripts/challenge-admin';
+      void initAdmin();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "label": "baseline",
+  "measuredAt": "2026-11-06T23:38:08.210Z",
+  "environment": "Local Chromium, loopback, no network throttling; one sample per viewport. Baseline proxy compresses, enabled harness does not: compare decodedScriptBytes, not encoded scriptBytes. Not field CWV/INP or a 60 FPS guarantee.",
+  "samples": [
+    {
+      "width": 390,
+      "cpuSlowdown": 4,
+      "before": {
+        "lcpMs": 608,
+        "cls": 0,
+        "scriptBytes": 15867,
+        "decodedScriptBytes": 40814,
+        "scripts": [
+          "/_astro/Feedback.astro_astro_type_script_index_0_lang.DOSpjRPf.js",
+          "/_astro/Base.astro_astro_type_script_index_0_lang.DhGtVvsJ.js",
+          "/_astro/motion.BEL7y3_3.js"
+        ]
+      },
+      "after": {
+        "cls": 0,
+        "maxRecordedInteractionMs": 0,
+        "frameMedianMs": 16.699999999999818,
+        "frameP95Ms": 16.799999999999727,
+        "framesOver34ms": 0,
+        "scriptBytes": 15867,
+        "decodedScriptBytes": 40814
+      }
+    },
+    {
+      "width": 1440,
+      "cpuSlowdown": 1,
+      "before": {
+        "lcpMs": 220,
+        "cls": 0,
+        "scriptBytes": 15867,
+        "decodedScriptBytes": 40814,
+        "scripts": [
+          "/_astro/Feedback.astro_astro_type_script_index_0_lang.DOSpjRPf.js",
+          "/_astro/Base.astro_astro_type_script_index_0_lang.DhGtVvsJ.js",
+          "/_astro/motion.BEL7y3_3.js"
+        ]
+      },
+      "after": {
+        "cls": 0,
+        "maxRecordedInteractionMs": 0,
+        "frameMedianMs": 16.699999999999818,
+        "frameP95Ms": 16.800000000000182,
+        "framesOver34ms": 0,
+        "scriptBytes": 15867,
+        "decodedScriptBytes": 40814
+      }
+    }
+  ]
+}

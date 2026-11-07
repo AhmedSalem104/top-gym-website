@@ -1,5 +1,9 @@
 # TOP GYM motion system
 
+## Gated challenge integration
+
+The lazy challenge controller reuses `playMotion(..., 'enter')` and `feedback` for dialog/result/question entrances. Controls use existing micro/easing CSS tokens. Only the timer fill uses `scaleX`; its visual 50 ms interval stops when closed and never controls backend time. Result numbers count up for the shared 260 ms entrance duration in a bounded requestAnimationFrame sequence, reserve width and finish immediately on close/hidden-document handling; reduced motion displays final values directly. The dialog keeps stable viewport-bounded height across async steps. Result confetti is finite (10 particles, 18 for a perfect score), pointer-inert, removed after 1.8 seconds and disabled under reduced motion. No page scroll listener, additional animation dependency or permanent animation loop is introduced. The strict five-second interaction itself remains an accessibility policy decision, separate from reduced-motion support. See [CHALLENGE_QA.md](CHALLENGE_QA.md).
+
 ## Architecture
 
 The site remains static Astro with shared Arabic/English components. Native Web Animations own viewport entrances/dialogs; CSS owns first-paint hero motion and hover/focus/press states. All share the same configuration tokens. There are no animation packages, hydration islands, scroll handlers or perpetual JavaScript render loops. The cinematic Hero adds two CSS cycles while visible, described in `CINEMATIC_HERO.md`; these pause offscreen, in hidden documents and for reduced motion. The owner subsequently requested stronger motion and removal of the visible pause button; the documented accessibility tradeoff remains explicit.

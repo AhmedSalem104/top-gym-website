@@ -1,5 +1,9 @@
 # Delivery roadmap
 
+## Fitness challenge backlog
+
+Local implementation now covers backend/schema, API, OTP adapter, timing/scoring, coupons, challenge UI/results/registration, mail outbox, protected admin, redemption, attribution, localization and automated tests. The 300 original draft questions exist privately; qualified content review remains open. Staging/production phases are not complete. Pending owner decisions and release checks are in [CHALLENGE.md](CHALLENGE.md) and [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md). No new GitHub issues/project changes or remote deployment are claimed for this gated phase.
+
 [GitHub Project: TOP GYM — Website delivery](https://github.com/users/AhmedSalem104/projects/2) is an actual private owner project with ten linked issues and ten milestones. The tracker inventory is in `github-tracker.json`.
 
 Phases 0, 1, 2, 3, 5, 6 and 8 are complete with local and GitHub Actions evidence. Phases 4, 7 and 9 remain in progress for the owner inputs below.

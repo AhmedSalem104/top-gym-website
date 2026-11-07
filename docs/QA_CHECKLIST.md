@@ -1,5 +1,9 @@
 # QA and release checklist
 
+## Fitness challenge release gate
+
+Use [CHALLENGE_QA.md](CHALLENGE_QA.md) for local evidence. Public CI uses synthetic questions, never the private answer bank. Before activation: qualified review of every real question; approved OTP/budget and successful staging verification; approved discount policy; isolated HTTPS/BFF; real authorized inbox/Gmail rendering; Linux container/backup/restore/load tests; retention and five-second accessibility decision; separate Gate 2 and Gate 3 approvals. Existing website checks must continue to pass. Local results are not deployment evidence.
+
 ## Feedback activation — 6 November 2026
 
 - Production configuration is complete and redeployed. Public readiness returns HTTP 200 with available:true.

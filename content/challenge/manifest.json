@@ -1,0 +1,14 @@
+{
+  "count": 300,
+  "difficulty": {
+    "medium": 90,
+    "medium-advanced": 150,
+    "advanced": 60
+  },
+  "locales": ["ar", "en"],
+  "reviewed": 0,
+  "draft": 300,
+  "sha256": "24a76f89efc368c2e0f3a009470f081c4b306c17c590bbc2f95827169ec8dd86",
+  "source": "Private local original-authoring draft; not a public answer bank",
+  "productionEligible": false
+}

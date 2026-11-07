@@ -1,5 +1,7 @@
 # TOP GYM project brief
 
+The owner has approved Gate 1 local implementation of a separate fitness challenge/lead/coupon system. This does not include a member/payment portal and does not authorize staging or production changes. Current architecture, private-question boundary, local review instructions and unresolved business decisions: [CHALLENGE.md](CHALLENGE.md).
+
 ## Goal
 
 Deliver a maintainable, premium bilingual gym marketing site faithful to the supplied Stitch Apex Gold design, real photography, official prices and verified contact information. Conversion is through phone, directions and a clearly identified WhatsApp group. The owner subsequently requested private customer feedback delivered through Gmail; this adds one serverless endpoint. No accounts, payment processor or fake booking form.

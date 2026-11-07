@@ -1,5 +1,9 @@
 # Deployment preparation
 
+## Challenge code publication ? 7 November 2026
+
+The owner explicitly authorized pushing and publishing after the local handoff. Publish the verified code through the protected PR/Vercel workflow; the challenge remains disabled until its activation prerequisites are satisfied. See [CHALLENGE_OPERATIONS.md](CHALLENGE_OPERATIONS.md) for private environment variables, isolated SQLite, Docker/Caddy templates, OTP/mail activation, backups and rollback. Keep `PUBLIC_CHALLENGE_ENABLED=false`; do not activate mock OTP, unreviewed questions or invented commercial terms. No backend artifact has been installed on the VPS.
+
 ## Current publishing authorization — 6 November 2026
 
 The owner explicitly requested merging and publishing PR #16, then instructed: after every completed modification, push and publish. This is standing authorization for the normal protected-PR/Vercel workflow after successful validation; do not repeatedly request permission. A later explicit review-only instruction overrides this preference. Preserve required checks, source integrity and post-deployment verification. Deployment permission does not verify unresolved business facts or enable search indexing automatically.

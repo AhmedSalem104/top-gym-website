@@ -1,0 +1,250 @@
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import { mkdir } from 'node:fs/promises';
+const evidence = 'docs/evidence/challenge';
+test.beforeAll(async () => {
+  await mkdir(evidence, { recursive: true });
+});
+for (const locale of ['ar', 'en'])
+  for (const width of [320, 390, 768, 1440]) {
+    test(`${locale} ${width}: responsive intro, keyboard and reduced motion`, async ({ page }) => {
+      const errors: string[] = [];
+      page.on('pageerror', (e) => errors.push(e.message));
+      await page.setViewportSize({ width, height: 900 });
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await page.goto(`/${locale}/`);
+      const open = page.locator('[data-challenge-open]');
+      await open.focus();
+      await page.keyboard.press('Enter');
+      await expect(page.locator('#challenge-dialog')).toBeVisible();
+      await expect(page.locator('#challenge-dialog input[type=tel]')).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      const failures = await new AxeBuilder({ page }).include('#challenge-dialog').analyze();
+      expect(failures.violations).toEqual([]);
+      await page
+        .locator('#challenge-dialog')
+        .screenshot({ path: `${evidence}/intro-${locale}-${width}.png` });
+      await page.keyboard.press('Escape');
+      await expect(page.locator('#challenge-dialog')).not.toBeVisible();
+      await expect(open).toBeFocused();
+      expect(errors).toEqual([]);
+    });
+  }
+for (const [index, locale] of ['ar', 'en'].entries())
+  test(`${locale}: verified attempt, real API scoring, private registration and recovery`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: locale === 'ar' ? 390 : 1440, height: 950 });
+    if (locale === 'ar') await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(`/${locale}/`);
+    await page.locator('[data-challenge-open]').click();
+    const modal = page.locator('#challenge-dialog');
+    await modal.locator('input[name=phone]').fill(`0101234567${index}`);
+    await modal.locator('button[type=submit]').click();
+    await modal.locator('input[name=code]').fill('246810');
+    await modal.locator('button[type=submit]').click();
+    await expect(
+      modal.getByText(locale === 'ar' ? 'تم التحقق من رقمك' : 'Your number is verified', {
+        exact: false,
+      }),
+    ).toBeVisible();
+    await modal
+      .getByRole('button', {
+        name: locale === 'ar' ? 'جاهز؟ ابدأ التحدي' : 'Ready? Start the challenge',
+      })
+      .click();
+    await expect(modal.locator('.challenge-options')).toBeVisible();
+    await modal.screenshot({ path: `${evidence}/question-${locale}.png` });
+    for (let i = 0; i < 3; i++) {
+      await modal.getByRole('button', { name: locale === 'ar' ? /صحيح$/ : /Correct$/ }).click();
+      if (i < 2) await expect(modal.locator('.challenge-progress')).toContainText(String(i + 2));
+    }
+    await expect(modal.locator('.challenge-result-value')).toHaveText('30%');
+    if (locale === 'ar') await expect(modal.locator('.challenge-confetti')).toHaveCount(0);
+    await modal
+      .locator('input[name=name]')
+      .fill(locale === 'ar' ? 'اختبار محلي' : 'Local test participant');
+    await modal.locator('input[name=email]').fill('test@example.test');
+    await modal.locator('input[type=checkbox]').first().check();
+    await modal.locator('button[type=submit]').click();
+    await expect(modal.locator('.challenge-coupon code')).toHaveText(/^TOP-[A-F0-9]{20}$/);
+    const coupon = await modal.locator('.challenge-coupon code').innerText();
+    await modal.screenshot({ path: `${evidence}/result-${locale}.png` });
+    await page.reload();
+    await page.locator('[data-challenge-open]').click();
+    await expect(modal.locator('.challenge-coupon code')).toHaveText(coupon);
+    expect(
+      (await new AxeBuilder({ page }).include('#challenge-dialog').analyze()).violations,
+    ).toEqual([]);
+  });
+test('server timeout survives closed modal and refresh; no zero-score coupon', async ({ page }) => {
+  await page.goto('/en/');
+  await page.locator('[data-challenge-open]').click();
+  const modal = page.locator('#challenge-dialog');
+  await modal.locator('input[name=phone]').fill('01012345672');
+  await modal.locator('button[type=submit]').click();
+  await modal.locator('input[name=code]').fill('246810');
+  await modal.locator('button[type=submit]').click();
+  await modal.getByRole('button', { name: 'Ready? Start the challenge' }).click();
+  await expect(modal.locator('.challenge-question')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(15500);
+  await page.reload();
+  await page.locator('[data-challenge-open]').click();
+  await expect(modal.locator('.challenge-result-value')).toHaveText('0%');
+  await expect(modal.locator('.challenge-coupon')).toHaveCount(0);
+});
+test('hidden entry requires real login, and admin searches and redeems once', async ({
+  page,
+  request,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  const post = async (path: string, data: unknown) => {
+    const r = await request.post('/api/challenge/v1/' + path, {
+      headers: { Origin: 'http://127.0.0.1:4340', 'Idempotency-Key': crypto.randomUUID() },
+      data,
+    });
+    expect(r.ok()).toBe(true);
+    return r.json();
+  };
+  const verification = await post('verification/request', { phone: '01012345679' });
+  await post('verification/confirm', { verification: verification.verification, code: '246810' });
+  let seeded = await post('challenge/start', { locale: 'en', attribution: {} });
+  for (let i = 0; i < 3; i++)
+    seeded = await post('challenge/answer', {
+      question: seeded.question.id,
+      option: seeded.question.options.find((o: { text: { en: string } }) => o.text.en === 'Correct')
+        .id,
+    });
+  await post('challenge/finalize', {
+    name: 'Admin seeded participant',
+    consent: true,
+    marketingConsent: false,
+  });
+  await page.goto('/en/');
+  const entry = page.locator('[data-admin-entry]');
+  await entry.scrollIntoViewIfNeeded();
+  for (let i = 0; i < 5; i++) await entry.click();
+  await page.getByRole('link', { name: 'Administrator sign in' }).click();
+  await expect(page.locator('input[type=password]')).toBeVisible();
+  const code = (await (await request.get('/__test/totp')).json()).code;
+  await page.getByLabel('Administrator email').fill('local-admin@example.test');
+  await page.getByLabel('Password', { exact: true }).fill('Local-test-password-only!');
+  await page.getByLabel('Authenticator code').fill(code);
+  await page.getByRole('button', { name: 'Secure sign in' }).click();
+  await expect(page.locator('.challenge-admin-kpis')).toBeVisible();
+  await page.getByLabel('Search exact full name, phone or coupon').fill('Admin seeded participant');
+  await page.getByRole('button', { name: 'Search', exact: true }).click();
+  await expect(page.locator('tbody tr')).toHaveCount(1);
+  const coupon = await page.locator('tbody tr').first().locator('td').nth(6).innerText();
+  await page.getByLabel('Code', { exact: true }).fill(coupon);
+  await page.getByRole('button', { name: 'Look up coupon' }).click();
+  await page
+    .getByLabel('I have checked the terms and the coupon holder. This coupon cannot be used again.')
+    .check();
+  await page.getByRole('button', { name: 'Confirm redemption' }).click();
+  await expect(page.getByRole('button', { name: 'Confirm redemption' })).toHaveCount(0);
+  await page.screenshot({ path: `${evidence}/admin-en-1440.png`, fullPage: true });
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  await page.getByRole('button', { name: 'Sign out' }).click();
+  await expect(page.locator('input[type=password]')).toBeVisible();
+});
+
+test('slow CPU, failed answer recovery, timer authority and no layout shift on opening', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const session = await page.context().newCDPSession(page);
+  await session.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+  await page.addInitScript(() => {
+    (window as unknown as { challengeCLS: number }).challengeCLS = 0;
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries() as (PerformanceEntry & {
+        hadRecentInput: boolean;
+        value: number;
+      })[])
+        if (!entry.hadRecentInput)
+          (window as unknown as { challengeCLS: number }).challengeCLS += entry.value;
+    }).observe({ type: 'layout-shift', buffered: true });
+  });
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.goto('/en/');
+  await page.locator('[data-challenge-open]').click();
+  const modal = page.locator('#challenge-dialog');
+  await modal.locator('input[name=phone]').fill('01012345675');
+  await modal.locator('button[type=submit]').click();
+  await modal.locator('input[name=code]').fill('246810');
+  await modal.locator('button[type=submit]').click();
+  await modal.getByRole('button', { name: 'Ready? Start the challenge' }).click();
+  await page.route('**/api/challenge/v1/challenge/answer', (route) => route.abort());
+  await modal.getByRole('button', { name: /Correct$/ }).click();
+  await expect(modal.getByRole('button', { name: 'Recover current state' })).toBeVisible();
+  await page.unroute('**/api/challenge/v1/challenge/answer');
+  await modal.getByRole('button', { name: 'Recover current state' }).click();
+  await expect(modal.locator('.challenge-options')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(errors).toEqual([]);
+  const cls = await page.evaluate(
+    () => (window as unknown as { challengeCLS: number }).challengeCLS,
+  );
+  await test.info().attach('local-performance', {
+    body: JSON.stringify({
+      cpuSlowdown: 4,
+      viewport: 390,
+      cls,
+      note: 'Local Chromium sample; not field CWV or a throughput benchmark.',
+    }),
+    contentType: 'application/json',
+  });
+  expect(cls).toBeLessThan(0.1);
+  await session.send('Emulation.setCPUThrottlingRate', { rate: 1 });
+});
+
+test('Arabic administration, language switch and four responsive widths', async ({
+  page,
+  request,
+}) => {
+  await page.goto('/ar/challenge-admin/');
+  const code = (await (await request.get('/__test/totp')).json()).code;
+  await page.getByLabel('بريد المسؤول').fill('local-ar-admin@example.test');
+  await page.getByLabel('كلمة المرور', { exact: true }).fill('Local-test-password-only!');
+  await page.getByLabel('رمز تطبيق المصادقة').fill(code);
+  await page.getByRole('button', { name: 'دخول آمن' }).click();
+  await expect(page.locator('.challenge-admin-kpis')).toBeVisible();
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 950 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    await page.screenshot({ path: `${evidence}/admin-ar-${width}.png`, fullPage: true });
+  }
+  await page.getByRole('link', { name: 'EN', exact: true }).click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await expect(page.locator('.challenge-admin-kpis')).toBeVisible();
+  await page.getByRole('button', { name: 'Sign out' }).click();
+});
+
+test('mobile touch can open, focus and close the challenge', async ({ browser }) => {
+  const context = await browser.newContext({
+    baseURL: 'http://127.0.0.1:4340',
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+  try {
+    await page.goto('/ar/');
+    await page.locator('[data-challenge-open]').tap();
+    await expect(page.locator('#challenge-dialog input[type=tel]')).toBeVisible();
+    await page.locator('#challenge-dialog input[type=tel]').tap();
+    await expect(page.locator('#challenge-dialog input[type=tel]')).toBeFocused();
+    await page.locator('[data-challenge-close]').tap();
+    await expect(page.locator('#challenge-dialog')).not.toBeVisible();
+  } finally {
+    await context.close();
+  }
+});
