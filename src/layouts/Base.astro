@@ -15,6 +15,7 @@ import '../styles/global.css';
 import '../styles/motion.css';
 import { motionCssVariables } from '../config/motion';
 import { business, type Locale } from '../config/business';
+import { gymPhotos } from '../content/media';
 import { t } from '../i18n';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -30,23 +31,57 @@ const copy = t(locale);
 const origin = Astro.site;
 const canonical = origin ? new URL(`/${locale}/`, origin).href : undefined;
 const indexable = Boolean(origin) && import.meta.env.PUBLIC_INDEXABLE === 'true' && !root;
+const businessId = origin ? `${origin}/#gym` : undefined;
+const websiteId = origin ? `${origin}/#website` : undefined;
+const pageId = canonical ? `${canonical}#webpage` : undefined;
+const socialImage = origin ? new URL('/media/social-share.jpg', origin).href : undefined;
+const businessImages = origin
+  ? [socialImage, ...gymPhotos.map((photo) => new URL(`/media/${photo.id}-1440.webp`, origin).href)]
+  : undefined;
+const languageTag = locale === 'ar' ? 'ar-EG' : 'en';
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'ExerciseGym',
-  name: business.name,
-  ...(origin
-    ? {
-        url: canonical,
-        image: new URL('/media/social-share.jpg', origin).href,
-        logo: new URL(business.logo, origin).href,
-      }
-    : {}),
-  telephone: business.contacts[0].phone,
-  currenciesAccepted: business.currency,
-  hasMap: business.links.maps,
-  sameAs: [business.links.facebook],
-  ...(business.location.address ? { address: business.location.address[locale] } : {}),
-  // Unconfirmed hours and identity are deliberately excluded from structured claims.
+  '@graph': [
+    {
+      '@type': 'ExerciseGym',
+      ...(businessId ? { '@id': businessId } : {}),
+      name: business.name,
+      description: copy.description,
+      ...(origin ? { url: new URL(`/${business.defaultLocale}/`, origin).href } : {}),
+      ...(businessImages ? { image: businessImages } : {}),
+      ...(origin ? { logo: new URL(business.logo, origin).href } : {}),
+      telephone: business.contacts.map((contact) => contact.phone),
+      currenciesAccepted: business.currency,
+      hasMap: business.links.maps,
+      sameAs: [business.links.facebook],
+      contactPoint: business.contacts.map((contact) => ({
+        '@type': 'ContactPoint',
+        telephone: contact.phone,
+        availableLanguage: ['Arabic', 'English'],
+      })),
+      ...(business.location.address ? { address: business.location.address[locale] } : {}),
+      // Unconfirmed address and operating hours are deliberately excluded from structured claims.
+    },
+    {
+      '@type': 'WebSite',
+      ...(websiteId ? { '@id': websiteId } : {}),
+      name: business.name,
+      ...(origin ? { url: origin } : {}),
+      inLanguage: ['ar-EG', 'en'],
+      ...(businessId ? { publisher: { '@id': businessId } } : {}),
+    },
+    {
+      '@type': 'WebPage',
+      ...(pageId ? { '@id': pageId } : {}),
+      ...(canonical ? { url: canonical } : {}),
+      name: copy.title,
+      description: copy.description,
+      inLanguage: languageTag,
+      ...(websiteId ? { isPartOf: { '@id': websiteId } } : {}),
+      ...(businessId ? { about: { '@id': businessId } } : {}),
+      ...(socialImage ? { primaryImageOfPage: socialImage } : {}),
+    },
+  ],
 };
 ---
 
@@ -59,7 +94,10 @@ const schema = {
     <meta name="description" content={copy.description} />
     <meta name="theme-color" content="#0B0D0F" />
     <style is:inline set:html={motionCssVariables} />
-    <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
+    <meta
+      name="robots"
+      content={indexable ? 'index, follow, max-image-preview:large' : 'noindex, nofollow'}
+    />
     <link rel="icon" href="/media/favicon.png" type="image/png" />
     <noscript>
       <link rel="stylesheet" href="/no-js.css" />
@@ -73,7 +111,7 @@ const schema = {
     {canonical && <link rel="canonical" href={canonical} />}
     {origin && (
       <>
-        <link rel="alternate" hreflang="ar" href={new URL('/ar/', origin)} />
+        <link rel="alternate" hreflang="ar-EG" href={new URL('/ar/', origin)} />
         <link rel="alternate" hreflang="en" href={new URL('/en/', origin)} />
         <link
           rel="alternate"
@@ -95,13 +133,15 @@ const schema = {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={copy.brandAlt} />
+        <meta property="og:image:type" content="image/jpeg" />
       </>
     )}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={copy.title} />
     <meta name="twitter:description" content={copy.description} />
-    {origin && <meta name="twitter:image" content={new URL('/media/social-share.jpg', origin)} />}
-    <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\u003c')} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    <meta name="twitter:image:alt" content={copy.brandAlt} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   </head>
   <body id="top">
     <Header locale={locale} />
