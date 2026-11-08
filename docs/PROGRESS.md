@@ -236,3 +236,11 @@ Gate 1 final local verification: 45 backend + 58 website/BFF unit tests, 117 exi
 - Follow-up fixes keep the WhatsApp CTA text dark across hover/visited/focus states, and the admin Back button now performs a CSRF-protected server logout before replacing the admin history entry with the localized home page. A fresh admin visit must authenticate again.
 - Validation: typecheck and lint pass; 66 unit tests pass; challenge preview build passes; 3 focused Chromium tests pass, including Arabic/English result screens, expiry display, copy confirmation and personalized WhatsApp link. Updated result captures: `docs/evidence/challenge/result-ar.png` and `docs/evidence/challenge/result-en.png`.
 - Limitation: production challenge API currently returns literal question marks for Arabic terms. The website now has a safe display fallback, but correcting the API's stored policy still requires access to the private backend configuration. No backend secrets or production coupon records were changed.
+
+## Search discovery and indexing readiness — 2026-11-08
+
+- Production audit found that Vercel had no `SITE_URL` or `PUBLIC_INDEXABLE` settings; the live robots response disallowed all crawling and both localized pages were `noindex`.
+- Added linked ExerciseGym/WebSite/WebPage JSON-LD using supplied identity, contact, map, social, logo and real facility images; omitted unconfirmed address and provisional opening hours.
+- Improved localized descriptions, hreflang-aware sitemap, social card image metadata, crawler allow/disallow policy and IndexNow notification tooling.
+- Added `docs/SEO_GEO_AEO.md` with post-release verification and owner-managed Search Console, Bing Webmaster and Google Business Profile tasks. Search inclusion and rankings are not guaranteed.
+- Local TypeScript, lint, formatting, unit and SEO fixture checks pass. Full local Playwright run encountered the pre-existing Astro preview process conflict; 104 browser tests passed, 13 failed when a reused local browser toolbar added duplicate headings and affected Hero scroll assertions. GitHub clean-run checks remain the release gate.

@@ -156,16 +156,16 @@ Semantic sections, a skip link, visible focus rings, native select/details/dialo
 
 The hero has high-priority responsive image loading. Below-the-fold imagery is lazy loaded; fonts are local with swap behavior; the browser script is shared and small. Actual measurements and viewport evidence are recorded in [QA](docs/QA_CHECKLIST.md), not inferred from these architectural choices. Lighthouse scores are lab measurements, not real-user guarantees.
 
-## SEO and deployment preparation
+## SEO, local discovery and AI answer readiness
 
 Copy `.env.example` to `.env` only when needed:
 
-| Variable           | Meaning                                                       |
-| ------------------ | ------------------------------------------------------------- |
-| `SITE_URL`         | Confirmed HTTPS production origin; no invented default        |
-| `PUBLIC_INDEXABLE` | `false` during review; set `true` only after release approval |
+| Variable           | Meaning                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| `SITE_URL`         | Confirmed HTTPS production origin (`https://top-gym-website.vercel.app` in production) |
+| `PUBLIC_INDEXABLE` | `false` for local/review builds; `true` in production after release approval           |
 
-Without an approved domain, canonical/hreflang and absolute social URLs are omitted, sitemap is empty, and robots disallows crawling. With an approved origin, both locales get canonical and alternate links and branded social metadata. The root is a nonindexed preference entrypoint. Structured data never invents address, coordinates, ratings, trainer identity or confirmed hours.
+Production should build with `SITE_URL=https://top-gym-website.vercel.app` and `PUBLIC_INDEXABLE=true`. This enables crawlable Arabic and English pages, canonical and reciprocal hreflang URLs, a localized sitemap, social sharing metadata and structured `ExerciseGym`, `WebSite` and `WebPage` entities. The root is a nonindexed language preference entrypoint. Structured data deliberately omits the unconfirmed street address and provisional hours. See [SEO, GEO and AEO implementation and launch checklist](docs/SEO_GEO_AEO.md). `npm run seo:indexnow` notifies IndexNow participating engines about the two public language URLs after a release; it does not guarantee indexing.
 
 Deploy through the linked Vercel project after completing [deployment preparation](docs/DEPLOYMENT.md). It serves `dist/` and builds `api/feedback.ts` as a Node function. A static-only host cannot send feedback. CI validates without production secrets or real mail. The owner has authorized publication of this update through the protected PR workflow.
 

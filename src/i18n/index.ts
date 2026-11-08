@@ -13,7 +13,8 @@ export const days = {
 };
 const en = {
   title: 'TOP GYM | Strength, cardio & memberships',
-  description: `Explore the real TOP GYM, compare gym and cardio memberships, view opening hours, and call ${business.contacts[0].name.en} or ${business.contacts[1].name.en} to plan your visit.`,
+  description:
+    'Explore real TOP GYM equipment and photos, compare Gym and Gym + Cardio packages and prices, and find contact options and directions.',
   skip: 'Skip to content',
   navLabel: 'Main navigation',
   top: 'Home',
@@ -131,7 +132,8 @@ const en = {
 };
 const ar: typeof en = {
   title: 'توب جيم | تمارين القوة والكارديو والاشتراكات',
-  description: `تعرّف على توب جيم بالصور، وقارن اشتراكات الجيم والكارديو، واطّلع على المواعيد واتصل بـ${business.contacts[0].name.ar} أو ${business.contacts[1].name.ar} لترتيب زيارتك.`,
+  description:
+    'استكشف أجهزة وصور TOP GYM الحقيقية، وقارن باقتَي الجيم والجيم مع الكارديو وأسعارهما، وتعرّف على وسائل التواصل والاتجاهات.',
   skip: 'انتقل إلى المحتوى',
   navLabel: 'القائمة الرئيسية',
   top: 'الرئيسية',
